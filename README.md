@@ -1,3 +1,16 @@
+> **This is a fork of [nibzard/awesome-agentic-patterns](https://github.com/nibzard/awesome-agentic-patterns)**
+>
+> **Visual Snippets Viewer**: [esc5221.github.io/awesome-agentic-patterns](https://esc5221.github.io/awesome-agentic-patterns/)
+>
+> This fork adds a card-based visual viewer (`pattern-snippets/`) for 99 AI agent design patterns with:
+> - ASCII art & Mermaid diagrams
+> - English/Korean bilingual support
+> - Quick reference cards for each pattern
+>
+> **Original site**: [agentic-patterns.com](https://agentic-patterns.com)
+
+---
+
 # Awesome Agentic Patterns [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 ![Awesome Agentic Patterns](/agentic-patterns.jpeg)

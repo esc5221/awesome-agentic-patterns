@@ -82,7 +82,7 @@ function generateHtml(cards, toc) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agentic Patterns</title>
+  <title>Agentic Patterns Snippets</title>
   <link rel="stylesheet" href="styles.css">
   <!-- Mermaid -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
@@ -111,7 +111,7 @@ function generateHtml(cards, toc) {
   <header class="header">
     <div class="header-content">
       <div class="header-left">
-        <h1 data-i18n="site.title">Agentic Patterns</h1>
+        <h1 data-i18n="site.title">Agentic Patterns Snippets</h1>
         <p class="subtitle" data-i18n="site.subtitle">AI 에이전트 설계 패턴 레퍼런스</p>
       </div>
       <div class="lang-switch">
@@ -208,6 +208,22 @@ function build() {
       /data-pattern="([^"]+)"/,
       `data-pattern="$1" id="$1"`
     );
+    // Add original link button after pattern header
+    const originalUrl = `https://agentic-patterns.com/patterns/${p.meta.id}/`;
+    html = html.replace(
+      /<\/div>\s*<\/div>\s*<!-- \/pattern-header -->/,
+      `</div>
+      <a href="${originalUrl}" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original</a>
+    </div>
+    <!-- /pattern-header -->`
+    );
+    // Fallback: Add link after the closing tag of pattern-header if comment not present
+    if (!html.includes('original-link')) {
+      html = html.replace(
+        /(<div class="pattern-header">[\s\S]*?<\/span>\s*<\/div>)/,
+        `$1\n      <a href="${originalUrl}" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original</a>`
+      );
+    }
     // Indent each line for prettier output
     return html.split('\n').map(line => '      ' + line).join('\n');
   }).join('\n\n');
@@ -228,16 +244,18 @@ function build() {
   // Generate combined locale files
   const koLocale = {
     site: {
-      title: 'Agentic Patterns',
+      title: 'Agentic Patterns Snippets',
       subtitle: 'AI 에이전트 설계 패턴 레퍼런스',
-      source: '소스'
+      source: '소스',
+      viewOriginal: '원본 보기'
     }
   };
   const enLocale = {
     site: {
-      title: 'Agentic Patterns',
+      title: 'Agentic Patterns Snippets',
       subtitle: 'AI Agent Design Pattern Reference',
-      source: 'Source'
+      source: 'Source',
+      viewOriginal: 'View Original'
     }
   };
 

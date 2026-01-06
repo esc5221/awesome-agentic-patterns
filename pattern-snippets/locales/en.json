@@ -1,8 +1,9 @@
 {
   "site": {
-    "title": "Agentic Patterns",
+    "title": "Agentic Patterns Snippets",
     "subtitle": "AI Agent Design Pattern Reference",
-    "source": "Source"
+    "source": "Source",
+    "viewOriginal": "View Original"
   },
   "context-minimization-pattern": {
     "category": "Context & Memory",
