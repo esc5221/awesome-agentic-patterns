@@ -208,22 +208,13 @@ function build() {
       /data-pattern="([^"]+)"/,
       `data-pattern="$1" id="$1"`
     );
-    // Add original link button after pattern header
+    // Add original link at the bottom of the card (before closing </article>)
     const originalUrl = `https://agentic-patterns.com/patterns/${p.meta.id}/`;
     html = html.replace(
-      /<\/div>\s*<\/div>\s*<!-- \/pattern-header -->/,
-      `</div>
-      <a href="${originalUrl}" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original</a>
-    </div>
-    <!-- /pattern-header -->`
+      /<\/article>/,
+      `  <a href="${originalUrl}" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
+</article>`
     );
-    // Fallback: Add link after the closing tag of pattern-header if comment not present
-    if (!html.includes('original-link')) {
-      html = html.replace(
-        /(<div class="pattern-header">[\s\S]*?<\/span>\s*<\/div>)/,
-        `$1\n      <a href="${originalUrl}" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original</a>`
-      );
-    }
     // Indent each line for prettier output
     return html.split('\n').map(line => '      ' + line).join('\n');
   }).join('\n\n');

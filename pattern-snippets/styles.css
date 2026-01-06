@@ -185,18 +185,16 @@ body {
 
 .pattern-header {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  align-items: baseline;
+  justify-content: space-between;
   padding: 0;
   margin-bottom: 1rem;
-  flex-wrap: wrap;
 }
 
 .pattern-header h2 {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text);
-  margin-right: auto;
 }
 
 .tag {
@@ -208,19 +206,19 @@ body {
 }
 
 .original-link {
-  font-size: 0.65rem;
-  color: var(--accent);
+  display: block;
+  text-align: right;
+  font-size: 0.7rem;
+  color: var(--text-muted);
   text-decoration: none;
-  padding: 0.25rem 0.5rem;
-  border: 1px solid var(--accent);
-  border-radius: 3px;
-  transition: all 0.15s;
-  white-space: nowrap;
+  padding: 0.5rem 1rem;
+  opacity: 0.6;
+  transition: opacity 0.15s;
 }
 
 .original-link:hover {
-  background: var(--accent);
-  color: white;
+  opacity: 1;
+  color: var(--accent);
 }
 
 /* ========================================
