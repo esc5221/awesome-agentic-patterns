@@ -1,0 +1,18 @@
+{
+  "category": "Context & Memory",
+  "problem": "Manually providing context in every prompt is cumbersome; global context is too broad or narrow.",
+  "solution": "Auto-discover and merge layered config files (enterprise, user, project, local) by filesystem hierarchy.",
+  "when": [
+    "Multi-project environments",
+    "Team-wide policies",
+    "Personal customization"
+  ],
+  "pros": [
+    "Zero manual context",
+    "Scoped customization"
+  ],
+  "cons": [
+    "Merge conflicts",
+    "Discovery complexity"
+  ]
+}

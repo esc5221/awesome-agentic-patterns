@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Agents complete turns even when tasks are not truly done (tests fail, checks incomplete)",
+  "solution": "Use stop hooks to check success criteria after each turn; auto-continue agent until criteria pass",
+  "when": [
+    "Test-driven development workflows",
+    "Autonomous task completion required",
+    "Sandboxed/containerized environments"
+  ],
+  "pros": [
+    "True task completion guaranteed",
+    "No manual re-prompting needed"
+  ],
+  "cons": [
+    "Risk of infinite loops",
+    "Runaway costs without timeout"
+  ]
+}

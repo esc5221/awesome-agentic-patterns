@@ -1,0 +1,102 @@
+<article class="pattern-card" data-pattern="curated-file-context-window">
+  <div class="pattern-header">
+    <h2>Curated File Context Window</h2>
+    <span class="tag" data-i18n="category">Context & Memory</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Task: "Add validation to signup()"
+           │
+           ▼
+  ┌─────────────────────────────────────┐
+  │ PRIMARY: UserController.java (full) │
+  ├─────────────────────────────────────┤
+  │ CONTEXT SNIPPETS:                   │
+  │  - UserService.validateUser()       │
+  │  - SignupDTO: fields + annotations  │
+  └─────────────────────────────────────┘
+           │
+           ▼
+      Agent: Focused edit ✓</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TB
+    A[Parse task] --> B[Identify primary files]
+    B --> C[Search subagent: rg/index]
+    C --> D[Extract snippets]
+    D --> E[Assemble context]
+    E --> F[Agent executes]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">primary = load_full("UserController.java")
+secondary = search.find("signup", top_n=5)
+snippets = [extract_methods(f) for f in secondary]
+
+context = f"""
+### PRIMARY: {primary}
+### SNIPPETS: {snippets}
+"""</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Loading all files into prompt exceeds token limits and introduces noise from unrelated code.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Load only primary files plus summarized secondary files from a search subagent's ranked results.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Multi-file refactoring tasks</li>
+          <li>Feature implementation in large repos</li>
+          <li>Need to minimize hallucinations</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Minimal prompt size, on-target</li>
+              <li>Faster responses, fewer hallucinations</li>
+              <li>Scales to large repositories</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires file-search service</li>
+              <li>May miss critical files if ranking is off</li>
+              <li>Index needs to stay current</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

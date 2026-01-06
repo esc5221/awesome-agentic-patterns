@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Single agent gets stuck in local optimum or fails to explore diverse solutions for complex problems.",
+  "solution": "Spawn multiple agents with different perspectives to brainstorm in parallel, then synthesize best ideas.",
+  "when": [
+    "Creative ideation tasks",
+    "Complex refactoring decisions",
+    "Design exploration"
+  ],
+  "pros": [
+    "Diverse perspectives",
+    "Avoids local optima"
+  ],
+  "cons": [
+    "Higher token cost",
+    "Synthesis complexity"
+  ]
+}

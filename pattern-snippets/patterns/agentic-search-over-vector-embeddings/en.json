@@ -1,0 +1,18 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Vector embeddings require continuous re-indexing, handling local changes, and infrastructure overhead.",
+  "solution": "Replace vector search with agentic search using bash, grep, and file traversal - no pre-indexing needed.",
+  "when": [
+    "Frequently changing codebases",
+    "No vector infrastructure available",
+    "Security-sensitive deployments"
+  ],
+  "pros": [
+    "No indexing maintenance",
+    "Always searches current state"
+  ],
+  "cons": [
+    "May need multiple iterations",
+    "Slower on very large codebases"
+  ]
+}

@@ -1,0 +1,113 @@
+<article class="pattern-card" data-pattern="human-in-loop">
+  <div class="pattern-header">
+    <h2>Human-in-the-Loop Approval</h2>
+    <span class="tag" data-i18n="category">Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">                Low Risk
+              ┌────────────────────────────────▶ Execute
+              │
+Agent ──▶ [Risk?]
+              │
+              │ High Risk        ┌─────┐
+              └───────▶ Human ──▶│ Y/N │──┬──▶ Execute
+                       <span class="emoji">⌛</span>       └─────┘  │
+                                          └──▶ Abort / Adapt
+
+Gate:  [auto]────────────●────────────[manual]
+                     threshold</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    participant A as Agent
+    participant F as Framework
+    participant S as Slack
+    participant H as Human
+    A->>F: DROP table request
+    F->>F: Classify HIGH RISK
+    F->>S: Request approval
+    S->>H: Notification
+    alt Approved
+        H->>S: Approve
+        S->>F: Granted
+        F->>A: Execute
+    else Rejected
+        H->>S: Reject + reason
+        S->>F: Denied
+        F->>A: Find alternative
+    end
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Implementation</span>
+        </div>
+        <pre><code class="language-python">from humanlayer import HumanLayer
+hl = HumanLayer()
+
+@hl.require_approval(channel="slack")
+def delete_user_data(user_id: str):
+    return db.users.delete(user_id)
+
+# Execution pauses until human approves
+delete_user_data("user_123")</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">위험한 작업(DB 삭제, 배포)을 자동 실행하면 안전/규정 문제 발생. 모든 작업을 막으면 자동화 의미 없음</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">고위험 작업에만 인간 승인 게이트 삽입. 안전 작업은 자동, 위험 작업만 Slack 등으로 승인 요청</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>DB: DELETE, DROP, ALTER</li>
+          <li>API: 결제, 이메일, 웹훅</li>
+          <li>시스템: 방화벽, 권한 변경</li>
+          <li>규정: GDPR, HIPAA, SOC2</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>안전한 자동화</li>
+              <li>감사 추적</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>인간 응답 대기</li>
+              <li>승인 피로도</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

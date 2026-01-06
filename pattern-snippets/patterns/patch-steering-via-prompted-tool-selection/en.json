@@ -1,0 +1,18 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Agents with multiple patching tools may choose suboptimal ones, causing inconsistent and lower quality results.",
+  "solution": "Steer tool selection through explicit natural language instructions, specifying preferred tools and usage patterns in prompts.",
+  "when": [
+    "Multiple patching/refactoring tools available",
+    "Need for consistent tool usage",
+    "AST-safe operations preferred over text replace"
+  ],
+  "pros": [
+    "Predictable tool selection behavior",
+    "Higher code quality with semantic tools"
+  ],
+  "cons": [
+    "Prompt length increases",
+    "Requires maintenance as tools evolve"
+  ]
+}

@@ -1,0 +1,93 @@
+<article class="pattern-card" data-pattern="llm-map-reduce-pattern">
+  <div class="pattern-header">
+    <h2>LLM Map-Reduce Pattern</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">        MAP                    REDUCE
+[Doc1] ──▶ Sandbox LLM ──┐
+[Doc2] ──▶ Sandbox LLM ──┼──▶ Aggregate ──▶ Result
+[Doc3] ──▶ Sandbox LLM ──┘
+           (isolated)    (safe summaries only)</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    D1[Doc 1] --> S1[Sandbox]
+    D2[Doc 2] --> S2[Sandbox]
+    D3[Doc 3] --> S3[Sandbox]
+    S1 --> R[Reduce]
+    S2 --> R
+    S3 --> R
+    R --> O[Output]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">results = []
+for doc in untrusted_docs:
+    # Sandboxed: constrained output
+    ok = sandbox_llm("Invoice? yes/no", doc)
+    results.append(ok)
+# Reduce: no raw docs here
+final = reduce(results)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Single poisoned document can manipulate global reasoning if all data processed in one context.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Map: sandboxed LLMs process each doc independently. Reduce: aggregate only sanitized outputs.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Processing untrusted docs</li>
+          <li>File triage/classification</li>
+          <li>N-to-1 decisions</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Poisoned item isolated</li>
+              <li>Scalable parallelism</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Output validation needed</li>
+              <li>Orchestration overhead</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

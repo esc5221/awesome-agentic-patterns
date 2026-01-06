@@ -1,0 +1,16 @@
+{
+  "title": "Pattern Title",
+  "category": "Category",
+  "problem": "Problem description",
+  "solution": "Solution description",
+  "when": [
+    "Condition 1",
+    "Condition 2"
+  ],
+  "pros": [
+    "Pro 1"
+  ],
+  "cons": [
+    "Con 1"
+  ]
+}

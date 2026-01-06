@@ -1,0 +1,95 @@
+<article class="pattern-card" data-pattern="compounding-engineering-pattern">
+  <div class="pattern-header">
+    <h2>Compounding Engineering Pattern</h2>
+    <span class="tag" data-i18n="category">Learning & Adaptation</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">┌─────────────────────────────────────────────────────┐
+│               COMPOUNDING LOOP                      │
+│                                                     │
+│  Build ──▶ Learn ──▶ Codify ──▶ Easier Build       │
+│    ▲                               │                │
+│    └───────────────────────────────┘                │
+│                                                     │
+│  Outputs: CLAUDE.md, /commands, hooks, subagents   │
+└─────────────────────────────────────────────────────┘</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Build Feature] --> B[Document Learnings]
+    B --> C[Codify into Prompts]
+    C --> D[Next Feature]
+    D --> E[Easier Build]
+    E --> A
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-markdown"># After completing feature:
+1. Update CLAUDE.md with patterns
+2. Create /test-with-validation command
+3. Add pre-commit hook for edge cases
+4. Build security-review subagent</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Traditional engineering has diminishing returns; AI agents repeat mistakes because learnings aren't codified.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Codify all learnings from each feature into prompts, commands, and hooks to make subsequent features easier.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Building features with AI agents</li>
+          <li>Onboarding new team members</li>
+          <li>Agents repeating the same mistakes</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Accelerating productivity over time</li>
+              <li>Knowledge preserved beyond individuals</li>
+              <li>Better agent and human onboarding</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Upfront documentation time</li>
+              <li>Risk of prompt bloat</li>
+              <li>Requires extensible agent system</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

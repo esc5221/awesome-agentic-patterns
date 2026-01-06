@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Single-agent approaches either over-engineer each session (wasting setup time) or under-invest in foundations (causing drift and confusion).",
+  "solution": "Use two specialized agents: Initializer creates foundations once (features, env, tracking); Maintainer handles incremental development across sessions.",
+  "when": [
+    "Projects requiring many sessions (days/weeks)",
+    "Complex applications with 50+ features",
+    "When context loss between sessions is costly"
+  ],
+  "pros": [
+    "Clear separation of setup vs execution",
+    "Session bootstrapping prevents context loss",
+    "Mirrors effective human team practices"
+  ],
+  "cons": [
+    "Requires upfront feature specification",
+    "Two prompts/configs to maintain",
+    "Overhead for small single-session tasks"
+  ]
+}

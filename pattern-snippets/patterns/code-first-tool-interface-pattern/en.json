@@ -1,0 +1,20 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Traditional MCP tool calls force all intermediate JSON through the context, causing massive token waste on multi-step and fan-out operations.",
+  "solution": "LLMs write TypeScript code that orchestrates MCP tools in V8 isolates; only final results return to context.",
+  "when": [
+    "Multi-step workflows with clear sequences",
+    "Fan-out operations (100+ items to process)",
+    "Token costs or latency are critical"
+  ],
+  "pros": [
+    "10x+ token reduction on multi-step workflows",
+    "Dramatic fan-out efficiency with loops",
+    "Self-debugging with error handling and retry"
+  ],
+  "cons": [
+    "Requires V8 isolate infrastructure",
+    "Poor fit for dynamic research loops",
+    "Intelligence-in-middle defeats the purpose"
+  ]
+}

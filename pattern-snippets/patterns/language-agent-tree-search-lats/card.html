@@ -1,0 +1,96 @@
+<article class="pattern-card" data-pattern="language-agent-tree-search-lats">
+  <div class="pattern-header">
+    <h2>Language Agent Tree Search (LATS)</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">        [Root]
+       /   |   \
+     [A]  [B]  [C]    ← Expand candidates
+      |    |
+    [A1] [B1]         ← UCB select best
+      |
+    [A1a]             ← Evaluate & backprop
+
+Select ──▶ Expand ──▶ Evaluate ──▶ Backprop</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TB
+    R[Root] --> A[Path A]
+    R --> B[Path B]
+    A --> A1[A.1]
+    A1 --> A2[A.2 Best]
+    B --> B1[B.1]
+    style A2 fill:#90EE90
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">def search(root, iterations=50):
+    for _ in range(iterations):
+        node = select(root)  # UCB
+        children = expand(node)  # LLM
+        value = evaluate(node)  # LLM
+        backpropagate(node, value)
+    return best_path(root)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Linear reasoning (ReACT) gets stuck in local optima on complex tasks requiring strategic exploration.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Apply Monte Carlo Tree Search (MCTS) with LLM for action generation, evaluation, and backpropagation.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Multi-step reasoning</li>
+          <li>Strategic planning</li>
+          <li>Multiple valid approaches</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Systematic exploration</li>
+              <li>Outperforms ReACT</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>High LLM call cost</li>
+              <li>Parameter tuning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

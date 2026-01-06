@@ -1,0 +1,90 @@
+<article class="pattern-card" data-pattern="parallel-tool-execution">
+  <div class="pattern-header">
+    <h2>Conditional Parallel Tool Execution</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Tools ──▶ Classify ──┬── Read-Only? ── Parallel ──┐
+                     │                            │
+                     └── Has-Write? ── Sequential ┴──▶ Results</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Tool Batch] --> B{All Read-Only?}
+    B -->|Yes| C[Execute Parallel]
+    B -->|No| D[Execute Sequential]
+    C --> E[Results]
+    D --> E
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">def execute_batch(tools):
+    if all(t.is_read_only for t in tools):
+        return parallel_execute(tools)
+    else:
+        return sequential_execute(tools)
+
+# FileRead, Grep: parallel
+# FileWrite: sequential</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Sequential tool execution causes delays for read-only operations, but parallel execution risks race conditions for state-modifying tools.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Classify tools as read-only or state-modifying. Execute read-only batches in parallel, serialize state-modifying operations.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Mix of read and write operations</li>
+          <li>Performance-sensitive applications</li>
+          <li>Batch tool calls in single reasoning step</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Fast parallel reads, safe sequential writes</li>
+              <li>Prevents race conditions</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Single write in batch serializes everything</li>
+              <li>Relies on accurate tool classification</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

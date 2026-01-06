@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Long-running agents declare premature victory, delete tests to pass, or lose track of requirements across sessions.",
+  "solution": "Define all features upfront in an immutable JSON that agents can mark complete but cannot modify or delete.",
+  "when": [
+    "Building complete applications with known requirements",
+    "Projects spanning many agent sessions",
+    "When agent accountability is critical"
+  ],
+  "pros": [
+    "Prevents premature completion claims",
+    "Eliminates 'pass by deletion' attacks",
+    "Measurable progress (X of Y features)"
+  ],
+  "cons": [
+    "Requires upfront feature specification",
+    "Rigid for changing requirements",
+    "Not suitable for exploratory work"
+  ]
+}

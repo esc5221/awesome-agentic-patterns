@@ -1,0 +1,20 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Loading all tool definitions upfront consumes excessive context window space when agents have access to large tool catalogs, limiting space for actual task execution.",
+  "solution": "Present tools through a filesystem-like hierarchy where agents discover capabilities on-demand, requesting different detail levels (name only, description, full schema) as needed.",
+  "when": [
+    "Systems with 20+ available tools",
+    "MCP server implementations",
+    "Plugin architectures with many capabilities"
+  ],
+  "pros": [
+    "Reduces initial context consumption",
+    "Scales to hundreds of tools",
+    "Natural filesystem-like exploration"
+  ],
+  "cons": [
+    "Adds discovery overhead",
+    "Multiple round-trips to find tools",
+    "Requires thoughtful organization"
+  ]
+}

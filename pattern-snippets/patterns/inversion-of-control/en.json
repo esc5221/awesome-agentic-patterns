@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Traditional 'prompt-as-puppeteer' workflows force humans to spell out every step, limiting scale and creativity.",
+  "solution": "Give the agent tools plus a high-level goal and let it decide orchestration. Humans supply guard-rails (10%) while agent handles execution (87%).",
+  "when": [
+    "Complex multi-step tasks with unclear sequence",
+    "Agent has necessary tools and capabilities",
+    "Human oversight available for critical decisions"
+  ],
+  "pros": [
+    "Scales to complex tasks without step-by-step prompting",
+    "Unleashes agent creativity and problem-solving",
+    "Reduces human micromanagement burden"
+  ],
+  "cons": [
+    "Requires trust in agent judgment",
+    "Need robust guard-rails for safety",
+    "May take unexpected paths"
+  ]
+}

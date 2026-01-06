@@ -1,0 +1,18 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Including full build logs in main agent context blows up context length and slows inference",
+  "solution": "Spawn specialized subagents to compile each module, returning only concise error summaries to main agent",
+  "when": [
+    "Multi-module/microservice projects",
+    "Build logs too verbose for context",
+    "Parallel compilation needed"
+  ],
+  "pros": [
+    "Main agent context stays clean",
+    "Parallel builds possible"
+  ],
+  "cons": [
+    "Infrastructure to manage subagents",
+    "Build dependency coordination"
+  ]
+}

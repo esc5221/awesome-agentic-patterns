@@ -1,0 +1,6 @@
+{
+  "id": "filesystem-based-agent-state",
+  "title": "Filesystem-Based Agent State",
+  "category": "Context & Memory",
+  "order": 101
+}

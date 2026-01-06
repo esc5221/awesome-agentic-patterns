@@ -1,0 +1,103 @@
+<article class="pattern-card" data-pattern="three-stage-perception-architecture">
+  <div class="pattern-header">
+    <h2>Three-Stage Perception Architecture</h2>
+    <span class="tag" data-i18n="category">Orchestration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">┌───────────────┐   ┌───────────────┐   ┌───────────────┐
+│  PERCEPTION   │   │  PROCESSING   │   │    ACTION     │
+│───────────────│   │───────────────│   │───────────────│
+│ Text/Image/   │   │  Reasoning    │   │ API Calls     │
+│ Audio Input   │──▶│  Decision     │──▶│ File Ops      │
+│ Normalization │   │  Validation   │   │ Notifications │
+└───────────────┘   └───────────────┘   └───────────────┘
+                            │
+                            ▼
+                    [ Feedback Loop ]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    subgraph P[Perception]
+        A[Raw Input] --> B[Normalize]
+    end
+    subgraph R[Processing]
+        B --> C[Reason] --> D[Decide]
+    end
+    subgraph X[Action]
+        D --> E[Execute]
+    end
+    E --> F[Feedback]
+    F --> C
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">class ThreeStageAgent:
+    async def run(self, raw_input):
+        # Stage 1: Perception
+        data = await self.perception.process(raw_input)
+        # Stage 2: Processing
+        decisions = await self.processor.analyze(data)
+        # Stage 3: Action
+        return await self.action.execute(decisions)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Monolithic agents mixing perception, reasoning, and action are hard to debug, extend, or scale independently.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Separate workflow into three stages: Perception (input normalization), Processing (reasoning), and Action (execution).</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Complex multi-modal inputs</li>
+          <li>Need independent component scaling</li>
+          <li>Team collaboration per stage</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Clean separation of concerns</li>
+              <li>Better error isolation</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Additional complexity for simple tasks</li>
+              <li>Latency from stage transitions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

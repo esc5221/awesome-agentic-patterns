@@ -1,0 +1,91 @@
+<article class="pattern-card" data-pattern="memory-synthesis-from-execution-logs">
+  <div class="pattern-header">
+    <h2>Memory Synthesis from Execution Logs</h2>
+    <span class="tag" data-i18n="category">Context & Memory</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Task Diaries              Synthesis
+────────────              ─────────
+[Diary 1] ──┐
+[Diary 2] ──┼──▶ Synthesis Agent ──▶ Patterns
+[Diary 3] ──┘              ↓
+                    CLAUDE.md / Commands</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    D1[Diary 1] --> S[Synthesis]
+    D2[Diary 2] --> S
+    D3[Diary 3] --> S
+    S --> P[Patterns]
+    P --> M[CLAUDE.md]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Synthesis prompt
+synthesis_agent("""
+Review 50 task diaries.
+Find patterns appearing 3+ times.
+Output: rules, commands, tests
+""")</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Task logs contain valuable learnings but are too specific; hard to know which patterns generalize.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Write structured task diaries, then periodically synthesize across logs to extract reusable patterns.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Recurring task types</li>
+          <li>Learning from failures</li>
+          <li>Building organizational memory</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Pattern discovery</li>
+              <li>Evidence-backed rules</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Storage overhead</li>
+              <li>False pattern risk</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

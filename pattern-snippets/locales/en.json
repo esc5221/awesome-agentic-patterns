@@ -1,0 +1,1873 @@
+{
+  "site": {
+    "title": "Agentic Patterns",
+    "subtitle": "AI Agent Design Pattern Reference",
+    "source": "Source"
+  },
+  "context-minimization-pattern": {
+    "category": "Context & Memory",
+    "problem": "User-supplied text lingers in context, enabling it to influence later generations and potentially inject malicious instructions",
+    "solution": "Purge untrusted segments after transforming into safe intermediate. Later reasoning sees only trusted data",
+    "when": [
+      "Customer service chat",
+      "Medical Q&A systems",
+      "Multi-turn flows where input shouldn't steer later steps"
+    ],
+    "pros": [
+      "Simple, no extra models",
+      "Prevents prompt injection"
+    ],
+    "cons": [
+      "Loses conversational nuance",
+      "May hurt UX if too aggressive"
+    ]
+  },
+  "context-window-anxiety-management": {
+    "category": "Context & Memory",
+    "problem": "Models exhibit 'context anxiety' near window limits, prematurely summarizing or rushing to complete tasks.",
+    "solution": "Provide buffer headroom and explicit reassurance that context is abundant to override anxiety behaviors.",
+    "when": [
+      "Long coding or research sessions",
+      "Tasks requiring sustained attention",
+      "Model mentions 'running out of space'"
+    ],
+    "pros": [
+      "Prevents premature task abandonment",
+      "Enables more thorough work",
+      "Overcomes model behavioral quirks"
+    ],
+    "cons": [
+      "Requires model-specific tuning",
+      "May increase token usage",
+      "Aggressive prompting overhead"
+    ]
+  },
+  "dynamic-context-injection": {
+    "category": "Context & Memory",
+    "problem": "Agents often need specific context on-demand, but constantly editing static files or pasting text is inefficient.",
+    "solution": "Use @mentions for files and /slash commands for reusable prompts to dynamically inject context during sessions.",
+    "when": [
+      "Need specific file contents mid-task",
+      "Frequently reuse complex instructions",
+      "Want fluid context management"
+    ],
+    "pros": [
+      "Targeted context injection",
+      "Reusable slash commands",
+      "Efficient lazy loading"
+    ],
+    "cons": [
+      "Must learn special syntax",
+      "May inject too much context",
+      "Command setup overhead"
+    ]
+  },
+  "filesystem-based-agent-state": {
+    "category": "Context & Memory",
+    "problem": "Long-running agent workflows lose all progress when interrupted, as state in context window does not persist across sessions.",
+    "solution": "Persist intermediate results to files, creating durable checkpoints that enable workflow resumption and failure recovery.",
+    "when": [
+      "Multi-step workflows with expensive operations",
+      "Long-running tasks exceeding session limits",
+      "Workflows needing recovery from failures"
+    ],
+    "pros": [
+      "Enables workflow resumption after interruption",
+      "Protects against data loss",
+      "Allows inspection of intermediate results"
+    ],
+    "cons": [
+      "Requires checkpoint/recovery logic",
+      "File I/O adds overhead",
+      "Stale state can cause confusion"
+    ]
+  },
+  "layered-configuration-context": {
+    "category": "Context & Memory",
+    "problem": "Manually providing context in every prompt is cumbersome; global context is too broad or narrow.",
+    "solution": "Auto-discover and merge layered config files (enterprise, user, project, local) by filesystem hierarchy.",
+    "when": [
+      "Multi-project environments",
+      "Team-wide policies",
+      "Personal customization"
+    ],
+    "pros": [
+      "Zero manual context",
+      "Scoped customization"
+    ],
+    "cons": [
+      "Merge conflicts",
+      "Discovery complexity"
+    ]
+  },
+  "curated-code-context-window": {
+    "category": "Context & Memory",
+    "problem": "Dumping entire repositories into context overwhelms the model with noise and slows inference.",
+    "solution": "Use a search subagent to inject only top-K relevant code snippets into the main agent's context.",
+    "when": [
+      "Working in large codebases",
+      "Need focused reasoning on specific modules",
+      "Token efficiency is critical"
+    ],
+    "pros": [
+      "Noise reduction improves clarity",
+      "Dramatically reduces token usage",
+      "Mitigates context anxiety"
+    ],
+    "cons": [
+      "Index must stay fresh",
+      "Adds search subagent complexity",
+      "May miss edge-case dependencies"
+    ]
+  },
+  "episodic-memory-retrieval-injection": {
+    "category": "Context & Memory",
+    "problem": "Stateless calls make agents forget prior decisions, causing repetition and shallow reasoning.",
+    "solution": "Add vector-backed episodic memory: store event/outcome/rationale blobs, retrieve top-k similar memories, inject as hints.",
+    "when": [
+      "Long-running agent sessions",
+      "Need continuity across tasks",
+      "Avoiding repeated mistakes"
+    ],
+    "pros": [
+      "Richer continuity",
+      "Fewer repeated mistakes",
+      "Learns from past"
+    ],
+    "cons": [
+      "Retrieval noise if uncurated",
+      "Storage cost",
+      "Stale memory issues"
+    ]
+  },
+  "memory-synthesis-from-execution-logs": {
+    "category": "Context & Memory",
+    "problem": "Task logs contain valuable learnings but are too specific; hard to know which patterns generalize.",
+    "solution": "Write structured task diaries, then periodically synthesize across logs to extract reusable patterns.",
+    "when": [
+      "Recurring task types",
+      "Learning from failures",
+      "Building organizational memory"
+    ],
+    "pros": [
+      "Pattern discovery",
+      "Evidence-backed rules"
+    ],
+    "cons": [
+      "Storage overhead",
+      "False pattern risk"
+    ]
+  },
+  "proactive-agent-state-externalization": {
+    "category": "Context & Memory",
+    "problem": "Models proactively write notes to preserve state, but self-generated summaries are often incomplete and may consume tokens better spent on task execution.",
+    "solution": "Provide structured templates and validation for agent self-documentation, combining agent notes with external memory systems as fallback.",
+    "when": [
+      "Long-running development sessions",
+      "Multi-session research tasks",
+      "Subagent coordination requiring state communication"
+    ],
+    "pros": [
+      "Leverages natural model behavior",
+      "Enables session continuity",
+      "Creates audit trails"
+    ],
+    "cons": [
+      "May consume tokens on documentation over progress",
+      "Risk of incomplete self-assessment",
+      "Requires validation overhead"
+    ]
+  },
+  "curated-file-context-window": {
+    "category": "Context & Memory",
+    "problem": "Loading all files into prompt exceeds token limits and introduces noise from unrelated code.",
+    "solution": "Load only primary files plus summarized secondary files from a search subagent's ranked results.",
+    "when": [
+      "Multi-file refactoring tasks",
+      "Feature implementation in large repos",
+      "Need to minimize hallucinations"
+    ],
+    "pros": [
+      "Minimal prompt size, on-target",
+      "Faster responses, fewer hallucinations",
+      "Scales to large repositories"
+    ],
+    "cons": [
+      "Requires file-search service",
+      "May miss critical files if ranking is off",
+      "Index needs to stay current"
+    ]
+  },
+  "background-agent-ci": {
+    "category": "Feedback Loops",
+    "problem": "Long-running tasks tie up the editor and require developers to babysit the agent throughout execution.",
+    "solution": "Run agent asynchronously: push branch, wait for CI, ingest pass/fail output, iterate automatically, and notify when green.",
+    "when": [
+      "Long-running upgrade or refactoring tasks",
+      "Developer wants to work on other things",
+      "Mobile kick-offs (e.g., fix tests while away)"
+    ],
+    "pros": [
+      "Developer freed from babysitting",
+      "Uses existing CI as feedback loop",
+      "Fully autonomous iteration"
+    ],
+    "cons": [
+      "Requires CI integration and permissions",
+      "May iterate on wrong direction without oversight"
+    ]
+  },
+  "dogfooding-with-rapid-iteration-for-agent-improvement": {
+    "category": "Feedback Loops",
+    "problem": "External feedback loops are slow and simulated environments miss real-world nuances for agent improvement.",
+    "solution": "Development team uses their own AI agent daily, creating tight feedback loops for rapid iteration and honest assessment.",
+    "when": [
+      "Building AI-assisted dev tools",
+      "Need rapid feature validation",
+      "Team wants unfiltered feedback"
+    ],
+    "pros": [
+      "Direct, immediate feedback",
+      "Real-world problem testing",
+      "Fast iteration cycles"
+    ],
+    "cons": [
+      "May bias toward developer needs",
+      "Internal users != all users",
+      "Requires team adoption commitment"
+    ]
+  },
+  "graph-of-thoughts": {
+    "category": "Feedback Loops",
+    "problem": "Linear Chain-of-Thought reasoning cannot handle problems with complex interdependencies requiring paths that merge, split, and recombine.",
+    "solution": "Represent reasoning as a directed graph where thoughts can branch, aggregate, refine, and loop back for iterative improvement.",
+    "when": [
+      "Complex problems with interdependent reasoning steps",
+      "Tasks requiring insight aggregation from multiple paths",
+      "Problems needing iterative refinement and backtracking"
+    ],
+    "pros": [
+      "Handles non-linear reasoning patterns",
+      "Combines insights from multiple paths",
+      "Supports backtracking and refinement"
+    ],
+    "cons": [
+      "Significantly higher computational cost",
+      "Complex to implement and debug",
+      "Overkill for simple problems"
+    ]
+  },
+  "reflection-loop": {
+    "category": "Feedback Loops",
+    "problem": "Without self-review, LLM outputs may be low quality or fail to meet requirements",
+    "solution": "Generate → self-evaluate → incorporate feedback → regenerate until criteria met",
+    "when": [
+      "Quality/compliance is critical",
+      "Code, writing, reasoning tasks",
+      "Clear evaluation metrics exist"
+    ],
+    "pros": [
+      "Automatic quality improvement",
+      "Explicit criteria compliance"
+    ],
+    "cons": [
+      "Extra computation cost",
+      "Infinite loop risk with vague metrics"
+    ]
+  },
+  "spec-as-test-feedback-loop": {
+    "category": "Feedback Loops",
+    "problem": "Implementations can drift from specs as code evolves, causing silent divergence",
+    "solution": "Auto-generate executable tests from specs and run on every commit, with agent-authored PRs for fixes",
+    "when": [
+      "Spec-first development workflows",
+      "Critical systems requiring spec-impl sync",
+      "Continuous integration environments"
+    ],
+    "pros": [
+      "Catches drift early",
+      "Keeps spec and impl in lock-step"
+    ],
+    "cons": [
+      "Heavy CI usage",
+      "False positives with loose spec wording"
+    ]
+  },
+  "tool-use-incentivization-via-reward-shaping": {
+    "category": "Feedback Loops",
+    "problem": "Agents underutilize tools (compilers, linters, tests) and default to internal thinking tokens instead of invoking external tools.",
+    "solution": "Provide dense shaped rewards for each intermediate tool invocation (+1 compile, +2 test pass) to guide policy toward tool usage.",
+    "when": [
+      "RL-based agent training",
+      "Tool use is underutilized",
+      "Sparse final rewards are insufficient"
+    ],
+    "pros": [
+      "Denser feedback guides step-by-step",
+      "Encourages tool adoption"
+    ],
+    "cons": [
+      "Reward engineering overhead",
+      "May game intermediate rewards"
+    ]
+  },
+  "coding-agent-ci-feedback-loop": {
+    "category": "Feedback Loops",
+    "problem": "Synchronous test runs block agent from parallel work, creating idle compute and inflated training times as agent babysits builds.",
+    "solution": "Run agent async against CI: push branch, poll for partial failures, patch iteratively, notify on final green.",
+    "when": [
+      "Multi-file refactors or feature additions",
+      "Long test suites that block iteration",
+      "Need to maximize compute utilization"
+    ],
+    "pros": [
+      "Compute efficiency - overlaps generation and testing",
+      "Faster iteration with less waiting",
+      "Autonomous until final green"
+    ],
+    "cons": [
+      "CI flakiness can mislead patches",
+      "Security - agent needs CI push/read permissions"
+    ]
+  },
+  "inference-healed-code-review-reward": {
+    "category": "Feedback Loops",
+    "problem": "Binary 'tests passed' rewards miss nuanced code quality issues like performance regressions, style violations, and security problems.",
+    "solution": "Use a multi-criteria code review critic that decomposes quality into subcriteria (correctness, style, perf, security) with explainable subscores.",
+    "when": [
+      "RL-based code generation agents",
+      "When code quality beyond correctness matters",
+      "Continuous improvement of code agents"
+    ],
+    "pros": [
+      "Explainable feedback for targeted fixes",
+      "Higher code quality via non-functional criteria",
+      "Human-readable review comments"
+    ],
+    "cons": [
+      "Compute overhead (tests, linters, benchmarks)",
+      "Critic model maintenance as standards evolve",
+      "Complexity in aggregating subscores"
+    ]
+  },
+  "rich-feedback-loops": {
+    "category": "Feedback Loops",
+    "problem": "Polishing a single prompt can't cover every edge case. Agents need ground truth to self-correct",
+    "solution": "Expose iterative, machine-readable feedback (compiler errors, test failures, lint) after every tool call. Agent uses diagnostics to self-debug",
+    "when": [
+      "Code generation tasks",
+      "Any task with verifiable output",
+      "When tests/linters are available"
+    ],
+    "pros": [
+      "Emergent self-debugging",
+      "Better than bigger prompts"
+    ],
+    "cons": [
+      "Requires feedback infrastructure",
+      "More iterations = more tokens"
+    ]
+  },
+  "self-critique-evaluator-loop": {
+    "category": "Feedback Loops",
+    "problem": "Human preference labels are costly and quickly become outdated as base models improve, creating a bottleneck for reward model training.",
+    "solution": "Train a self-taught evaluator that bootstraps from synthetic data: generate candidates, judge with reasoning traces, fine-tune on its own judgments, and iterate.",
+    "when": [
+      "Human labels too expensive to scale",
+      "Base models evolving rapidly",
+      "Need automated quality gates"
+    ],
+    "pros": [
+      "Near-human eval accuracy without labels",
+      "Scales with compute",
+      "Self-improving over time"
+    ],
+    "cons": [
+      "Risk of evaluator-model collusion",
+      "Needs adversarial testing",
+      "May amplify systematic errors"
+    ]
+  },
+  "self-discover-reasoning-structures": {
+    "category": "Feedback Loops",
+    "problem": "Different reasoning tasks require different thinking strategies. Fixed reasoning patterns like Chain-of-Thought may be suboptimal for diverse problems.",
+    "solution": "Enable LLMs to automatically discover and compose task-specific reasoning structures by selecting and adapting atomic reasoning modules to match the problem's characteristics.",
+    "when": [
+      "Diverse reasoning tasks",
+      "Standard CoT underperforming",
+      "Novel problem types"
+    ],
+    "pros": [
+      "Up to 32% improvement over CoT",
+      "Creates reusable reasoning templates",
+      "Adapts to novel problems"
+    ],
+    "cons": [
+      "Overhead for structure discovery",
+      "May over-engineer simple problems",
+      "Depends on task analysis accuracy"
+    ]
+  },
+  "agent-reinforcement-fine-tuning": {
+    "category": "Learning & Adaptation",
+    "problem": "Base models underperform on domain-specific tasks due to distribution shift and inefficient tool use.",
+    "solution": "Train model end-to-end on agentic tasks with real tool calls, custom graders, and multi-step reinforcement.",
+    "when": [
+      "Domain shift from base model",
+      "Inefficient tool use patterns",
+      "100-1000 quality samples available"
+    ],
+    "pros": [
+      "End-to-end optimization",
+      "Sample efficient (100-1000 samples)"
+    ],
+    "cons": [
+      "Infrastructure complexity",
+      "Careful reward engineering needed"
+    ]
+  },
+  "compounding-engineering-pattern": {
+    "category": "Learning & Adaptation",
+    "problem": "Traditional engineering has diminishing returns; AI agents repeat mistakes because learnings aren't codified.",
+    "solution": "Codify all learnings from each feature into prompts, commands, and hooks to make subsequent features easier.",
+    "when": [
+      "Building features with AI agents",
+      "Onboarding new team members",
+      "Agents repeating the same mistakes"
+    ],
+    "pros": [
+      "Accelerating productivity over time",
+      "Knowledge preserved beyond individuals",
+      "Better agent and human onboarding"
+    ],
+    "cons": [
+      "Upfront documentation time",
+      "Risk of prompt bloat",
+      "Requires extensible agent system"
+    ]
+  },
+  "skill-library-evolution": {
+    "category": "Learning & Adaptation",
+    "problem": "Agents solve similar problems across sessions but must rediscover solutions each time, wasting tokens",
+    "solution": "Persist working code as reusable functions in skills/ directory. Over time, evolve into documented, tested capabilities",
+    "when": [
+      "Repetitive problem-solving across sessions",
+      "Organization wants agents to build capability over time",
+      "Code reuse is valuable"
+    ],
+    "pros": [
+      "Builds agent capability over time",
+      "Reduces token consumption"
+    ],
+    "cons": [
+      "Requires discipline to organize",
+      "Skills can become stale"
+    ]
+  },
+  "variance-based-rl-sample-selection": {
+    "category": "Learning & Adaptation",
+    "problem": "Zero-variance samples (always correct or always wrong) provide no learning signal, wasting compute in RL training.",
+    "solution": "Run multiple baseline evals per sample, plot variance, prioritize high-variance samples where model sometimes succeeds.",
+    "when": [
+      "RL training with limited budget",
+      "Dataset may contain many solved/unsolvable samples",
+      "Need to estimate improvement potential"
+    ],
+    "pros": [
+      "Data efficiency - focus on learnable samples",
+      "Predictive - estimate potential before training"
+    ],
+    "cons": [
+      "Upfront eval cost (3-5x baselines)",
+      "Variance changes during training"
+    ]
+  },
+  "sub-agent-spawning": {
+    "category": "Orchestration & Control",
+    "problem": "Large multi-file tasks overflow main agent's context window, exceeding reasoning budget",
+    "solution": "Spawn independent sub-agents to work in parallel, then merge results",
+    "when": [
+      "Multi-file edits (10+ files)",
+      "Independently partitionable tasks",
+      "Sequential processing too slow"
+    ],
+    "pros": [
+      "Faster via parallel execution",
+      "Context isolation"
+    ],
+    "cons": [
+      "Coordination complexity",
+      "Merge overhead"
+    ]
+  },
+  "action-selector-pattern": {
+    "category": "Orchestration & Control",
+    "problem": "Untrusted input can hijack agent reasoning when tool feedback re-enters context window.",
+    "solution": "Use LLM only to map requests to pre-approved actions; no tool outputs fed back to the model.",
+    "when": [
+      "High-security environments",
+      "Customer service bots",
+      "Limited action sets (kiosks, routers)"
+    ],
+    "pros": [
+      "Near-immunity to prompt injection",
+      "Trivial to audit"
+    ],
+    "cons": [
+      "Limited flexibility",
+      "New capabilities require code updates"
+    ]
+  },
+  "autonomous-workflow-agent-architecture": {
+    "category": "Orchestration & Control",
+    "problem": "Complex engineering workflows require extensive human oversight, with manual coordination, monitoring, and intervention at each step.",
+    "solution": "Containerized agents with tmux session management, intelligent monitoring, and context-aware error recovery for autonomous multi-step execution.",
+    "when": [
+      "Model training and evaluation pipelines",
+      "Infrastructure provisioning and configuration",
+      "Multi-stage deployment workflows"
+    ],
+    "pros": [
+      "1.2-1.4x speedup in workflow execution",
+      "Reduced human intervention for routine steps",
+      "Comprehensive automatic logging"
+    ],
+    "cons": [
+      "Limited handling of novel failure scenarios",
+      "Context window constraints for long workflows",
+      "Setup complexity for containers and monitoring"
+    ]
+  },
+  "continuous-autonomous-task-loop-pattern": {
+    "category": "Orchestration & Control",
+    "problem": "Manual task orchestration—selection, commits, rate-limit handling—interrupts developer flow.",
+    "solution": "Implement continuous loop with fresh context per task, auto-commits, and intelligent backoff.",
+    "when": [
+      "Batch processing TODO lists",
+      "Overnight autonomous development",
+      "Discrete, well-defined tasks"
+    ],
+    "pros": [
+      "Complete autonomy",
+      "Fresh context per task",
+      "Handles rate limits gracefully"
+    ],
+    "cons": [
+      "Reduced human oversight",
+      "Elevated permission requirements",
+      "Risk of runaway execution"
+    ]
+  },
+  "distributed-execution-cloud-workers": {
+    "category": "Orchestration & Control",
+    "problem": "Single-session AI agent execution cannot scale to meet enterprise team demands with multiple simultaneous code changes.",
+    "solution": "Run multiple Claude sessions in parallel using git worktrees and cloud workers with centralized coordination.",
+    "when": [
+      "Team-wide code migrations",
+      "Parallel feature development",
+      "Large-scale infrastructure changes"
+    ],
+    "pros": [
+      "10x-100x parallelization speedup",
+      "Scales to enterprise teams",
+      "Centralized monitoring"
+    ],
+    "cons": [
+      "Significant infrastructure complexity",
+      "Merge conflict overhead",
+      "Higher parallel model costs"
+    ]
+  },
+  "feature-list-as-immutable-contract": {
+    "category": "Orchestration & Control",
+    "problem": "Long-running agents declare premature victory, delete tests to pass, or lose track of requirements across sessions.",
+    "solution": "Define all features upfront in an immutable JSON that agents can mark complete but cannot modify or delete.",
+    "when": [
+      "Building complete applications with known requirements",
+      "Projects spanning many agent sessions",
+      "When agent accountability is critical"
+    ],
+    "pros": [
+      "Prevents premature completion claims",
+      "Eliminates 'pass by deletion' attacks",
+      "Measurable progress (X of Y features)"
+    ],
+    "cons": [
+      "Requires upfront feature specification",
+      "Rigid for changing requirements",
+      "Not suitable for exploratory work"
+    ]
+  },
+  "iterative-multi-agent-brainstorming": {
+    "category": "Orchestration & Control",
+    "problem": "Single agent gets stuck in local optimum or fails to explore diverse solutions for complex problems.",
+    "solution": "Spawn multiple agents with different perspectives to brainstorm in parallel, then synthesize best ideas.",
+    "when": [
+      "Creative ideation tasks",
+      "Complex refactoring decisions",
+      "Design exploration"
+    ],
+    "pros": [
+      "Diverse perspectives",
+      "Avoids local optima"
+    ],
+    "cons": [
+      "Higher token cost",
+      "Synthesis complexity"
+    ]
+  },
+  "multi-model-orchestration-for-complex-edits": {
+    "category": "Orchestration & Control",
+    "problem": "A single model may not be optimal for all sub-tasks in complex operations like multi-file code editing.",
+    "solution": "Pipeline multiple specialized models: retrieval model for context, generation model for edits, and application model for changes.",
+    "when": [
+      "Multi-file code editing tasks",
+      "Complex operations requiring different skills",
+      "Tasks with distinct retrieval, generation, and application phases"
+    ],
+    "pros": [
+      "Leverages each model's strengths",
+      "More robust outcomes than single model"
+    ],
+    "cons": [
+      "Orchestration complexity",
+      "Latency from multiple model calls"
+    ]
+  },
+  "plan-then-execute-pattern": {
+    "category": "Orchestration & Control",
+    "problem": "If tool outputs alter choice of later actions, injected instructions may redirect agent toward malicious steps",
+    "solution": "Split into Plan phase (fixed sequence before seeing untrusted data) and Execute phase (controller runs exact sequence)",
+    "when": [
+      "Email & calendar bots",
+      "SQL assistants",
+      "Tasks where action set is known but params vary"
+    ],
+    "pros": [
+      "Strong control-flow integrity",
+      "2-3x success rates for complex tasks"
+    ],
+    "cons": [
+      "Output content can still be poisoned",
+      "Less flexible for dynamic tasks"
+    ]
+  },
+  "self-rewriting-meta-prompt-loop": {
+    "category": "Orchestration & Control",
+    "problem": "Static system prompts become stale as agents encounter new tasks and edge cases",
+    "solution": "Let the agent rewrite its own system prompt after each interaction through reflection and validation",
+    "when": [
+      "Agent encounters recurring failures",
+      "Prompt needs frequent minor tweaks",
+      "Continuous learning without human intervention"
+    ],
+    "pros": [
+      "Rapid adaptation to new scenarios",
+      "No human in the loop for minor tweaks"
+    ],
+    "cons": [
+      "Risk of drift or jailbreak",
+      "Requires strong guardrails"
+    ]
+  },
+  "three-stage-perception-architecture": {
+    "category": "Orchestration & Control",
+    "problem": "Monolithic agents mixing perception, reasoning, and action are hard to debug, extend, or scale independently.",
+    "solution": "Separate workflow into three stages: Perception (input normalization), Processing (reasoning), and Action (execution).",
+    "when": [
+      "Complex multi-modal inputs",
+      "Need independent component scaling",
+      "Team collaboration per stage"
+    ],
+    "pros": [
+      "Clean separation of concerns",
+      "Better error isolation"
+    ],
+    "cons": [
+      "Additional complexity for simple tasks",
+      "Latency from stage transitions"
+    ]
+  },
+  "agent-driven-research": {
+    "category": "Orchestration & Control",
+    "problem": "Traditional research lacks ability to adapt search strategies based on emerging results dynamically.",
+    "solution": "Let agents independently formulate queries, execute searches, analyze results, and iterate until satisfied.",
+    "when": [
+      "Complex research questions",
+      "Multi-source information gathering",
+      "Adaptive search needed"
+    ],
+    "pros": [
+      "Adaptive search strategies",
+      "Autonomous iteration"
+    ],
+    "cons": [
+      "May miss obvious sources",
+      "Token cost for iterations"
+    ]
+  },
+  "discrete-phase-separation": {
+    "category": "Orchestration & Control",
+    "problem": "Simultaneous research, planning, and implementation causes context contamination and degraded output.",
+    "solution": "Break workflow into isolated phases (Research, Plan, Execute) with clean handoffs of distilled conclusions.",
+    "when": [
+      "Complex features needing background research",
+      "Refactoring projects with architectural decisions",
+      "Mixing research and implementation hurts quality"
+    ],
+    "pros": [
+      "Higher quality per phase",
+      "Prevents context contamination",
+      "Leverages model-specific strengths"
+    ],
+    "cons": [
+      "Requires explicit phase management",
+      "Feels slower for simple tasks",
+      "Higher total token usage"
+    ]
+  },
+  "dual-llm-pattern": {
+    "category": "Orchestration & Control",
+    "problem": "A privileged agent that sees untrusted text AND wields tools can be coerced into dangerous calls.",
+    "solution": "Split into Privileged LLM (plans/tools, no raw data) and Quarantined LLM (reads data, no tools), passing data as symbolic variables.",
+    "when": [
+      "Email/calendar assistants",
+      "Booking agents handling user data",
+      "API-powered chatbots"
+    ],
+    "pros": [
+      "Clear trust boundary",
+      "Compatible with static analysis",
+      "Prevents injection attacks"
+    ],
+    "cons": [
+      "Increased complexity",
+      "Debugging across two models",
+      "Variable mapping overhead"
+    ]
+  },
+  "inference-time-scaling": {
+    "category": "Orchestration & Control",
+    "problem": "Once trained, model performance is fixed. We cannot 'think harder' by allocating more compute for challenging problems.",
+    "solution": "Allocate additional inference compute dynamically: generate multiple candidates, perform extended reasoning, iterate and refine outputs.",
+    "when": [
+      "Complex reasoning tasks where quality matters",
+      "Problems with verifiable solutions",
+      "When latency is acceptable for accuracy"
+    ],
+    "pros": [
+      "Dramatically improves performance on hard tasks",
+      "More cost-effective than larger models",
+      "Dynamic resource allocation by difficulty"
+    ],
+    "cons": [
+      "Increased latency for responses",
+      "Higher inference costs",
+      "Diminishing returns beyond thresholds"
+    ]
+  },
+  "language-agent-tree-search-lats": {
+    "category": "Orchestration & Control",
+    "problem": "Linear reasoning (ReACT) gets stuck in local optima on complex tasks requiring strategic exploration.",
+    "solution": "Apply Monte Carlo Tree Search (MCTS) with LLM for action generation, evaluation, and backpropagation.",
+    "when": [
+      "Multi-step reasoning",
+      "Strategic planning",
+      "Multiple valid approaches"
+    ],
+    "pros": [
+      "Systematic exploration",
+      "Outperforms ReACT"
+    ],
+    "cons": [
+      "High LLM call cost",
+      "Parameter tuning"
+    ]
+  },
+  "opponent-processor-multi-agent-debate": {
+    "category": "Orchestration & Control",
+    "problem": "Single-agent decisions suffer from confirmation bias, limited perspectives, and unexamined assumptions.",
+    "solution": "Spawn opposing agents with different goals to debate each other, surfacing blind spots and unconsidered alternatives.",
+    "when": [
+      "Decisions requiring balanced perspectives",
+      "High-stakes choices needing scrutiny",
+      "Tasks prone to confirmation bias"
+    ],
+    "pros": [
+      "Reduces bias through adversarial pressure",
+      "Surfaces blind spots and trade-offs"
+    ],
+    "cons": [
+      "2x+ token cost",
+      "May deadlock without resolution mechanism"
+    ]
+  },
+  "progressive-autonomy-with-model-evolution": {
+    "category": "Orchestration & Control",
+    "problem": "Agent scaffolding built for older models becomes unnecessary overhead as models improve, creating prompt bloat, wasted tokens, and maintenance burden.",
+    "solution": "Actively remove scaffolding as models become more capable. Regularly audit system prompts and orchestration logic to eliminate what newer models have internalized.",
+    "when": [
+      "New model releases available",
+      "System prompts exceeding necessary length",
+      "Complex orchestration for simple tasks"
+    ],
+    "pros": [
+      "Reduced token costs",
+      "Faster execution",
+      "Simpler maintenance"
+    ],
+    "cons": [
+      "Requires testing for quality validation",
+      "May need different configs per model version",
+      "Loss of explicit control"
+    ]
+  },
+  "specification-driven-agent-development": {
+    "category": "Orchestration & Control",
+    "problem": "Hand-crafted prompts leave room for ambiguity; agents can over-interpret or conflict with stakeholder intent",
+    "solution": "Use a formal spec file as the agent's primary input and source of truth, iterating only by editing the spec",
+    "when": [
+      "Complex multi-step feature development",
+      "Audit-friendly, repeatable workflows",
+      "Team collaboration requiring clear contracts"
+    ],
+    "pros": [
+      "Repeatable, audit-friendly, easy diffing",
+      "Clear artifact traceability to spec"
+    ],
+    "cons": [
+      "Up-front spec writing effort",
+      "Ramp-up for teams new to spec formats"
+    ]
+  },
+  "tool-capability-compartmentalization": {
+    "category": "Orchestration & Control",
+    "problem": "Mix-and-match tools combining data readers, web fetchers, and writers amplify prompt-injection attack chains.",
+    "solution": "Split tools into reader/processor/writer micro-tools with isolated permissions and explicit per-call consent.",
+    "when": [
+      "Tools handle private data",
+      "Multiple capability types combined",
+      "Security is high priority"
+    ],
+    "pros": [
+      "Fine-grained security control",
+      "Plays well with modular architectures"
+    ],
+    "cons": [
+      "More tooling overhead",
+      "Permission creep over time"
+    ]
+  },
+  "disposable-scaffolding-over-durable-features": {
+    "category": "Orchestration & Control",
+    "problem": "Complex features built around models become obsolete when next-gen models perform those tasks natively.",
+    "solution": "Treat tooling as temporary scaffolding; build simplest solutions expecting they will be discarded.",
+    "when": [
+      "Building model-compensating features",
+      "Rapid model improvement cycles",
+      "Need product agility over long-term investment"
+    ],
+    "pros": [
+      "Fast adaptation to new models",
+      "Lower engineering investment risk",
+      "Focus on unique value, not workarounds"
+    ],
+    "cons": [
+      "May feel wasteful",
+      "Requires discipline to avoid over-engineering",
+      "Tech debt accumulates if not cleaned"
+    ]
+  },
+  "explicit-posterior-sampling-planner": {
+    "category": "Orchestration & Control",
+    "problem": "Agents relying on ad-hoc heuristics explore poorly, wasting tokens and API calls on dead ends.",
+    "solution": "Embed PSRL algorithm: maintain Bayesian posterior over task models, sample model, compute optimal plan, execute, update posterior.",
+    "when": [
+      "Exploration-heavy tasks",
+      "Multi-step decision making",
+      "Need principled exploration"
+    ],
+    "pros": [
+      "Principled exploration",
+      "Efficient token usage",
+      "Theoretical guarantees"
+    ],
+    "cons": [
+      "Implementation complexity",
+      "Posterior computation cost",
+      "Requires RL expertise"
+    ]
+  },
+  "initializer-maintainer-dual-agent": {
+    "category": "Orchestration & Control",
+    "problem": "Single-agent approaches either over-engineer each session (wasting setup time) or under-invest in foundations (causing drift and confusion).",
+    "solution": "Use two specialized agents: Initializer creates foundations once (features, env, tracking); Maintainer handles incremental development across sessions.",
+    "when": [
+      "Projects requiring many sessions (days/weeks)",
+      "Complex applications with 50+ features",
+      "When context loss between sessions is costly"
+    ],
+    "pros": [
+      "Clear separation of setup vs execution",
+      "Session bootstrapping prevents context loss",
+      "Mirrors effective human team practices"
+    ],
+    "cons": [
+      "Requires upfront feature specification",
+      "Two prompts/configs to maintain",
+      "Overhead for small single-session tasks"
+    ]
+  },
+  "llm-map-reduce-pattern": {
+    "category": "Orchestration & Control",
+    "problem": "Single poisoned document can manipulate global reasoning if all data processed in one context.",
+    "solution": "Map: sandboxed LLMs process each doc independently. Reduce: aggregate only sanitized outputs.",
+    "when": [
+      "Processing untrusted docs",
+      "File triage/classification",
+      "N-to-1 decisions"
+    ],
+    "pros": [
+      "Poisoned item isolated",
+      "Scalable parallelism"
+    ],
+    "cons": [
+      "Output validation needed",
+      "Orchestration overhead"
+    ]
+  },
+  "oracle-and-worker-multi-model": {
+    "category": "Orchestration & Control",
+    "problem": "Single model creates trade-off between capability and cost. Powerful models are expensive for routine tasks.",
+    "solution": "Two-tier system: fast Worker (Sonnet) handles bulk tasks, expensive Oracle (o3/Gemini) reserved for high-level reasoning and debugging.",
+    "when": [
+      "Mix of routine and complex tasks",
+      "Cost optimization is important",
+      "Tasks where worker may get stuck"
+    ],
+    "pros": [
+      "Cost-efficient use of frontier models",
+      "Specialized AI team approach"
+    ],
+    "cons": [
+      "Orchestration complexity",
+      "Latency from model switching"
+    ]
+  },
+  "progressive-complexity-escalation": {
+    "category": "Orchestration & Control",
+    "problem": "Deploying agents with overly ambitious capabilities from day one leads to unreliable outputs, failed implementations, and safety risks from autonomous high-stakes operations.",
+    "solution": "Start with low-complexity, high-reliability tasks and progressively unlock more complex capabilities as models improve and trust is established through capability tiers.",
+    "when": [
+      "Deploying agents into production",
+      "High-stakes or regulated domains",
+      "Building internal automation tools"
+    ],
+    "pros": [
+      "Risk mitigation via limited blast radius",
+      "Builds stakeholder confidence",
+      "Graceful degradation"
+    ],
+    "cons": [
+      "Delayed full automation benefits",
+      "Tier management complexity",
+      "Promotion friction"
+    ]
+  },
+  "stop-hook-auto-continue-pattern": {
+    "category": "Orchestration & Control",
+    "problem": "Agents complete turns even when tasks are not truly done (tests fail, checks incomplete)",
+    "solution": "Use stop hooks to check success criteria after each turn; auto-continue agent until criteria pass",
+    "when": [
+      "Test-driven development workflows",
+      "Autonomous task completion required",
+      "Sandboxed/containerized environments"
+    ],
+    "pros": [
+      "True task completion guaranteed",
+      "No manual re-prompting needed"
+    ],
+    "cons": [
+      "Risk of infinite loops",
+      "Runaway costs without timeout"
+    ]
+  },
+  "tree-of-thought-reasoning": {
+    "category": "Orchestration & Control",
+    "problem": "Linear chain-of-thought reasoning gets stuck on complex problems, missing alternatives or failing to backtrack.",
+    "solution": "Explore a search tree of intermediate thoughts, expand multiple steps, evaluate partial solutions before committing.",
+    "when": [
+      "Complex puzzles or planning tasks",
+      "Multiple valid approaches exist",
+      "Backtracking may be needed"
+    ],
+    "pros": [
+      "Covers more possibilities",
+      "Improves reliability on hard tasks"
+    ],
+    "cons": [
+      "Higher compute cost",
+      "Needs good scoring method"
+    ]
+  },
+  "inversion-of-control": {
+    "category": "Orchestration & Control",
+    "problem": "Traditional 'prompt-as-puppeteer' workflows force humans to spell out every step, limiting scale and creativity.",
+    "solution": "Give the agent tools plus a high-level goal and let it decide orchestration. Humans supply guard-rails (10%) while agent handles execution (87%).",
+    "when": [
+      "Complex multi-step tasks with unclear sequence",
+      "Agent has necessary tools and capabilities",
+      "Human oversight available for critical decisions"
+    ],
+    "pros": [
+      "Scales to complex tasks without step-by-step prompting",
+      "Unleashes agent creativity and problem-solving",
+      "Reduces human micromanagement burden"
+    ],
+    "cons": [
+      "Requires trust in agent judgment",
+      "Need robust guard-rails for safety",
+      "May take unexpected paths"
+    ]
+  },
+  "parallel-tool-call-learning": {
+    "category": "Orchestration & Control",
+    "problem": "Agents execute tool calls sequentially even when they could run in parallel, causing unnecessary latency.",
+    "solution": "Use Agent RFT to teach models to parallelize independent tool calls, reducing latency by 40-50% when tool execution is fast.",
+    "when": [
+      "Tool execution faster than inference",
+      "Independent information gathering",
+      "Broad exploration phases"
+    ],
+    "pros": [
+      "40-50% latency reduction",
+      "Emerges naturally from RL training"
+    ],
+    "cons": [
+      "Requires concurrent tool infrastructure",
+      "Higher peak resource usage"
+    ]
+  },
+  "swarm-migration-pattern": {
+    "category": "Orchestration & Control",
+    "problem": "Large-scale code migrations (framework upgrades, lint fixes) are slow when done sequentially",
+    "solution": "Main agent orchestrates 10+ parallel subagents, each migrating a batch of files in map-reduce fashion",
+    "when": [
+      "Framework migrations (Jest to Vitest, etc.)",
+      "Lint rule rollouts across many files",
+      "API updates or code modernization"
+    ],
+    "pros": [
+      "10x+ speedup via parallelization",
+      "Fault isolation per batch"
+    ],
+    "cons": [
+      "High token cost for parallel agents",
+      "Potential merge conflicts"
+    ]
+  },
+  "parallel-tool-execution": {
+    "category": "Orchestration & Control",
+    "problem": "Sequential tool execution causes delays for read-only operations, but parallel execution risks race conditions for state-modifying tools.",
+    "solution": "Classify tools as read-only or state-modifying. Execute read-only batches in parallel, serialize state-modifying operations.",
+    "when": [
+      "Mix of read and write operations",
+      "Performance-sensitive applications",
+      "Batch tool calls in single reasoning step"
+    ],
+    "pros": [
+      "Fast parallel reads, safe sequential writes",
+      "Prevents race conditions"
+    ],
+    "cons": [
+      "Single write in batch serializes everything",
+      "Relies on accurate tool classification"
+    ]
+  },
+  "anti-reward-hacking-grader-design": {
+    "category": "Reliability & Eval",
+    "problem": "RL models exploit grader loopholes to maximize reward without actually solving tasks, leading to 100% validation scores but poor real performance.",
+    "solution": "Design multi-criteria graders with iterative hardening, weighted subscores, and explicit gaming pattern detection.",
+    "when": [
+      "Training agents with reinforcement learning",
+      "Initial grader shows suspiciously high scores",
+      "Production performance doesn't match validation metrics"
+    ],
+    "pros": [
+      "Robust learning - models solve tasks, not game metrics",
+      "Better generalization via multi-criteria evaluation",
+      "Debuggable subscores for identifying struggles"
+    ],
+    "cons": [
+      "Engineering effort for careful design and iteration",
+      "Slower convergence due to harder grading",
+      "Computational cost for multi-criteria evaluation"
+    ]
+  },
+  "criticgpt-style-evaluation": {
+    "category": "Reliability & Eval",
+    "problem": "Human reviewers struggle to catch subtle bugs in sophisticated AI-generated code at scale.",
+    "solution": "Deploy specialized critic models trained for code review to identify bugs, security issues, and quality problems.",
+    "when": [
+      "High volume of AI-generated code",
+      "Security-critical applications",
+      "Need consistent quality standards"
+    ],
+    "pros": [
+      "Catches subtle bugs humans miss",
+      "Consistent 24/7 reviews",
+      "Scalable code review process"
+    ],
+    "cons": [
+      "False positives need human verification",
+      "Cannot understand full business context",
+      "May miss novel vulnerability types"
+    ]
+  },
+  "extended-coherence-work-sessions": {
+    "category": "Reliability & Eval",
+    "problem": "Early AI agents lose coherence after a few minutes, limiting their utility for complex multi-stage tasks requiring sustained effort.",
+    "solution": "Use models and architectures designed to maintain coherence over hours through larger context windows and better state management.",
+    "when": [
+      "Complex multi-step projects (hours of work)",
+      "Tasks requiring sustained context across stages",
+      "Prolonged problem-solving sessions"
+    ],
+    "pros": [
+      "Enables human-equivalent work sessions",
+      "Handles complex, multi-stage tasks",
+      "Rapidly improving capability"
+    ],
+    "cons": [
+      "Requires advanced model architecture",
+      "Higher computational cost",
+      "Still evolving technology"
+    ]
+  },
+  "lethal-trifecta-threat-model": {
+    "category": "Reliability & Eval",
+    "problem": "Combining private data + untrusted input + external communication enables prompt injection data exfiltration.",
+    "solution": "Audit every tool for these 3 capabilities and guarantee at least one is blocked in any execution path.",
+    "when": [
+      "Agents with tool access",
+      "Processing untrusted data",
+      "Security-critical systems"
+    ],
+    "pros": [
+      "Simple mental model",
+      "Eliminates attack class"
+    ],
+    "cons": [
+      "Limits all-in-one agents",
+      "Capability tagging effort"
+    ]
+  },
+  "merged-code-language-skill-model": {
+    "category": "Reliability & Eval",
+    "problem": "Training a single model for both code and natural language requires massive compute and risks skill interference.",
+    "solution": "Train separate specialist models independently, then merge weights to combine skills without centralized training.",
+    "when": [
+      "Building multi-skill models (code + NL)",
+      "Limited centralized compute resources",
+      "Parallel R&D teams for different capabilities"
+    ],
+    "pros": [
+      "Parallel development of skills",
+      "Reduced centralized compute needs"
+    ],
+    "cons": [
+      "Potential skill dilution from averaging",
+      "Requires identical model architectures"
+    ]
+  },
+  "rlaif-reinforcement-learning-from-ai-feedback": {
+    "category": "Reliability & Eval",
+    "problem": "Traditional RLHF requires extensive human annotation for preference data, which is expensive ($1+ per annotation), time-consuming, and creates a bottleneck in training aligned AI systems.",
+    "solution": "Use AI models to generate preference feedback and evaluation data based on constitutional principles, reducing costs to less than $0.01 per annotation while maintaining quality.",
+    "when": [
+      "Need large-scale preference data",
+      "Human annotation is too expensive",
+      "Training aligned AI systems"
+    ],
+    "pros": [
+      "100x cheaper than human feedback",
+      "Unlimited scalability",
+      "More consistent than varying annotators"
+    ],
+    "cons": [
+      "May amplify existing model biases",
+      "Cannot provide truly novel insights",
+      "Requires careful principle design"
+    ]
+  },
+  "structured-output-specification": {
+    "category": "Reliability & Eval",
+    "problem": "Free-form agent outputs are hard to validate, parse, and integrate with downstream systems",
+    "solution": "Constrain outputs using deterministic schemas (JSON Schema, Zod, Pydantic) enforced at generation time",
+    "when": [
+      "Multi-phase agent workflows",
+      "Classification/categorization tasks",
+      "Integration with databases or APIs"
+    ],
+    "pros": [
+      "Guaranteed parseable outputs",
+      "Type safety and validation"
+    ],
+    "cons": [
+      "Rigidity limits free-form responses",
+      "Schema evolution friction"
+    ]
+  },
+  "versioned-constitution-governance": {
+    "category": "Reliability & Eval",
+    "problem": "Self-modifying agents can accidentally violate safety rules or regress on alignment when rewriting their constitution.",
+    "solution": "Store constitution in version-controlled, signed repo with CI policy checks; agent proposes, gatekeeper merges.",
+    "when": [
+      "Agent can modify its own rules",
+      "Safety constraints are critical",
+      "Audit trail is required"
+    ],
+    "pros": [
+      "Full audit history",
+      "Prevents unauthorized changes"
+    ],
+    "cons": [
+      "Slower iteration cycle",
+      "Requires governance overhead"
+    ]
+  },
+  "asynchronous-coding-agent-pipeline": {
+    "category": "Reliability & Eval",
+    "problem": "Synchronous tool execution (compilation, testing) creates compute bubbles and idle GPUs, blocking agents while waiting for I/O-bound operations.",
+    "solution": "Decouple inference, tool execution, and learning into parallel async components communicating via message queues.",
+    "when": [
+      "Running RL training for coding agents",
+      "Tool calls have high latency (compilation, tests)",
+      "Need to maximize GPU utilization"
+    ],
+    "pros": [
+      "High utilization - GPUs stay busy during I/O",
+      "Scalable - independently scale inference, tools, learning"
+    ],
+    "cons": [
+      "Complex system maintenance across services",
+      "Staleness management for policy updates"
+    ]
+  },
+  "no-token-limit-magic": {
+    "category": "Reliability & Eval",
+    "problem": "Aggressive prompt compression to save tokens stifles reasoning depth and self-correction capabilities.",
+    "solution": "During prototyping, remove hard token limits. Allow lavish context and multiple reasoning passes to discover valuable patterns.",
+    "when": [
+      "Prototyping and experimentation phase",
+      "Discovering optimal reasoning patterns",
+      "Tasks requiring deep self-correction"
+    ],
+    "pros": [
+      "Dramatically better output quality",
+      "Surfaces valuable patterns for optimization"
+    ],
+    "cons": [
+      "Higher cost during prototyping",
+      "Not suitable for production without optimization"
+    ]
+  },
+  "deterministic-security-scanning-build-loop": {
+    "category": "Security & Safety",
+    "problem": "Non-deterministic security approaches (cursor rules, MCP tools) are suggestions that LLMs may ignore.",
+    "solution": "Integrate deterministic security scanners into the build loop that agents must run after every change.",
+    "when": [
+      "AI-assisted code generation",
+      "Security-critical applications",
+      "Need consistent policy enforcement"
+    ],
+    "pros": [
+      "Deterministic, battle-tested tools",
+      "Reuses existing security infra",
+      "Works with any agent/harness"
+    ],
+    "cons": [
+      "Increases build time",
+      "May produce false positives",
+      "Requires fast tools for good DX"
+    ]
+  },
+  "egress-lockdown-no-exfiltration-channel": {
+    "category": "Security & Safety",
+    "problem": "Even with private-data access and untrusted inputs, attacks fail if the agent has no way to transmit stolen data.",
+    "solution": "Implement egress firewall: allow only specific domains, strip content from outbound calls, forbid dynamic link generation.",
+    "when": [
+      "Agents handle sensitive data",
+      "Processing untrusted inputs",
+      "High-security environments"
+    ],
+    "pros": [
+      "Drastically reduces leak risk",
+      "Easy to reason about",
+      "Simple network rules"
+    ],
+    "cons": [
+      "Breaks legitimate integrations",
+      "Requires proxy stubs",
+      "Limits agent capabilities"
+    ]
+  },
+  "isolated-vm-per-rl-rollout": {
+    "category": "Security & Safety",
+    "problem": "RL training rollouts share infrastructure, causing cross-contamination and corrupted rewards when agents execute destructive commands.",
+    "solution": "Spin up an isolated VM/container for each rollout, ensuring complete environment isolation with fresh state.",
+    "when": [
+      "RL training with tool-using agents",
+      "Agents with shell/filesystem access",
+      "Parallel rollouts (100+)"
+    ],
+    "pros": [
+      "Complete isolation",
+      "Deterministic rewards"
+    ],
+    "cons": [
+      "Cost of 100s VMs",
+      "Provisioning latency"
+    ]
+  },
+  "pii-tokenization": {
+    "category": "Security & Safety",
+    "problem": "Sending raw PII through the model's context creates privacy risks and compliance concerns.",
+    "solution": "Intercept tool responses to tokenize PII before reaching model, untokenize when making actual tool calls.",
+    "when": [
+      "Workflows processing customer data",
+      "Compliance-sensitive environments (GDPR, HIPAA)",
+      "Multi-step automation involving PII"
+    ],
+    "pros": [
+      "Prevents raw PII in model context",
+      "Transparent to agent reasoning"
+    ],
+    "cons": [
+      "PII detection must be accurate",
+      "Doesn't prevent inference of patterns"
+    ]
+  },
+  "agent-first-tooling-and-logging": {
+    "category": "Tool Use & Environment",
+    "problem": "Human-centric tools with colored, multi-line outputs are hard for agents to parse reliably.",
+    "solution": "Design tools with machine-readable outputs (JSON), unified logs, and --for-agent flags for agent consumption.",
+    "when": [
+      "Building agent-powered workflows",
+      "Multiple log sources to consolidate",
+      "Reliable automation needed"
+    ],
+    "pros": [
+      "Better parsing accuracy",
+      "Reduced token waste"
+    ],
+    "cons": [
+      "Sacrifices human readability",
+      "Requires tooling investment"
+    ]
+  },
+  "cli-native-agent-orchestration": {
+    "category": "Tool Use & Environment",
+    "problem": "Web chat UIs are awkward for repeat runs, local file edits, or scripting inside CI pipelines.",
+    "solution": "Expose agent capabilities through a first-class CLI for Makefiles, Git hooks, cron jobs, and headless automation.",
+    "when": [
+      "Integrating agents into CI/CD pipelines",
+      "Automating repetitive development tasks",
+      "Need headless or scripted agent execution"
+    ],
+    "pros": [
+      "Scriptable and composable with other tools",
+      "Works offline with local context",
+      "Easy to embed in existing workflows"
+    ],
+    "cons": [
+      "Initial install and auth setup",
+      "Learning curve for CLI flags"
+    ]
+  },
+  "code-then-execute-pattern": {
+    "category": "Tool Use & Environment",
+    "problem": "Plan lists are opaque; need full data-flow analysis and taint tracking for security",
+    "solution": "LLM outputs sandboxed program/DSL. Static checker verifies flows, interpreter runs in locked sandbox",
+    "when": [
+      "Complex multi-step agents",
+      "SQL copilots",
+      "Software engineering bots"
+    ],
+    "pros": [
+      "Formal verifiability",
+      "Replay logs for audit"
+    ],
+    "cons": [
+      "Requires DSL design",
+      "Static analysis infrastructure"
+    ]
+  },
+  "dual-use-tool-design": {
+    "category": "Tool Use & Environment",
+    "problem": "Building separate tools for humans and AI agents creates maintenance overhead, inconsistent behavior, and feature drift.",
+    "solution": "Design all tools to be dual-use: same interface, shared logic, equally accessible to both humans and AI agents.",
+    "when": [
+      "Building developer tools",
+      "Creating slash commands",
+      "Designing agent-assisted workflows"
+    ],
+    "pros": [
+      "Reduced maintenance (one implementation)",
+      "Consistent behavior for both",
+      "Single test suite"
+    ],
+    "cons": [
+      "Must satisfy both ergonomics",
+      "May compromise optimization",
+      "Documentation challenge"
+    ]
+  },
+  "llm-friendly-api-design": {
+    "category": "Tool Use & Environment",
+    "problem": "APIs designed for humans are often ambiguous or complex for LLMs, causing unreliable tool use.",
+    "solution": "Design APIs with explicit versioning, self-descriptive names, clear errors, and minimal indirection.",
+    "when": [
+      "Building agent-callable APIs",
+      "Exposing tools to LLMs",
+      "Internal library design"
+    ],
+    "pros": [
+      "Reliable LLM tool use",
+      "Self-correcting errors"
+    ],
+    "cons": [
+      "API redesign effort",
+      "May be verbose"
+    ]
+  },
+  "patch-steering-via-prompted-tool-selection": {
+    "category": "Tool Use & Environment",
+    "problem": "Agents with multiple patching tools may choose suboptimal ones, causing inconsistent and lower quality results.",
+    "solution": "Steer tool selection through explicit natural language instructions, specifying preferred tools and usage patterns in prompts.",
+    "when": [
+      "Multiple patching/refactoring tools available",
+      "Need for consistent tool usage",
+      "AST-safe operations preferred over text replace"
+    ],
+    "pros": [
+      "Predictable tool selection behavior",
+      "Higher code quality with semantic tools"
+    ],
+    "cons": [
+      "Prompt length increases",
+      "Requires maintenance as tools evolve"
+    ]
+  },
+  "shell-command-contextualization": {
+    "category": "Tool Use & Environment",
+    "problem": "Manually copying shell command output into agent context is tedious and error-prone",
+    "solution": "Provide a special prefix (e.g., !) that executes shell commands and auto-injects both command and output into agent context",
+    "when": [
+      "Agent needs real-time environment state",
+      "Checking git status, file listings, test results",
+      "Interactive debugging with agent assistance"
+    ],
+    "pros": [
+      "Seamless environment integration",
+      "No manual copy-paste required"
+    ],
+    "cons": [
+      "Security risk from arbitrary commands",
+      "Large outputs can bloat context"
+    ]
+  },
+  "tool-use-steering-via-prompting": {
+    "category": "Tool Use & Environment",
+    "problem": "Having tools available does not guarantee agents will use them appropriately, especially for custom or team-specific tools.",
+    "solution": "Guide tool selection via explicit prompts: direct invocation, teaching tool usage, implicit shortcuts, and deeper reasoning triggers.",
+    "when": [
+      "Custom or team-specific tools exist",
+      "Agent tool selection is suboptimal",
+      "Teaching new tool workflows"
+    ],
+    "pros": [
+      "Direct control over tool usage",
+      "Enables custom tool onboarding"
+    ],
+    "cons": [
+      "Requires prompt engineering",
+      "May reduce agent autonomy"
+    ]
+  },
+  "agent-sdk-for-programmatic-control": {
+    "category": "Tool Use & Environment",
+    "problem": "Interactive interfaces don't support CI/CD pipelines, scheduled jobs, or custom application integration.",
+    "solution": "Provide SDK (CLI, Python, TypeScript) exposing agent actions for programmatic access and automation.",
+    "when": [
+      "CI/CD integration needed",
+      "Building custom applications",
+      "Batch processing workflows"
+    ],
+    "pros": [
+      "Enables automation pipelines",
+      "Flexible integration options"
+    ],
+    "cons": [
+      "Learning curve for SDK",
+      "May require API key management"
+    ]
+  },
+  "code-first-tool-interface-pattern": {
+    "category": "Tool Use & Environment",
+    "problem": "Traditional MCP tool calls force all intermediate JSON through the context, causing massive token waste on multi-step and fan-out operations.",
+    "solution": "LLMs write TypeScript code that orchestrates MCP tools in V8 isolates; only final results return to context.",
+    "when": [
+      "Multi-step workflows with clear sequences",
+      "Fan-out operations (100+ items to process)",
+      "Token costs or latency are critical"
+    ],
+    "pros": [
+      "10x+ token reduction on multi-step workflows",
+      "Dramatic fan-out efficiency with loops",
+      "Self-debugging with error handling and retry"
+    ],
+    "cons": [
+      "Requires V8 isolate infrastructure",
+      "Poor fit for dynamic research loops",
+      "Intelligence-in-middle defeats the purpose"
+    ]
+  },
+  "dynamic-code-injection-on-demand-file-fetch": {
+    "category": "Tool Use & Environment",
+    "problem": "Manually copying files into prompts is tedious, wastes tokens, and interrupts workflow momentum.",
+    "solution": "Allow on-demand file injection via @filename or /load syntax that fetches, optionally summarizes, and injects code into context.",
+    "when": [
+      "Interactive coding sessions",
+      "Exploring unfamiliar codebases",
+      "Need specific file context mid-conversation"
+    ],
+    "pros": [
+      "Interactive code exploration",
+      "No manual copy/paste",
+      "Improves agent accuracy"
+    ],
+    "cons": [
+      "Requires file system access",
+      "Security risk if unsandboxed",
+      "Summarization may lose context"
+    ]
+  },
+  "progressive-tool-discovery": {
+    "category": "Tool Use & Environment",
+    "problem": "Loading all tool definitions upfront consumes excessive context window space when agents have access to large tool catalogs, limiting space for actual task execution.",
+    "solution": "Present tools through a filesystem-like hierarchy where agents discover capabilities on-demand, requesting different detail levels (name only, description, full schema) as needed.",
+    "when": [
+      "Systems with 20+ available tools",
+      "MCP server implementations",
+      "Plugin architectures with many capabilities"
+    ],
+    "pros": [
+      "Reduces initial context consumption",
+      "Scales to hundreds of tools",
+      "Natural filesystem-like exploration"
+    ],
+    "cons": [
+      "Adds discovery overhead",
+      "Multiple round-trips to find tools",
+      "Requires thoughtful organization"
+    ]
+  },
+  "subagent-compilation-checker": {
+    "category": "Tool Use & Environment",
+    "problem": "Including full build logs in main agent context blows up context length and slows inference",
+    "solution": "Spawn specialized subagents to compile each module, returning only concise error summaries to main agent",
+    "when": [
+      "Multi-module/microservice projects",
+      "Build logs too verbose for context",
+      "Parallel compilation needed"
+    ],
+    "pros": [
+      "Main agent context stays clean",
+      "Parallel builds possible"
+    ],
+    "cons": [
+      "Infrastructure to manage subagents",
+      "Build dependency coordination"
+    ]
+  },
+  "virtual-machine-operator-agent": {
+    "category": "Tool Use & Environment",
+    "problem": "Agents limited to code generation cannot perform complex tasks requiring full computer environment interaction.",
+    "solution": "Give agent access to a dedicated VM environment to execute code, install packages, manage files, and run applications.",
+    "when": [
+      "Tasks require full OS interaction",
+      "Need to install and run software",
+      "Complex multi-step system operations"
+    ],
+    "pros": [
+      "General-purpose digital operator",
+      "Full system capability"
+    ],
+    "cons": [
+      "Higher security risk",
+      "Resource intensive"
+    ]
+  },
+  "agentic-search-over-vector-embeddings": {
+    "category": "Tool Use & Environment",
+    "problem": "Vector embeddings require continuous re-indexing, handling local changes, and infrastructure overhead.",
+    "solution": "Replace vector search with agentic search using bash, grep, and file traversal - no pre-indexing needed.",
+    "when": [
+      "Frequently changing codebases",
+      "No vector infrastructure available",
+      "Security-sensitive deployments"
+    ],
+    "pros": [
+      "No indexing maintenance",
+      "Always searches current state"
+    ],
+    "cons": [
+      "May need multiple iterations",
+      "Slower on very large codebases"
+    ]
+  },
+  "code-over-api-pattern": {
+    "category": "Tool Use & Environment",
+    "problem": "Direct API calls force all intermediate data through the model's context window, causing 150K+ tokens for data-heavy workflows.",
+    "solution": "Agent writes code that executes in sandbox; data processing happens in execution environment with only results returning to context.",
+    "when": [
+      "Data-heavy workflows (spreadsheets, databases, logs)",
+      "Multi-step transformations or aggregations",
+      "Cost-sensitive applications where token usage matters"
+    ],
+    "pros": [
+      "Dramatic token reduction (150K to 2K reported)",
+      "Lower latency (fewer context API calls)",
+      "Natural fit for data processing tasks"
+    ],
+    "cons": [
+      "Requires secure code execution infrastructure",
+      "Agents must write correct code",
+      "Debugging errors happens in execution, not context"
+    ]
+  },
+  "visual-ai-multimodal-integration": {
+    "category": "Tool Use & Environment",
+    "problem": "Text-only agents miss critical visual information in images, videos, diagrams, and UI screenshots.",
+    "solution": "Integrate multimodal models (LMMs) to accept visual inputs, extract information, and combine with text for cross-modal reasoning.",
+    "when": [
+      "Tasks involve images or screenshots",
+      "UI debugging or visual analysis",
+      "Document/chart understanding"
+    ],
+    "pros": [
+      "Enables new visual task categories",
+      "More natural show-not-tell interaction"
+    ],
+    "cons": [
+      "Higher computational cost",
+      "Privacy concerns with visual data"
+    ]
+  },
+  "abstracted-code-representation-for-review": {
+    "category": "UX & Collaboration",
+    "problem": "Reviewing large AI-generated code line-by-line is tedious and error-prone when humans mainly care about intent and logic.",
+    "solution": "Provide abstracted representations (pseudocode, intent summaries) with guarantees they map to actual code changes.",
+    "when": [
+      "Large AI-generated code volumes",
+      "Intent verification over syntax checking",
+      "Trusted generation pipeline"
+    ],
+    "pros": [
+      "Faster verification process",
+      "Focus on conceptual correctness"
+    ],
+    "cons": [
+      "Requires abstraction accuracy guarantees",
+      "May miss low-level bugs"
+    ]
+  },
+  "chain-of-thought-monitoring-interruption": {
+    "category": "UX & Collaboration",
+    "problem": "Agents can pursue misguided reasoning paths for extended periods. By the time developers realize it's wrong, significant time and tokens are wasted.",
+    "solution": "Real-time surveillance of agent reasoning with low-friction interrupt capability to redirect before completing flawed sequences.",
+    "when": [
+      "Complex refactoring where wrong file choices are costly",
+      "High-stakes operations (database migrations, API changes)",
+      "Agent might misinterpret ambiguous requirements"
+    ],
+    "pros": [
+      "Prevents wasted time on fundamentally wrong approaches",
+      "Maximizes value from expensive model calls",
+      "Enables collaborative human-AI problem solving"
+    ],
+    "cons": [
+      "Requires active human attention (not autonomous)",
+      "Can interrupt productive exploration if triggered prematurely",
+      "Adds cognitive load to monitor reasoning"
+    ]
+  },
+  "human-in-loop": {
+    "category": "UX & Collaboration",
+    "problem": "Auto-executing dangerous operations (DB delete, deploy) causes safety/compliance issues. Blocking all defeats automation",
+    "solution": "Insert human approval gate only for high-risk ops. Safe ops auto-execute, risky ones require Slack approval",
+    "when": [
+      "DB: DELETE, DROP, ALTER",
+      "API: Payments, emails, webhooks",
+      "System: Firewall, permission changes",
+      "Compliance: GDPR, HIPAA, SOC2"
+    ],
+    "pros": [
+      "Safe automation",
+      "Audit trail"
+    ],
+    "cons": [
+      "Human response latency",
+      "Approval fatigue"
+    ]
+  },
+  "human-in-loop-approval-framework": {
+    "category": "UX & Collaboration",
+    "problem": "Autonomous agents need to execute high-risk operations (DB changes, deployments), but unsupervised execution creates unacceptable safety risks.",
+    "solution": "Insert human approval gates for high-risk functions via Slack/email/SMS, maintaining agent autonomy for safe operations.",
+    "when": [
+      "Production database operations (DELETE, DROP)",
+      "External API calls with side effects (payments)",
+      "Compliance-sensitive operations (GDPR, HIPAA)"
+    ],
+    "pros": [
+      "Safe autonomous execution of risky ops",
+      "Lightweight Slack button integration",
+      "Audit trail for compliance"
+    ],
+    "cons": [
+      "Requires human availability",
+      "Can bottleneck agent workflows",
+      "Risk of approval fatigue"
+    ]
+  },
+  "latent-demand-product-discovery": {
+    "category": "UX & Collaboration",
+    "problem": "Difficult to predict which features have real product-market fit before significant engineering investment.",
+    "solution": "Build hackable products, observe how power users repurpose features, then productize validated demand.",
+    "when": [
+      "Building extensible platforms",
+      "Feature prioritization",
+      "New product exploration"
+    ],
+    "pros": [
+      "Behavior-validated demand",
+      "Reduced risk"
+    ],
+    "cons": [
+      "Extension infra needed",
+      "Power users != mainstream"
+    ]
+  },
+  "spectrum-of-control-blended-initiative": {
+    "category": "UX & Collaboration",
+    "problem": "One-size-fits-all agent autonomy doesn't fit varying task complexity or user familiarity",
+    "solution": "Provide a spectrum of control modes from low (tab-complete) to high (background agent) that users can switch between",
+    "when": [
+      "IDE/editor integrations",
+      "Varying task complexity within one session",
+      "Users with different comfort levels"
+    ],
+    "pros": [
+      "Flexible for all task sizes",
+      "User maintains desired control level"
+    ],
+    "cons": [
+      "UX complexity with multiple modes",
+      "Learning curve for mode switching"
+    ]
+  },
+  "team-shared-agent-configuration": {
+    "category": "UX & Collaboration",
+    "problem": "Independent agent configs per developer cause inconsistent behavior, permission friction, and duplicated effort across the team.",
+    "solution": "Store agent configuration in version control as code, enabling team-wide sharing via git pull.",
+    "when": [
+      "Multiple team members use AI agents",
+      "Consistent agent behavior is critical",
+      "New members need quick onboarding"
+    ],
+    "pros": [
+      "Consistent team experience",
+      "Faster onboarding"
+    ],
+    "cons": [
+      "Less individual flexibility",
+      "Config sprawl over time"
+    ]
+  },
+  "agent-assisted-scaffolding": {
+    "category": "UX & Collaboration",
+    "problem": "Starting new features involves writing repetitive boilerplate and foundational code, which is time-consuming.",
+    "solution": "Use AI to generate initial structure, files, and boilerplate from high-level descriptions, then focus on core logic.",
+    "when": [
+      "New feature or module development",
+      "Repetitive project setup tasks",
+      "Consistent structure requirements"
+    ],
+    "pros": [
+      "Quick project kickstart",
+      "Consistent initial structure"
+    ],
+    "cons": [
+      "May not match existing conventions",
+      "Requires review of generated code"
+    ]
+  },
+  "seamless-background-to-foreground-handoff": {
+    "category": "UX & Collaboration",
+    "problem": "Background agents can handle complex tasks autonomously but may achieve only 90% correctness. A clunky handoff process to human control negates the automation benefits.",
+    "solution": "Design systems allowing seamless transition from background agent work to foreground human control, preserving context so users can refine the remaining 10% efficiently.",
+    "when": [
+      "Background agents producing near-complete work",
+      "Tasks requiring human finesse for completion",
+      "Developer workflows with autonomous PR generation"
+    ],
+    "pros": [
+      "Leverages autonomous processing power",
+      "Retains human control for final touches",
+      "Preserves context across transition"
+    ],
+    "cons": [
+      "Requires careful UX design",
+      "Context handoff complexity",
+      "May create workflow interruptions"
+    ]
+  },
+  "verbose-reasoning-transparency": {
+    "category": "UX & Collaboration",
+    "problem": "Complex agents behave like black boxes; users cannot understand why decisions were made or debug unexpected behavior.",
+    "solution": "Provide on-demand verbose mode (e.g., Ctrl+R) showing reasoning steps, tool selection rationale, and raw outputs.",
+    "when": [
+      "Debugging unexpected agent behavior",
+      "Building trust in agent decisions",
+      "Learning effective prompting"
+    ],
+    "pros": [
+      "Better debugging and trust",
+      "Helps users improve prompts"
+    ],
+    "cons": [
+      "Information overload risk",
+      "May expose internal complexity"
+    ]
+  },
+  "agent-friendly-workflow-design": {
+    "category": "UX & Collaboration",
+    "problem": "Agents struggle when workflows are too rigid or humans micromanage technical decisions.",
+    "solution": "Design workflows with clear goals, appropriate autonomy, structured I/O, and iterative feedback loops.",
+    "when": [
+      "Integrating agents into existing processes",
+      "Agent performance is suboptimal",
+      "Building new human-AI workflows"
+    ],
+    "pros": [
+      "Maximizes agent capabilities",
+      "Better human-AI collaboration"
+    ],
+    "cons": [
+      "Requires workflow redesign",
+      "May need trust building"
+    ]
+  }
+}

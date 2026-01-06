@@ -1,0 +1,93 @@
+<article class="pattern-card" data-pattern="context-window-anxiety-management">
+  <div class="pattern-header">
+    <h2>Context Window Anxiety Management</h2>
+    <span class="tag" data-i18n="category">Context & Memory</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Context Window: [████████████░░░░░░░░] 60%
+
+Without Management:          With Management:
+├─ "Running low..."         ├─ "Plenty of space"
+├─ Summarize early          ├─ Continue working
+└─ Rush completion          └─ Thorough output
+
+Buffer: Enable 1M ──▶ Cap at 200k ──▶ Psychological runway</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Enable 1M tokens] --> B[Cap usage at 200k]
+    B --> C[Add reassurance prompts]
+    C --> D[Model works thoroughly]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">prompt = """
+CONTEXT GUIDANCE: You have 200k+ tokens.
+Do NOT rush or summarize prematurely.
+""" + user_input + """
+Remember: Context is NOT a constraint.
+"""</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Models exhibit 'context anxiety' near window limits, prematurely summarizing or rushing to complete tasks.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Provide buffer headroom and explicit reassurance that context is abundant to override anxiety behaviors.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Long coding or research sessions</li>
+          <li>Tasks requiring sustained attention</li>
+          <li>Model mentions 'running out of space'</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Prevents premature task abandonment</li>
+              <li>Enables more thorough work</li>
+              <li>Overcomes model behavioral quirks</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires model-specific tuning</li>
+              <li>May increase token usage</li>
+              <li>Aggressive prompting overhead</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,18 @@
+{
+  "category": "Reliability & Eval",
+  "problem": "Aggressive prompt compression to save tokens stifles reasoning depth and self-correction capabilities.",
+  "solution": "During prototyping, remove hard token limits. Allow lavish context and multiple reasoning passes to discover valuable patterns.",
+  "when": [
+    "Prototyping and experimentation phase",
+    "Discovering optimal reasoning patterns",
+    "Tasks requiring deep self-correction"
+  ],
+  "pros": [
+    "Dramatically better output quality",
+    "Surfaces valuable patterns for optimization"
+  ],
+  "cons": [
+    "Higher cost during prototyping",
+    "Not suitable for production without optimization"
+  ]
+}

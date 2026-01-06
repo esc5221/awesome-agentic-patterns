@@ -1,0 +1,18 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Independent agent configs per developer cause inconsistent behavior, permission friction, and duplicated effort across the team.",
+  "solution": "Store agent configuration in version control as code, enabling team-wide sharing via git pull.",
+  "when": [
+    "Multiple team members use AI agents",
+    "Consistent agent behavior is critical",
+    "New members need quick onboarding"
+  ],
+  "pros": [
+    "Consistent team experience",
+    "Faster onboarding"
+  ],
+  "cons": [
+    "Less individual flexibility",
+    "Config sprawl over time"
+  ]
+}

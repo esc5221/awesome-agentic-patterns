@@ -1,0 +1,99 @@
+<article class="pattern-card" data-pattern="agent-assisted-scaffolding">
+  <div class="pattern-header">
+    <h2>Agent-Assisted Scaffolding</h2>
+    <span class="tag" data-i18n="category">UX & Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Developer ──▶ "Create user API" ──▶ Agent
+                                        │
+              ┌─────────────────────────┘
+              ▼
+         Generated Files:
+         ├── routes/user.ts
+         ├── controllers/user.ts
+         ├── models/user.ts
+         └── tests/user.test.ts
+              │
+              ▼
+         Developer: Implement Core Logic</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[High-level Description] --> B[Agent Scaffolding]
+    B --> C[Routes]
+    B --> D[Controllers]
+    B --> E[Models]
+    B --> F[Tests]
+    C & D & E & F --> G[Developer Implements Logic]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">agent.scaffold(
+    description="User profile API endpoint",
+    framework="fastapi",
+    include=["routes", "models", "tests"]
+)
+# Agent generates structure
+# Developer fills in business logic</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">새 기능 시작 시 반복적인 보일러플레이트와 기초 코드 작성이 필요하여 시간이 많이 소요됨</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">AI를 사용해 고수준 설명으로부터 초기 구조, 파일, 보일러플레이트를 생성한 후 핵심 로직에 집중</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>새 기능 또는 모듈 개발</li>
+          <li>반복적인 프로젝트 설정 작업</li>
+          <li>일관된 구조가 필요할 때</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>빠른 프로젝트 시작</li>
+              <li>일관된 초기 구조</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>기존 컨벤션과 불일치할 수 있음</li>
+              <li>생성된 코드 검토 필요</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

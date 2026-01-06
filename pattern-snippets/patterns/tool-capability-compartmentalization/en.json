@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Mix-and-match tools combining data readers, web fetchers, and writers amplify prompt-injection attack chains.",
+  "solution": "Split tools into reader/processor/writer micro-tools with isolated permissions and explicit per-call consent.",
+  "when": [
+    "Tools handle private data",
+    "Multiple capability types combined",
+    "Security is high priority"
+  ],
+  "pros": [
+    "Fine-grained security control",
+    "Plays well with modular architectures"
+  ],
+  "cons": [
+    "More tooling overhead",
+    "Permission creep over time"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "category": "Reliability & Eval",
+  "problem": "Self-modifying agents can accidentally violate safety rules or regress on alignment when rewriting their constitution.",
+  "solution": "Store constitution in version-controlled, signed repo with CI policy checks; agent proposes, gatekeeper merges.",
+  "when": [
+    "Agent can modify its own rules",
+    "Safety constraints are critical",
+    "Audit trail is required"
+  ],
+  "pros": [
+    "Full audit history",
+    "Prevents unauthorized changes"
+  ],
+  "cons": [
+    "Slower iteration cycle",
+    "Requires governance overhead"
+  ]
+}

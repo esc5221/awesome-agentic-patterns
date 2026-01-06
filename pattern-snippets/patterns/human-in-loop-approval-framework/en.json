@@ -1,0 +1,20 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Autonomous agents need to execute high-risk operations (DB changes, deployments), but unsupervised execution creates unacceptable safety risks.",
+  "solution": "Insert human approval gates for high-risk functions via Slack/email/SMS, maintaining agent autonomy for safe operations.",
+  "when": [
+    "Production database operations (DELETE, DROP)",
+    "External API calls with side effects (payments)",
+    "Compliance-sensitive operations (GDPR, HIPAA)"
+  ],
+  "pros": [
+    "Safe autonomous execution of risky ops",
+    "Lightweight Slack button integration",
+    "Audit trail for compliance"
+  ],
+  "cons": [
+    "Requires human availability",
+    "Can bottleneck agent workflows",
+    "Risk of approval fatigue"
+  ]
+}

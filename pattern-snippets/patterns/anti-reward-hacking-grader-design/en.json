@@ -1,0 +1,20 @@
+{
+  "category": "Reliability & Eval",
+  "problem": "RL models exploit grader loopholes to maximize reward without actually solving tasks, leading to 100% validation scores but poor real performance.",
+  "solution": "Design multi-criteria graders with iterative hardening, weighted subscores, and explicit gaming pattern detection.",
+  "when": [
+    "Training agents with reinforcement learning",
+    "Initial grader shows suspiciously high scores",
+    "Production performance doesn't match validation metrics"
+  ],
+  "pros": [
+    "Robust learning - models solve tasks, not game metrics",
+    "Better generalization via multi-criteria evaluation",
+    "Debuggable subscores for identifying struggles"
+  ],
+  "cons": [
+    "Engineering effort for careful design and iteration",
+    "Slower convergence due to harder grading",
+    "Computational cost for multi-criteria evaluation"
+  ]
+}

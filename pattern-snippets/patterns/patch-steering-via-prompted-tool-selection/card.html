@@ -1,0 +1,90 @@
+<article class="pattern-card" data-pattern="patch-steering-via-prompted-tool-selection">
+  <div class="pattern-header">
+    <h2>Patch Steering via Prompted Tool Selection</h2>
+    <span class="tag" data-i18n="category">Tool Use & Environment</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User: "Refactor X" ──▶ [+Prompt: "Use ASTRefactor"] ──▶ Agent
+                                                          │
+                                                    Selects: ASTRefactor
+                                                          │
+                                                          ▼
+                                                    Safe AST Patch</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[User Request] --> B[Augmented Prompt]
+    B --> C[Agent selects ASTRefactor]
+    C --> D[Safe Code Patch]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Prompt template with tool steering
+prompt = f"""
+Task: {task_description}
+Preferred tool: ASTRefactor
+Usage: {{"file": str, "pattern": str}}
+Fallback: apply_patch if AST fails
+"""</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Agents with multiple patching tools may choose suboptimal ones, causing inconsistent and lower quality results.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Steer tool selection through explicit natural language instructions, specifying preferred tools and usage patterns in prompts.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Multiple patching/refactoring tools available</li>
+          <li>Need for consistent tool usage</li>
+          <li>AST-safe operations preferred over text replace</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Predictable tool selection behavior</li>
+              <li>Higher code quality with semantic tools</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Prompt length increases</li>
+              <li>Requires maintenance as tools evolve</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

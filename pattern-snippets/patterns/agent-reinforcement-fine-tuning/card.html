@@ -1,0 +1,103 @@
+<article class="pattern-card" data-pattern="agent-reinforcement-fine-tuning">
+  <div class="pattern-header">
+    <h2>Agent Reinforcement Fine-Tuning</h2>
+    <span class="tag" data-i18n="category">Learning & Adaptation</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Sample ──▶ Model ──▶ Tool Call? ──▶ Your Endpoint
+              ▲          │              │
+              │          ▼              ▼
+              │     Final Answer   Add to Context
+              │          │              │
+              │          ▼              │
+              │      Grader ◀───────────┘
+              │          │
+              └── Reward ┘
+
+[End-to-end training with real tools]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Training Sample] --> B[Model Rollout]
+    B --> C{Tool Call?}
+    C -->|Yes| D[Call Tool Endpoint]
+    D --> E[Add Response to Context]
+    E --> B
+    C -->|No| F[Final Answer]
+    F --> G[Grader Evaluates]
+    G --> H[Reward Signal]
+    H --> I[Update Weights]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">client.fine_tuning.jobs.create(
+    model="gpt-4o",
+    method="rft",
+    rft={
+        "tools": [{"url": "https://api/search"}],
+        "grader": {"type": "model", "model": "gpt-4o"},
+        "hyperparameters": {"compute_multiplier": 1}
+    }
+)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">기본 모델은 분포 이동과 비효율적인 도구 사용으로 인해 도메인 특화 작업에서 성능이 떨어짐</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">실제 도구 호출, 커스텀 그레이더, 다단계 강화학습으로 에이전트 작업에 대해 모델을 엔드투엔드로 학습</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>기본 모델과의 분포 이동</li>
+          <li>비효율적인 도구 사용 패턴</li>
+          <li>100-1000개의 품질 샘플이 있을 때</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>엔드투엔드 최적화</li>
+              <li>샘플 효율적 (100-1000 샘플)</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>인프라 복잡성</li>
+              <li>신중한 보상 엔지니어링 필요</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

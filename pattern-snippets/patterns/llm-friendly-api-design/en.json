@@ -1,0 +1,18 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "APIs designed for humans are often ambiguous or complex for LLMs, causing unreliable tool use.",
+  "solution": "Design APIs with explicit versioning, self-descriptive names, clear errors, and minimal indirection.",
+  "when": [
+    "Building agent-callable APIs",
+    "Exposing tools to LLMs",
+    "Internal library design"
+  ],
+  "pros": [
+    "Reliable LLM tool use",
+    "Self-correcting errors"
+  ],
+  "cons": [
+    "API redesign effort",
+    "May be verbose"
+  ]
+}

@@ -1,0 +1,92 @@
+<article class="pattern-card" data-pattern="stop-hook-auto-continue-pattern">
+  <div class="pattern-header">
+    <h2>Stop Hook Auto-Continue Pattern</h2>
+    <span class="tag" data-i18n="category">Orchestration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Agent Turn ──▶ Stop Hook ──▶ Run Tests ──┐
+                                         │
+          ┌──────────────────────────────┘
+          │ Fail?
+          ▼
+   Auto-Continue ──▶ Agent Fixes ──▶ [loop until pass]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Agent Turn End] --> B[Stop Hook]
+    B --> C{Tests Pass?}
+    C -->|Yes| D[Return to User]
+    C -->|No| E[Continue Agent]
+    E --> A
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-javascript">// hooks config
+{
+  "on_stop": {
+    "command": "./check_tests.sh",
+    "auto_continue_on_failure": true
+  }
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Agents complete turns even when tasks are not truly done (tests fail, checks incomplete)</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Use stop hooks to check success criteria after each turn; auto-continue agent until criteria pass</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Test-driven development workflows</li>
+          <li>Autonomous task completion required</li>
+          <li>Sandboxed/containerized environments</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>True task completion guaranteed</li>
+              <li>No manual re-prompting needed</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Risk of infinite loops</li>
+              <li>Runaway costs without timeout</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

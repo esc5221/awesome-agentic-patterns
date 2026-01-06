@@ -1,0 +1,104 @@
+<article class="pattern-card" data-pattern="asynchronous-coding-agent-pipeline">
+  <div class="pattern-header">
+    <h2>Asynchronous Coding Agent Pipeline</h2>
+    <span class="tag" data-i18n="category">Reliability & Eval</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  Inference  │───▶│ Tool Queue  │───▶│   Tool      │
+│  Workers    │    │ (Redis/MQ)  │    │  Executors  │
+│   (GPU)     │◀───│             │◀───│   (CPU)     │
+└──────┬──────┘    └─────────────┘    └─────────────┘
+       │
+       ▼ trajectories
+┌─────────────┐    ┌─────────────┐
+│   Replay    │───▶│   Learner   │
+│   Buffer    │    │(Policy Upd) │
+└─────────────┘    └──────┬──────┘
+                          │ new checkpoint
+                          ▼</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Inference Worker] -->|tool call| B[Tool Queue]
+    B -->|request| C[Tool Executor]
+    C -->|result| A
+    A -->|trajectory| D[Replay Buffer]
+    D -->|batch| E[Learner]
+    E -->|checkpoint| A
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Async pipeline components
+inference_worker.submit_action("compile", file)
+# No blocking - continue inference
+
+# Tool executor (separate process)
+tool_queue.subscribe("compile_requests")
+result = run_compile(request)
+result_queue.publish(result)
+
+# Learner updates policy periodically
+learner.update_from_buffer(replay_buffer)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Synchronous tool execution (compilation, testing) creates compute bubbles and idle GPUs, blocking agents while waiting for I/O-bound operations.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Decouple inference, tool execution, and learning into parallel async components communicating via message queues.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Running RL training for coding agents</li>
+          <li>Tool calls have high latency (compilation, tests)</li>
+          <li>Need to maximize GPU utilization</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>High utilization - GPUs stay busy during I/O</li>
+              <li>Scalable - independently scale inference, tools, learning</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Complex system maintenance across services</li>
+              <li>Staleness management for policy updates</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

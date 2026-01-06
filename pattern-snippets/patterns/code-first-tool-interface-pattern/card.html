@@ -1,0 +1,100 @@
+<article class="pattern-card" data-pattern="code-first-tool-interface-pattern">
+  <div class="pattern-header">
+    <h2>Code Mode MCP Tool Interface</h2>
+    <span class="tag" data-i18n="category">Tool Use & Environment</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Traditional:
+  LLM ──▶ Tool1 ──▶ [JSON 1000t] ──▶ LLM
+  LLM ──▶ Tool2 ──▶ [JSON 1000t] ──▶ LLM
+  LLM ──▶ Tool3 ──▶ [JSON 1000t] ──▶ LLM
+
+Code Mode:
+  LLM ──▶ V8 Isolate ┬──▶ Tool1
+                     ├──▶ Tool2
+                     └──▶ Tool3
+                          │
+                     [Condensed] ──▶ LLM</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[LLM] -->|TypeScript| B[V8 Isolate]
+    B -->|binding| C[MCP Server]
+    C --> D[APIs]
+    D --> C
+    C --> B
+    B -->|condensed| A
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-typescript">// LLM generates orchestration code
+const vpc = await createVPC({name: "demo"})
+const igw = await createInternetGateway(vpc.id)
+const sg = await createSecurityGroup(vpc.id, rules)
+const ec2 = await launchEC2({vpcId: vpc.id})
+// All calls in isolate - only result to LLM
+return {vpcId: vpc.id, publicIP: ec2.ip}</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Traditional MCP tool calls force all intermediate JSON through the context, causing massive token waste on multi-step and fan-out operations.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">LLMs write TypeScript code that orchestrates MCP tools in V8 isolates; only final results return to context.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Multi-step workflows with clear sequences</li>
+          <li>Fan-out operations (100+ items to process)</li>
+          <li>Token costs or latency are critical</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>10x+ token reduction on multi-step workflows</li>
+              <li>Dramatic fan-out efficiency with loops</li>
+              <li>Self-debugging with error handling and retry</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires V8 isolate infrastructure</li>
+              <li>Poor fit for dynamic research loops</li>
+              <li>Intelligence-in-middle defeats the purpose</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

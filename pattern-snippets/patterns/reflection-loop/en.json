@@ -1,0 +1,18 @@
+{
+  "category": "Feedback Loops",
+  "problem": "Without self-review, LLM outputs may be low quality or fail to meet requirements",
+  "solution": "Generate → self-evaluate → incorporate feedback → regenerate until criteria met",
+  "when": [
+    "Quality/compliance is critical",
+    "Code, writing, reasoning tasks",
+    "Clear evaluation metrics exist"
+  ],
+  "pros": [
+    "Automatic quality improvement",
+    "Explicit criteria compliance"
+  ],
+  "cons": [
+    "Extra computation cost",
+    "Infinite loop risk with vague metrics"
+  ]
+}

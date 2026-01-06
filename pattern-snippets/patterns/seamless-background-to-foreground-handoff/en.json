@@ -1,0 +1,20 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Background agents can handle complex tasks autonomously but may achieve only 90% correctness. A clunky handoff process to human control negates the automation benefits.",
+  "solution": "Design systems allowing seamless transition from background agent work to foreground human control, preserving context so users can refine the remaining 10% efficiently.",
+  "when": [
+    "Background agents producing near-complete work",
+    "Tasks requiring human finesse for completion",
+    "Developer workflows with autonomous PR generation"
+  ],
+  "pros": [
+    "Leverages autonomous processing power",
+    "Retains human control for final touches",
+    "Preserves context across transition"
+  ],
+  "cons": [
+    "Requires careful UX design",
+    "Context handoff complexity",
+    "May create workflow interruptions"
+  ]
+}

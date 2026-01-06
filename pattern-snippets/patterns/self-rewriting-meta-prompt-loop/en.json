@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Static system prompts become stale as agents encounter new tasks and edge cases",
+  "solution": "Let the agent rewrite its own system prompt after each interaction through reflection and validation",
+  "when": [
+    "Agent encounters recurring failures",
+    "Prompt needs frequent minor tweaks",
+    "Continuous learning without human intervention"
+  ],
+  "pros": [
+    "Rapid adaptation to new scenarios",
+    "No human in the loop for minor tweaks"
+  ],
+  "cons": [
+    "Risk of drift or jailbreak",
+    "Requires strong guardrails"
+  ]
+}

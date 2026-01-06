@@ -1,0 +1,18 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Agents limited to code generation cannot perform complex tasks requiring full computer environment interaction.",
+  "solution": "Give agent access to a dedicated VM environment to execute code, install packages, manage files, and run applications.",
+  "when": [
+    "Tasks require full OS interaction",
+    "Need to install and run software",
+    "Complex multi-step system operations"
+  ],
+  "pros": [
+    "General-purpose digital operator",
+    "Full system capability"
+  ],
+  "cons": [
+    "Higher security risk",
+    "Resource intensive"
+  ]
+}

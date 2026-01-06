@@ -1,0 +1,20 @@
+{
+  "category": "Context & Memory",
+  "problem": "Models exhibit 'context anxiety' near window limits, prematurely summarizing or rushing to complete tasks.",
+  "solution": "Provide buffer headroom and explicit reassurance that context is abundant to override anxiety behaviors.",
+  "when": [
+    "Long coding or research sessions",
+    "Tasks requiring sustained attention",
+    "Model mentions 'running out of space'"
+  ],
+  "pros": [
+    "Prevents premature task abandonment",
+    "Enables more thorough work",
+    "Overcomes model behavioral quirks"
+  ],
+  "cons": [
+    "Requires model-specific tuning",
+    "May increase token usage",
+    "Aggressive prompting overhead"
+  ]
+}

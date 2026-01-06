@@ -1,0 +1,6 @@
+{
+  "id": "egress-lockdown-no-exfiltration-channel",
+  "title": "Egress Lockdown (No-Exfiltration Channel)",
+  "category": "Security & Safety",
+  "order": 601
+}

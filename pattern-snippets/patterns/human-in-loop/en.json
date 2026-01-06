@@ -1,0 +1,19 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Auto-executing dangerous operations (DB delete, deploy) causes safety/compliance issues. Blocking all defeats automation",
+  "solution": "Insert human approval gate only for high-risk ops. Safe ops auto-execute, risky ones require Slack approval",
+  "when": [
+    "DB: DELETE, DROP, ALTER",
+    "API: Payments, emails, webhooks",
+    "System: Firewall, permission changes",
+    "Compliance: GDPR, HIPAA, SOC2"
+  ],
+  "pros": [
+    "Safe automation",
+    "Audit trail"
+  ],
+  "cons": [
+    "Human response latency",
+    "Approval fatigue"
+  ]
+}

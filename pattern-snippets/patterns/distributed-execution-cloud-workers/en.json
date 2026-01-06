@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Single-session AI agent execution cannot scale to meet enterprise team demands with multiple simultaneous code changes.",
+  "solution": "Run multiple Claude sessions in parallel using git worktrees and cloud workers with centralized coordination.",
+  "when": [
+    "Team-wide code migrations",
+    "Parallel feature development",
+    "Large-scale infrastructure changes"
+  ],
+  "pros": [
+    "10x-100x parallelization speedup",
+    "Scales to enterprise teams",
+    "Centralized monitoring"
+  ],
+  "cons": [
+    "Significant infrastructure complexity",
+    "Merge conflict overhead",
+    "Higher parallel model costs"
+  ]
+}

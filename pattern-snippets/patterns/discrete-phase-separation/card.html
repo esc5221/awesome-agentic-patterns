@@ -1,0 +1,94 @@
+<article class="pattern-card" data-pattern="discrete-phase-separation">
+  <div class="pattern-header">
+    <h2>Discrete Phase Separation</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">┌──────────┐    Findings    ┌──────────┐    Plan    ┌──────────┐
+│ Research │ ────────────▶  │ Planning │ ────────▶  │ Execute  │
+│  (Opus)  │                │  (Opus)  │            │ (Sonnet) │
+└──────────┘                └──────────┘            └──────────┘
+     ↓                           ↓                       ↓
+[Fresh ctx]               [Fresh ctx]              [Fresh ctx]
+
+Key: Pass distilled conclusions, NOT full history</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Research<br/>Opus] -->|Distilled findings| B[Planning<br/>Opus]
+    B -->|Implementation plan| C[Execute<br/>Sonnet]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Phase 1: Research (new conversation)
+findings = opus.research("OAuth flows in codebase")
+
+# Phase 2: Plan (new conversation)
+plan = opus.plan(findings, "Add Google OAuth")
+
+# Phase 3: Execute (new conversation)
+sonnet.implement(plan, step=1)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Simultaneous research, planning, and implementation causes context contamination and degraded output.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Break workflow into isolated phases (Research, Plan, Execute) with clean handoffs of distilled conclusions.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Complex features needing background research</li>
+          <li>Refactoring projects with architectural decisions</li>
+          <li>Mixing research and implementation hurts quality</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Higher quality per phase</li>
+              <li>Prevents context contamination</li>
+              <li>Leverages model-specific strengths</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires explicit phase management</li>
+              <li>Feels slower for simple tasks</li>
+              <li>Higher total token usage</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

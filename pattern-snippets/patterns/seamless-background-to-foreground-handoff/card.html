@@ -1,0 +1,106 @@
+<article class="pattern-card" data-pattern="seamless-background-to-foreground-handoff">
+  <div class="pattern-header">
+    <h2>Seamless Background-to-Foreground Handoff</h2>
+    <span class="tag" data-i18n="category">UX & Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User: "Refactor X" ──▶ [Background Agent]
+                              │
+                              ▼
+                       Proposes PR (90%)
+                              │
+           ┌──────────────────┴──────────────────┐
+           ▼                                     ▼
+     100% Correct ──▶ Done           90% Correct ──▶ Take Over
+                                                       │
+                                                       ▼
+                                          User + Foreground Tools
+                                                       │
+                                                       ▼
+                                                  Finalized PR</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[User Request] --> B[Background Agent]
+    B --> C[Proposed PR]
+    C --> D{Review}
+    D -->|100%| E[Done]
+    D -->|90%| F[Take Over]
+    F --> G[Foreground Edit]
+    G --> E
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Background agent completes task
+pr = background_agent.work("Refactor module X")
+
+# User reviews and takes control if needed
+if user.review(pr) != "approved":
+    # Seamless handoff with context
+    foreground = pr.take_control()
+    foreground.edit_with_ai_assist()
+    foreground.finalize()</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Background agents can handle complex tasks autonomously but may achieve only 90% correctness. A clunky handoff process to human control negates the automation benefits.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Design systems allowing seamless transition from background agent work to foreground human control, preserving context so users can refine the remaining 10% efficiently.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Background agents producing near-complete work</li>
+          <li>Tasks requiring human finesse for completion</li>
+          <li>Developer workflows with autonomous PR generation</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Leverages autonomous processing power</li>
+              <li>Retains human control for final touches</li>
+              <li>Preserves context across transition</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires careful UX design</li>
+              <li>Context handoff complexity</li>
+              <li>May create workflow interruptions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,95 @@
+<article class="pattern-card" data-pattern="curated-code-context-window">
+  <div class="pattern-header">
+    <h2>Curated Code Context Window</h2>
+    <span class="tag" data-i18n="category">Context & Memory</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">MainAgent: "Find UserModel definitions"
+     │
+     ▼
+SearchSubagent ──▶ [Index] ──▶ Top 3 snippets
+     │
+     ▼
+Context: [user_service.py] [models/user.py] [auth.py]
+     │
+     ▼
+MainAgent: edit_file(UserService) ✓</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    MainAgent->>SearchSubagent: Find UserModel
+    SearchSubagent-->>MainAgent: 3 file snippets
+    MainAgent->>Context: Inject snippets
+    MainAgent->>Tool: edit_file()
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">search = SearchSubagent(index="code_index")
+snippets = search.find("UserModel", top_k=3)
+
+context.inject(snippets)  # Only 3 files
+agent.edit("UserService")  # Focused work</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Dumping entire repositories into context overwhelms the model with noise and slows inference.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Use a search subagent to inject only top-K relevant code snippets into the main agent's context.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Working in large codebases</li>
+          <li>Need focused reasoning on specific modules</li>
+          <li>Token efficiency is critical</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Noise reduction improves clarity</li>
+              <li>Dramatically reduces token usage</li>
+              <li>Mitigates context anxiety</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Index must stay fresh</li>
+              <li>Adds search subagent complexity</li>
+              <li>May miss edge-case dependencies</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

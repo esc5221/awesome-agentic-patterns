@@ -1,0 +1,90 @@
+<article class="pattern-card" data-pattern="merged-code-language-skill-model">
+  <div class="pattern-header">
+    <h2>Merged Code + Language Skill Model</h2>
+    <span class="tag" data-i18n="category">Reliability & Eval</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Base LLM ──┬──▶ Lang Specialist ──┐
+           │                       │
+           └──▶ Code Specialist ──┼──▶ Weight Merge ──▶ Unified Model
+                                   │
+              (Fisher Avg / α=0.5)</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Base LLM] --> B[Lang Specialist]
+    A --> C[Code Specialist]
+    B --> D[Weight Merge]
+    C --> D
+    D --> E[Unified Model]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash"># Merge two specialist checkpoints
+python merge_models.py \
+  --model_a lang-specialist.pt \
+  --model_b code-specialist.pt \
+  --output merged-agent.pt \
+  --alpha 0.5</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Training a single model for both code and natural language requires massive compute and risks skill interference.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Train separate specialist models independently, then merge weights to combine skills without centralized training.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Building multi-skill models (code + NL)</li>
+          <li>Limited centralized compute resources</li>
+          <li>Parallel R&D teams for different capabilities</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Parallel development of skills</li>
+              <li>Reduced centralized compute needs</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Potential skill dilution from averaging</li>
+              <li>Requires identical model architectures</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

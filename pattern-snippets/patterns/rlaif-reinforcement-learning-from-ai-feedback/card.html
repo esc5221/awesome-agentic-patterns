@@ -1,0 +1,100 @@
+<article class="pattern-card" data-pattern="rlaif-reinforcement-learning-from-ai-feedback">
+  <div class="pattern-header">
+    <h2>RLAIF (Reinforcement Learning from AI Feedback)</h2>
+    <span class="tag" data-i18n="category">Reliability & Eval</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">                    ┌──────────────────┐
+Prompt ──▶ Model ──▶│ Response A       │
+                    │ Response B       │
+                    └────────┬─────────┘
+                             ▼
+                    ┌──────────────────┐
+                    │  AI Critic       │
+                    │  + Constitution  │──▶ Preference (A > B)
+                    └──────────────────┘
+                             │
+                             ▼
+                    Train Reward Model</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Prompt] --> B[Generate A, B]
+    B --> C[AI Critic]
+    C --> D[Compare with Principles]
+    D --> E[Preference Data]
+    E --> F[Train Reward Model]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">class RLAIF:
+    def generate_preference(self, prompt, a, b):
+        critique = f"""Given principles: {self.constitution}
+Which response is better for "{prompt}"?
+A: {a}  B: {b}
+Choose and explain why."""
+        return self.critic.generate(critique)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Traditional RLHF requires extensive human annotation for preference data, which is expensive ($1+ per annotation), time-consuming, and creates a bottleneck in training aligned AI systems.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Use AI models to generate preference feedback and evaluation data based on constitutional principles, reducing costs to less than $0.01 per annotation while maintaining quality.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Need large-scale preference data</li>
+          <li>Human annotation is too expensive</li>
+          <li>Training aligned AI systems</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>100x cheaper than human feedback</li>
+              <li>Unlimited scalability</li>
+              <li>More consistent than varying annotators</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>May amplify existing model biases</li>
+              <li>Cannot provide truly novel insights</li>
+              <li>Requires careful principle design</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

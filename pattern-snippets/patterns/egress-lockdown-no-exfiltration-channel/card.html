@@ -1,0 +1,99 @@
+<article class="pattern-card" data-pattern="egress-lockdown-no-exfiltration-channel">
+  <div class="pattern-header">
+    <h2>Egress Lockdown</h2>
+    <span class="tag" data-i18n="category">Security</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">┌─────────────────────────────────────────┐
+│            SANDBOXED AGENT              │
+│  [Private Data] ──▶ [Agent] ──▶ ???     │
+└─────────────────────────────────────────┘
+                      │
+          ┌───────────┼───────────┐
+          ▼           ▼           ▼
+    api.internal   attacker.com  ANY
+         ✓             ✗          ✗
+
+   OUTPUT DROP (default) | ACCEPT (whitelist)</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Agent] -->|Request| FW[Egress Firewall]
+    FW -->|api.internal| OK[Allowed]
+    FW -->|attacker.com| X[Blocked]
+    FW -->|dynamic URL| X
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash"># Docker egress rules
+iptables -P OUTPUT DROP  # default-deny
+iptables -A OUTPUT \
+  -d api.mycompany.internal \
+  -j ACCEPT
+
+# Log blocked attempts
+iptables -A OUTPUT -j LOG</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Even with private-data access and untrusted inputs, attacks fail if the agent has no way to transmit stolen data.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Implement egress firewall: allow only specific domains, strip content from outbound calls, forbid dynamic link generation.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Agents handle sensitive data</li>
+          <li>Processing untrusted inputs</li>
+          <li>High-security environments</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Drastically reduces leak risk</li>
+              <li>Easy to reason about</li>
+              <li>Simple network rules</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Breaks legitimate integrations</li>
+              <li>Requires proxy stubs</li>
+              <li>Limits agent capabilities</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

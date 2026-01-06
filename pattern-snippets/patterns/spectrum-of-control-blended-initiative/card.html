@@ -1,0 +1,89 @@
+<article class="pattern-card" data-pattern="spectrum-of-control-blended-initiative">
+  <div class="pattern-header">
+    <h2>Spectrum of Control / Blended Initiative</h2>
+    <span class="tag" data-i18n="category">UX & Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Low Autonomy          Medium              High              Async
+    │                    │                   │                  │
+    ▼                    ▼                   ▼                  ▼
+[Tab Complete] ──▶ [Cmd-K Edit] ──▶ [Agent Mode] ──▶ [Background Agent]
+  (inline)        (region/file)    (multi-file)       (full PR)</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Tab Completion] --> B[Command K]
+    B --> C[Agent Feature]
+    C --> D[Background Agent]
+    A -.->|Low| A
+    D -.->|High Autonomy| D
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># User chooses autonomy level:
+cursor.tab()       # inline assist
+cursor.cmd_k()     # edit region
+cursor.agent()     # multi-file task
+cursor.background()# async full PR</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">One-size-fits-all agent autonomy doesn't fit varying task complexity or user familiarity</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Provide a spectrum of control modes from low (tab-complete) to high (background agent) that users can switch between</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>IDE/editor integrations</li>
+          <li>Varying task complexity within one session</li>
+          <li>Users with different comfort levels</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Flexible for all task sizes</li>
+              <li>User maintains desired control level</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>UX complexity with multiple modes</li>
+              <li>Learning curve for mode switching</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,20 @@
+{
+  "category": "Feedback Loops",
+  "problem": "Binary 'tests passed' rewards miss nuanced code quality issues like performance regressions, style violations, and security problems.",
+  "solution": "Use a multi-criteria code review critic that decomposes quality into subcriteria (correctness, style, perf, security) with explainable subscores.",
+  "when": [
+    "RL-based code generation agents",
+    "When code quality beyond correctness matters",
+    "Continuous improvement of code agents"
+  ],
+  "pros": [
+    "Explainable feedback for targeted fixes",
+    "Higher code quality via non-functional criteria",
+    "Human-readable review comments"
+  ],
+  "cons": [
+    "Compute overhead (tests, linters, benchmarks)",
+    "Critic model maintenance as standards evolve",
+    "Complexity in aggregating subscores"
+  ]
+}

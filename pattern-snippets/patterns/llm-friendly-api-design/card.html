@@ -1,0 +1,90 @@
+<article class="pattern-card" data-pattern="llm-friendly-api-design">
+  <div class="pattern-header">
+    <h2>LLM-Friendly API Design</h2>
+    <span class="tag" data-i18n="category">Tool Use & Environment</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Human API          LLM-Friendly API
+─────────          ────────────────
+Complex nesting    Flat structure
+Implicit version   Explicit v2.0
+Cryptic errors     Actionable errors
+Many indirects     2 levels max</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[API v2.0] --> B[Self-descriptive]
+    B --> C[Clear Errors]
+    C --> D[LLM Success]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># LLM-friendly function
+def create_user_v2(
+    name: str,      # Descriptive param names
+    email: str
+) -> UserResult:   # Typed return
+    """Creates a new user account."""
+    # Clear errors, not cryptic codes</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">APIs designed for humans are often ambiguous or complex for LLMs, causing unreliable tool use.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Design APIs with explicit versioning, self-descriptive names, clear errors, and minimal indirection.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Building agent-callable APIs</li>
+          <li>Exposing tools to LLMs</li>
+          <li>Internal library design</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Reliable LLM tool use</li>
+              <li>Self-correcting errors</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>API redesign effort</li>
+              <li>May be verbose</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

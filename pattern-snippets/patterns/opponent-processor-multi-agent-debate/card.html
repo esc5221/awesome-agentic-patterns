@@ -1,0 +1,91 @@
+<article class="pattern-card" data-pattern="opponent-processor-multi-agent-debate">
+  <div class="pattern-header">
+    <h2>Opponent Processor / Multi-Agent Debate</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Task ──┬──▶ [Advocate] ──▶ Propose ──┐
+       │                             │
+       └──▶ [Critic]   ──▶ Challenge ┼──▶ Debate ──▶ Synthesis
+                                     │
+                              (Iterate)</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Task] --> B[Advocate]
+    A --> C[Critic]
+    B --> D[Debate]
+    C --> D
+    D --> E[Synthesized Decision]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Debate pattern for expenses
+advocate = Agent(role="user_advocate")
+auditor = Agent(role="company_auditor")
+
+proposal = advocate.classify(expense)
+challenge = auditor.review(proposal)
+final = synthesize(proposal, challenge)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Single-agent decisions suffer from confirmation bias, limited perspectives, and unexamined assumptions.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Spawn opposing agents with different goals to debate each other, surfacing blind spots and unconsidered alternatives.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Decisions requiring balanced perspectives</li>
+          <li>High-stakes choices needing scrutiny</li>
+          <li>Tasks prone to confirmation bias</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Reduces bias through adversarial pressure</li>
+              <li>Surfaces blind spots and trade-offs</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>2x+ token cost</li>
+              <li>May deadlock without resolution mechanism</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,20 @@
+{
+  "category": "Reliability & Eval",
+  "problem": "Traditional RLHF requires extensive human annotation for preference data, which is expensive ($1+ per annotation), time-consuming, and creates a bottleneck in training aligned AI systems.",
+  "solution": "Use AI models to generate preference feedback and evaluation data based on constitutional principles, reducing costs to less than $0.01 per annotation while maintaining quality.",
+  "when": [
+    "Need large-scale preference data",
+    "Human annotation is too expensive",
+    "Training aligned AI systems"
+  ],
+  "pros": [
+    "100x cheaper than human feedback",
+    "Unlimited scalability",
+    "More consistent than varying annotators"
+  ],
+  "cons": [
+    "May amplify existing model biases",
+    "Cannot provide truly novel insights",
+    "Requires careful principle design"
+  ]
+}

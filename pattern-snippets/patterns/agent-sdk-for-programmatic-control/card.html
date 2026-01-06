@@ -1,0 +1,99 @@
+<article class="pattern-card" data-pattern="agent-sdk-for-programmatic-control">
+  <div class="pattern-header">
+    <h2>Agent SDK for Programmatic Control</h2>
+    <span class="tag" data-i18n="category">Tool Use & Environment</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Application/Script ──▶ Agent SDK
+                            │
+          ┌─────────────────┼─────────────────┐
+          │                 │                 │
+          ▼                 ▼                 ▼
+     CLI Interface    Python Lib      TS Library
+          │                 │                 │
+          └─────────────────┼─────────────────┘
+                            ▼
+                       Agent Core
+                     (Tools, Memory)</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Application/Script] --> B[Agent SDK]
+    B --> C[CLI Interface]
+    B --> D[Python Library]
+    B --> E[TypeScript Library]
+    C & D & E --> F[Agent Core]
+    F --> G[Tool Access]
+    F --> H[Memory]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash"># CLI usage for CI/CD
+$ claude -p "what changed this week?" \
+  --allowedTools "Bash(git log:*)" \
+  --output-format json
+
+# Python SDK
+agent.run("Review PR", tools=["git"])</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">대화형 인터페이스는 CI/CD 파이프라인, 스케줄 작업, 커스텀 애플리케이션 통합을 지원하지 않음</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">프로그래밍 방식 접근 및 자동화를 위해 에이전트 액션을 노출하는 SDK(CLI, Python, TypeScript) 제공</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>CI/CD 통합이 필요할 때</li>
+          <li>커스텀 애플리케이션 구축 시</li>
+          <li>배치 처리 워크플로우</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>자동화 파이프라인 가능</li>
+              <li>유연한 통합 옵션</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>SDK 학습 곡선</li>
+              <li>API 키 관리가 필요할 수 있음</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

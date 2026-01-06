@@ -1,0 +1,20 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Direct API calls force all intermediate data through the model's context window, causing 150K+ tokens for data-heavy workflows.",
+  "solution": "Agent writes code that executes in sandbox; data processing happens in execution environment with only results returning to context.",
+  "when": [
+    "Data-heavy workflows (spreadsheets, databases, logs)",
+    "Multi-step transformations or aggregations",
+    "Cost-sensitive applications where token usage matters"
+  ],
+  "pros": [
+    "Dramatic token reduction (150K to 2K reported)",
+    "Lower latency (fewer context API calls)",
+    "Natural fit for data processing tasks"
+  ],
+  "cons": [
+    "Requires secure code execution infrastructure",
+    "Agents must write correct code",
+    "Debugging errors happens in execution, not context"
+  ]
+}

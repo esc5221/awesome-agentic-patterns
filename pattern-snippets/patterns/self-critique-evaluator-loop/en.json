@@ -1,0 +1,20 @@
+{
+  "category": "Feedback Loops",
+  "problem": "Human preference labels are costly and quickly become outdated as base models improve, creating a bottleneck for reward model training.",
+  "solution": "Train a self-taught evaluator that bootstraps from synthetic data: generate candidates, judge with reasoning traces, fine-tune on its own judgments, and iterate.",
+  "when": [
+    "Human labels too expensive to scale",
+    "Base models evolving rapidly",
+    "Need automated quality gates"
+  ],
+  "pros": [
+    "Near-human eval accuracy without labels",
+    "Scales with compute",
+    "Self-improving over time"
+  ],
+  "cons": [
+    "Risk of evaluator-model collusion",
+    "Needs adversarial testing",
+    "May amplify systematic errors"
+  ]
+}

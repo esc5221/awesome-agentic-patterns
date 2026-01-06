@@ -1,0 +1,20 @@
+{
+  "category": "Context & Memory",
+  "problem": "Dumping entire repositories into context overwhelms the model with noise and slows inference.",
+  "solution": "Use a search subagent to inject only top-K relevant code snippets into the main agent's context.",
+  "when": [
+    "Working in large codebases",
+    "Need focused reasoning on specific modules",
+    "Token efficiency is critical"
+  ],
+  "pros": [
+    "Noise reduction improves clarity",
+    "Dramatically reduces token usage",
+    "Mitigates context anxiety"
+  ],
+  "cons": [
+    "Index must stay fresh",
+    "Adds search subagent complexity",
+    "May miss edge-case dependencies"
+  ]
+}

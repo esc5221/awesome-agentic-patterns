@@ -1,0 +1,98 @@
+<article class="pattern-card" data-pattern="self-critique-evaluator-loop">
+  <div class="pattern-header">
+    <h2>Self-Critique Evaluator Loop</h2>
+    <span class="tag" data-i18n="category">Feedback Loops</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Instruction ──▶ Generate Candidates ──▶ [A, B, C]
+                                            │
+                                            ▼
+                                   Judge: "B > A > C"
+                                   (with reasoning)
+                                            │
+                                            ▼
+                                  Fine-tune on Judgments
+                                            │
+                     ┌──────────────────────┴──────────────────────┐
+                     ▼                                             ▼
+              Improved Evaluator                          Use as Reward Model</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Generate Candidates] --> B[Judge with Reasoning]
+    B --> C[Fine-tune Evaluator]
+    C --> D[Improved Judge]
+    D --> B
+    D --> E[Use as Reward Model]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">def self_taught_evaluator_loop(model, instructions):
+    candidates = [model.generate(i) for i in instructions]
+    judgments = model.judge_and_explain(candidates)
+    model.finetune(judgments)  # Train on own traces
+    return model  # Now better at evaluation</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Human preference labels are costly and quickly become outdated as base models improve, creating a bottleneck for reward model training.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Train a self-taught evaluator that bootstraps from synthetic data: generate candidates, judge with reasoning traces, fine-tune on its own judgments, and iterate.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Human labels too expensive to scale</li>
+          <li>Base models evolving rapidly</li>
+          <li>Need automated quality gates</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Near-human eval accuracy without labels</li>
+              <li>Scales with compute</li>
+              <li>Self-improving over time</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Risk of evaluator-model collusion</li>
+              <li>Needs adversarial testing</li>
+              <li>May amplify systematic errors</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

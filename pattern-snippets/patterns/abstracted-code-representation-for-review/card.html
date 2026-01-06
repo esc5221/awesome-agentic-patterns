@@ -1,0 +1,95 @@
+<article class="pattern-card" data-pattern="abstracted-code-representation-for-review">
+  <div class="pattern-header">
+    <h2>Abstracted Code Representation for Review</h2>
+    <span class="tag" data-i18n="category">UX & Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">AI Code ──▶ Abstractor ──▶ Pseudocode/Summary
+   │                              │
+   │         ┌────────────────────┘
+   │         ▼
+   │    Human Review (Intent)
+   │         │
+   └─────────┼──▶ Verified Code
+             ▼
+    "Sort changed: O(n²) → O(n log n)"</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[AI Generated Code] --> B[Abstraction Layer]
+    B --> C[Pseudocode/Summary]
+    C --> D[Human Reviews Intent]
+    D --> E{Approved?}
+    E -->|Yes| F[Apply Code Changes]
+    E -->|No| G[Request Revisions]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Instead of reviewing 50 lines of code:
+review = abstractor.summarize(diff)
+# Output: "Changed user_list sorting from
+#          bubble sort to quicksort.
+#          Tests maintained."
+human.verify_intent(review)  # Much faster!</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">AI 생성 코드를 라인 단위로 검토하는 것은 지루하고 오류가 발생하기 쉬우며, 사람은 주로 의도와 로직에 관심이 있음</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">실제 코드 변경과 정확히 매핑된다는 보장과 함께 추상화된 표현(의사코드, 의도 요약)을 제공</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>대량의 AI 생성 코드</li>
+          <li>구문 검사보다 의도 검증이 중요할 때</li>
+          <li>신뢰할 수 있는 생성 파이프라인</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>검증 프로세스 가속화</li>
+              <li>개념적 정확성에 집중 가능</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>추상화 정확성 보장 필요</li>
+              <li>저수준 버그를 놓칠 수 있음</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

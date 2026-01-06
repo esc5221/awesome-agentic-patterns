@@ -1,0 +1,95 @@
+<article class="pattern-card" data-pattern="swarm-migration-pattern">
+  <div class="pattern-header">
+    <h2>Swarm Migration Pattern</h2>
+    <span class="tag" data-i18n="category">Orchestration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Main ──▶ Scan (100 files) ──▶ Todo List ──▶ Spawn 10 Agents
+                                              │
+     ┌─────────────────────────────────────-──┘
+     │  [10 files each, parallel]
+     ▼
+ Verify All ──▶ Consolidated PR</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Main Agent] --> B[Scan Codebase]
+    B --> C[Create Todo: 100 files]
+    C --> D[Spawn 10 Subagents]
+    D --> E1[Agent 1: 1-10]
+    D --> E2[Agent 2: 11-20]
+    D --> E3[...]
+    E1 --> F[Verify]
+    E2 --> F
+    F --> G[Merged PR]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">files = find("*.test.js", old_framework)
+for batch in chunk(files, 10):
+    spawn_agent(
+        task=f"Migrate {batch} to new framework",
+        auto_commit=True
+    )</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Large-scale code migrations (framework upgrades, lint fixes) are slow when done sequentially</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Main agent orchestrates 10+ parallel subagents, each migrating a batch of files in map-reduce fashion</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Framework migrations (Jest to Vitest, etc.)</li>
+          <li>Lint rule rollouts across many files</li>
+          <li>API updates or code modernization</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>10x+ speedup via parallelization</li>
+              <li>Fault isolation per batch</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>High token cost for parallel agents</li>
+              <li>Potential merge conflicts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

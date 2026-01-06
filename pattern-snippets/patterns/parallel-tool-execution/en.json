@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Sequential tool execution causes delays for read-only operations, but parallel execution risks race conditions for state-modifying tools.",
+  "solution": "Classify tools as read-only or state-modifying. Execute read-only batches in parallel, serialize state-modifying operations.",
+  "when": [
+    "Mix of read and write operations",
+    "Performance-sensitive applications",
+    "Batch tool calls in single reasoning step"
+  ],
+  "pros": [
+    "Fast parallel reads, safe sequential writes",
+    "Prevents race conditions"
+  ],
+  "cons": [
+    "Single write in batch serializes everything",
+    "Relies on accurate tool classification"
+  ]
+}

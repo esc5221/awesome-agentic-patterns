@@ -1,0 +1,20 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Agents can pursue misguided reasoning paths for extended periods. By the time developers realize it's wrong, significant time and tokens are wasted.",
+  "solution": "Real-time surveillance of agent reasoning with low-friction interrupt capability to redirect before completing flawed sequences.",
+  "when": [
+    "Complex refactoring where wrong file choices are costly",
+    "High-stakes operations (database migrations, API changes)",
+    "Agent might misinterpret ambiguous requirements"
+  ],
+  "pros": [
+    "Prevents wasted time on fundamentally wrong approaches",
+    "Maximizes value from expensive model calls",
+    "Enables collaborative human-AI problem solving"
+  ],
+  "cons": [
+    "Requires active human attention (not autonomous)",
+    "Can interrupt productive exploration if triggered prematurely",
+    "Adds cognitive load to monitor reasoning"
+  ]
+}

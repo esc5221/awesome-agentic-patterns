@@ -1,0 +1,18 @@
+{
+  "category": "Feedback Loops",
+  "problem": "Agents underutilize tools (compilers, linters, tests) and default to internal thinking tokens instead of invoking external tools.",
+  "solution": "Provide dense shaped rewards for each intermediate tool invocation (+1 compile, +2 test pass) to guide policy toward tool usage.",
+  "when": [
+    "RL-based agent training",
+    "Tool use is underutilized",
+    "Sparse final rewards are insufficient"
+  ],
+  "pros": [
+    "Denser feedback guides step-by-step",
+    "Encourages tool adoption"
+  ],
+  "cons": [
+    "Reward engineering overhead",
+    "May game intermediate rewards"
+  ]
+}

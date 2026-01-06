@@ -1,0 +1,100 @@
+<article class="pattern-card" data-pattern="dual-llm-pattern">
+  <div class="pattern-header">
+    <h2>Dual LLM Pattern</h2>
+    <span class="tag" data-i18n="category">Orchestration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">┌─────────────────┐      ┌─────────────────┐
+│  Quarantined    │      │   Privileged    │
+│     LLM         │      │      LLM        │
+│                 │      │                 │
+│ [Reads Data]    │ $VAR │ [Plans + Tools] │
+│ [No Tools]      │ ───▶ │ [No Raw Data]   │
+└─────────────────┘      └────────┬────────┘
+        ▲                         │
+        │                         ▼
+   Untrusted              execute(plan, $VAR)
+     Input</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    Input[Untrusted Text] --> Q[Quarantined LLM]
+    Q -->|$VAR1| P[Privileged LLM]
+    P -->|plan| E[Execute]
+    E -->|subst $VAR1| Action
+    Q -.-x|NO| Tools
+    P -.-x|NO| RawData[Raw Data]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">var1 = QuarantineLLM("extract email", text)
+# Returns symbolic: $VAR1
+
+plan = PrivLLM.plan("send $VAR1 to boss")
+# No raw text exposure
+
+execute(plan, subst={"$VAR1": var1})</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">A privileged agent that sees untrusted text AND wields tools can be coerced into dangerous calls.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Split into Privileged LLM (plans/tools, no raw data) and Quarantined LLM (reads data, no tools), passing data as symbolic variables.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Email/calendar assistants</li>
+          <li>Booking agents handling user data</li>
+          <li>API-powered chatbots</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Clear trust boundary</li>
+              <li>Compatible with static analysis</li>
+              <li>Prevents injection attacks</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Increased complexity</li>
+              <li>Debugging across two models</li>
+              <li>Variable mapping overhead</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

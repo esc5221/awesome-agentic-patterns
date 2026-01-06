@@ -1,0 +1,20 @@
+{
+  "category": "Context & Memory",
+  "problem": "Long-running agent workflows lose all progress when interrupted, as state in context window does not persist across sessions.",
+  "solution": "Persist intermediate results to files, creating durable checkpoints that enable workflow resumption and failure recovery.",
+  "when": [
+    "Multi-step workflows with expensive operations",
+    "Long-running tasks exceeding session limits",
+    "Workflows needing recovery from failures"
+  ],
+  "pros": [
+    "Enables workflow resumption after interruption",
+    "Protects against data loss",
+    "Allows inspection of intermediate results"
+  ],
+  "cons": [
+    "Requires checkpoint/recovery logic",
+    "File I/O adds overhead",
+    "Stale state can cause confusion"
+  ]
+}

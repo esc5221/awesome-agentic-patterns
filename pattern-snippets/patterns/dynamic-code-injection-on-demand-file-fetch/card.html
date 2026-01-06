@@ -1,0 +1,106 @@
+<article class="pattern-card" data-pattern="dynamic-code-injection-on-demand-file-fetch">
+  <div class="pattern-header">
+    <h2>Dynamic Code Injection</h2>
+    <span class="tag" data-i18n="category">Tool Use</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User: "@src/Button.js"
+         │
+         ▼
+┌─────────────────────────────┐
+│  Preprocessor               │
+│  1. Parse @mention          │
+│  2. Read file (lines 1-50)  │
+│  3. Inject into context     │
+└─────────────────────────────┘
+         │
+         ▼
+Agent: [Context + Button.js] ──▶ Continue</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant P as Preprocessor
+    participant FS as File System
+    participant A as Agent
+    U->>P: @src/Button.js:10-50
+    P->>FS: Read lines 10-50
+    FS-->>P: File content
+    P->>A: Inject into context
+    A-->>U: Continue with file visible
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Syntax examples
+"@path/to/file.ext"        # Full file
+"/load file.ext:10-50"     # Line range
+"/summarize test_spec.py"  # Extract summary
+
+# Injected as:
+# /// BEGIN Button.js
+# ...content...
+# /// END Button.js</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Manually copying files into prompts is tedious, wastes tokens, and interrupts workflow momentum.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Allow on-demand file injection via @filename or /load syntax that fetches, optionally summarizes, and injects code into context.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Interactive coding sessions</li>
+          <li>Exploring unfamiliar codebases</li>
+          <li>Need specific file context mid-conversation</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Interactive code exploration</li>
+              <li>No manual copy/paste</li>
+              <li>Improves agent accuracy</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires file system access</li>
+              <li>Security risk if unsandboxed</li>
+              <li>Summarization may lose context</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

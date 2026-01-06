@@ -1,0 +1,89 @@
+<article class="pattern-card" data-pattern="subagent-compilation-checker">
+  <div class="pattern-header">
+    <h2>Subagent Compilation Checker</h2>
+    <span class="tag" data-i18n="category">Tool Use</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Main ──▶ "Compile svc-A" ──▶ CompileSubagent ──▶ Build
+                                                  │
+         Main Context ◀───────────────────────────┘
+           [{file:"x.go", line:10, err:"..."}]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    Main->>Subagent: Compile module A
+    Subagent->>Build: go build
+    alt Success
+        Subagent-->>Main: {status: ok, artifact: "a.bin"}
+    else Failure
+        Subagent-->>Main: [{file, line, error}]
+    end
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">result = spawn_compile_agent("auth-service")
+# Returns concise error summary:
+# [{file:"auth.go", line:85, error:"undefined"}]
+main_context.inject(result.errors)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Including full build logs in main agent context blows up context length and slows inference</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Spawn specialized subagents to compile each module, returning only concise error summaries to main agent</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Multi-module/microservice projects</li>
+          <li>Build logs too verbose for context</li>
+          <li>Parallel compilation needed</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Main agent context stays clean</li>
+              <li>Parallel builds possible</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Infrastructure to manage subagents</li>
+              <li>Build dependency coordination</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

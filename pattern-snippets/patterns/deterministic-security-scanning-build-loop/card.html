@@ -1,0 +1,97 @@
+<article class="pattern-card" data-pattern="deterministic-security-scanning-build-loop">
+  <div class="pattern-header">
+    <h2>Deterministic Security Scanning Build Loop</h2>
+    <span class="tag" data-i18n="category">Security & Safety</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Agent ──▶ Generate ──▶ make all ──▶ Scan Pass?
+                                        │
+                          ┌─────────────┴─────────────┐
+                          │                           │
+                         No                          Yes
+                          │                           │
+                    See errors              ──▶ Complete ✓
+                          │
+                    ◀── Regenerate</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Agent generates code] --> B[Run make all]
+    B --> C{Security scan?}
+    C -->|Fail| D[Error in context]
+    D --> E[Agent regenerates]
+    E --> A
+    C -->|Pass| F[Done]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-makefile">all: build test security-scan
+
+security-scan:
+    semgrep --config=auto src/
+    bandit -r src/
+    @exit $?</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Non-deterministic security approaches (cursor rules, MCP tools) are suggestions that LLMs may ignore.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Integrate deterministic security scanners into the build loop that agents must run after every change.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>AI-assisted code generation</li>
+          <li>Security-critical applications</li>
+          <li>Need consistent policy enforcement</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Deterministic, battle-tested tools</li>
+              <li>Reuses existing security infra</li>
+              <li>Works with any agent/harness</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Increases build time</li>
+              <li>May produce false positives</li>
+              <li>Requires fast tools for good DX</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,94 @@
+<article class="pattern-card" data-pattern="dual-use-tool-design">
+  <div class="pattern-header">
+    <h2>Dual-Use Tool Design</h2>
+    <span class="tag" data-i18n="category">Tool Use</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Human ──▶ /commit ──┐
+                    │     ┌────────────────┐
+                    ├───▶ │  Shared Tool   │ ──▶ Result
+                    │     │  (same logic)  │
+Agent ──▶ /commit ──┘     └────────────────┘
+
+"Everything you can do, Claude can do"</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    H[Human] -->|/commit| T[Shared Tool]
+    A[Agent] -->|/commit| T
+    T --> R[Same Result]
+    T --> L[Same Logs]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">define_slash_command("/commit", {
+    "steps": ["lint", "gen message", "commit"],
+    "callable_by": ["human", "agent"],
+    "pre_allowed": ["git add", "git commit"]
+})
+# Human: $ /commit
+# Agent: agent.call("/commit")</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Building separate tools for humans and AI agents creates maintenance overhead, inconsistent behavior, and feature drift.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Design all tools to be dual-use: same interface, shared logic, equally accessible to both humans and AI agents.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Building developer tools</li>
+          <li>Creating slash commands</li>
+          <li>Designing agent-assisted workflows</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Reduced maintenance (one implementation)</li>
+              <li>Consistent behavior for both</li>
+              <li>Single test suite</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Must satisfy both ergonomics</li>
+              <li>May compromise optimization</li>
+              <li>Documentation challenge</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,93 @@
+<article class="pattern-card" data-pattern="pii-tokenization">
+  <div class="pattern-header">
+    <h2>PII Tokenization</h2>
+    <span class="tag" data-i18n="category">Security & Safety</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Tool ──▶ [john@x.com] ──▶ MCP Client ──▶ [EMAIL_1] ──▶ Model
+                              │
+                         Tokenize
+                              │
+Model ──▶ "Send to [EMAIL_1]" ──▶ MCP ──▶ [john@x.com] ──▶ Tool
+                                    │
+                               Untokenize</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Tool Response] --> B[MCP Client]
+    B --> C[Tokenize PII]
+    C --> D[Model sees tokens]
+    D --> E[Tool Call with tokens]
+    E --> F[Untokenize]
+    F --> G[Real Tool Call]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># MCP client intercepts
+data = {"email": "john@example.com"}
+# Tokenized for model
+ctx = {"email": "[EMAIL_1]"}
+# Agent reasons with tokens
+# Real value restored for tools</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Sending raw PII through the model's context creates privacy risks and compliance concerns.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Intercept tool responses to tokenize PII before reaching model, untokenize when making actual tool calls.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Workflows processing customer data</li>
+          <li>Compliance-sensitive environments (GDPR, HIPAA)</li>
+          <li>Multi-step automation involving PII</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Prevents raw PII in model context</li>
+              <li>Transparent to agent reasoning</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>PII detection must be accurate</li>
+              <li>Doesn't prevent inference of patterns</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

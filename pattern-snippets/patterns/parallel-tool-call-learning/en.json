@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Agents execute tool calls sequentially even when they could run in parallel, causing unnecessary latency.",
+  "solution": "Use Agent RFT to teach models to parallelize independent tool calls, reducing latency by 40-50% when tool execution is fast.",
+  "when": [
+    "Tool execution faster than inference",
+    "Independent information gathering",
+    "Broad exploration phases"
+  ],
+  "pros": [
+    "40-50% latency reduction",
+    "Emerges naturally from RL training"
+  ],
+  "cons": [
+    "Requires concurrent tool infrastructure",
+    "Higher peak resource usage"
+  ]
+}

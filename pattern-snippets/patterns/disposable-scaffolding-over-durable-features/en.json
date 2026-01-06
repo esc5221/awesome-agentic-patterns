@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Complex features built around models become obsolete when next-gen models perform those tasks natively.",
+  "solution": "Treat tooling as temporary scaffolding; build simplest solutions expecting they will be discarded.",
+  "when": [
+    "Building model-compensating features",
+    "Rapid model improvement cycles",
+    "Need product agility over long-term investment"
+  ],
+  "pros": [
+    "Fast adaptation to new models",
+    "Lower engineering investment risk",
+    "Focus on unique value, not workarounds"
+  ],
+  "cons": [
+    "May feel wasteful",
+    "Requires discipline to avoid over-engineering",
+    "Tech debt accumulates if not cleaned"
+  ]
+}

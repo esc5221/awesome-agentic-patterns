@@ -1,0 +1,90 @@
+<article class="pattern-card" data-pattern="spec-as-test-feedback-loop">
+  <div class="pattern-header">
+    <h2>Spec-As-Test Feedback Loop</h2>
+    <span class="tag" data-i18n="category">Feedback Loops</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Spec Change ──▶ Generate Tests ──▶ Run Tests ──┐
+                                                │
+    ┌───────────────────────────────────────────┘
+    │  Fail?
+    ▼
+Agent PR: Fix Code or Flag Spec ──▶ Review</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Spec/Code Commit] --> B[Generate Tests]
+    B --> C[Run Tests]
+    C -->|Pass| D[Done]
+    C -->|Fail| E[Agent PR]
+    E --> F[Fix Code or Flag Spec]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">on_commit(spec_or_code):
+    tests = generate_tests(spec.latest)
+    result = run_tests(tests)
+    if result.failed:
+        create_pr(fix_or_flag(result))</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Implementations can drift from specs as code evolves, causing silent divergence</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Auto-generate executable tests from specs and run on every commit, with agent-authored PRs for fixes</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Spec-first development workflows</li>
+          <li>Critical systems requiring spec-impl sync</li>
+          <li>Continuous integration environments</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Catches drift early</li>
+              <li>Keeps spec and impl in lock-step</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Heavy CI usage</li>
+              <li>False positives with loose spec wording</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

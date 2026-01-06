@@ -1,0 +1,103 @@
+<article class="pattern-card" data-pattern="versioned-constitution-governance">
+  <div class="pattern-header">
+    <h2>Versioned Constitution Governance</h2>
+    <span class="tag" data-i18n="category">Reliability</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Agent ──▶ Propose Change ──▶ Git PR
+                                  │
+                           ┌──────▼──────┐
+                           │   CI Check  │
+                           │ - Signed?   │
+                           │ - Policy OK?│
+                           └──────┬──────┘
+                                  │
+                     ┌────────────┼────────────┐
+                     ▼            ▼            ▼
+                  [PASS]      [REVIEW]      [REJECT]
+                     │            │
+                     ▼            ▼
+               Gatekeeper ──▶ Merge</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Agent] -->|propose| B[Git PR]
+    B --> C{CI Check}
+    C -->|pass| D[Gatekeeper]
+    D -->|approve| E[Merge]
+    C -->|fail| F[Reject]
+    E --> G[Constitution HEAD]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-yaml"># constitution.yaml (in signed git repo)
+rules:
+  - name: "no_secret_exfil"
+    level: critical
+    immutable: true
+  - name: "confirm_destructive"
+    level: high
+
+# CI: flag deletion of critical rules</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Self-modifying agents can accidentally violate safety rules or regress on alignment when rewriting their constitution.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Store constitution in version-controlled, signed repo with CI policy checks; agent proposes, gatekeeper merges.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Agent can modify its own rules</li>
+          <li>Safety constraints are critical</li>
+          <li>Audit trail is required</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Full audit history</li>
+              <li>Prevents unauthorized changes</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Slower iteration cycle</li>
+              <li>Requires governance overhead</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

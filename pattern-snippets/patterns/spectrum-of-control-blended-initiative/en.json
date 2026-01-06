@@ -1,0 +1,18 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "One-size-fits-all agent autonomy doesn't fit varying task complexity or user familiarity",
+  "solution": "Provide a spectrum of control modes from low (tab-complete) to high (background agent) that users can switch between",
+  "when": [
+    "IDE/editor integrations",
+    "Varying task complexity within one session",
+    "Users with different comfort levels"
+  ],
+  "pros": [
+    "Flexible for all task sizes",
+    "User maintains desired control level"
+  ],
+  "cons": [
+    "UX complexity with multiple modes",
+    "Learning curve for mode switching"
+  ]
+}

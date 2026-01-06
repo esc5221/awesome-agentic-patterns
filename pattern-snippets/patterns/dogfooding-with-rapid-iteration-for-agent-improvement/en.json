@@ -1,0 +1,20 @@
+{
+  "category": "Feedback Loops",
+  "problem": "External feedback loops are slow and simulated environments miss real-world nuances for agent improvement.",
+  "solution": "Development team uses their own AI agent daily, creating tight feedback loops for rapid iteration and honest assessment.",
+  "when": [
+    "Building AI-assisted dev tools",
+    "Need rapid feature validation",
+    "Team wants unfiltered feedback"
+  ],
+  "pros": [
+    "Direct, immediate feedback",
+    "Real-world problem testing",
+    "Fast iteration cycles"
+  ],
+  "cons": [
+    "May bias toward developer needs",
+    "Internal users != all users",
+    "Requires team adoption commitment"
+  ]
+}

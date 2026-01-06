@@ -1,0 +1,18 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Agents struggle when workflows are too rigid or humans micromanage technical decisions.",
+  "solution": "Design workflows with clear goals, appropriate autonomy, structured I/O, and iterative feedback loops.",
+  "when": [
+    "Integrating agents into existing processes",
+    "Agent performance is suboptimal",
+    "Building new human-AI workflows"
+  ],
+  "pros": [
+    "Maximizes agent capabilities",
+    "Better human-AI collaboration"
+  ],
+  "cons": [
+    "Requires workflow redesign",
+    "May need trust building"
+  ]
+}

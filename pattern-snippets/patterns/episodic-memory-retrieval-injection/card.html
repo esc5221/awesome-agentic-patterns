@@ -1,0 +1,103 @@
+<article class="pattern-card" data-pattern="episodic-memory-retrieval-injection">
+  <div class="pattern-header">
+    <h2>Episodic Memory Retrieval</h2>
+    <span class="tag" data-i18n="category">Context & Memory</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Episode Done ──▶ Write Memory Blob ──▶ [Vector DB]
+                                           │
+New Task ──▶ Embed Prompt ──▶ Query ───────┘
+                               │
+                               ▼
+                         top-k Memories
+                               │
+                               ▼
+               Agent [Context + Hints] ──▶ Execute</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    participant A as Agent
+    participant V as Vector DB
+    A->>V: Store memory (event, outcome)
+    Note over A: New task arrives
+    A->>V: Query similar memories
+    V-->>A: top-k results
+    A->>A: Inject as context hints
+    A->>A: Execute with memory
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># After episode completion
+memory_db.write({
+    "event": "refactored auth module",
+    "outcome": "broke session handling",
+    "rationale": "missed dependency"
+})
+
+# On new task
+hints = memory_db.retrieve(task, top_k=3)
+agent.execute(task, context_hints=hints)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Stateless calls make agents forget prior decisions, causing repetition and shallow reasoning.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Add vector-backed episodic memory: store event/outcome/rationale blobs, retrieve top-k similar memories, inject as hints.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Long-running agent sessions</li>
+          <li>Need continuity across tasks</li>
+          <li>Avoiding repeated mistakes</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Richer continuity</li>
+              <li>Fewer repeated mistakes</li>
+              <li>Learns from past</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Retrieval noise if uncurated</li>
+              <li>Storage cost</li>
+              <li>Stale memory issues</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Large multi-file tasks overflow main agent's context window, exceeding reasoning budget",
+  "solution": "Spawn independent sub-agents to work in parallel, then merge results",
+  "when": [
+    "Multi-file edits (10+ files)",
+    "Independently partitionable tasks",
+    "Sequential processing too slow"
+  ],
+  "pros": [
+    "Faster via parallel execution",
+    "Context isolation"
+  ],
+  "cons": [
+    "Coordination complexity",
+    "Merge overhead"
+  ]
+}

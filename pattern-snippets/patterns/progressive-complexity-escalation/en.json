@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Deploying agents with overly ambitious capabilities from day one leads to unreliable outputs, failed implementations, and safety risks from autonomous high-stakes operations.",
+  "solution": "Start with low-complexity, high-reliability tasks and progressively unlock more complex capabilities as models improve and trust is established through capability tiers.",
+  "when": [
+    "Deploying agents into production",
+    "High-stakes or regulated domains",
+    "Building internal automation tools"
+  ],
+  "pros": [
+    "Risk mitigation via limited blast radius",
+    "Builds stakeholder confidence",
+    "Graceful degradation"
+  ],
+  "cons": [
+    "Delayed full automation benefits",
+    "Tier management complexity",
+    "Promotion friction"
+  ]
+}

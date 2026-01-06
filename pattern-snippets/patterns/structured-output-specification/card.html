@@ -1,0 +1,89 @@
+<article class="pattern-card" data-pattern="structured-output-specification">
+  <div class="pattern-header">
+    <h2>Structured Output Specification</h2>
+    <span class="tag" data-i18n="category">Reliability</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Input ──▶ LLM + Schema ──▶ Validated Output ──┬──▶ DB
+                                              ├──▶ API
+                                              └──▶ Next Agent</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Agent Input] --> B[LLM + Schema]
+    B --> C[Validated Output]
+    C --> D[Downstream System]
+    C --> E[Database]
+    C --> F[Next Agent]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-typescript">const schema = z.object({
+  category: z.enum(['spam', 'legit']),
+  confidence: z.number().min(0).max(1)
+});
+const result = await generateObject({
+  model, schema, prompt
+});</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Free-form agent outputs are hard to validate, parse, and integrate with downstream systems</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Constrain outputs using deterministic schemas (JSON Schema, Zod, Pydantic) enforced at generation time</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Multi-phase agent workflows</li>
+          <li>Classification/categorization tasks</li>
+          <li>Integration with databases or APIs</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Guaranteed parseable outputs</li>
+              <li>Type safety and validation</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Rigidity limits free-form responses</li>
+              <li>Schema evolution friction</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

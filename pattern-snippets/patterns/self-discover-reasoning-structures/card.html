@@ -1,0 +1,105 @@
+<article class="pattern-card" data-pattern="self-discover-reasoning-structures">
+  <div class="pattern-header">
+    <h2>Self-Discover Reasoning Structures</h2>
+    <span class="tag" data-i18n="category">Feedback Loops</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Task ──▶ Analyze ──▶ Select Modules ──▶ Adapt ──▶ Compose
+                         │
+         ┌───────────────┴───────────────┐
+         │  Module Library               │
+         │  • Break into steps           │
+         │  • Work backwards             │
+         │  • Find patterns              │
+         └───────────────────────────────┘
+                                              │
+                                              ▼
+                              Task-Specific Reasoning Structure
+                                              │
+                                              ▼
+                                         Execute ──▶ Solution</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Task] --> B[Analyze]
+    B --> C[Select Modules]
+    C --> D[Adapt to Task]
+    D --> E[Compose Structure]
+    E --> F[Execute]
+    F --> G[Solution]
+    H[Module Library] --> C
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">def self_discover_solve(task, modules):
+    # Select relevant modules for this task
+    selected = llm.select(task, modules)
+    # Adapt to specific problem
+    adapted = llm.adapt(task, selected)
+    # Compose reasoning structure
+    structure = llm.compose(adapted)
+    return llm.solve_with(task, structure)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Different reasoning tasks require different thinking strategies. Fixed reasoning patterns like Chain-of-Thought may be suboptimal for diverse problems.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Enable LLMs to automatically discover and compose task-specific reasoning structures by selecting and adapting atomic reasoning modules to match the problem's characteristics.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Diverse reasoning tasks</li>
+          <li>Standard CoT underperforming</li>
+          <li>Novel problem types</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Up to 32% improvement over CoT</li>
+              <li>Creates reusable reasoning templates</li>
+              <li>Adapts to novel problems</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Overhead for structure discovery</li>
+              <li>May over-engineer simple problems</li>
+              <li>Depends on task analysis accuracy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

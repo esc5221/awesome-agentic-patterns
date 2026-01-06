@@ -1,0 +1,18 @@
+{
+  "category": "Reliability & Eval",
+  "problem": "Synchronous tool execution (compilation, testing) creates compute bubbles and idle GPUs, blocking agents while waiting for I/O-bound operations.",
+  "solution": "Decouple inference, tool execution, and learning into parallel async components communicating via message queues.",
+  "when": [
+    "Running RL training for coding agents",
+    "Tool calls have high latency (compilation, tests)",
+    "Need to maximize GPU utilization"
+  ],
+  "pros": [
+    "High utilization - GPUs stay busy during I/O",
+    "Scalable - independently scale inference, tools, learning"
+  ],
+  "cons": [
+    "Complex system maintenance across services",
+    "Staleness management for policy updates"
+  ]
+}

@@ -1,0 +1,94 @@
+<article class="pattern-card" data-pattern="progressive-autonomy-with-model-evolution">
+  <div class="pattern-header">
+    <h2>Progressive Autonomy with Model Evolution</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Model v1 ──▶ Heavy Scaffolding ──▶ [2000 tokens prompt]
+    │
+    ▼ (model upgrade)
+Model v2 ──▶ Audit & Remove ──▶ [500 tokens prompt]
+    │
+    ▼ (model upgrade)
+Model v3 ──▶ Minimal Prompt ──▶ [100 tokens prompt]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Model v1] --> B[Heavy Scaffolding]
+    B --> C[Model v2 Released]
+    C --> D[Remove Unnecessary]
+    D --> E[Model v3 Released]
+    E --> F[Minimal Prompt]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Before: 2000 tokens of instructions
+system_prompt_v1 = """Check file exists, read contents,
+plan changes, make minimal edits, verify syntax..."""
+
+# After: Model internalized the steps
+system_prompt_v2 = "Write clean, tested code."</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Agent scaffolding built for older models becomes unnecessary overhead as models improve, creating prompt bloat, wasted tokens, and maintenance burden.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Actively remove scaffolding as models become more capable. Regularly audit system prompts and orchestration logic to eliminate what newer models have internalized.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>New model releases available</li>
+          <li>System prompts exceeding necessary length</li>
+          <li>Complex orchestration for simple tasks</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Reduced token costs</li>
+              <li>Faster execution</li>
+              <li>Simpler maintenance</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires testing for quality validation</li>
+              <li>May need different configs per model version</li>
+              <li>Loss of explicit control</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

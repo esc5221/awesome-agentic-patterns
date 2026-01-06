@@ -1,0 +1,20 @@
+{
+  "category": "Context & Memory",
+  "problem": "Agents often need specific context on-demand, but constantly editing static files or pasting text is inefficient.",
+  "solution": "Use @mentions for files and /slash commands for reusable prompts to dynamically inject context during sessions.",
+  "when": [
+    "Need specific file contents mid-task",
+    "Frequently reuse complex instructions",
+    "Want fluid context management"
+  ],
+  "pros": [
+    "Targeted context injection",
+    "Reusable slash commands",
+    "Efficient lazy loading"
+  ],
+  "cons": [
+    "Must learn special syntax",
+    "May inject too much context",
+    "Command setup overhead"
+  ]
+}

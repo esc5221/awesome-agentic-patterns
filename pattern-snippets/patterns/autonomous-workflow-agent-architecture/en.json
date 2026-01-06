@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Complex engineering workflows require extensive human oversight, with manual coordination, monitoring, and intervention at each step.",
+  "solution": "Containerized agents with tmux session management, intelligent monitoring, and context-aware error recovery for autonomous multi-step execution.",
+  "when": [
+    "Model training and evaluation pipelines",
+    "Infrastructure provisioning and configuration",
+    "Multi-stage deployment workflows"
+  ],
+  "pros": [
+    "1.2-1.4x speedup in workflow execution",
+    "Reduced human intervention for routine steps",
+    "Comprehensive automatic logging"
+  ],
+  "cons": [
+    "Limited handling of novel failure scenarios",
+    "Context window constraints for long workflows",
+    "Setup complexity for containers and monitoring"
+  ]
+}

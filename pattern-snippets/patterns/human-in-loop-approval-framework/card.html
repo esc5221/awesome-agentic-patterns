@@ -1,0 +1,102 @@
+<article class="pattern-card" data-pattern="human-in-loop-approval-framework">
+  <div class="pattern-header">
+    <h2>Human-in-the-Loop Approval Framework</h2>
+    <span class="tag" data-i18n="category">UX & Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Agent ──▶ "DROP TABLE" ──▶ Framework
+                              │
+                    [HIGH RISK DETECTED]
+                              │
+                              ▼
+                         Slack #ops
+                    ┌─────────────────┐
+                    │ [Approve] [Deny]│
+                    └─────────────────┘
+                              │
+              ┌───────────────┴───────────────┐
+              ▼                               ▼
+         Execute + Log                   Agent Adapts</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    Agent->>Framework: DROP old_users
+    Framework->>Slack: Request approval
+    Slack->>Human: [Approve] [Reject]
+    Human->>Slack: Approve
+    Slack->>Framework: Granted
+    Framework->>Agent: Execute
+    Framework->>Log: Record
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">from humanlayer import HumanLayer
+hl = HumanLayer()
+
+@hl.require_approval(channel="slack")
+def delete_user_data(user_id: str):
+    """Requires human approval before execution"""
+    return db.users.delete(user_id)
+# Pauses for Slack approval button click</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Autonomous agents need to execute high-risk operations (DB changes, deployments), but unsupervised execution creates unacceptable safety risks.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Insert human approval gates for high-risk functions via Slack/email/SMS, maintaining agent autonomy for safe operations.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Production database operations (DELETE, DROP)</li>
+          <li>External API calls with side effects</li>
+          <li>Compliance-sensitive operations</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Safe autonomous risky operations</li>
+              <li>Lightweight Slack integration</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires human availability</li>
+              <li>Risk of approval fatigue</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

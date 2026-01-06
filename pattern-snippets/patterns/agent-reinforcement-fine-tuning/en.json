@@ -1,0 +1,18 @@
+{
+  "category": "Learning & Adaptation",
+  "problem": "Base models underperform on domain-specific tasks due to distribution shift and inefficient tool use.",
+  "solution": "Train model end-to-end on agentic tasks with real tool calls, custom graders, and multi-step reinforcement.",
+  "when": [
+    "Domain shift from base model",
+    "Inefficient tool use patterns",
+    "100-1000 quality samples available"
+  ],
+  "pros": [
+    "End-to-end optimization",
+    "Sample efficient (100-1000 samples)"
+  ],
+  "cons": [
+    "Infrastructure complexity",
+    "Careful reward engineering needed"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "category": "Context & Memory",
+  "problem": "Models proactively write notes to preserve state, but self-generated summaries are often incomplete and may consume tokens better spent on task execution.",
+  "solution": "Provide structured templates and validation for agent self-documentation, combining agent notes with external memory systems as fallback.",
+  "when": [
+    "Long-running development sessions",
+    "Multi-session research tasks",
+    "Subagent coordination requiring state communication"
+  ],
+  "pros": [
+    "Leverages natural model behavior",
+    "Enables session continuity",
+    "Creates audit trails"
+  ],
+  "cons": [
+    "May consume tokens on documentation over progress",
+    "Risk of incomplete self-assessment",
+    "Requires validation overhead"
+  ]
+}

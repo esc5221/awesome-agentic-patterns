@@ -1,0 +1,20 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Building separate tools for humans and AI agents creates maintenance overhead, inconsistent behavior, and feature drift.",
+  "solution": "Design all tools to be dual-use: same interface, shared logic, equally accessible to both humans and AI agents.",
+  "when": [
+    "Building developer tools",
+    "Creating slash commands",
+    "Designing agent-assisted workflows"
+  ],
+  "pros": [
+    "Reduced maintenance (one implementation)",
+    "Consistent behavior for both",
+    "Single test suite"
+  ],
+  "cons": [
+    "Must satisfy both ergonomics",
+    "May compromise optimization",
+    "Documentation challenge"
+  ]
+}

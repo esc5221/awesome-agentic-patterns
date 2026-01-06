@@ -1,0 +1,97 @@
+<article class="pattern-card" data-pattern="progressive-tool-discovery">
+  <div class="pattern-header">
+    <h2>Progressive Tool Discovery</h2>
+    <span class="tag" data-i18n="category">Tool Use & Environment</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">servers/
+├── google-drive/   ──▶ list (names only)
+│   ├── getDocument     ──▶ search (+ description)
+│   └── listFiles           ──▶ get (full schema)
+├── slack/
+└── github/
+
+Agent: list_dir("./servers/") → ["google-drive/", ...]
+       search_tools("google-drive/*", "name+desc")
+       get_tool_definition("getDocument") → {schema}</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[List Servers] --> B[Browse Category]
+    B --> C[Search Tools]
+    C --> D[Get Full Schema]
+    D --> E[Execute Tool]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Progressive discovery workflow
+servers = list_directory("./servers/")  # names only
+tools = search_tools("google-drive/*",
+                     detail="name+description")
+schema = get_tool_definition(
+    "servers/google-drive/getDocument"
+)  # full JSON schema when needed</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Loading all tool definitions upfront consumes excessive context window space when agents have access to large tool catalogs, limiting space for actual task execution.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Present tools through a filesystem-like hierarchy where agents discover capabilities on-demand, requesting different detail levels (name only, description, full schema) as needed.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Systems with 20+ available tools</li>
+          <li>MCP server implementations</li>
+          <li>Plugin architectures with many capabilities</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Reduces initial context consumption</li>
+              <li>Scales to hundreds of tools</li>
+              <li>Natural filesystem-like exploration</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Adds discovery overhead</li>
+              <li>Multiple round-trips to find tools</li>
+              <li>Requires thoughtful organization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

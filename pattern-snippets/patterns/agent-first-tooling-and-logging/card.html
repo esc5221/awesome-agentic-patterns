@@ -1,0 +1,99 @@
+<article class="pattern-card" data-pattern="agent-first-tooling-and-logging">
+  <div class="pattern-header">
+    <h2>Agent-First Tooling and Logging</h2>
+    <span class="tag" data-i18n="category">Tool Use & Environment</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Agent ──▶ CLI --for-agent --json ──▶ System
+                                        │
+              ┌─────────────────────────┘
+              ▼
+         Unified Logger (JSON Lines)
+              │
+              ▼
+         Agent Parses Structured Data
+              │
+              ▼
+         Next Action Based on Analysis</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    participant A as Agent
+    participant C as CLI --for-agent
+    participant L as Unified Logger
+    A->>C: command --json
+    C->>L: Write JSON log entry
+    L->>A: Return structured data
+    A->>A: Parse & decide next action
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash"># Human-friendly (hard to parse)
+$ npm test
+PASS src/test.js
+
+# Agent-friendly (easy to parse)
+$ npm test --json --for-agent
+{"status":"pass","file":"src/test.js"}</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">컬러, 멀티라인 출력을 가진 사람 중심 도구는 에이전트가 안정적으로 파싱하기 어려움</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">기계 판독 가능한 출력(JSON), 통합 로그, --for-agent 플래그를 가진 에이전트 우선 도구 설계</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>에이전트 기반 워크플로우 구축</li>
+          <li>통합할 다중 로그 소스가 있을 때</li>
+          <li>신뢰할 수 있는 자동화가 필요할 때</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>더 나은 파싱 정확도</li>
+              <li>토큰 낭비 감소</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>사람의 가독성 희생</li>
+              <li>도구 수정에 투자 필요</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

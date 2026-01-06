@@ -1,0 +1,113 @@
+<article class="pattern-card" data-pattern="autonomous-workflow-agent-architecture">
+  <div class="pattern-header">
+    <h2>Autonomous Workflow Agent Architecture</h2>
+    <span class="tag" data-i18n="category">Orchestration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Workflow ──▶ Container ──▶ tmux Sessions
+                              │
+            ┌─────────────────┼─────────────────┐
+            ▼                 ▼                 ▼
+       [Session 1]      [Session 2]      [Session 3]
+            │                 │                 │
+            └─────────┬───────┘                 │
+                      ▼                         │
+               Monitor & Wait ◀─────────────────┘
+                      │
+              Error? ─┼─▶ Retry/Recover
+                      │
+                      ▼
+               Checkpoint ──▶ Next Step</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Workflow] --> B[Container]
+    B --> C[tmux Sessions]
+    C --> D[Parallel Execution]
+    D --> E[Intelligent Monitoring]
+    E --> F{Error?}
+    F -->|Yes| G[Adaptive Recovery]
+    G --> C
+    F -->|No| H[Checkpoint]
+    H --> I{Complete?}
+    I -->|No| C
+    I -->|Yes| J[Results]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">class WorkflowAgent:
+    def execute_workflow(self, steps):
+        for step in steps:
+            session = self.create_session(step.name)
+            try:
+                result = self.execute_step(step, session)
+                self.create_checkpoint(step, result)
+            except Exception as e:
+                if self.can_retry(e):
+                    self.retry_with_backoff(step)
+                else:
+                    self.escalate_to_human(step, e)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Complex engineering workflows require extensive human oversight, with manual coordination, monitoring, and intervention at each step.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Containerized agents with tmux session management, intelligent monitoring, and context-aware error recovery for autonomous multi-step execution.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Model training and evaluation pipelines</li>
+          <li>Infrastructure provisioning and configuration</li>
+          <li>Multi-stage deployment workflows</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>1.2-1.4x speedup in workflow execution</li>
+              <li>Reduced human intervention for routine steps</li>
+              <li>Comprehensive automatic logging</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Limited handling of novel failure scenarios</li>
+              <li>Context window constraints for long workflows</li>
+              <li>Setup complexity for containers and monitoring</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

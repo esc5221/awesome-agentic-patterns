@@ -1,0 +1,95 @@
+<article class="pattern-card" data-pattern="iterative-multi-agent-brainstorming">
+  <div class="pattern-header">
+    <h2>Iterative Multi-Agent Brainstorming</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">              ┌─── Agent A ──▶ Ideas 1 ───┐
+              │                           │
+Problem ──▶   ├─── Agent B ──▶ Ideas 2 ───┼──▶ Synthesize
+              │                           │
+              └─── Agent C ──▶ Ideas 3 ───┘
+
+Perspectives: [Performance] [Security] [UX]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    P[Problem] --> A1[Agent 1]
+    P --> A2[Agent 2]
+    P --> A3[Agent 3]
+    A1 --> S[Synthesize]
+    A2 --> S
+    A3 --> S
+    S --> R[Best Ideas]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Parallel brainstorming agents
+ideas = await asyncio.gather(
+    agent("Refactor for performance"),
+    agent("Refactor for readability"),
+    agent("Refactor for testability")
+)
+best = synthesize(ideas)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Single agent gets stuck in local optimum or fails to explore diverse solutions for complex problems.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Spawn multiple agents with different perspectives to brainstorm in parallel, then synthesize best ideas.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Creative ideation tasks</li>
+          <li>Complex refactoring decisions</li>
+          <li>Design exploration</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Diverse perspectives</li>
+              <li>Avoids local optima</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Higher token cost</li>
+              <li>Synthesis complexity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

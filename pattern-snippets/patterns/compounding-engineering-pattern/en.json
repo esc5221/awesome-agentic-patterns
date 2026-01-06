@@ -1,0 +1,20 @@
+{
+  "category": "Learning & Adaptation",
+  "problem": "Traditional engineering has diminishing returns; AI agents repeat mistakes because learnings aren't codified.",
+  "solution": "Codify all learnings from each feature into prompts, commands, and hooks to make subsequent features easier.",
+  "when": [
+    "Building features with AI agents",
+    "Onboarding new team members",
+    "Agents repeating the same mistakes"
+  ],
+  "pros": [
+    "Accelerating productivity over time",
+    "Knowledge preserved beyond individuals",
+    "Better agent and human onboarding"
+  ],
+  "cons": [
+    "Upfront documentation time",
+    "Risk of prompt bloat",
+    "Requires extensible agent system"
+  ]
+}

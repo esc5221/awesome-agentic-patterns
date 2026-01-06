@@ -1,0 +1,96 @@
+<article class="pattern-card" data-pattern="plan-then-execute-pattern">
+  <div class="pattern-header">
+    <h2>Plan-Then-Execute Pattern</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">         PLAN PHASE              EXECUTE PHASE
+             │                        │
+Prompt ──▶ [LLM] ──▶ Plan ──▶ [Controller] ──▶ Results
+             │        │              │
+             │    ┌───┴───┐     ┌────┴────┐
+             │    │ call1 │     │ run(1)  │
+             │    │ call2 │────▶│ run(2)  │
+             │    │ call3 │     │ run(3)  │
+             │    └───────┘     └─────────┘
+             │                       │
+          frozen               no plan changes</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Prompt] --> B[LLM: Make Plan]
+    B --> C[Frozen Plan]
+    C --> D[Execute call 1]
+    D --> E[Execute call 2]
+    E --> F[Execute call 3]
+    F --> G[Results]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">plan = LLM.make_plan(prompt)  # frozen
+for call in plan:
+    result = tools.run(call)
+    stash(result)  # outputs isolated
+# Tool outputs can't change which tools run</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">If tool outputs alter choice of later actions, injected instructions may redirect agent toward malicious steps</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Split into Plan phase (fixed sequence before seeing untrusted data) and Execute phase (controller runs exact sequence)</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Email & calendar bots</li>
+          <li>SQL assistants</li>
+          <li>Tasks where action set is known but params vary</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Strong control-flow integrity</li>
+              <li>2-3x success rates for complex tasks</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Output content can still be poisoned</li>
+              <li>Less flexible for dynamic tasks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

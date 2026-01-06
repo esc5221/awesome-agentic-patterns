@@ -1,0 +1,94 @@
+<article class="pattern-card" data-pattern="action-selector-pattern">
+  <div class="pattern-header">
+    <h2>Action-Selector Pattern</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User Prompt ──▶ LLM ──▶ Action ID ──▶ Execute
+                 │                        │
+                 │    ┌───────────────────┘
+                 │    │
+                 ▼    ▼
+            Allowlist Check    Tool Output
+                              (NOT fed back!)
+
+[LLM as decoder only - no feedback loop]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[User Request] --> B[LLM Decoder]
+    B --> C{Match Allowlist?}
+    C -->|Yes| D[Execute Action]
+    C -->|No| E[Reject]
+    D --> F[Return Result]
+    F -.->|NOT fed back| B
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">allowlist = ["check_balance", "transfer", "history"]
+action = llm.translate(user_prompt, allowlist)
+result = execute(action)
+# CRITICAL: result NOT returned to LLM
+return result  # Direct to user</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">도구 피드백이 컨텍스트 윈도우로 재진입할 때 신뢰할 수 없는 입력이 에이전트 추론을 하이재킹할 수 있음</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">LLM을 요청을 사전 승인된 액션으로 매핑하는 데만 사용하고, 도구 출력은 모델에 피드백하지 않음</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>고보안 환경</li>
+          <li>고객 서비스 봇</li>
+          <li>제한된 액션 세트 (키오스크, 라우터)</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>프롬프트 인젝션에 거의 면역</li>
+              <li>감사가 매우 쉬움</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>유연성 제한</li>
+              <li>새 기능 추가 시 코드 수정 필요</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

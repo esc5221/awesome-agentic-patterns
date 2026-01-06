@@ -1,0 +1,89 @@
+<article class="pattern-card" data-pattern="shell-command-contextualization">
+  <div class="pattern-header">
+    <h2>Shell Command Contextualization</h2>
+    <span class="tag" data-i18n="category">Tool Use</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User ──▶ "!ls -la" ──▶ Interface ──▶ Shell ──▶ Output
+                                        │
+          Agent Context ◀───────────────┘
+              [cmd + output injected]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    User->>Interface: !ls -la
+    Interface->>Shell: Execute command
+    Shell-->>Interface: Output
+    Interface->>Agent: Inject cmd + output
+    Agent-->>User: Response with context
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash"># User types in Claude Code:
+!git status
+
+# Agent receives in context:
+# Command: git status
+# Output: On branch main, 2 files changed...</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Manually copying shell command output into agent context is tedious and error-prone</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Provide a special prefix (e.g., !) that executes shell commands and auto-injects both command and output into agent context</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Agent needs real-time environment state</li>
+          <li>Checking git status, file listings, test results</li>
+          <li>Interactive debugging with agent assistance</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Seamless environment integration</li>
+              <li>No manual copy-paste required</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Security risk from arbitrary commands</li>
+              <li>Large outputs can bloat context</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

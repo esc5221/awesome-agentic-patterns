@@ -1,0 +1,104 @@
+<article class="pattern-card" data-pattern="tool-capability-compartmentalization">
+  <div class="pattern-header">
+    <h2>Tool Capability Compartmentalization</h2>
+    <span class="tag" data-i18n="category">Orchestration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">        Monolithic Tool (RISKY)          Compartmentalized (SAFE)
+        ┌─────────────────────┐           ┌─────────┐
+        │  read + fetch +     │           │ READER  │ fs:read-only
+        │  write ALL-IN-ONE   │    ──▶    └────┬────┘
+        │  🔓 max surface     │                │  consent
+        └─────────────────────┘           ┌────▼────┐
+                                          │PROCESSOR│ net:allowlist
+                                          └────┬────┘
+                                               │  consent
+                                          ┌────▼────┐
+                                          │ WRITER  │ scoped perms
+                                          └─────────┘</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    subgraph Old[Monolithic]
+        A[Read+Fetch+Write]
+    end
+    subgraph New[Compartmentalized]
+        R[Reader] -->|consent| P[Processor]
+        P -->|consent| W[Writer]
+    end
+    Old --> New
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-yaml"># tool-manifest.yml
+email_reader:
+  capabilities: [private_data, untrusted_input]
+  permissions:
+    fs: read-only:/mail
+    net: none
+issue_creator:
+  capabilities: [external_comm]
+  permissions:
+    net: allowlist:github.com</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Mix-and-match tools combining data readers, web fetchers, and writers amplify prompt-injection attack chains.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Split tools into reader/processor/writer micro-tools with isolated permissions and explicit per-call consent.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Tools handle private data</li>
+          <li>Multiple capability types combined</li>
+          <li>Security is high priority</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Fine-grained security control</li>
+              <li>Plays well with modular architectures</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>More tooling overhead</li>
+              <li>Permission creep over time</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

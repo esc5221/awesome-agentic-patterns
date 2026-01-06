@@ -1,0 +1,98 @@
+<article class="pattern-card" data-pattern="inference-healed-code-review-reward">
+  <div class="pattern-header">
+    <h2>Inference-Healed Code Review Reward</h2>
+    <span class="tag" data-i18n="category">Feedback Loops</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">             ┌── Correctness ──▶ 1.0 ──┐
+             │                         │
+Patch ──▶ Critic ─── Style ──────▶ 0.8 ──┼──▶ Weighted ──▶ 0.7
+             │                         │      Sum
+             ├── Performance ──▶ 0.4 ──┤
+             │                         │
+             └── Security ────▶ 0.6 ──┘
+
++ CoT: "O(n^2) loop caused perf regression"</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Patch] --> B[Critic]
+    B --> C[Correctness: 1.0]
+    B --> D[Style: 0.8]
+    B --> E[Performance: 0.4]
+    B --> F[Security: 0.6]
+    C & D & E & F --> G[Weighted Sum: 0.7]
+    G --> H[Feedback + Comments]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">subscores = {
+    "correctness": test_critic.score(patch),
+    "style": linter_critic.score(patch),
+    "performance": perf_critic.score(patch),
+    "security": security_critic.score(patch),
+}
+final = sum(w[k]*subscores[k] for k in subscores)
+return final, subscores, "O(n^2) loop detected"</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Binary 'tests passed' rewards miss nuanced code quality issues like performance regressions, style violations, and security problems.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Use a multi-criteria code review critic that decomposes quality into subcriteria (correctness, style, perf, security) with explainable subscores.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>RL-based code generation agents</li>
+          <li>When code quality beyond correctness matters</li>
+          <li>Continuous improvement of code agents</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Explainable feedback for targeted fixes</li>
+              <li>Higher code quality via non-functional criteria</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Compute overhead</li>
+              <li>Critic model maintenance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

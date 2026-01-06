@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Simultaneous research, planning, and implementation causes context contamination and degraded output.",
+  "solution": "Break workflow into isolated phases (Research, Plan, Execute) with clean handoffs of distilled conclusions.",
+  "when": [
+    "Complex features needing background research",
+    "Refactoring projects with architectural decisions",
+    "Mixing research and implementation hurts quality"
+  ],
+  "pros": [
+    "Higher quality per phase",
+    "Prevents context contamination",
+    "Leverages model-specific strengths"
+  ],
+  "cons": [
+    "Requires explicit phase management",
+    "Feels slower for simple tasks",
+    "Higher total token usage"
+  ]
+}

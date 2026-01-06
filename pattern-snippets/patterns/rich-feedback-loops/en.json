@@ -1,0 +1,18 @@
+{
+  "category": "Feedback Loops",
+  "problem": "Polishing a single prompt can't cover every edge case. Agents need ground truth to self-correct",
+  "solution": "Expose iterative, machine-readable feedback (compiler errors, test failures, lint) after every tool call. Agent uses diagnostics to self-debug",
+  "when": [
+    "Code generation tasks",
+    "Any task with verifiable output",
+    "When tests/linters are available"
+  ],
+  "pros": [
+    "Emergent self-debugging",
+    "Better than bigger prompts"
+  ],
+  "cons": [
+    "Requires feedback infrastructure",
+    "More iterations = more tokens"
+  ]
+}

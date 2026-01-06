@@ -1,0 +1,18 @@
+{
+  "category": "Learning & Adaptation",
+  "problem": "Agents solve similar problems across sessions but must rediscover solutions each time, wasting tokens",
+  "solution": "Persist working code as reusable functions in skills/ directory. Over time, evolve into documented, tested capabilities",
+  "when": [
+    "Repetitive problem-solving across sessions",
+    "Organization wants agents to build capability over time",
+    "Code reuse is valuable"
+  ],
+  "pros": [
+    "Builds agent capability over time",
+    "Reduces token consumption"
+  ],
+  "cons": [
+    "Requires discipline to organize",
+    "Skills can become stale"
+  ]
+}

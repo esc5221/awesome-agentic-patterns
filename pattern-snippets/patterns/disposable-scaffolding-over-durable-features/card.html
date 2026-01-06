@@ -1,0 +1,102 @@
+<article class="pattern-card" data-pattern="disposable-scaffolding-over-durable-features">
+  <div class="pattern-header">
+    <h2>Disposable Scaffolding Over Durable Features</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">┌─────────────────────────────────────────────────┐
+│           THE BITTER LESSON CYCLE               │
+│                                                 │
+│  New Model ──▶ Eval Scaffolding ──▶ Obsolete?  │
+│       ▲               │                │        │
+│       │          Still needed?     Discard      │
+│       │               │                │        │
+│       │          ──▶ Keep minimal ◀────┘        │
+│       └─────────────────────────────────────────│
+│                                                 │
+│  Mindset: Build simple, throw away, repeat     │
+└─────────────────────────────────────────────────┘</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[New Model Release] --> B{Eval Scaffolding}
+    B -->|Obsolete| C[Discard]
+    B -->|Still needed| D[Keep minimal]
+    C --> E[Rebuild lightweight]
+    D --> E
+    E --> F[Focus on core value]
+    F --> A
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Instead of 3-month robust solution:
+def quick_context_compressor(text):
+    """Expect this to be obsolete by Q2"""
+    return simple_summarize(text)
+
+# Focus engineering on unique value
+# that won't "fall into the model"</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Complex features built around models become obsolete when next-gen models perform those tasks natively.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Treat tooling as temporary scaffolding; build simplest solutions expecting they will be discarded.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Building model-compensating features</li>
+          <li>Rapid model improvement cycles</li>
+          <li>Need product agility over long-term investment</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Fast adaptation to new models</li>
+              <li>Lower engineering investment risk</li>
+              <li>Focus on unique value, not workarounds</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>May feel wasteful</li>
+              <li>Requires discipline to avoid over-engineering</li>
+              <li>Tech debt accumulates if not cleaned</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

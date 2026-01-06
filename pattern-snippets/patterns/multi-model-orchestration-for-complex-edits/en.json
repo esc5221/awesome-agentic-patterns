@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "A single model may not be optimal for all sub-tasks in complex operations like multi-file code editing.",
+  "solution": "Pipeline multiple specialized models: retrieval model for context, generation model for edits, and application model for changes.",
+  "when": [
+    "Multi-file code editing tasks",
+    "Complex operations requiring different skills",
+    "Tasks with distinct retrieval, generation, and application phases"
+  ],
+  "pros": [
+    "Leverages each model's strengths",
+    "More robust outcomes than single model"
+  ],
+  "cons": [
+    "Orchestration complexity",
+    "Latency from multiple model calls"
+  ]
+}

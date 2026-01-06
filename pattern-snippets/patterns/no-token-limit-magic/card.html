@@ -1,0 +1,90 @@
+<article class="pattern-card" data-pattern="no-token-limit-magic">
+  <div class="pattern-header">
+    <h2>No-Token-Limit Magic</h2>
+    <span class="tag" data-i18n="category">Reliability & Eval</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">PROTOTYPE PHASE                    PRODUCTION PHASE
+    │                                    │
+    ▼                                    ▼
+[No Limits] ──▶ [Rich Output] ──▶ [Pattern Discovery] ──▶ [Optimized]
+    │               │                    │                    │
+ $$$$$           Quality             Insights              $</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Prototype: No Limits] --> B[Rich Output]
+    B --> C[Pattern Discovery]
+    C --> D[Production: Optimized]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Prototype: no limits
+config = {
+    "max_tokens": None,  # Unlimited
+    "reasoning_passes": 5,
+    "self_correction": True
+}
+# Find patterns, then optimize later</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Aggressive prompt compression to save tokens stifles reasoning depth and self-correction capabilities.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">During prototyping, remove hard token limits. Allow lavish context and multiple reasoning passes to discover valuable patterns.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Prototyping and experimentation phase</li>
+          <li>Discovering optimal reasoning patterns</li>
+          <li>Tasks requiring deep self-correction</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Dramatically better output quality</li>
+              <li>Surfaces valuable patterns for optimization</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Higher cost during prototyping</li>
+              <li>Not suitable for production without optimization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

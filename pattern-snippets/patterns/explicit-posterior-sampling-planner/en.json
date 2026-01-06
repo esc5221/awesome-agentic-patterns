@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Agents relying on ad-hoc heuristics explore poorly, wasting tokens and API calls on dead ends.",
+  "solution": "Embed PSRL algorithm: maintain Bayesian posterior over task models, sample model, compute optimal plan, execute, update posterior.",
+  "when": [
+    "Exploration-heavy tasks",
+    "Multi-step decision making",
+    "Need principled exploration"
+  ],
+  "pros": [
+    "Principled exploration",
+    "Efficient token usage",
+    "Theoretical guarantees"
+  ],
+  "cons": [
+    "Implementation complexity",
+    "Posterior computation cost",
+    "Requires RL expertise"
+  ]
+}

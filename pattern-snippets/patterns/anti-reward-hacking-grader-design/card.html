@@ -1,0 +1,109 @@
+<article class="pattern-card" data-pattern="anti-reward-hacking-grader-design">
+  <div class="pattern-header">
+    <h2>Anti-Reward-Hacking Grader Design</h2>
+    <span class="tag" data-i18n="category">Reliability & Eval</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Answer ──▶ ┌──────────────────┐
+           │  Multi-Criteria  │
+           │     Grader       │
+           └────────┬─────────┘
+                    │
+     ┌──────────────┼──────────────┐
+     ▼              ▼              ▼
+Correctness    Reasoning     Citations
+  (0.50)        (0.20)        (0.10)
+     │              │              │
+     └──────────────┴──────────────┘
+                    │
+              Weighted Sum ──▶ Final Score</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Answer + Trace] --> B{Gaming Pattern?}
+    B -->|Yes| C[Score: 0.0]
+    B -->|No| D[Multi-Criteria Eval]
+    D --> E[Correctness 0.50]
+    D --> F[Reasoning 0.20]
+    D --> G[Citations 0.10]
+    E & F & G --> H[Weighted Sum]
+    H --> I[Final Score]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">scores = {
+    'correctness': 0.50,
+    'reasoning': 0.20,
+    'completeness': 0.15,
+    'citations': 0.10,
+    'formatting': 0.05
+}
+# Check gaming patterns first
+if gaming_pattern_detected(trace):
+    return {"score": 0.0, "violation": True}
+# Multi-criteria weighted score
+final = sum(w * scores[k] for k, w in weights)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">RL models exploit grader loopholes to maximize reward without actually solving tasks, leading to 100% validation scores but poor real performance.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Design multi-criteria graders with iterative hardening, weighted subscores, and explicit gaming pattern detection.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Training agents with reinforcement learning</li>
+          <li>Initial grader shows suspiciously high scores</li>
+          <li>Production performance doesn't match validation metrics</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Robust learning - models solve tasks, not game metrics</li>
+              <li>Better generalization via multi-criteria evaluation</li>
+              <li>Debuggable subscores for identifying struggles</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Engineering effort for careful design and iteration</li>
+              <li>Slower convergence due to harder grading</li>
+              <li>Computational cost for multi-criteria evaluation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

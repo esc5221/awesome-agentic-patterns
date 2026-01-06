@@ -1,0 +1,100 @@
+<article class="pattern-card" data-pattern="team-shared-agent-configuration">
+  <div class="pattern-header">
+    <h2>Team-Shared Agent Configuration</h2>
+    <span class="tag" data-i18n="category">UX & Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">                    ┌─────────────────────────┐
+                    │   .claude/settings.json │
+                    │   (version controlled)  │
+                    └───────────┬─────────────┘
+                                │
+         ┌──────────────────────┼──────────────────────┐
+         │                      │                      │
+         ▼                      ▼                      ▼
+    [Dev A] ──▶ git pull ──▶ [Dev B] ──▶ git pull ──▶ [Dev C]
+         │                      │                      │
+         └──────────────────────┴──────────────────────┘
+                    Same Config Everywhere</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    R[settings.json in Git] --> A[Dev A]
+    R --> B[Dev B]
+    R --> C[Dev C]
+    A --> |git pull| R
+    B --> |git pull| R
+    C --> |git pull| R
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-json">// .claude/settings.json
+{
+  "permissions": {
+    "pre_allowed": ["git add", "npm test"],
+    "blocked_paths": [".env", "secrets/"]
+  },
+  "hooks": { "pre_commit": "./run_tests.sh" }
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Independent agent configs per developer cause inconsistent behavior, permission friction, and duplicated effort across the team.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Store agent configuration in version control as code, enabling team-wide sharing via git pull.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Multiple team members use AI agents</li>
+          <li>Consistent agent behavior is critical</li>
+          <li>New members need quick onboarding</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Consistent team experience</li>
+              <li>Faster onboarding</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Less individual flexibility</li>
+              <li>Config sprawl over time</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

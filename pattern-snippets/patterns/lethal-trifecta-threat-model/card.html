@@ -1,0 +1,91 @@
+<article class="pattern-card" data-pattern="lethal-trifecta-threat-model">
+  <div class="pattern-header">
+    <h2>Lethal Trifecta Threat Model</h2>
+    <span class="tag" data-i18n="category">Reliability & Eval</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">    [Private Data]
+         /    \
+        /      \
+[Untrusted] ─── [External Comm]
+
+All 3 = DANGER! Block at least one circle.</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TB
+    A[Private Data] --- B[Untrusted Input]
+    B --- C[External Comm]
+    C --- A
+    style A fill:#ffcccc
+    style B fill:#ffcccc
+    style C fill:#ffcccc
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Pre-execution policy check
+if (tool.can_externally_communicate and
+    tool.accesses_private_data and
+    input_source == "untrusted"):
+    raise SecurityError("Lethal trifecta!")</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Combining private data + untrusted input + external communication enables prompt injection data exfiltration.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Audit every tool for these 3 capabilities and guarantee at least one is blocked in any execution path.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Agents with tool access</li>
+          <li>Processing untrusted data</li>
+          <li>Security-critical systems</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Simple mental model</li>
+              <li>Eliminates attack class</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Limits all-in-one agents</li>
+              <li>Capability tagging effort</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

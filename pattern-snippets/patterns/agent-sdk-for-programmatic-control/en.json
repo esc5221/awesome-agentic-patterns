@@ -1,0 +1,18 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Interactive interfaces don't support CI/CD pipelines, scheduled jobs, or custom application integration.",
+  "solution": "Provide SDK (CLI, Python, TypeScript) exposing agent actions for programmatic access and automation.",
+  "when": [
+    "CI/CD integration needed",
+    "Building custom applications",
+    "Batch processing workflows"
+  ],
+  "pros": [
+    "Enables automation pipelines",
+    "Flexible integration options"
+  ],
+  "cons": [
+    "Learning curve for SDK",
+    "May require API key management"
+  ]
+}

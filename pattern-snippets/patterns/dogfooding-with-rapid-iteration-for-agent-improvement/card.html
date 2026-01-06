@@ -1,0 +1,103 @@
+<article class="pattern-card" data-pattern="dogfooding-with-rapid-iteration-for-agent-improvement">
+  <div class="pattern-header">
+    <h2>Dogfooding with Rapid Iteration</h2>
+    <span class="tag" data-i18n="category">Feedback Loops</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">┌─────────────────────────────────────────────┐
+│              DOGFOODING LOOP                │
+└─────────────────────────────────────────────┘
+
+Build ──▶ Use Daily ──▶ Find Issues ──▶ Fix Fast
+  ▲                                        │
+  └────────────────────────────────────────┘
+
+Team(70-80%) ──▶ Feedback(5min) ──▶ Iterate</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    participant D as Dev Team
+    participant A as AI Agent
+    participant F as Feedback Channel
+    D->>A: Use for daily tasks
+    A-->>D: Pain points discovered
+    D->>F: Report issue (every 5min)
+    F->>D: Prioritize fix
+    D->>A: Deploy improvement
+    Note over D,A: Tight loop repeats
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Anthropic "ant-fooding" approach
+team_adoption = 0.80  # 80% daily usage
+feedback_interval = "5min"
+
+# Feature validation flow
+feature = push_to_internal()
+feedback = collect_team_feedback(feature)
+if not feedback.positive:
+    unship(feature)  # Fast pivot</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">External feedback loops are slow and simulated environments miss real-world nuances for agent improvement.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Development team uses their own AI agent daily, creating tight feedback loops for rapid iteration and honest assessment.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Building AI-assisted dev tools</li>
+          <li>Need rapid feature validation</li>
+          <li>Team wants unfiltered feedback</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Direct, immediate feedback</li>
+              <li>Real-world problem testing</li>
+              <li>Fast iteration cycles</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>May bias toward developer needs</li>
+              <li>Internal users != all users</li>
+              <li>Requires team adoption commitment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

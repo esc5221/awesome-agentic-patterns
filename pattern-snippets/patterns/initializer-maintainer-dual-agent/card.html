@@ -1,0 +1,107 @@
+<article class="pattern-card" data-pattern="initializer-maintainer-dual-agent">
+  <div class="pattern-header">
+    <h2>Initializer-Maintainer Dual Agent</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">┌─── ONCE ─────────────────────────────────┐
+│ Initializer ──▶ features.json            │
+│              ──▶ init.sh                 │
+│              ──▶ progress.txt            │
+│              ──▶ First Commit            │
+└──────────────────────────────────────────┘
+                    ▼
+┌─── EACH SESSION ─────────────────────────┐
+│ Maintainer ──▶ Read git/progress         │
+│            ──▶ Select next feature       │
+│            ──▶ Implement + Test          │
+│            ──▶ Commit + Update progress  │
+└──────────────────────────────────────────┘</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    participant Init as Initializer
+    participant FS as Filesystem
+    participant Code as Coding Agent
+    Note over Init: Runs ONCE
+    Init->>FS: feature-list.json
+    Init->>FS: init.sh, progress.txt
+    Note over Code: Runs EACH session
+    loop Session N
+        Code->>FS: Read progress
+        Code->>Code: Implement feature
+        Code->>FS: Update & commit
+    end
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash"># Initializer creates foundation
+project/
+  feature-list.json  # All features, passes=false
+  progress.txt       # Running log
+  init.sh            # One-command bootstrap
+
+# Maintainer session ritual
+$ ./init.sh && read_progress && implement_next</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Single-agent approaches either over-engineer each session (wasting setup time) or under-invest in foundations (causing drift and confusion).</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Use two specialized agents: Initializer creates foundations once (features, env, tracking); Maintainer handles incremental development across sessions.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Projects requiring many sessions</li>
+          <li>Complex applications with 50+ features</li>
+          <li>When context loss is costly</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Clear separation of setup vs execution</li>
+              <li>Prevents context loss across sessions</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires upfront specification</li>
+              <li>Two configs to maintain</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

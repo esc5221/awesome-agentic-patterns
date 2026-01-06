@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic Patterns (Dev)</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Mermaid -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <!-- Highlight.js - github theme -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+  <!-- Fira Code font -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+    code, pre code, .hljs {
+      font-family: 'Fira Code', 'JetBrains Mono', monospace;
+      font-feature-settings: "liga" 1;
+    }
+
+    @supports (font-variation-settings: normal) {
+      code, pre code, .hljs {
+        font-family: 'Fira Code VF', 'JetBrains Mono', monospace;
+      }
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+    }
+
+    .error {
+      text-align: center;
+      padding: 2rem;
+      color: #dc2626;
+    }
+
+    .dev-banner {
+      background: #fef3c7;
+      color: #92400e;
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="dev-banner">Development Mode - Dynamic Loading</div>
+
+  <header class="header">
+    <div class="header-content">
+      <div class="header-left">
+        <h1>Agentic Patterns</h1>
+        <p class="subtitle">AI 에이전트 설계 패턴 레퍼런스</p>
+      </div>
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ko">KO</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <aside class="sidebar">
+      <nav class="toc" id="toc-container"></nav>
+    </aside>
+
+    <main class="container" id="patterns-container"></main>
+  </div>
+
+  <footer class="footer">
+    <p>Source: <a href="https://github.com/nibzard/awesome-agentic-patterns">awesome-agentic-patterns</a></p>
+  </footer>
+
+  <script>
+    // Mermaid init
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#e8f0fe',
+        primaryTextColor: '#222',
+        primaryBorderColor: '#375EAB',
+        lineColor: '#666',
+        secondaryColor: '#f8f8f8',
+        tertiaryColor: '#fff',
+        background: '#fff',
+        mainBkg: '#f8f8f8',
+        textColor: '#444',
+        fontSize: '11px'
+      }
+    });
+  </script>
+  <script src="loader.js"></script>
+</body>
+</html>

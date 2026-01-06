@@ -1,0 +1,90 @@
+<article class="pattern-card" data-pattern="self-rewriting-meta-prompt-loop">
+  <div class="pattern-header">
+    <h2>Self-Rewriting Meta-Prompt Loop</h2>
+    <span class="tag" data-i18n="category">Orchestration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Episode ──▶ Reflect ──▶ Draft Delta ──▶ Validate ──┐
+                                                    │
+              ┌────────────────────────────────────-┘
+              ▼
+        [System Prompt v1] ──▶ [System Prompt v2] ──▶ Next Episode</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Episode] --> B[Reflect]
+    B --> C[Draft Edits]
+    C --> D{Validate}
+    D -->|Pass| E[Update Prompt]
+    D -->|Fail| B
+    E --> F[Next Episode]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">dialogue = run_episode()
+delta = LLM("Propose prompt edits", dialogue)
+if passes_guardrails(delta):
+    system_prompt += delta
+    save(system_prompt)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Static system prompts become stale as agents encounter new tasks and edge cases</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Let the agent rewrite its own system prompt after each interaction through reflection and validation</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Agent encounters recurring failures</li>
+          <li>Prompt needs frequent minor tweaks</li>
+          <li>Continuous learning without human intervention</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Rapid adaptation to new scenarios</li>
+              <li>No human in the loop for minor tweaks</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Risk of drift or jailbreak</li>
+              <li>Requires strong guardrails</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

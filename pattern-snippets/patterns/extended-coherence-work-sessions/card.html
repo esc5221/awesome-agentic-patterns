@@ -1,0 +1,100 @@
+<article class="pattern-card" data-pattern="extended-coherence-work-sessions">
+  <div class="pattern-header">
+    <h2>Extended Coherence Work Sessions</h2>
+    <span class="tag" data-i18n="category">Reliability & Eval</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Coherence Window Evolution:
+
+Early:  [██░░░░░░░░░░░░░░░░░░]  ~5 min
+        └─ loses track quickly
+
+Current: [██████████████░░░░░░]  ~hours
+         └─ sustained focus
+
+Future:  [████████████████████]  all-day
+         └─ human-equivalent</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+gantt
+    title Agent Coherence Over Time
+    dateFormat X
+    axisFormat %s
+    section Early Models
+    Short coherence :done, 0, 300
+    section Current
+    Extended coherence :active, 300, 10800
+    section Future
+    All-day coherence :future, 10800, 86400
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Coherence doubles every 7 months
+agent = ExtendedCoherenceAgent(
+    context_window="200K tokens",
+    state_management="persistent",
+    session_length="hours"
+)
+# Can now handle multi-hour projects</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Early AI agents lose coherence after a few minutes, limiting their utility for complex multi-stage tasks requiring sustained effort.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Use models and architectures designed to maintain coherence over hours through larger context windows and better state management.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Complex multi-step projects (hours of work)</li>
+          <li>Tasks requiring sustained context across stages</li>
+          <li>Prolonged problem-solving sessions</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Enables human-equivalent work sessions</li>
+              <li>Handles complex, multi-stage tasks</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires advanced model architecture</li>
+              <li>Higher computational cost</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

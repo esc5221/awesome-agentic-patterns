@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Single poisoned document can manipulate global reasoning if all data processed in one context.",
+  "solution": "Map: sandboxed LLMs process each doc independently. Reduce: aggregate only sanitized outputs.",
+  "when": [
+    "Processing untrusted docs",
+    "File triage/classification",
+    "N-to-1 decisions"
+  ],
+  "pros": [
+    "Poisoned item isolated",
+    "Scalable parallelism"
+  ],
+  "cons": [
+    "Output validation needed",
+    "Orchestration overhead"
+  ]
+}

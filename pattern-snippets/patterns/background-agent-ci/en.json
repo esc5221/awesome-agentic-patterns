@@ -1,0 +1,19 @@
+{
+  "category": "Feedback Loops",
+  "problem": "Long-running tasks tie up the editor and require developers to babysit the agent throughout execution.",
+  "solution": "Run agent asynchronously: push branch, wait for CI, ingest pass/fail output, iterate automatically, and notify when green.",
+  "when": [
+    "Long-running upgrade or refactoring tasks",
+    "Developer wants to work on other things",
+    "Mobile kick-offs (e.g., fix tests while away)"
+  ],
+  "pros": [
+    "Developer freed from babysitting",
+    "Uses existing CI as feedback loop",
+    "Fully autonomous iteration"
+  ],
+  "cons": [
+    "Requires CI integration and permissions",
+    "May iterate on wrong direction without oversight"
+  ]
+}

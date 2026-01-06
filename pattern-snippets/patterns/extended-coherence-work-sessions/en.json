@@ -1,0 +1,20 @@
+{
+  "category": "Reliability & Eval",
+  "problem": "Early AI agents lose coherence after a few minutes, limiting their utility for complex multi-stage tasks requiring sustained effort.",
+  "solution": "Use models and architectures designed to maintain coherence over hours through larger context windows and better state management.",
+  "when": [
+    "Complex multi-step projects (hours of work)",
+    "Tasks requiring sustained context across stages",
+    "Prolonged problem-solving sessions"
+  ],
+  "pros": [
+    "Enables human-equivalent work sessions",
+    "Handles complex, multi-stage tasks",
+    "Rapidly improving capability"
+  ],
+  "cons": [
+    "Requires advanced model architecture",
+    "Higher computational cost",
+    "Still evolving technology"
+  ]
+}

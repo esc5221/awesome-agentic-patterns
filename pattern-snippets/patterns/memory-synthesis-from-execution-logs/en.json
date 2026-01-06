@@ -1,0 +1,18 @@
+{
+  "category": "Context & Memory",
+  "problem": "Task logs contain valuable learnings but are too specific; hard to know which patterns generalize.",
+  "solution": "Write structured task diaries, then periodically synthesize across logs to extract reusable patterns.",
+  "when": [
+    "Recurring task types",
+    "Learning from failures",
+    "Building organizational memory"
+  ],
+  "pros": [
+    "Pattern discovery",
+    "Evidence-backed rules"
+  ],
+  "cons": [
+    "Storage overhead",
+    "False pattern risk"
+  ]
+}

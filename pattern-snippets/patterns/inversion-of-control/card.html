@@ -1,0 +1,99 @@
+<article class="pattern-card" data-pattern="inversion-of-control">
+  <div class="pattern-header">
+    <h2>Inversion of Control</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Human: "Refactor UploadService to async"
+       │
+       ▼
+┌─────────────────────────────────────────┐
+│          Agent Decides HOW              │
+│  ┌─────┐   ┌─────┐   ┌─────┐           │
+│  │grep │──▶│edit │──▶│test │──▶ ...    │
+│  └─────┘   └─────┘   └─────┘           │
+│      (Agent orchestrates 87%)           │
+└─────────────────────────────────────────┘
+       │
+       ▼
+Human: Review PR (3%)</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    Dev->>Agent: "Refactor UploadService to async"
+    Agent->>Repo: git grep "UploadService"
+    Agent->>Tools: edit_file
+    Agent->>Tools: run_tests
+    Agent-->>Dev: PR with green CI
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Human provides goal, not steps
+agent.run(
+    goal="Refactor UploadService to async",
+    tools=[grep, edit_file, run_tests, git],
+    guardrails=["no prod DB access", "tests must pass"]
+)
+# Agent decides: grep -> analyze -> edit -> test -> PR</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Traditional 'prompt-as-puppeteer' workflows force humans to spell out every step, limiting scale and creativity.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Give the agent tools plus a high-level goal and let it decide orchestration. Humans supply guard-rails (10%) while agent handles execution (87%).</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Complex tasks with unclear sequence</li>
+          <li>Agent has necessary tools</li>
+          <li>Human oversight available</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Scales without step-by-step prompting</li>
+              <li>Unleashes agent creativity</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires trust in agent judgment</li>
+              <li>May take unexpected paths</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,90 @@
+<article class="pattern-card" data-pattern="layered-configuration-context">
+  <div class="pattern-header">
+    <h2>Layered Configuration Context</h2>
+    <span class="tag" data-i18n="category">Context & Memory</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Enterprise ──┐
+  ~/.claude ─┼──▶ Merge ──▶ Agent Context
+   project/ ─┤
+    .local ──┘
+
+Priority: local > project > user > enterprise</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    E[Enterprise] --> M[Merge]
+    U[User Global] --> M
+    P[Project] --> M
+    L[Local] --> M
+    M --> C[Context Window]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash"># Auto-discovered hierarchy
+/enterprise/CLAUDE.md    # Org policies
+~/.claude/CLAUDE.md      # User prefs
+./CLAUDE.md              # Project rules
+./CLAUDE.local.md        # Personal overrides</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Manually providing context in every prompt is cumbersome; global context is too broad or narrow.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Auto-discover and merge layered config files (enterprise, user, project, local) by filesystem hierarchy.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Multi-project environments</li>
+          <li>Team-wide policies</li>
+          <li>Personal customization</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Zero manual context</li>
+              <li>Scoped customization</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Merge conflicts</li>
+              <li>Discovery complexity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

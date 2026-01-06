@@ -1,0 +1,87 @@
+<article class="pattern-card" data-pattern="multi-model-orchestration-for-complex-edits">
+  <div class="pattern-header">
+    <h2>Multi-Model Orchestration for Complex Edits</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User Request ──▶ Retrieval Model ──▶ Generation Model ──▶ Apply Model ──▶ Done
+                     │                    │                   │
+                 (context)            (edits)            (patches)</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[User Request] --> B[Retrieval Model]
+    B --> C[Generation Model]
+    C --> D[Apply Model]
+    D --> E[Edited Codebase]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Multi-model pipeline
+context = retrieval_model.gather(codebase)
+edits = generation_model.generate(
+    context, user_request
+)  # Claude Sonnet
+apply_model.patch(edits)  # Custom</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">A single model may not be optimal for all sub-tasks in complex operations like multi-file code editing.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Pipeline multiple specialized models: retrieval model for context, generation model for edits, and application model for changes.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Multi-file code editing tasks</li>
+          <li>Complex operations requiring different skills</li>
+          <li>Tasks with distinct retrieval, generation, and application phases</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Leverages each model's strengths</li>
+              <li>More robust outcomes than single model</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Orchestration complexity</li>
+              <li>Latency from multiple model calls</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,106 @@
+<article class="pattern-card" data-pattern="background-agent-ci">
+  <div class="pattern-header">
+    <h2>Background Agent with CI Feedback</h2>
+    <span class="tag" data-i18n="category">Feedback Loops</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Dev ──▶ Agent: "Upgrade to React 19"
+              │
+              ▼
+        [Push Branch] ──▶ CI Tests
+              │               │
+              │◀──── 12 fails ┘
+              ▼
+        [Patch imports]
+              │
+              ▼
+        [Re-run CI] ──▶ All Green
+              │
+              ▼
+        Agent ──▶ Dev: "PR ready!"</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    Dev->>Agent: "Upgrade to React 19"
+    Agent->>Git: push branch
+    Agent-->>CI: trigger tests
+    CI-->>Agent: 12 failures
+    Agent->>Files: patch imports
+    Agent-->>CI: re-run
+    CI-->>Agent: all green
+    Agent-->>Dev: PR ready
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash"># Agent runs in background
+git checkout -b react19-upgrade
+# Make changes...
+git push origin react19-upgrade
+
+# CI runs automatically
+# Agent polls for results
+# On failure: patch and retry
+# On success: notify developer</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Long-running tasks tie up the editor and require developers to babysit the agent throughout execution.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Run agent asynchronously: push branch, wait for CI, ingest pass/fail output, iterate automatically, and notify when green.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Long-running upgrade or refactoring tasks</li>
+          <li>Developer wants to work on other things</li>
+          <li>Mobile kick-offs (e.g., fix tests while away)</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Developer freed from babysitting</li>
+              <li>Uses existing CI as feedback loop</li>
+              <li>Fully autonomous iteration</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires CI integration and permissions</li>
+              <li>May iterate on wrong direction without oversight</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

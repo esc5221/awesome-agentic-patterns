@@ -1,0 +1,20 @@
+{
+  "category": "Feedback Loops",
+  "problem": "Linear Chain-of-Thought reasoning cannot handle problems with complex interdependencies requiring paths that merge, split, and recombine.",
+  "solution": "Represent reasoning as a directed graph where thoughts can branch, aggregate, refine, and loop back for iterative improvement.",
+  "when": [
+    "Complex problems with interdependent reasoning steps",
+    "Tasks requiring insight aggregation from multiple paths",
+    "Problems needing iterative refinement and backtracking"
+  ],
+  "pros": [
+    "Handles non-linear reasoning patterns",
+    "Combines insights from multiple paths",
+    "Supports backtracking and refinement"
+  ],
+  "cons": [
+    "Significantly higher computational cost",
+    "Complex to implement and debug",
+    "Overkill for simple problems"
+  ]
+}

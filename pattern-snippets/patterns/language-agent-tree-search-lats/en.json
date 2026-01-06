@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Linear reasoning (ReACT) gets stuck in local optima on complex tasks requiring strategic exploration.",
+  "solution": "Apply Monte Carlo Tree Search (MCTS) with LLM for action generation, evaluation, and backpropagation.",
+  "when": [
+    "Multi-step reasoning",
+    "Strategic planning",
+    "Multiple valid approaches"
+  ],
+  "pros": [
+    "Systematic exploration",
+    "Outperforms ReACT"
+  ],
+  "cons": [
+    "High LLM call cost",
+    "Parameter tuning"
+  ]
+}

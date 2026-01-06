@@ -1,0 +1,90 @@
+<article class="pattern-card" data-pattern="code-then-execute-pattern">
+  <div class="pattern-header">
+    <h2>Code-Then-Execute Pattern</h2>
+    <span class="tag" data-i18n="category">Tool Use & Environment</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">LLM ──▶ [Write DSL] ──▶ Static Check ──▶ Sandbox Run
+             │              │                │
+        ┌────┴────┐    ┌────┴────┐      ┌────┴────┐
+        │ x=read  │    │ taint   │      │ locked  │
+        │ y=proc  │───▶│ verify  │─────▶│ execute │
+        │ z=write │    │ flows   │      │         │
+        └─────────┘    └─────────┘      └─────────┘</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[LLM] --> B[Write DSL Code]
+    B --> C[Static Checker]
+    C --> D[Taint Verify]
+    D --> E[Sandbox Execute]
+    E --> F[Results]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">DSL Example</span>
+        </div>
+        <pre><code class="language-python">x = calendar.read(today)
+y = QuarantineLLM.format(x)
+email.write(to="john@acme.com", body=y)
+# Static check: tainted var can't reach recipient</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Plan lists are opaque; need full data-flow analysis and taint tracking for security</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">LLM outputs sandboxed program/DSL. Static checker verifies flows, interpreter runs in locked sandbox</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Complex multi-step agents</li>
+          <li>SQL copilots</li>
+          <li>Software engineering bots</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Formal verifiability</li>
+              <li>Replay logs for audit</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires DSL design</li>
+              <li>Static analysis infrastructure</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

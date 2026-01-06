@@ -1,0 +1,18 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Complex agents behave like black boxes; users cannot understand why decisions were made or debug unexpected behavior.",
+  "solution": "Provide on-demand verbose mode (e.g., Ctrl+R) showing reasoning steps, tool selection rationale, and raw outputs.",
+  "when": [
+    "Debugging unexpected agent behavior",
+    "Building trust in agent decisions",
+    "Learning effective prompting"
+  ],
+  "pros": [
+    "Better debugging and trust",
+    "Helps users improve prompts"
+  ],
+  "cons": [
+    "Information overload risk",
+    "May expose internal complexity"
+  ]
+}

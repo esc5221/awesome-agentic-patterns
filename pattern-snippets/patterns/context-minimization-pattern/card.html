@@ -1,0 +1,90 @@
+<article class="pattern-card" data-pattern="context-minimization-pattern">
+  <div class="pattern-header">
+    <h2>Context-Minimization Pattern</h2>
+    <span class="tag" data-i18n="category">Context & Memory</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User Input ──▶ [Transform] ──▶ Safe Output
+    │              │
+    │         ┌────┴────┐
+    └────────▶│ REMOVE  │
+              │ tainted │
+              └─────────┘
+
+Context:  [████ tainted ████] → [██ clean ██]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[User Input] --> B[Transform]
+    B --> C[Remove Input]
+    C --> D[Execute]
+    D --> E[Summarize]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">sql = LLM("to SQL", user_prompt)
+remove(user_prompt)  # tainted tokens gone
+rows = db.query(sql)
+answer = LLM("summarize", rows)  # clean context</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">User-supplied text lingers in context, enabling it to influence later generations and potentially inject malicious instructions</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Purge untrusted segments after transforming into safe intermediate. Later reasoning sees only trusted data</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Customer service chat</li>
+          <li>Medical Q&A systems</li>
+          <li>Multi-turn flows where input shouldn't steer later steps</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Simple, no extra models</li>
+              <li>Prevents prompt injection</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Loses conversational nuance</li>
+              <li>May hurt UX if too aggressive</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

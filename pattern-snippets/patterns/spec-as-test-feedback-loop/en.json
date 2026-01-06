@@ -1,0 +1,18 @@
+{
+  "category": "Feedback Loops",
+  "problem": "Implementations can drift from specs as code evolves, causing silent divergence",
+  "solution": "Auto-generate executable tests from specs and run on every commit, with agent-authored PRs for fixes",
+  "when": [
+    "Spec-first development workflows",
+    "Critical systems requiring spec-impl sync",
+    "Continuous integration environments"
+  ],
+  "pros": [
+    "Catches drift early",
+    "Keeps spec and impl in lock-step"
+  ],
+  "cons": [
+    "Heavy CI usage",
+    "False positives with loose spec wording"
+  ]
+}

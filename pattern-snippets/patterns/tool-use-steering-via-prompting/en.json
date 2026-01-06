@@ -1,0 +1,18 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Having tools available does not guarantee agents will use them appropriately, especially for custom or team-specific tools.",
+  "solution": "Guide tool selection via explicit prompts: direct invocation, teaching tool usage, implicit shortcuts, and deeper reasoning triggers.",
+  "when": [
+    "Custom or team-specific tools exist",
+    "Agent tool selection is suboptimal",
+    "Teaching new tool workflows"
+  ],
+  "pros": [
+    "Direct control over tool usage",
+    "Enables custom tool onboarding"
+  ],
+  "cons": [
+    "Requires prompt engineering",
+    "May reduce agent autonomy"
+  ]
+}

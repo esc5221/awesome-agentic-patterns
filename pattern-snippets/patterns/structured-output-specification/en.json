@@ -1,0 +1,18 @@
+{
+  "category": "Reliability & Eval",
+  "problem": "Free-form agent outputs are hard to validate, parse, and integrate with downstream systems",
+  "solution": "Constrain outputs using deterministic schemas (JSON Schema, Zod, Pydantic) enforced at generation time",
+  "when": [
+    "Multi-phase agent workflows",
+    "Classification/categorization tasks",
+    "Integration with databases or APIs"
+  ],
+  "pros": [
+    "Guaranteed parseable outputs",
+    "Type safety and validation"
+  ],
+  "cons": [
+    "Rigidity limits free-form responses",
+    "Schema evolution friction"
+  ]
+}

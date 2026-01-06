@@ -1,0 +1,92 @@
+<article class="pattern-card" data-pattern="skill-library-evolution">
+  <div class="pattern-header">
+    <h2>Skill Library Evolution</h2>
+    <span class="tag" data-i18n="category">Learning & Adaptation</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Ad-hoc ──▶ Save ──▶ Reusable ──▶ Documented ──▶ Capability
+  │         │          │            │              │
+  └─────────┴──────────┴────────────┴──────────────┘
+                    skills/
+              ├── sentiment.py
+              ├── pdf_convert.py
+              └── api_summary.py</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+graph LR
+    A[Ad-hoc Code] --> B[Save Working Solution]
+    B --> C[Reusable Function]
+    C --> D[Documented Skill]
+    D --> E[Agent Capability]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Concept</span>
+        </div>
+        <pre><code class="language-python"># Session 1: Save working solution
+with open("skills/sentiment.py", "w") as f:
+    f.write(working_code)
+
+# Session N: Reuse existing skill
+from skills.sentiment import analyze
+result = analyze(text)  # no rediscovery</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Agents solve similar problems across sessions but must rediscover solutions each time, wasting tokens</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Persist working code as reusable functions in skills/ directory. Over time, evolve into documented, tested capabilities</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Repetitive problem-solving across sessions</li>
+          <li>Organization wants agents to build capability over time</li>
+          <li>Code reuse is valuable</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Builds agent capability over time</li>
+              <li>Reduces token consumption</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires discipline to organize</li>
+              <li>Skills can become stale</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

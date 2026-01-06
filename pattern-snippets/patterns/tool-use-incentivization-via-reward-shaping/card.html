@@ -1,0 +1,90 @@
+<article class="pattern-card" data-pattern="tool-use-incentivization-via-reward-shaping">
+  <div class="pattern-header">
+    <h2>Tool Use Incentivization via Reward Shaping</h2>
+    <span class="tag" data-i18n="category">Feedback Loops</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Agent ──▶ compile() ──▶ [+1.0] ──▶ lint() ──▶ [+0.5]
+                │                       │
+                └───────────────────────┴──▶ test() ──▶ [+2.0]
+                                                         │
+                                              ∑ rewards ──▶ Policy Update</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Agent] --> B[compile]
+    B -->|+1| C[lint]
+    C -->|+0.5| D[test]
+    D -->|+2| E[Sum Rewards]
+    E --> F[Policy Update]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># RL step: shaped rewards for tool calls
+if action == "compile":
+    local_reward = 1 if compile_success else -0.5
+elif action == "run_tests":
+    local_reward = 2 if new_tests_passed else 0
+trajectory.append((state, action, local_reward))</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Agents underutilize tools (compilers, linters, tests) and default to internal thinking tokens instead of invoking external tools.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Provide dense shaped rewards for each intermediate tool invocation (+1 compile, +2 test pass) to guide policy toward tool usage.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>RL-based agent training</li>
+          <li>Tool use is underutilized</li>
+          <li>Sparse final rewards are insufficient</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Denser feedback guides step-by-step</li>
+              <li>Encourages tool adoption</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Reward engineering overhead</li>
+              <li>May game intermediate rewards</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

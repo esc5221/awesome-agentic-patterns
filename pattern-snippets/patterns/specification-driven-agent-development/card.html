@@ -1,0 +1,87 @@
+<article class="pattern-card" data-pattern="specification-driven-agent-development">
+  <div class="pattern-header">
+    <h2>Specification-Driven Agent Development</h2>
+    <span class="tag" data-i18n="category">Orchestration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Spec File ──▶ Parse ──▶ Task Graph ──▶ Scaffold
+   (MD/JSON)                            │
+                                        ▼
+                        Generated Code ◀── [links to spec clause]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Spec File] --> B[Parse Spec]
+    B --> C[Build Task Graph]
+    C --> D[Scaffold Code]
+    D --> E[Link to Spec Clauses]
+    E --> F[Iterate via Spec Edits]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">if new_feature_requested:
+    write_spec(update)
+    agent.sync_with(spec)
+# All artifacts link back to spec clauses</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Hand-crafted prompts leave room for ambiguity; agents can over-interpret or conflict with stakeholder intent</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Use a formal spec file as the agent's primary input and source of truth, iterating only by editing the spec</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Complex multi-step feature development</li>
+          <li>Audit-friendly, repeatable workflows</li>
+          <li>Team collaboration requiring clear contracts</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Repeatable, audit-friendly, easy diffing</li>
+              <li>Clear artifact traceability to spec</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Up-front spec writing effort</li>
+              <li>Ramp-up for teams new to spec formats</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

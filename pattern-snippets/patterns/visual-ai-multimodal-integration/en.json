@@ -1,0 +1,18 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Text-only agents miss critical visual information in images, videos, diagrams, and UI screenshots.",
+  "solution": "Integrate multimodal models (LMMs) to accept visual inputs, extract information, and combine with text for cross-modal reasoning.",
+  "when": [
+    "Tasks involve images or screenshots",
+    "UI debugging or visual analysis",
+    "Document/chart understanding"
+  ],
+  "pros": [
+    "Enables new visual task categories",
+    "More natural show-not-tell interaction"
+  ],
+  "cons": [
+    "Higher computational cost",
+    "Privacy concerns with visual data"
+  ]
+}

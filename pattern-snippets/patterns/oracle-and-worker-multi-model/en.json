@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Single model creates trade-off between capability and cost. Powerful models are expensive for routine tasks.",
+  "solution": "Two-tier system: fast Worker (Sonnet) handles bulk tasks, expensive Oracle (o3/Gemini) reserved for high-level reasoning and debugging.",
+  "when": [
+    "Mix of routine and complex tasks",
+    "Cost optimization is important",
+    "Tasks where worker may get stuck"
+  ],
+  "pros": [
+    "Cost-efficient use of frontier models",
+    "Specialized AI team approach"
+  ],
+  "cons": [
+    "Orchestration complexity",
+    "Latency from model switching"
+  ]
+}

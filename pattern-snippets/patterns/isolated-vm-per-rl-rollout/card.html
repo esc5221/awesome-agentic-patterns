@@ -1,0 +1,95 @@
+<article class="pattern-card" data-pattern="isolated-vm-per-rl-rollout">
+  <div class="pattern-header">
+    <h2>Isolated VM per RL Rollout</h2>
+    <span class="tag" data-i18n="category">Security & Safety</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">               ┌─── VM1 [Rollout 1] ───┐
+               │   shell("grep TODO")  │
+Training ──▶   ├─── VM2 [Rollout 2] ───┼──▶ Rewards
+               │   shell("rm temp")    │
+               └─── VM3 [Rollout 3] ───┘
+
+Each VM: [Fresh FS] → [Execute] → [Destroy]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    participant T as Training
+    participant VM1 as VM 1
+    participant VM2 as VM 2
+    T->>VM1: Rollout 1: shell()
+    T->>VM2: Rollout 2: shell()
+    VM1-->>T: Result
+    VM2-->>T: Result
+    Note over VM1,VM2: VMs destroyed
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">@app.cls(image=base_image, timeout=600)
+class IsolatedToolExecutor:
+    def execute_shell(self, rollout_id, cmd):
+        # Safe: isolated VM per rollout
+        return subprocess.run(cmd, shell=True)
+    # VM auto-destroyed after rollout</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">RL training rollouts share infrastructure, causing cross-contamination and corrupted rewards when agents execute destructive commands.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Spin up an isolated VM/container for each rollout, ensuring complete environment isolation with fresh state.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>RL training with tool-using agents</li>
+          <li>Agents with shell/filesystem access</li>
+          <li>Parallel rollouts (100+)</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Complete isolation</li>
+              <li>Deterministic rewards</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Cost of 100s VMs</li>
+              <li>Provisioning latency</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

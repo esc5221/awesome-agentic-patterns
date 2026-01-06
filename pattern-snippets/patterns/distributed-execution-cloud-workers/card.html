@@ -1,0 +1,104 @@
+<article class="pattern-card" data-pattern="distributed-execution-cloud-workers">
+  <div class="pattern-header">
+    <h2>Distributed Execution with Cloud Workers</h2>
+    <span class="tag" data-i18n="category">Orchestration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">                    ┌──▶ Worker1 [Worktree-A] ──┐
+                    │                           │
+Coordinator ──▶ ────┼──▶ Worker2 [Worktree-B] ──┼──▶ Merge ──▶ main
+                    │                           │
+                    └──▶ Worker3 [Worktree-C] ──┘
+
+Tasks:  [████████] → [██] [██] [██] → [████████]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    participant C as Coordinator
+    participant W1 as Worker 1
+    participant W2 as Worker 2
+    participant W3 as Worker 3
+    C->>C: Decompose tasks
+    par Parallel Execution
+        C->>W1: Task A (worktree-1)
+        C->>W2: Task B (worktree-2)
+        C->>W3: Task C (worktree-3)
+    end
+    W1-->>C: PR ready
+    W2-->>C: PR ready
+    W3-->>C: PR ready
+    C->>C: Merge all → main
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">coordinator.deploy_workers(
+    tasks=["refactor auth", "update API", "fix tests"],
+    workers=3,
+    git_worktrees=True
+)
+# Each worker: isolated worktree + Claude session
+# Coordinator: monitors, merges PRs</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Single-session AI agent execution cannot scale to meet enterprise team demands with multiple simultaneous code changes.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Run multiple Claude sessions in parallel using git worktrees and cloud workers with centralized coordination.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Team-wide code migrations</li>
+          <li>Parallel feature development</li>
+          <li>Large-scale infrastructure changes</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>10x-100x parallelization speedup</li>
+              <li>Scales to enterprise teams</li>
+              <li>Centralized monitoring</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Significant infrastructure complexity</li>
+              <li>Merge conflict overhead</li>
+              <li>Higher parallel model costs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

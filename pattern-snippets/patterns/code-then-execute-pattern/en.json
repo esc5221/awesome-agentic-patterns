@@ -1,0 +1,18 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Plan lists are opaque; need full data-flow analysis and taint tracking for security",
+  "solution": "LLM outputs sandboxed program/DSL. Static checker verifies flows, interpreter runs in locked sandbox",
+  "when": [
+    "Complex multi-step agents",
+    "SQL copilots",
+    "Software engineering bots"
+  ],
+  "pros": [
+    "Formal verifiability",
+    "Replay logs for audit"
+  ],
+  "cons": [
+    "Requires DSL design",
+    "Static analysis infrastructure"
+  ]
+}

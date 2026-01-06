@@ -1,0 +1,20 @@
+{
+  "category": "Security & Safety",
+  "problem": "Non-deterministic security approaches (cursor rules, MCP tools) are suggestions that LLMs may ignore.",
+  "solution": "Integrate deterministic security scanners into the build loop that agents must run after every change.",
+  "when": [
+    "AI-assisted code generation",
+    "Security-critical applications",
+    "Need consistent policy enforcement"
+  ],
+  "pros": [
+    "Deterministic, battle-tested tools",
+    "Reuses existing security infra",
+    "Works with any agent/harness"
+  ],
+  "cons": [
+    "Increases build time",
+    "May produce false positives",
+    "Requires fast tools for good DX"
+  ]
+}

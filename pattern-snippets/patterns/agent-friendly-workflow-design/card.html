@@ -1,0 +1,105 @@
+<article class="pattern-card" data-pattern="agent-friendly-workflow-design">
+  <div class="pattern-header">
+    <h2>Agent-Friendly Workflow Design</h2>
+    <span class="tag" data-i18n="category">UX & Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Traditional ──▶ Agent-Friendly?
+     │               │
+     │     ┌─────────┴─────────┐
+     │     │                   │
+     ▼     ▼                   ▼
+  Redesign:              Already OK
+  ├── Clear Goals           │
+  ├── Autonomy              │
+  ├── Structured I/O        │
+  └── Feedback Loops        │
+          │                 │
+          └────────┬────────┘
+                   ▼
+            Enhanced Performance</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Traditional Workflow] --> B{Agent-Friendly?}
+    B -->|No| C[Redesign]
+    C --> D[Clear Goals]
+    C --> E[Appropriate Autonomy]
+    C --> F[Structured I/O]
+    C --> G[Feedback Loops]
+    D & E & F & G --> H[Optimized Workflow]
+    B -->|Yes| H
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Bad: Micromanaging
+agent.do("Use React, then add useState...")
+
+# Good: Goal-oriented with autonomy
+agent.do(
+    goal="Build login form",
+    constraints=["use existing auth"],
+    freedom="choose implementation"
+)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">워크플로우가 너무 경직되거나 사람이 기술적 결정을 마이크로매니징하면 에이전트가 어려움을 겪음</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">명확한 목표, 적절한 자율성, 구조화된 I/O, 반복적인 피드백 루프를 가진 워크플로우 설계</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>에이전트를 기존 프로세스에 통합할 때</li>
+          <li>에이전트 성능이 최적이 아닐 때</li>
+          <li>새로운 인간-AI 워크플로우 구축 시</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>에이전트 역량 극대화</li>
+              <li>더 나은 인간-AI 협업</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>워크플로우 재설계 필요</li>
+              <li>신뢰 구축이 필요할 수 있음</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

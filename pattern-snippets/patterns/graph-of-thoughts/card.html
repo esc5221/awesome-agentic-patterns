@@ -1,0 +1,97 @@
+<article class="pattern-card" data-pattern="graph-of-thoughts">
+  <div class="pattern-header">
+    <h2>Graph of Thoughts (GoT)</h2>
+    <span class="tag" data-i18n="category">Feedback Loops</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">        ┌── T1 ──┐
+        │        ▼
+Problem ┼── T2 ──┼──▶ Aggregate ──▶ Refine ──▶ Solution
+        │        ▲         ▲
+        └── T3 ──┘         │
+             │             │
+             └── Loop ─────┘
+
+Branch → Aggregate → Refine → Loop back if needed</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+graph TD
+    A[Problem] --> B[Thought 1]
+    A --> C[Thought 2]
+    B --> D[Thought 3]
+    C --> D
+    D --> E[Aggregated]
+    E --> F[Refined]
+    F --> G[Solution]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">got = GraphOfThoughts(llm, max_thoughts=50)
+got.add_thought(root)
+for thought in thoughts_to_expand:
+    got.branch_thought(thought)   # Generate alternatives
+    got.aggregate_related()       # Combine insights
+    got.refine_thought(thought)   # Improve based on context
+return got.extract_best_solution()</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Linear Chain-of-Thought reasoning cannot handle problems with complex interdependencies requiring paths that merge, split, and recombine.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Represent reasoning as a directed graph where thoughts can branch, aggregate, refine, and loop back for iterative improvement.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Complex problems with interdependent reasoning</li>
+          <li>Tasks requiring insight aggregation</li>
+          <li>Problems needing iterative refinement</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Handles non-linear reasoning</li>
+              <li>Combines insights from multiple paths</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Higher computational cost</li>
+              <li>Complex to implement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

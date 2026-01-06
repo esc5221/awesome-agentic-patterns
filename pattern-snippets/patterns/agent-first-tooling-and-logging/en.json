@@ -1,0 +1,18 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Human-centric tools with colored, multi-line outputs are hard for agents to parse reliably.",
+  "solution": "Design tools with machine-readable outputs (JSON), unified logs, and --for-agent flags for agent consumption.",
+  "when": [
+    "Building agent-powered workflows",
+    "Multiple log sources to consolidate",
+    "Reliable automation needed"
+  ],
+  "pros": [
+    "Better parsing accuracy",
+    "Reduced token waste"
+  ],
+  "cons": [
+    "Sacrifices human readability",
+    "Requires tooling investment"
+  ]
+}

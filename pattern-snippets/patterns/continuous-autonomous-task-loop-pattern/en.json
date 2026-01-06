@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Manual task orchestration—selection, commits, rate-limit handling—interrupts developer flow.",
+  "solution": "Implement continuous loop with fresh context per task, auto-commits, and intelligent backoff.",
+  "when": [
+    "Batch processing TODO lists",
+    "Overnight autonomous development",
+    "Discrete, well-defined tasks"
+  ],
+  "pros": [
+    "Complete autonomy",
+    "Fresh context per task",
+    "Handles rate limits gracefully"
+  ],
+  "cons": [
+    "Reduced human oversight",
+    "Elevated permission requirements",
+    "Risk of runaway execution"
+  ]
+}

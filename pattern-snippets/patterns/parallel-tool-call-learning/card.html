@@ -1,0 +1,95 @@
+<article class="pattern-card" data-pattern="parallel-tool-call-learning">
+  <div class="pattern-header">
+    <h2>Parallel Tool Call Learning</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">BEFORE (Sequential):  T1 ──▶ T2 ──▶ T3 ──▶ T4  (7s)
+
+AFTER (RL-Learned Parallel):
+    ┌── T1 ──┐
+    ├── T2 ──┼──▶ Results ──▶ T4 ──▶ Done  (3.5s)
+    └── T3 ──┘</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Agent] --> B[Batch 1: Parallel]
+    B --> C[T1]
+    B --> D[T2]
+    B --> E[T3]
+    C & D & E --> F[Aggregate]
+    F --> G[Batch 2]
+    G --> H[Done]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># RL learns parallel patterns naturally
+# No explicit parallelization code needed
+job = client.fine_tuning.jobs.create(
+    model="gpt-4o",
+    method="rft",
+    rft={"tools": tools, "grader": grader}
+)
+# Model discovers: batch independent calls</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Agents execute tool calls sequentially even when they could run in parallel, causing unnecessary latency.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Use Agent RFT to teach models to parallelize independent tool calls, reducing latency by 40-50% when tool execution is fast.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Tool execution faster than inference</li>
+          <li>Independent information gathering</li>
+          <li>Broad exploration phases</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>40-50% latency reduction</li>
+              <li>Emerges naturally from RL training</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires concurrent tool infrastructure</li>
+              <li>Higher peak resource usage</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

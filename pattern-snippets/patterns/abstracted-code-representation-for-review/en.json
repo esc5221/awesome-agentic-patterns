@@ -1,0 +1,18 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Reviewing large AI-generated code line-by-line is tedious and error-prone when humans mainly care about intent and logic.",
+  "solution": "Provide abstracted representations (pseudocode, intent summaries) with guarantees they map to actual code changes.",
+  "when": [
+    "Large AI-generated code volumes",
+    "Intent verification over syntax checking",
+    "Trusted generation pipeline"
+  ],
+  "pros": [
+    "Faster verification process",
+    "Focus on conceptual correctness"
+  ],
+  "cons": [
+    "Requires abstraction accuracy guarantees",
+    "May miss low-level bugs"
+  ]
+}

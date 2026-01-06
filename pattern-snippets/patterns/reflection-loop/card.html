@@ -1,0 +1,100 @@
+<article class="pattern-card" data-pattern="reflection-loop">
+  <div class="pattern-header">
+    <h2>Reflection Loop</h2>
+    <span class="tag" data-i18n="category">Feedback</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">                    ┌──────────────────┐
+                    │                  │
+                    ▼                  │ No
+Input ──▶ Generate ──▶ Evaluate ──▶ [score ≥ θ?] ──▶ Done
+                                       │ Yes
+                    ▲                  │
+                    │    Feedback      │
+                    └──────────────────┘
+
+Quality:  ░░░░ → ▒▒▒▒ → ▓▓▓▓ → ████</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Start] --> B[Generate]
+    B --> C[Evaluate]
+    C --> D{Pass?}
+    D -->|Yes| E[Done]
+    D -->|No| F[Feedback]
+    F --> B
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Pseudo</span>
+        </div>
+        <pre><code class="language-python">for attempt in range(max_iters):
+    draft = generate(prompt)
+    score, critique = evaluate(draft, metric)
+
+    if score >= threshold:
+        return draft
+
+    prompt = incorporate(critique, prompt)
+
+return draft  # best effort</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">LLM이 자기 결과물을 검토하지 않으면 품질이 낮거나 요구사항을 충족하지 못할 수 있음</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">생성 후 자체 평가 → 피드백 반영 → 재생성 루프를 기준 충족까지 반복</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>품질/기준 준수가 중요할 때</li>
+          <li>코드, 글쓰기, 추론 작업</li>
+          <li>명확한 평가 메트릭이 있을 때</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>자동 품질 향상</li>
+              <li>명시적 기준 준수</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>추가 연산 비용</li>
+              <li>메트릭 모호 시 무한루프</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "If tool outputs alter choice of later actions, injected instructions may redirect agent toward malicious steps",
+  "solution": "Split into Plan phase (fixed sequence before seeing untrusted data) and Execute phase (controller runs exact sequence)",
+  "when": [
+    "Email & calendar bots",
+    "SQL assistants",
+    "Tasks where action set is known but params vary"
+  ],
+  "pros": [
+    "Strong control-flow integrity",
+    "2-3x success rates for complex tasks"
+  ],
+  "cons": [
+    "Output content can still be poisoned",
+    "Less flexible for dynamic tasks"
+  ]
+}

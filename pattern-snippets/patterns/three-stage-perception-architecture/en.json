@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Monolithic agents mixing perception, reasoning, and action are hard to debug, extend, or scale independently.",
+  "solution": "Separate workflow into three stages: Perception (input normalization), Processing (reasoning), and Action (execution).",
+  "when": [
+    "Complex multi-modal inputs",
+    "Need independent component scaling",
+    "Team collaboration per stage"
+  ],
+  "pros": [
+    "Clean separation of concerns",
+    "Better error isolation"
+  ],
+  "cons": [
+    "Additional complexity for simple tasks",
+    "Latency from stage transitions"
+  ]
+}

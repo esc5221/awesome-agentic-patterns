@@ -1,0 +1,97 @@
+<article class="pattern-card" data-pattern="virtual-machine-operator-agent">
+  <div class="pattern-header">
+    <h2>Virtual Machine Operator Agent</h2>
+    <span class="tag" data-i18n="category">Tool Use</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User ──▶ Agent ──▶ ┌──────────────────────┐
+                   │    VIRTUAL MACHINE   │
+                   │ ┌──────────────────┐ │
+                   │ │ Execute Code     │ │
+                   │ │ Install Packages │ │
+                   │ │ File Operations  │ │
+                   │ │ Run Applications │ │
+                   │ └──────────────────┘ │
+                   └──────────┬───────────┘
+                              │
+                   Agent ◀────┘ Results</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    User->>Agent: Complex Task
+    Agent->>VM: Execute Code
+    Agent->>VM: Install Packages
+    Agent->>VM: File Ops
+    VM-->>Agent: Results
+    Agent-->>User: Task Report
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Agent operating in VM environment
+vm.execute("pip install pandas matplotlib")
+vm.execute("python analyze_data.py")
+vm.read_file("/output/report.pdf")
+vm.execute("git add . && git commit -m 'Add report'")
+# Agent has full computer operator capability</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Agents limited to code generation cannot perform complex tasks requiring full computer environment interaction.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Give agent access to a dedicated VM environment to execute code, install packages, manage files, and run applications.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Tasks require full OS interaction</li>
+          <li>Need to install and run software</li>
+          <li>Complex multi-step system operations</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>General-purpose digital operator</li>
+              <li>Full system capability</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Higher security risk</li>
+              <li>Resource intensive</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

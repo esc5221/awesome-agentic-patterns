@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Agent scaffolding built for older models becomes unnecessary overhead as models improve, creating prompt bloat, wasted tokens, and maintenance burden.",
+  "solution": "Actively remove scaffolding as models become more capable. Regularly audit system prompts and orchestration logic to eliminate what newer models have internalized.",
+  "when": [
+    "New model releases available",
+    "System prompts exceeding necessary length",
+    "Complex orchestration for simple tasks"
+  ],
+  "pros": [
+    "Reduced token costs",
+    "Faster execution",
+    "Simpler maintenance"
+  ],
+  "cons": [
+    "Requires testing for quality validation",
+    "May need different configs per model version",
+    "Loss of explicit control"
+  ]
+}

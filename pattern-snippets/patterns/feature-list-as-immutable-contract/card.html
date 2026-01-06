@@ -1,0 +1,102 @@
+<article class="pattern-card" data-pattern="feature-list-as-immutable-contract">
+  <div class="pattern-header">
+    <h2>Feature List as Immutable Contract</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">feature-list.json (IMMUTABLE)
+┌─────────────────────────────────┐
+│ auth-001: [░] New chat button   │
+│ auth-002: [░] Logout function   │◄── Agent can ONLY
+│ ui-001:   [█] Dark mode         │    set passes=true
+│ ui-002:   [░] Responsive nav    │
+│ api-001:  [░] Rate limiting     │◄── Cannot DELETE
+└─────────────────────────────────┘    or MODIFY
+
+Agent ──▶ Implement ──▶ Test ──▶ [█] Mark Done</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+graph TD
+    A[Feature List Created] --> B[All passes=false]
+    B --> C{Select Next Feature}
+    C --> D[Implement]
+    D --> E[Test]
+    E --> F{All Steps Pass?}
+    F -->|No| D
+    F -->|Yes| G[Set passes=true]
+    G --> H{More Features?}
+    H -->|Yes| C
+    H -->|No| I[Complete]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-json">{
+  "features": [{
+    "id": "auth-001",
+    "description": "New chat creates conversation",
+    "steps": ["Click button", "Verify URL"],
+    "passes": false  // Agent can ONLY flip to true
+  }]
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Long-running agents declare premature victory, delete tests to pass, or lose track of requirements across sessions.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Define all features upfront in an immutable JSON that agents can mark complete but cannot modify or delete.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Building complete applications with known requirements</li>
+          <li>Projects spanning many agent sessions</li>
+          <li>When agent accountability is critical</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Prevents premature completion claims</li>
+              <li>Eliminates 'pass by deletion' attacks</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires upfront feature specification</li>
+              <li>Rigid for changing requirements</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

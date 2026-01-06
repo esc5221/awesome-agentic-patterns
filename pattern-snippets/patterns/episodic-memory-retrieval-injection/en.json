@@ -1,0 +1,20 @@
+{
+  "category": "Context & Memory",
+  "problem": "Stateless calls make agents forget prior decisions, causing repetition and shallow reasoning.",
+  "solution": "Add vector-backed episodic memory: store event/outcome/rationale blobs, retrieve top-k similar memories, inject as hints.",
+  "when": [
+    "Long-running agent sessions",
+    "Need continuity across tasks",
+    "Avoiding repeated mistakes"
+  ],
+  "pros": [
+    "Richer continuity",
+    "Fewer repeated mistakes",
+    "Learns from past"
+  ],
+  "cons": [
+    "Retrieval noise if uncurated",
+    "Storage cost",
+    "Stale memory issues"
+  ]
+}

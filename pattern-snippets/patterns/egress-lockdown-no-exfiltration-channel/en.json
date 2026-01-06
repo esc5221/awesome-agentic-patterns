@@ -1,0 +1,20 @@
+{
+  "category": "Security & Safety",
+  "problem": "Even with private-data access and untrusted inputs, attacks fail if the agent has no way to transmit stolen data.",
+  "solution": "Implement egress firewall: allow only specific domains, strip content from outbound calls, forbid dynamic link generation.",
+  "when": [
+    "Agents handle sensitive data",
+    "Processing untrusted inputs",
+    "High-security environments"
+  ],
+  "pros": [
+    "Drastically reduces leak risk",
+    "Easy to reason about",
+    "Simple network rules"
+  ],
+  "cons": [
+    "Breaks legitimate integrations",
+    "Requires proxy stubs",
+    "Limits agent capabilities"
+  ]
+}

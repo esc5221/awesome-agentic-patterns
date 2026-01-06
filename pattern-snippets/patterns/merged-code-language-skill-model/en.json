@@ -1,0 +1,18 @@
+{
+  "category": "Reliability & Eval",
+  "problem": "Training a single model for both code and natural language requires massive compute and risks skill interference.",
+  "solution": "Train separate specialist models independently, then merge weights to combine skills without centralized training.",
+  "when": [
+    "Building multi-skill models (code + NL)",
+    "Limited centralized compute resources",
+    "Parallel R&D teams for different capabilities"
+  ],
+  "pros": [
+    "Parallel development of skills",
+    "Reduced centralized compute needs"
+  ],
+  "cons": [
+    "Potential skill dilution from averaging",
+    "Requires identical model architectures"
+  ]
+}

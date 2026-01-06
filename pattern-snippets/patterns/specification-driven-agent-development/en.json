@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Hand-crafted prompts leave room for ambiguity; agents can over-interpret or conflict with stakeholder intent",
+  "solution": "Use a formal spec file as the agent's primary input and source of truth, iterating only by editing the spec",
+  "when": [
+    "Complex multi-step feature development",
+    "Audit-friendly, repeatable workflows",
+    "Team collaboration requiring clear contracts"
+  ],
+  "pros": [
+    "Repeatable, audit-friendly, easy diffing",
+    "Clear artifact traceability to spec"
+  ],
+  "cons": [
+    "Up-front spec writing effort",
+    "Ramp-up for teams new to spec formats"
+  ]
+}

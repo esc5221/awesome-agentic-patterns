@@ -1,0 +1,20 @@
+{
+  "category": "Reliability & Eval",
+  "problem": "Human reviewers struggle to catch subtle bugs in sophisticated AI-generated code at scale.",
+  "solution": "Deploy specialized critic models trained for code review to identify bugs, security issues, and quality problems.",
+  "when": [
+    "High volume of AI-generated code",
+    "Security-critical applications",
+    "Need consistent quality standards"
+  ],
+  "pros": [
+    "Catches subtle bugs humans miss",
+    "Consistent 24/7 reviews",
+    "Scalable code review process"
+  ],
+  "cons": [
+    "False positives need human verification",
+    "Cannot understand full business context",
+    "May miss novel vulnerability types"
+  ]
+}

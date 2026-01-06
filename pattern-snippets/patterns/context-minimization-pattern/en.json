@@ -1,0 +1,18 @@
+{
+  "category": "Context & Memory",
+  "problem": "User-supplied text lingers in context, enabling it to influence later generations and potentially inject malicious instructions",
+  "solution": "Purge untrusted segments after transforming into safe intermediate. Later reasoning sees only trusted data",
+  "when": [
+    "Customer service chat",
+    "Medical Q&A systems",
+    "Multi-turn flows where input shouldn't steer later steps"
+  ],
+  "pros": [
+    "Simple, no extra models",
+    "Prevents prompt injection"
+  ],
+  "cons": [
+    "Loses conversational nuance",
+    "May hurt UX if too aggressive"
+  ]
+}

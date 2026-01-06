@@ -1,0 +1,98 @@
+<article class="pattern-card" data-pattern="visual-ai-multimodal-integration">
+  <div class="pattern-header">
+    <h2>Visual AI Multimodal Integration</h2>
+    <span class="tag" data-i18n="category">Tool Use</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">         ┌─────────┐
+Text ────┤         │
+         │ Multi   ├──▶ Cross-Modal ──▶ Solution
+Image ───┤ Modal   │    Reasoning
+         │ Model   │
+Video ───┤         │
+         └─────────┘
+
+Image ──▶ [OCR] + [Objects] + [Spatial] ──▶ Understanding</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Text Query] --> M[Multimodal LLM]
+    B[Image] --> M
+    C[Video] --> M
+    M --> D[Object Detection]
+    M --> E[OCR]
+    M --> F[Spatial Understanding]
+    D & E & F --> G[Combined Solution]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">class VisualAIAgent:
+    async def process(self, task, image):
+        analysis = await self.mm_llm.analyze(
+            prompt=f"Task: {task}",
+            image=image
+        )
+        # Extract: objects, OCR text, spatial info
+        return await self.solve_with_visual(analysis)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Text-only agents miss critical visual information in images, videos, diagrams, and UI screenshots.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Integrate multimodal models (LMMs) to accept visual inputs, extract information, and combine with text for cross-modal reasoning.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Tasks involve images or screenshots</li>
+          <li>UI debugging or visual analysis</li>
+          <li>Document/chart understanding</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Enables new visual task categories</li>
+              <li>More natural show-not-tell interaction</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Higher computational cost</li>
+              <li>Privacy concerns with visual data</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

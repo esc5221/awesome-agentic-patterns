@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Untrusted input can hijack agent reasoning when tool feedback re-enters context window.",
+  "solution": "Use LLM only to map requests to pre-approved actions; no tool outputs fed back to the model.",
+  "when": [
+    "High-security environments",
+    "Customer service bots",
+    "Limited action sets (kiosks, routers)"
+  ],
+  "pros": [
+    "Near-immunity to prompt injection",
+    "Trivial to audit"
+  ],
+  "cons": [
+    "Limited flexibility",
+    "New capabilities require code updates"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "category": "Security & Safety",
+  "problem": "Sending raw PII through the model's context creates privacy risks and compliance concerns.",
+  "solution": "Intercept tool responses to tokenize PII before reaching model, untokenize when making actual tool calls.",
+  "when": [
+    "Workflows processing customer data",
+    "Compliance-sensitive environments (GDPR, HIPAA)",
+    "Multi-step automation involving PII"
+  ],
+  "pros": [
+    "Prevents raw PII in model context",
+    "Transparent to agent reasoning"
+  ],
+  "cons": [
+    "PII detection must be accurate",
+    "Doesn't prevent inference of patterns"
+  ]
+}

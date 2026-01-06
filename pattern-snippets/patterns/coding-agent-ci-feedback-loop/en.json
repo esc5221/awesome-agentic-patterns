@@ -1,0 +1,19 @@
+{
+  "category": "Feedback Loops",
+  "problem": "Synchronous test runs block agent from parallel work, creating idle compute and inflated training times as agent babysits builds.",
+  "solution": "Run agent async against CI: push branch, poll for partial failures, patch iteratively, notify on final green.",
+  "when": [
+    "Multi-file refactors or feature additions",
+    "Long test suites that block iteration",
+    "Need to maximize compute utilization"
+  ],
+  "pros": [
+    "Compute efficiency - overlaps generation and testing",
+    "Faster iteration with less waiting",
+    "Autonomous until final green"
+  ],
+  "cons": [
+    "CI flakiness can mislead patches",
+    "Security - agent needs CI push/read permissions"
+  ]
+}

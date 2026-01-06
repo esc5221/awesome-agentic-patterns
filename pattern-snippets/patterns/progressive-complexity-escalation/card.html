@@ -1,0 +1,96 @@
+<article class="pattern-card" data-pattern="progressive-complexity-escalation">
+  <div class="pattern-header">
+    <h2>Progressive Complexity Escalation</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Tier 1: Research ──▶ Present to Human
+           │ (proven reliable)
+           ▼
+Tier 2: Research ──▶ Draft ──▶ Human Approves
+           │ (proven reliable)
+           ▼
+Tier 3: Research ──▶ Draft ──▶ Auto-Send (if conf > 0.8)</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Tier 1: Info Gathering] --> B{Reliable?}
+    B -->|Yes| C[Tier 2: Draft + Approval]
+    C --> D{Reliable?}
+    D -->|Yes| E[Tier 3: Autonomous]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">class AgentCapabilities:
+    def process(self, data):
+        research = self.research(data)  # Tier 1
+        if self.tier >= 2:
+            draft = self.generate(research)
+            if self.tier >= 3 and self.confidence > 0.8:
+                return self.auto_execute(draft)
+            return self.request_approval(draft)
+        return self.present_findings(research)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Deploying agents with overly ambitious capabilities from day one leads to unreliable outputs, failed implementations, and safety risks from autonomous high-stakes operations.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Start with low-complexity, high-reliability tasks and progressively unlock more complex capabilities as models improve and trust is established through capability tiers.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Deploying agents into production</li>
+          <li>High-stakes or regulated domains</li>
+          <li>Building internal automation tools</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Risk mitigation via limited blast radius</li>
+              <li>Builds stakeholder confidence</li>
+              <li>Graceful degradation</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Delayed full automation benefits</li>
+              <li>Tier management complexity</li>
+              <li>Promotion friction</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

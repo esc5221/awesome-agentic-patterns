@@ -1,0 +1,91 @@
+<article class="pattern-card" data-pattern="rich-feedback-loops">
+  <div class="pattern-header">
+    <h2>Rich Feedback Loops</h2>
+    <span class="tag" data-i18n="category">Feedback Loops</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Agent ──▶ [Action] ──▶ [Tool] ──▶ Feedback ──┐
+  ▲                                          │
+  │       ┌──────────────────────────────────┘
+  │       ▼
+  └─── [Parse] ◀── errors, test fails, lint, screenshots
+
+Loop: action → feedback → fix → action → ...</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    Agent->>CLI: go test ./...
+    CLI-->>Agent: FAIL auth_test.go:42
+    Agent->>File: patch handler
+    Agent->>CLI: go test ./...
+    CLI-->>Agent: PASS 87/87 tests
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Concept</span>
+        </div>
+        <pre><code class="language-python"># Rich feedback > perfect prompts
+result = agent.run(task)
+feedback = get_diagnostics(result)  # errors, lint
+if feedback.has_issues:
+    agent.fix(feedback)  # self-debugging loop</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Polishing a single prompt can't cover every edge case. Agents need ground truth to self-correct</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Expose iterative, machine-readable feedback (compiler errors, test failures, lint) after every tool call. Agent uses diagnostics to self-debug</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Code generation tasks</li>
+          <li>Any task with verifiable output</li>
+          <li>When tests/linters are available</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Emergent self-debugging</li>
+              <li>Better than bigger prompts</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires feedback infrastructure</li>
+              <li>More iterations = more tokens</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

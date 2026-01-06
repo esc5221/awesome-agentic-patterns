@@ -1,0 +1,97 @@
+<article class="pattern-card" data-pattern="criticgpt-style-evaluation">
+  <div class="pattern-header">
+    <h2>CriticGPT-Style Evaluation</h2>
+    <span class="tag" data-i18n="category">Reliability & Eval</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Generator ──▶ Code ──▶ CriticGPT ──▶ Issues?
+                              │
+                    ┌─────────┴─────────┐
+                    │                   │
+                   Yes                  No
+                    │                   │
+              ◀── Refine           ──▶ Human Review</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    Generator->>Critic: Submit code
+    loop Until passes
+        Critic->>Critic: Bug + Security scan
+        Critic->>Generator: Issues found
+        Generator->>Critic: Refined code
+    end
+    Critic->>Human: Present for review
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">critic = CriticGPT(severity_threshold=0.7)
+review = critic.review_code(code)
+
+if review['issues']:
+    code = generator.refine(code, review)
+else:
+    submit_to_human(code, review)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Human reviewers struggle to catch subtle bugs in sophisticated AI-generated code at scale.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Deploy specialized critic models trained for code review to identify bugs, security issues, and quality problems.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>High volume of AI-generated code</li>
+          <li>Security-critical applications</li>
+          <li>Need consistent quality standards</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Catches subtle bugs humans miss</li>
+              <li>Consistent 24/7 reviews</li>
+              <li>Scalable code review process</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>False positives need human verification</li>
+              <li>Cannot understand full business context</li>
+              <li>May miss novel vulnerability types</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

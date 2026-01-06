@@ -1,0 +1,101 @@
+<article class="pattern-card" data-pattern="tree-of-thought-reasoning">
+  <div class="pattern-header">
+    <h2>Tree-of-Thought Reasoning</h2>
+    <span class="tag" data-i18n="category">Orchestration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">                    [Problem]
+                        │
+            ┌───────────┼───────────┐
+            ▼           ▼           ▼
+        [Step A]    [Step B]    [Step C]
+           │           │           │
+       ┌───┴───┐   ┌───┴───┐       ✗
+       ▼       ▼   ▼       ▼
+    [A1]    [A2] [B1]    [B2]  ← evaluate
+       │       ✗   ✓       ✗
+       ▼           │
+    [A1.1]    [best path]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    P[Problem] --> A[Step A]
+    P --> B[Step B]
+    P --> C[Step C]
+    A --> A1[A1] --> A11[A1.1]
+    A --> A2[A2]
+    B --> B1[B1 Best]
+    B --> B2[B2]
+    C --> X[Pruned]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">queue = [root_problem]
+while queue:
+    thought = queue.pop()
+    for step in expand(thought):
+        score = evaluate(step)
+        queue.push((score, step))
+return select_best(queue)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Linear chain-of-thought reasoning gets stuck on complex problems, missing alternatives or failing to backtrack.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Explore a search tree of intermediate thoughts, expand multiple steps, evaluate partial solutions before committing.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Complex puzzles or planning tasks</li>
+          <li>Multiple valid approaches exist</li>
+          <li>Backtracking may be needed</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Covers more possibilities</li>
+              <li>Improves reliability on hard tasks</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Higher compute cost</li>
+              <li>Needs good scoring method</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

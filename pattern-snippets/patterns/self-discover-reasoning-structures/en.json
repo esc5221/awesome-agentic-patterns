@@ -1,0 +1,20 @@
+{
+  "category": "Feedback Loops",
+  "problem": "Different reasoning tasks require different thinking strategies. Fixed reasoning patterns like Chain-of-Thought may be suboptimal for diverse problems.",
+  "solution": "Enable LLMs to automatically discover and compose task-specific reasoning structures by selecting and adapting atomic reasoning modules to match the problem's characteristics.",
+  "when": [
+    "Diverse reasoning tasks",
+    "Standard CoT underperforming",
+    "Novel problem types"
+  ],
+  "pros": [
+    "Up to 32% improvement over CoT",
+    "Creates reusable reasoning templates",
+    "Adapts to novel problems"
+  ],
+  "cons": [
+    "Overhead for structure discovery",
+    "May over-engineer simple problems",
+    "Depends on task analysis accuracy"
+  ]
+}

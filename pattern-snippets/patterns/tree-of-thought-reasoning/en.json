@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Linear chain-of-thought reasoning gets stuck on complex problems, missing alternatives or failing to backtrack.",
+  "solution": "Explore a search tree of intermediate thoughts, expand multiple steps, evaluate partial solutions before committing.",
+  "when": [
+    "Complex puzzles or planning tasks",
+    "Multiple valid approaches exist",
+    "Backtracking may be needed"
+  ],
+  "pros": [
+    "Covers more possibilities",
+    "Improves reliability on hard tasks"
+  ],
+  "cons": [
+    "Higher compute cost",
+    "Needs good scoring method"
+  ]
+}

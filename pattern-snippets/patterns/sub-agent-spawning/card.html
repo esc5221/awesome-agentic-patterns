@@ -1,0 +1,103 @@
+<article class="pattern-card" data-pattern="sub-agent-spawning">
+  <div class="pattern-header">
+    <h2>Sub-Agent Spawning</h2>
+    <span class="tag" data-i18n="category">Orchestration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">                       ┌─── Sub1 ──▶ [████] ───┐
+                       │                       │
+Main ──▶ Split(n) ────┼─── Sub2 ──▶ [████] ───┼──▶ Merge ──▶ Done
+                       │                       │
+                       └─── Sub3 ──▶ [████] ───┘
+
+Context:  Main[████████████]  →  Sub[██] Sub[██] Sub[██]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    participant M as Main
+    participant S1 as Sub 1
+    participant S2 as Sub 2
+    participant S3 as Sub 3
+    M->>M: Split (36 files)
+    par Parallel
+        M->>S1: 12 files
+        M->>S2: 12 files
+        M->>S3: 12 files
+    end
+    S1-->>M: done
+    S2-->>M: done
+    S3-->>M: done
+    M->>M: Merge → PR
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">main_agent.spawn_subagents(
+    task="Refactor YAML front-matter",
+    files=glob("*.md"),  # 36 files
+    agents=3,
+    per_agent=12
+)
+# Each subagent gets fresh context
+# Main agent merges results</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">대규모 멀티파일 작업 시 메인 에이전트의 컨텍스트 윈도우가 폭발하여 추론 예산을 초과</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">독립된 서브에이전트를 생성하여 병렬로 분산 작업 후 결과 취합</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>멀티파일 수정 (10개 이상)</li>
+          <li>독립적으로 분할 가능한 작업</li>
+          <li>순차 처리로는 너무 느릴 때</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>병렬 처리로 속도 향상</li>
+              <li>컨텍스트 격리</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>에이전트 간 조율 복잡도</li>
+              <li>결과 병합 비용</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

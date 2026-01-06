@@ -1,0 +1,95 @@
+<article class="pattern-card" data-pattern="variance-based-rl-sample-selection">
+  <div class="pattern-header">
+    <h2>Variance-Based RL Sample Selection</h2>
+    <span class="tag" data-i18n="category">Learning</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Score
+1.0 ●━━━━●━━━━●━━━━●     ← Always correct (no learning)
+    ┃
+0.5 ┃  ●━━●━━●           ← HIGH VARIANCE (train here!)
+    ┃  ┃  ▼
+0.0 ●━━●━━━━●━━━━●━━━●   ← Always wrong (no learning)
+    └──┴──┴──┴──┴──┴──▶
+       Sample Index
+
+Legend: ● best │ ━ mean │ ▼ variance range</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Dataset] --> B[Run 3-5 Baselines]
+    B --> C[Plot Variance]
+    C --> D{Variance > 0?}
+    D -->|Yes| E[Train on this]
+    D -->|No| F[Skip sample]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Run multiple evals per sample
+for sample in dataset:
+    scores = [agent.eval(sample) for _ in range(3)]
+    variance = np.var(scores)
+    if variance > 0.01 and 0 < np.mean(scores) < 1:
+        high_variance_samples.append(sample)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Zero-variance samples (always correct or always wrong) provide no learning signal, wasting compute in RL training.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Run multiple baseline evals per sample, plot variance, prioritize high-variance samples where model sometimes succeeds.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>RL training with limited budget</li>
+          <li>Dataset may contain many solved/unsolvable samples</li>
+          <li>Need to estimate improvement potential</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Data efficiency - focus on learnable samples</li>
+              <li>Predictive - estimate potential before training</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Upfront eval cost (3-5x baselines)</li>
+              <li>Variance changes during training</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

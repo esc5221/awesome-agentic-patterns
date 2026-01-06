@@ -1,0 +1,99 @@
+<article class="pattern-card" data-pattern="tool-use-steering-via-prompting">
+  <div class="pattern-header">
+    <h2>Tool Use Steering via Prompting</h2>
+    <span class="tag" data-i18n="category">Tool Use</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User Task ──┬──▶ [Direct: "Use file search tool"]
+            │
+            ├──▶ [Teach: "Use barley CLI, -h for help"]
+            │
+            ├──▶ [Implicit: "commit, push, pr"]
+            │
+            └──▶ [Think: "*think hard*"]
+                       │
+                       ▼
+               Agent Tool Selection ──▶ Execute</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[User Task] --> B[Available Tools]
+    A --> C[Explicit Guidance]
+    C --> D[Direct Invocation]
+    C --> E[Teaching Usage]
+    C --> F[Implicit Shortcut]
+    D & E & F --> G[Agent Selection]
+    G --> H[Execute]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-text"># Direct invocation
+"Use the file search tool to find config files"
+
+# Teaching tool usage
+"Use our barley CLI to check logs. -h for help"
+
+# Implicit shortcut (learned association)
+"commit, push, pr"  # agent knows git workflow</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Having tools available does not guarantee agents will use them appropriately, especially for custom or team-specific tools.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Guide tool selection via explicit prompts: direct invocation, teaching tool usage, implicit shortcuts, and deeper reasoning triggers.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Custom or team-specific tools exist</li>
+          <li>Agent tool selection is suboptimal</li>
+          <li>Teaching new tool workflows</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Direct control over tool usage</li>
+              <li>Enables custom tool onboarding</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires prompt engineering</li>
+              <li>May reduce agent autonomy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

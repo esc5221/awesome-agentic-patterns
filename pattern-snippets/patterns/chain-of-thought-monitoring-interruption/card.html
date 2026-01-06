@@ -1,0 +1,110 @@
+<article class="pattern-card" data-pattern="chain-of-thought-monitoring-interruption">
+  <div class="pattern-header">
+    <h2>Chain-of-Thought Monitoring & Interruption</h2>
+    <span class="tag" data-i18n="category">UX & Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Agent: "I'll modify auth.ts..."
+   │
+   ▼
+[Start file read] ──▶ Dev watching
+                         │
+                    INTERRUPT!
+                         │
+                         ▼
+Dev: "Use oauth.ts instead"
+   │
+   ▼
+Agent: [Read oauth.ts] ──▶ Continue
+   │
+   ▼
+Correction within first tool call</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    participant Dev
+    participant Agent
+    participant Tools
+    Agent->>Dev: Display: "I'll modify auth.ts..."
+    Agent->>Tools: Start file read
+    Dev->>Agent: INTERRUPT! Wrong file
+    Dev->>Agent: "Use oauth.ts instead"
+    Agent->>Tools: Read oauth.ts
+    Agent->>Dev: Display updated reasoning
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Real-time reasoning visibility
+stream_reasoning_to_ui(agent.thoughts)
+
+# Low-friction interruption
+if user_pressed_escape():
+    agent.pause()
+    context = user.get_correction()
+    agent.inject_context(context)
+    agent.resume()
+# Partial work preserved on interrupt</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Agents can pursue misguided reasoning paths for extended periods. By the time developers realize it's wrong, significant time and tokens are wasted.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Real-time surveillance of agent reasoning with low-friction interrupt capability to redirect before completing flawed sequences.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Complex refactoring where wrong file choices are costly</li>
+          <li>High-stakes operations (database migrations, API changes)</li>
+          <li>Agent might misinterpret ambiguous requirements</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Prevents wasted time on fundamentally wrong approaches</li>
+              <li>Maximizes value from expensive model calls</li>
+              <li>Enables collaborative human-AI problem solving</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires active human attention (not autonomous)</li>
+              <li>Can interrupt productive exploration if triggered prematurely</li>
+              <li>Adds cognitive load to monitor reasoning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,19 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Web chat UIs are awkward for repeat runs, local file edits, or scripting inside CI pipelines.",
+  "solution": "Expose agent capabilities through a first-class CLI for Makefiles, Git hooks, cron jobs, and headless automation.",
+  "when": [
+    "Integrating agents into CI/CD pipelines",
+    "Automating repetitive development tasks",
+    "Need headless or scripted agent execution"
+  ],
+  "pros": [
+    "Scriptable and composable with other tools",
+    "Works offline with local context",
+    "Easy to embed in existing workflows"
+  ],
+  "cons": [
+    "Initial install and auth setup",
+    "Learning curve for CLI flags"
+  ]
+}

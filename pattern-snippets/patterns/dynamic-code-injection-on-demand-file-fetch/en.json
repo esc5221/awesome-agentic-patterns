@@ -1,0 +1,20 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Manually copying files into prompts is tedious, wastes tokens, and interrupts workflow momentum.",
+  "solution": "Allow on-demand file injection via @filename or /load syntax that fetches, optionally summarizes, and injects code into context.",
+  "when": [
+    "Interactive coding sessions",
+    "Exploring unfamiliar codebases",
+    "Need specific file context mid-conversation"
+  ],
+  "pros": [
+    "Interactive code exploration",
+    "No manual copy/paste",
+    "Improves agent accuracy"
+  ],
+  "cons": [
+    "Requires file system access",
+    "Security risk if unsandboxed",
+    "Summarization may lose context"
+  ]
+}

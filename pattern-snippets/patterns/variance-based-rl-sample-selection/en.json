@@ -1,0 +1,18 @@
+{
+  "category": "Learning & Adaptation",
+  "problem": "Zero-variance samples (always correct or always wrong) provide no learning signal, wasting compute in RL training.",
+  "solution": "Run multiple baseline evals per sample, plot variance, prioritize high-variance samples where model sometimes succeeds.",
+  "when": [
+    "RL training with limited budget",
+    "Dataset may contain many solved/unsolvable samples",
+    "Need to estimate improvement potential"
+  ],
+  "pros": [
+    "Data efficiency - focus on learnable samples",
+    "Predictive - estimate potential before training"
+  ],
+  "cons": [
+    "Upfront eval cost (3-5x baselines)",
+    "Variance changes during training"
+  ]
+}

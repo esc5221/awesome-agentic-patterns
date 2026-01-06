@@ -1,0 +1,101 @@
+<article class="pattern-card" data-pattern="continuous-autonomous-task-loop-pattern">
+  <div class="pattern-header">
+    <h2>Continuous Autonomous Task Loop</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">┌──────────────────────────────────────────────┐
+│              AUTONOMOUS LOOP                 │
+│                                              │
+│  Pick Task ──▶ Execute ──▶ Commit ──▶ Next  │
+│      ▲                           │           │
+│      └───────────────────────────┘           │
+│                                              │
+│  Rate Limit? ──▶ Exponential Backoff ──▶ ↺  │
+└──────────────────────────────────────────────┘</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    loop Until done
+        Script->>TaskAgent: Pick next task
+        Script->>MainAgent: Execute autonomously
+        Script->>GitAgent: Auto-commit
+        alt Rate Limited
+            Script->>Script: Backoff wait
+        end
+    end
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash">MAX_ITERATIONS=50
+BACKOFF=300  # seconds
+
+while [ $i -lt $MAX_ITERATIONS ]; do
+  task=$(claude "Pick next from TODO.md")
+  claude --auto-accept "$task"
+  git add -A && git commit -m "$task"
+done</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Manual task orchestration—selection, commits, rate-limit handling—interrupts developer flow.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Implement continuous loop with fresh context per task, auto-commits, and intelligent backoff.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Batch processing TODO lists</li>
+          <li>Overnight autonomous development</li>
+          <li>Discrete, well-defined tasks</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Complete autonomy</li>
+              <li>Fresh context per task</li>
+              <li>Handles rate limits gracefully</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Reduced human oversight</li>
+              <li>Elevated permission requirements</li>
+              <li>Risk of runaway execution</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,18 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Difficult to predict which features have real product-market fit before significant engineering investment.",
+  "solution": "Build hackable products, observe how power users repurpose features, then productize validated demand.",
+  "when": [
+    "Building extensible platforms",
+    "Feature prioritization",
+    "New product exploration"
+  ],
+  "pros": [
+    "Behavior-validated demand",
+    "Reduced risk"
+  ],
+  "cons": [
+    "Extension infra needed",
+    "Power users != mainstream"
+  ]
+}

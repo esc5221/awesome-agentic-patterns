@@ -1,0 +1,99 @@
+<article class="pattern-card" data-pattern="inference-time-scaling">
+  <div class="pattern-header">
+    <h2>Inference-Time Scaling</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Problem ──▶ Assess Difficulty
+                    │
+      ┌─────────────┼─────────────┐
+      ▼             ▼             ▼
+    [Low]       [Medium]       [High]
+      │             │             │
+  Standard    N Attempts    Deep Search
+      │             │             │
+      └─────────────┴─────────────┘
+                    │
+               Select Best ──▶ Answer</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Problem] --> B{Difficulty?}
+    B -->|Low| C[Standard]
+    B -->|Medium| D[N Attempts]
+    B -->|High| E[Deep Reasoning]
+    C & D & E --> F[Select Best]
+    F --> G[Answer]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">def solve_with_scaling(problem, budget=100):
+    difficulty = estimate_difficulty(problem)
+    if difficulty < 0.3:
+        return standard_inference(problem)
+    elif difficulty < 0.7:
+        return best_of_n(problem, n=5)
+    else:
+        return deep_reasoning_with_search(problem)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Once trained, model performance is fixed. We cannot 'think harder' by allocating more compute for challenging problems.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Allocate additional inference compute dynamically: generate multiple candidates, perform extended reasoning, iterate and refine outputs.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Complex reasoning tasks</li>
+          <li>Problems with verifiable solutions</li>
+          <li>When latency is acceptable</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Dramatically improves hard tasks</li>
+              <li>More cost-effective than larger models</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Increased latency</li>
+              <li>Higher inference costs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

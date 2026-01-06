@@ -1,0 +1,97 @@
+<article class="pattern-card" data-pattern="agentic-search-over-vector-embeddings">
+  <div class="pattern-header">
+    <h2>Agentic Search Over Vector Embeddings</h2>
+    <span class="tag" data-i18n="category">Tool Use & Environment</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Traditional RAG:
+  Code ──▶ Index ──▶ Vector DB ──▶ Query
+           (stale)     (infra)
+
+Agentic Search:
+  Query ──▶ grep/find ──▶ Refine ──▶ Results
+              │              │
+              └──────────────┘
+           (current state, no infra)</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Search Query] --> B[grep/ripgrep]
+    B --> C[Analyze Results]
+    C --> D{Found?}
+    D -->|No| E[Refine Search]
+    E --> B
+    D -->|Yes| F[Return Results]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Instead of vector search:
+# vector_db.index(codebase)  # stale!
+# results = vector_db.query(embed(q))
+
+# Use agentic search:
+agent.call_tool("grep", "function.*auth")
+agent.call_tool("find", "**/auth/*.ts")
+agent.refine_search_based_on_results()</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">벡터 임베딩은 지속적인 재인덱싱, 로컬 변경 처리, 인프라 오버헤드가 필요함</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">벡터 검색을 bash, grep, 파일 탐색을 사용하는 에이전틱 검색으로 대체 - 사전 인덱싱 불필요</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>자주 변경되는 코드베이스</li>
+          <li>벡터 인프라가 없을 때</li>
+          <li>보안에 민감한 배포</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>인덱싱 유지보수 불필요</li>
+              <li>항상 현재 상태를 검색</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>여러 번 반복이 필요할 수 있음</li>
+              <li>매우 큰 코드베이스에서 느림</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

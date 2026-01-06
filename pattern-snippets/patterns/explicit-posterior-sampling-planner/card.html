@@ -1,0 +1,101 @@
+<article class="pattern-card" data-pattern="explicit-posterior-sampling-planner">
+  <div class="pattern-header">
+    <h2>Explicit Posterior-Sampling Planner</h2>
+    <span class="tag" data-i18n="category">Orchestration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">┌─────────────────────────────────────┐
+│         PSRL Loop                   │
+└─────────────────────────────────────┘
+
+Posterior ──▶ Sample Model ──▶ Compute Plan
+    ▲                              │
+    │                              ▼
+    └──── Update ◀── Observe ◀── Execute
+
+P(model|data) → sample → plan → act → reward</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    P[Posterior P(M|D)] --> S[Sample Model]
+    S --> C[Compute Plan]
+    C --> E[Execute]
+    E --> O[Observe Reward]
+    O --> U[Update Posterior]
+    U --> P
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># PSRL-based agent loop
+posterior = init_prior(task_models)
+
+while not done:
+    model = posterior.sample()
+    plan = compute_optimal_plan(model)
+    reward = execute(plan)
+    posterior.update(observation, reward)
+    # Natural language: LLM fills each step</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Agents relying on ad-hoc heuristics explore poorly, wasting tokens and API calls on dead ends.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Embed PSRL algorithm: maintain Bayesian posterior over task models, sample model, compute optimal plan, execute, update posterior.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Exploration-heavy tasks</li>
+          <li>Multi-step decision making</li>
+          <li>Need principled exploration</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Principled exploration</li>
+              <li>Efficient token usage</li>
+              <li>Theoretical guarantees</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Implementation complexity</li>
+              <li>Posterior computation cost</li>
+              <li>Requires RL expertise</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,18 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Manually copying shell command output into agent context is tedious and error-prone",
+  "solution": "Provide a special prefix (e.g., !) that executes shell commands and auto-injects both command and output into agent context",
+  "when": [
+    "Agent needs real-time environment state",
+    "Checking git status, file listings, test results",
+    "Interactive debugging with agent assistance"
+  ],
+  "pros": [
+    "Seamless environment integration",
+    "No manual copy-paste required"
+  ],
+  "cons": [
+    "Security risk from arbitrary commands",
+    "Large outputs can bloat context"
+  ]
+}

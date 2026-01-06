@@ -1,0 +1,101 @@
+<article class="pattern-card" data-pattern="proactive-agent-state-externalization">
+  <div class="pattern-header">
+    <h2>Proactive Agent State Externalization</h2>
+    <span class="tag" data-i18n="category">Context & Memory</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Agent ──▶ [Work] ──▶ Write Notes ──▶ [state.md]
+                          │
+                          ▼
+               ┌─────────────────────┐
+               │  Template Schema    │
+               │  • Objective        │
+               │  • Progress         │
+               │  • Knowledge Gaps   │
+               └─────────────────────┘
+                          │
+                          ▼
+                Validate ──▶ External Memory</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Agent Work] --> B[Write Notes]
+    B --> C[Template Validation]
+    C --> D{Complete?}
+    D -->|Yes| E[Merge to Memory]
+    D -->|No| F[Prompt Clarification]
+    F --> B
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">class StateManager:
+    def capture_state(self, agent_notes):
+        structured = self.parse_notes(agent_notes)
+        missing = self.validate(structured)
+        if missing:
+            return self.prompt_clarification(missing)
+        return self.merge_with_memory(structured)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Models proactively write notes to preserve state, but self-generated summaries are often incomplete and may consume tokens better spent on task execution.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Provide structured templates and validation for agent self-documentation, combining agent notes with external memory systems as fallback.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Long-running development sessions</li>
+          <li>Multi-session research tasks</li>
+          <li>Subagent coordination requiring state communication</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Leverages natural model behavior</li>
+              <li>Enables session continuity</li>
+              <li>Creates audit trails</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>May consume tokens on documentation over progress</li>
+              <li>Risk of incomplete self-assessment</li>
+              <li>Requires validation overhead</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

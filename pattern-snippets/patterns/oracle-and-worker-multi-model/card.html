@@ -1,0 +1,93 @@
+<article class="pattern-card" data-pattern="oracle-and-worker-multi-model">
+  <div class="pattern-header">
+    <h2>Oracle and Worker Multi-Model</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Request ──▶ Worker(Sonnet) ──┬──▶ Execute ──▶ Done
+                             │
+                        [Stuck?]
+                             │
+                             └──▶ Oracle(o3) ──▶ Strategy ──▶ Worker</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Request] --> B[Worker]
+    B --> C{Stuck?}
+    C -->|No| D[Execute]
+    C -->|Yes| E[Oracle]
+    E --> F[Strategy]
+    F --> B
+    D --> G[Done]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">worker = Agent(model="sonnet-4")
+oracle = Agent(model="o3")
+
+result = worker.execute(task)
+if worker.is_stuck():
+    strategy = oracle.consult(context)
+    result = worker.execute(strategy)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Single model creates trade-off between capability and cost. Powerful models are expensive for routine tasks.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Two-tier system: fast Worker (Sonnet) handles bulk tasks, expensive Oracle (o3/Gemini) reserved for high-level reasoning and debugging.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Mix of routine and complex tasks</li>
+          <li>Cost optimization is important</li>
+          <li>Tasks where worker may get stuck</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Cost-efficient use of frontier models</li>
+              <li>Specialized AI team approach</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Orchestration complexity</li>
+              <li>Latency from model switching</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,95 @@
+<article class="pattern-card" data-pattern="agent-driven-research">
+  <div class="pattern-header">
+    <h2>Agent-Driven Research</h2>
+    <span class="tag" data-i18n="category">Orchestration & Control</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Question ──▶ Formulate Query ──▶ Search ──▶ Analyze
+                    ▲                          │
+                    │    Sufficient? ◀─────────┘
+                    │         │
+                    │    No   │ Yes
+                    └─────────┘   │
+                                  ▼
+                            Synthesize & Present</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Research Question] --> B[Formulate Query]
+    B --> C[Execute Search]
+    C --> D[Analyze Results]
+    D --> E{Sufficient?}
+    E -->|No| F[Refine Strategy]
+    F --> B
+    E -->|Yes| G[Synthesize Findings]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">while not agent.satisfied():
+    query = agent.formulate_query(question)
+    results = search_tool.execute(query)
+    agent.analyze(results)
+    agent.refine_strategy()
+return agent.synthesize_findings()</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">전통적인 리서치는 새로운 결과에 기반해 검색 전략을 동적으로 조정하는 능력이 부족함</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">에이전트가 독립적으로 쿼리를 생성하고, 검색을 실행하고, 결과를 분석하고, 만족할 때까지 반복하도록 함</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>복잡한 리서치 질문</li>
+          <li>다중 소스 정보 수집</li>
+          <li>적응적 검색이 필요할 때</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>적응적 검색 전략</li>
+              <li>자율적인 반복</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>명백한 소스를 놓칠 수 있음</li>
+              <li>반복에 따른 토큰 비용</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

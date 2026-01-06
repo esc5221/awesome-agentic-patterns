@@ -1,0 +1,88 @@
+<article class="pattern-card" data-pattern="latent-demand-product-discovery">
+  <div class="pattern-header">
+    <h2>Latent Demand Product Discovery</h2>
+    <span class="tag" data-i18n="category">UX & Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Hackable     Power Users      Analytics
+Product  ──▶  "Abuse"    ──▶   Pattern   ──▶ Productize
+             Features         Detection
+
+Example: Groups → 40% buy/sell → Marketplace</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Extension APIs] --> B[Power User Hacks]
+    B --> C[Pattern Detection]
+    C --> D[New Feature]
+    D --> E[All Users]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Monitor creative usage patterns
+if (slash_commands.custom_count > 100 and
+    usage.pattern == "notification"):
+    # Many users built this - productize it
+    roadmap.add("Built-in notifications")</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Difficult to predict which features have real product-market fit before significant engineering investment.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Build hackable products, observe how power users repurpose features, then productize validated demand.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Building extensible platforms</li>
+          <li>Feature prioritization</li>
+          <li>New product exploration</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Behavior-validated demand</li>
+              <li>Reduced risk</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Extension infra needed</li>
+              <li>Power users != mainstream</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

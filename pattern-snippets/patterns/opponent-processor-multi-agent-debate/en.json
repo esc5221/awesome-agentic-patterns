@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Single-agent decisions suffer from confirmation bias, limited perspectives, and unexamined assumptions.",
+  "solution": "Spawn opposing agents with different goals to debate each other, surfacing blind spots and unconsidered alternatives.",
+  "when": [
+    "Decisions requiring balanced perspectives",
+    "High-stakes choices needing scrutiny",
+    "Tasks prone to confirmation bias"
+  ],
+  "pros": [
+    "Reduces bias through adversarial pressure",
+    "Surfaces blind spots and trade-offs"
+  ],
+  "cons": [
+    "2x+ token cost",
+    "May deadlock without resolution mechanism"
+  ]
+}

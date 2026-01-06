@@ -1,0 +1,104 @@
+<article class="pattern-card" data-pattern="cli-native-agent-orchestration">
+  <div class="pattern-header">
+    <h2>CLI-Native Agent Orchestration</h2>
+    <span class="tag" data-i18n="category">Tool Use & Environment</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">┌─────────────────────────────────────┐
+│          Integration Points         │
+└─────────────────────────────────────┘
+        │         │         │
+        ▼         ▼         ▼
+   Makefile   Git Hook   Cron Job
+        │         │         │
+        └────┬────┴────┬────┘
+             │         │
+             ▼         ▼
+      claude spec   claude repl
+             │
+             ▼
+      Local Context ──▶ Agent ──▶ Output</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Makefile] --> D[claude CLI]
+    B[Git Hook] --> D
+    C[Cron Job] --> D
+    D --> E[Load Local Context]
+    E --> F[Agent Processing]
+    F --> G[Output/Changes]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash"># In your Makefile
+generate-from-spec:
+    claude spec run --input api.yaml --output src/
+
+test-spec-compliance:
+    claude spec test --spec api.yaml --codebase src/
+
+# Git pre-commit hook
+claude spec test || exit 1</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Web chat UIs are awkward for repeat runs, local file edits, or scripting inside CI pipelines.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Expose agent capabilities through a first-class CLI for Makefiles, Git hooks, cron jobs, and headless automation.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Integrating agents into CI/CD pipelines</li>
+          <li>Automating repetitive development tasks</li>
+          <li>Need headless or scripted agent execution</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Scriptable and composable with other tools</li>
+              <li>Works offline with local context</li>
+              <li>Easy to embed in existing workflows</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Initial install and auth setup</li>
+              <li>Learning curve for CLI flags</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

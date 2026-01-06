@@ -1,0 +1,18 @@
+{
+  "category": "Reliability & Eval",
+  "problem": "Combining private data + untrusted input + external communication enables prompt injection data exfiltration.",
+  "solution": "Audit every tool for these 3 capabilities and guarantee at least one is blocked in any execution path.",
+  "when": [
+    "Agents with tool access",
+    "Processing untrusted data",
+    "Security-critical systems"
+  ],
+  "pros": [
+    "Simple mental model",
+    "Eliminates attack class"
+  ],
+  "cons": [
+    "Limits all-in-one agents",
+    "Capability tagging effort"
+  ]
+}

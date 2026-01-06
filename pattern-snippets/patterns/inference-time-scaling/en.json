@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Once trained, model performance is fixed. We cannot 'think harder' by allocating more compute for challenging problems.",
+  "solution": "Allocate additional inference compute dynamically: generate multiple candidates, perform extended reasoning, iterate and refine outputs.",
+  "when": [
+    "Complex reasoning tasks where quality matters",
+    "Problems with verifiable solutions",
+    "When latency is acceptable for accuracy"
+  ],
+  "pros": [
+    "Dramatically improves performance on hard tasks",
+    "More cost-effective than larger models",
+    "Dynamic resource allocation by difficulty"
+  ],
+  "cons": [
+    "Increased latency for responses",
+    "Higher inference costs",
+    "Diminishing returns beyond thresholds"
+  ]
+}

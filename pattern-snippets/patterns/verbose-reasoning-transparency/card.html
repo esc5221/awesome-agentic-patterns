@@ -1,0 +1,100 @@
+<article class="pattern-card" data-pattern="verbose-reasoning-transparency">
+  <div class="pattern-header">
+    <h2>Verbose Reasoning Transparency</h2>
+    <span class="tag" data-i18n="category">UX & Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User ──▶ Complex Task ──▶ Agent ──▶ [Standard Output]
+                                         │
+                               ┌─────────┘
+                               │  Ctrl+R
+                               ▼
+                    ┌──────────────────────┐
+                    │  VERBOSE VIEW        │
+                    │  - Reasoning steps   │
+                    │  - Tool selection    │
+                    │  - Confidence scores │
+                    │  - Raw tool outputs  │
+                    └──────────────────────┘</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    User->>Agent: Task
+    Agent-->>User: Standard output
+    User->>UI: Ctrl+R
+    UI-->>User: Reasoning steps
+    UI-->>User: Tool rationale
+    UI-->>User: Raw outputs
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Verbose mode output example
+{
+    "interpretation": "User wants to refactor...",
+    "tools_considered": ["grep", "ast-parse", "sed"],
+    "tool_selected": "ast-parse",
+    "reason": "Need semantic understanding",
+    "confidence": 0.87
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Complex agents behave like black boxes; users cannot understand why decisions were made or debug unexpected behavior.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Provide on-demand verbose mode (e.g., Ctrl+R) showing reasoning steps, tool selection rationale, and raw outputs.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Debugging unexpected agent behavior</li>
+          <li>Building trust in agent decisions</li>
+          <li>Learning effective prompting</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Better debugging and trust</li>
+              <li>Helps users improve prompts</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Information overload risk</li>
+              <li>May expose internal complexity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

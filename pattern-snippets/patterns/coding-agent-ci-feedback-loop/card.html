@@ -1,0 +1,109 @@
+<article class="pattern-card" data-pattern="coding-agent-ci-feedback-loop">
+  <div class="pattern-header">
+    <h2>Coding Agent CI Feedback Loop</h2>
+    <span class="tag" data-i18n="category">Feedback Loops</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Agent ──▶ [Create Branch] ──▶ CI
+              │                  │
+              │◀── Partial Fails ┘
+              ▼
+        [Patch Specific Files]
+              │
+              ▼
+        [Re-run Failed Tests] ──▶ CI
+              │                    │
+              │◀──── Still Fails? ─┘
+              │        │
+              │        └──▶ Patch Again
+              ▼
+        All Green ──▶ User: "PR Ready"</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    Agent->>Git: create branch
+    Agent->>CI: trigger tests
+    loop every 30s
+        CI-->>Agent: partial failures
+        Agent->>Files: patch specific failures
+        Agent->>CI: re-run only failing tests
+    end
+    CI-->>Agent: all green
+    Agent-->>User: PR ready to merge
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Error parsing from CI logs
+def parse_ci_failures(logs):
+    return [
+        {"file": "auth.py", "line": 42,
+         "error": "Expected status 200"}
+    ]
+
+# Prioritized re-run
+agent.run_tests(only_files=patched_files)
+# Notify on completion
+if all_green: notify_user("PR ready")</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Synchronous test runs block agent from parallel work, creating idle compute and inflated training times as agent babysits builds.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Run agent async against CI: push branch, poll for partial failures, patch iteratively, notify on final green.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Multi-file refactors or feature additions</li>
+          <li>Long test suites that block iteration</li>
+          <li>Need to maximize compute utilization</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Compute efficiency - overlaps generation and testing</li>
+              <li>Faster iteration with less waiting</li>
+              <li>Autonomous until final green</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>CI flakiness can mislead patches</li>
+              <li>Security - agent needs CI push/read permissions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

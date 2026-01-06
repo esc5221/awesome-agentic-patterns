@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Traditional research lacks ability to adapt search strategies based on emerging results dynamically.",
+  "solution": "Let agents independently formulate queries, execute searches, analyze results, and iterate until satisfied.",
+  "when": [
+    "Complex research questions",
+    "Multi-source information gathering",
+    "Adaptive search needed"
+  ],
+  "pros": [
+    "Adaptive search strategies",
+    "Autonomous iteration"
+  ],
+  "cons": [
+    "May miss obvious sources",
+    "Token cost for iterations"
+  ]
+}

@@ -1,0 +1,100 @@
+<article class="pattern-card" data-pattern="dynamic-context-injection">
+  <div class="pattern-header">
+    <h2>Dynamic Context Injection</h2>
+    <span class="tag" data-i18n="category">Context & Memory</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User ──▶ "@Button.tsx" ──▶ [Read File] ──▶ Inject
+                                              │
+User ──▶ "/user:deploy" ──▶ [Load Cmd] ──────┤
+                                              ▼
+                         Agent [Enriched Context] ──▶ Continue</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant A as Agent
+    participant FS as File System
+    participant C as Commands
+    U->>A: @src/Button.tsx
+    A->>FS: Read file
+    FS-->>A: Content
+    U->>A: /user:deployment
+    A->>C: Load command
+    C-->>A: Instructions
+    A-->>U: Continue with context
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash"># File injection via @mention
+@src/components/Button.tsx
+
+# Slash command injection
+/user:deployment
+# Loads ~/.claude/commands/deployment.md
+
+# Both inject into agent context</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Agents often need specific context on-demand, but constantly editing static files or pasting text is inefficient.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Use @mentions for files and /slash commands for reusable prompts to dynamically inject context during sessions.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Need specific file contents mid-task</li>
+          <li>Frequently reuse complex instructions</li>
+          <li>Want fluid context management</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Targeted context injection</li>
+              <li>Reusable slash commands</li>
+              <li>Efficient lazy loading</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Must learn special syntax</li>
+              <li>May inject too much context</li>
+              <li>Command setup overhead</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

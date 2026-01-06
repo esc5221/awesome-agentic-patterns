@@ -1,0 +1,18 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "Large-scale code migrations (framework upgrades, lint fixes) are slow when done sequentially",
+  "solution": "Main agent orchestrates 10+ parallel subagents, each migrating a batch of files in map-reduce fashion",
+  "when": [
+    "Framework migrations (Jest to Vitest, etc.)",
+    "Lint rule rollouts across many files",
+    "API updates or code modernization"
+  ],
+  "pros": [
+    "10x+ speedup via parallelization",
+    "Fault isolation per batch"
+  ],
+  "cons": [
+    "High token cost for parallel agents",
+    "Potential merge conflicts"
+  ]
+}

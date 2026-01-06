@@ -1,0 +1,18 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Starting new features involves writing repetitive boilerplate and foundational code, which is time-consuming.",
+  "solution": "Use AI to generate initial structure, files, and boilerplate from high-level descriptions, then focus on core logic.",
+  "when": [
+    "New feature or module development",
+    "Repetitive project setup tasks",
+    "Consistent structure requirements"
+  ],
+  "pros": [
+    "Quick project kickstart",
+    "Consistent initial structure"
+  ],
+  "cons": [
+    "May not match existing conventions",
+    "Requires review of generated code"
+  ]
+}

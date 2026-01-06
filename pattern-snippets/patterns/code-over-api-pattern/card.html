@@ -1,0 +1,100 @@
+<article class="pattern-card" data-pattern="code-over-api-pattern">
+  <div class="pattern-header">
+    <h2>Code-Over-API Pattern</h2>
+    <span class="tag" data-i18n="category">Tool Use & Environment</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Direct API (High Cost):
+  Agent ──▶ API ──▶ [10K rows: 150K tokens] ──▶ Context
+
+Code-Over-API (Low Cost):
+  Agent ──▶ Write Code ──▶ Sandbox
+                              │
+                         [Process 10K]
+                              │
+                         [Filter/Agg]
+                              │
+                         [Summary: 2K] ──▶ Context</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Agent] -->|write code| B[Sandbox]
+    B -->|fetch| C[API/Data]
+    C -->|10K rows| B
+    B -->|process| B
+    B -->|summary only| A
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">def process_spreadsheet():
+    # Fetch in execution env (not context)
+    rows = spreadsheet.getRows(sheet_id="abc")
+    # Filter in code
+    active = [r for r in rows if r.status == "active"]
+    # Only summary to context
+    print(f"Found {len(active)} of {len(rows)}")
+    return active[:5]  # Sample only</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Direct API calls force all intermediate data through the model's context window, causing 150K+ tokens for data-heavy workflows.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Agent writes code that executes in sandbox; data processing happens in execution environment with only results returning to context.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Data-heavy workflows (spreadsheets, databases, logs)</li>
+          <li>Multi-step transformations or aggregations</li>
+          <li>Cost-sensitive applications where token usage matters</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Dramatic token reduction (150K to 2K reported)</li>
+              <li>Lower latency (fewer context API calls)</li>
+              <li>Natural fit for data processing tasks</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires secure code execution infrastructure</li>
+              <li>Agents must write correct code</li>
+              <li>Debugging errors happens in execution, not context</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,20 @@
+{
+  "category": "Orchestration & Control",
+  "problem": "A privileged agent that sees untrusted text AND wields tools can be coerced into dangerous calls.",
+  "solution": "Split into Privileged LLM (plans/tools, no raw data) and Quarantined LLM (reads data, no tools), passing data as symbolic variables.",
+  "when": [
+    "Email/calendar assistants",
+    "Booking agents handling user data",
+    "API-powered chatbots"
+  ],
+  "pros": [
+    "Clear trust boundary",
+    "Compatible with static analysis",
+    "Prevents injection attacks"
+  ],
+  "cons": [
+    "Increased complexity",
+    "Debugging across two models",
+    "Variable mapping overhead"
+  ]
+}

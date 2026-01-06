@@ -1,0 +1,18 @@
+{
+  "category": "Security & Safety",
+  "problem": "RL training rollouts share infrastructure, causing cross-contamination and corrupted rewards when agents execute destructive commands.",
+  "solution": "Spin up an isolated VM/container for each rollout, ensuring complete environment isolation with fresh state.",
+  "when": [
+    "RL training with tool-using agents",
+    "Agents with shell/filesystem access",
+    "Parallel rollouts (100+)"
+  ],
+  "pros": [
+    "Complete isolation",
+    "Deterministic rewards"
+  ],
+  "cons": [
+    "Cost of 100s VMs",
+    "Provisioning latency"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "category": "Context & Memory",
+  "problem": "Loading all files into prompt exceeds token limits and introduces noise from unrelated code.",
+  "solution": "Load only primary files plus summarized secondary files from a search subagent's ranked results.",
+  "when": [
+    "Multi-file refactoring tasks",
+    "Feature implementation in large repos",
+    "Need to minimize hallucinations"
+  ],
+  "pros": [
+    "Minimal prompt size, on-target",
+    "Faster responses, fewer hallucinations",
+    "Scales to large repositories"
+  ],
+  "cons": [
+    "Requires file-search service",
+    "May miss critical files if ranking is off",
+    "Index needs to stay current"
+  ]
+}

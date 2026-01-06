@@ -1,0 +1,100 @@
+<article class="pattern-card" data-pattern="filesystem-based-agent-state">
+  <div class="pattern-header">
+    <h2>Filesystem-Based Agent State</h2>
+    <span class="tag" data-i18n="category">Context & Memory</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">workspace/
+├── state/
+│   ├── step1_results.json  ◄── Checkpoint
+│   ├── step2_results.json  ◄── Checkpoint
+│   └── progress.txt
+└── logs/
+    └── execution.log
+
+Step1 ──▶ [Save] ──▶ Step2 ──▶ [Save] ──▶ Step3
+              │                    │
+              ▼                    ▼
+         [Interrupt]          [Resume]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Start] --> B{Checkpoint Exists?}
+    B -->|Yes| C[Load State]
+    B -->|No| D[Execute Step]
+    C --> D
+    D --> E[Save Checkpoint]
+    E --> F{More Steps?}
+    F -->|Yes| D
+    F -->|No| G[Done]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">if os.path.exists("state/step1.json"):
+    data = json.load(open("state/step1.json"))
+else:
+    data = perform_step1()
+    json.dump(data, open("state/step1.json", "w"))
+# Resume from checkpoint if interrupted</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Long-running agent workflows lose all progress when interrupted, as state in context window does not persist across sessions.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Persist intermediate results to files, creating durable checkpoints that enable workflow resumption and failure recovery.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Multi-step workflows with expensive operations</li>
+          <li>Long-running tasks exceeding session limits</li>
+          <li>Workflows needing recovery from failures</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Enables workflow resumption</li>
+              <li>Protects against data loss</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Requires checkpoint/recovery logic</li>
+              <li>File I/O adds overhead</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
