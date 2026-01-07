@@ -484,6 +484,33 @@ pre code {
 }
 
 /* ========================================
+   Mobile Menu (hidden by default on desktop)
+   ======================================== */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.menu-toggle svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+.sidebar-close {
+  display: none;
+}
+
+/* ========================================
    Responsive
    ======================================== */
 @media (max-width: 900px) {
@@ -497,9 +524,158 @@ pre code {
   }
 }
 
+@media (max-width: 768px) {
+  /* Show hamburger */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Overlay */
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Layout: single column */
+  .page-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Sidebar as slide-in drawer */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    max-width: 80vw;
+    height: 100vh;
+    background: var(--bg);
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    border-right: 1px solid var(--border);
+    padding-top: 0;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Close button inside sidebar */
+  .sidebar-close {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-close-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .sidebar-close-btn {
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    cursor: pointer;
+    color: var(--text-muted);
+  }
+
+  .sidebar-close-btn svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+
+  /* Container adjustments */
+  .container {
+    border-left: none;
+    padding: 0.75rem;
+    overflow-x: hidden;
+  }
+
+  /* Header adjustments - sticky on mobile */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg);
+    padding: 0.75rem 1rem;
+  }
+
+  .header h1 {
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .subtitle {
+    display: none;
+  }
+
+  /* Pattern card mobile */
+  .pattern-card {
+    padding-top: 1.5rem;
+  }
+
+  .pattern-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .pattern-header h2 {
+    font-size: 0.95rem;
+  }
+
+  .tag {
+    font-size: 0.6rem;
+  }
+
+  /* Prevent overflow */
+  .pattern-content {
+    overflow-x: hidden;
+  }
+
+  .visual-side,
+  .description-side {
+    padding: 0.5rem;
+    overflow-x: auto;
+  }
+
+  .ascii-art {
+    font-size: 0.55rem;
+    padding: 0.75rem;
+  }
+
+  .code-box pre {
+    padding: 0.5rem;
+  }
+
+  .code-box code {
+    font-size: 0.7rem;
+  }
+
+  .diagram-box,
+  .code-box {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 600px) {
   html { font-size: 13px; }
-  .container { padding: 1rem; }
-  .visual-side, .description-side { padding: 0.75rem; }
   .tradeoffs { flex-direction: column; gap: 0.5rem; }
 }

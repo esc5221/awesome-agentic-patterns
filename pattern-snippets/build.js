@@ -110,6 +110,13 @@ function generateHtml(cards, toc) {
 <body>
   <header class="header">
     <div class="header-content">
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
       <div class="header-left">
         <h1 data-i18n="site.title">Agentic Patterns Snippets</h1>
         <p class="subtitle" data-i18n="site.subtitle">AI 에이전트 설계 패턴 레퍼런스</p>
@@ -121,8 +128,18 @@ function generateHtml(cards, toc) {
     </div>
   </header>
 
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
   <div class="page-layout">
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-close">
+        <span class="sidebar-close-title">Patterns</span>
+        <button class="sidebar-close-btn" id="sidebarClose" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
       <nav class="toc">
 ${toc}
       </nav>
@@ -174,6 +191,37 @@ ${cards}
             content.classList.add('active');
           }
         });
+      });
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const sidebarClose = document.getElementById('sidebarClose');
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      sidebarOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    menuToggle.addEventListener('click', openSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    // Close sidebar when clicking a TOC link (mobile)
+    document.querySelectorAll('.toc-item').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          closeSidebar();
+        }
       });
     });
   </script>
