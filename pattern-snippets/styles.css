@@ -65,6 +65,18 @@ body {
   margin-top: 0.15rem;
 }
 
+.original-site-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+
+.original-site-link:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
 /* Language Switch */
 .lang-switch {
   display: flex;

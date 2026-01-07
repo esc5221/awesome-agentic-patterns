@@ -7,7 +7,11 @@
 > - English/Korean bilingual support
 > - Quick reference cards for each pattern
 >
-> **Original site**: [agentic-patterns.com](https://agentic-patterns.com)
+> ---
+>
+> 📌 **Original / Canonical**
+> - **Site**: [agentic-patterns.com](https://agentic-patterns.com)
+> - **GitHub**: [nibzard/awesome-agentic-patterns](https://github.com/nibzard/awesome-agentic-patterns)
 
 ---
 

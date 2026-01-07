@@ -119,7 +119,7 @@ function generateHtml(cards, toc) {
       </button>
       <div class="header-left">
         <h1 data-i18n="site.title">Agentic Patterns Snippets</h1>
-        <p class="subtitle" data-i18n="site.subtitle">AI 에이전트 설계 패턴 레퍼런스</p>
+        <p class="subtitle"><span data-i18n="site.subtitle">AI 에이전트 설계 패턴 레퍼런스</span> · <a href="https://agentic-patterns.com" target="_blank" rel="noopener" class="original-site-link">Original: agentic-patterns.com</a></p>
       </div>
       <div class="lang-switch">
         <button class="lang-btn active" data-lang="en">EN</button>
