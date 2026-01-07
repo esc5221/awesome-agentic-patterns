@@ -215,8 +215,14 @@ function build() {
       `  <a href="${originalUrl}" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
 </article>`
     );
-    // Indent each line for prettier output
-    return html.split('\n').map(line => '      ' + line).join('\n');
+    // Indent each line for prettier output, but preserve <pre> content
+    let inPre = false;
+    return html.split('\n').map(line => {
+      if (line.includes('<pre')) inPre = true;
+      const result = inPre ? line : '      ' + line;
+      if (line.includes('</pre>')) inPre = false;
+      return result;
+    }).join('\n');
   }).join('\n\n');
 
   // Generate TOC

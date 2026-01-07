@@ -190,14 +190,14 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">User Input ──▶ [Transform] ──▶ Safe Output
-          │              │
-          │         ┌────┴────┐
-          └────────▶│ REMOVE  │
-                    │ tainted │
-                    └─────────┘
-      
-      Context:  [████ tainted ████] → [██ clean ██]</pre>
+          <pre class="ascii-art">User Input ──▶ [Transform] ──▶ Safe Output
+    │              │
+    │         ┌────┴────┐
+    └────────▶│ REMOVE  │
+              │ tainted │
+              └─────────┘
+
+Context:  [████ tainted ████] → [██ clean ██]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -214,10 +214,10 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">sql = LLM("to SQL", user_prompt)
-      remove(user_prompt)  # tainted tokens gone
-      rows = db.query(sql)
-      answer = LLM("summarize", rows)  # clean context</code></pre>
+        <pre><code class="language-python">sql = LLM("to SQL", user_prompt)
+remove(user_prompt)  # tainted tokens gone
+rows = db.query(sql)
+answer = LLM("summarize", rows)  # clean context</code></pre>
             </div>
           </div>
       
@@ -283,14 +283,14 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Context Window: [████████████░░░░░░░░] 60%
-      
-      Without Management:          With Management:
-      ├─ "Running low..."         ├─ "Plenty of space"
-      ├─ Summarize early          ├─ Continue working
-      └─ Rush completion          └─ Thorough output
-      
-      Buffer: Enable 1M ──▶ Cap at 200k ──▶ Psychological runway</pre>
+          <pre class="ascii-art">Context Window: [████████████░░░░░░░░] 60%
+
+Without Management:          With Management:
+├─ "Running low..."         ├─ "Plenty of space"
+├─ Summarize early          ├─ Continue working
+└─ Rush completion          └─ Thorough output
+
+Buffer: Enable 1M ──▶ Cap at 200k ──▶ Psychological runway</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -306,12 +306,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">prompt = """
-      CONTEXT GUIDANCE: You have 200k+ tokens.
-      Do NOT rush or summarize prematurely.
-      """ + user_input + """
-      Remember: Context is NOT a constraint.
-      """</code></pre>
+        <pre><code class="language-python">prompt = """
+CONTEXT GUIDANCE: You have 200k+ tokens.
+Do NOT rush or summarize prematurely.
+""" + user_input + """
+Remember: Context is NOT a constraint.
+"""</code></pre>
             </div>
           </div>
       
@@ -379,11 +379,11 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">User ──▶ "@Button.tsx" ──▶ [Read File] ──▶ Inject
-                                                    │
-      User ──▶ "/user:deploy" ──▶ [Load Cmd] ──────┤
-                                                    ▼
-                               Agent [Enriched Context] ──▶ Continue</pre>
+          <pre class="ascii-art">User ──▶ "@Button.tsx" ──▶ [Read File] ──▶ Inject
+                                              │
+User ──▶ "/user:deploy" ──▶ [Load Cmd] ──────┤
+                                              ▼
+                         Agent [Enriched Context] ──▶ Continue</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -407,14 +407,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-bash"># File injection via @mention
-      @src/components/Button.tsx
-      
-      # Slash command injection
-      /user:deployment
-      # Loads ~/.claude/commands/deployment.md
-      
-      # Both inject into agent context</code></pre>
+        <pre><code class="language-bash"># File injection via @mention
+@src/components/Button.tsx
+
+# Slash command injection
+/user:deployment
+# Loads ~/.claude/commands/deployment.md
+
+# Both inject into agent context</code></pre>
             </div>
           </div>
       
@@ -482,18 +482,18 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">workspace/
-      ├── state/
-      │   ├── step1_results.json  ◄── Checkpoint
-      │   ├── step2_results.json  ◄── Checkpoint
-      │   └── progress.txt
-      └── logs/
-          └── execution.log
-      
-      Step1 ──▶ [Save] ──▶ Step2 ──▶ [Save] ──▶ Step3
-                    │                    │
-                    ▼                    ▼
-               [Interrupt]          [Resume]</pre>
+          <pre class="ascii-art">workspace/
+├── state/
+│   ├── step1_results.json  ◄── Checkpoint
+│   ├── step2_results.json  ◄── Checkpoint
+│   └── progress.txt
+└── logs/
+    └── execution.log
+
+Step1 ──▶ [Save] ──▶ Step2 ──▶ [Save] ──▶ Step3
+              │                    │
+              ▼                    ▼
+         [Interrupt]          [Resume]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -514,12 +514,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">if os.path.exists("state/step1.json"):
-          data = json.load(open("state/step1.json"))
-      else:
-          data = perform_step1()
-          json.dump(data, open("state/step1.json", "w"))
-      # Resume from checkpoint if interrupted</code></pre>
+        <pre><code class="language-python">if os.path.exists("state/step1.json"):
+    data = json.load(open("state/step1.json"))
+else:
+    data = perform_step1()
+    json.dump(data, open("state/step1.json", "w"))
+# Resume from checkpoint if interrupted</code></pre>
             </div>
           </div>
       
@@ -585,12 +585,12 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Enterprise ──┐
-        ~/.claude ─┼──▶ Merge ──▶ Agent Context
-         project/ ─┤
-          .local ──┘
-      
-      Priority: local > project > user > enterprise</pre>
+          <pre class="ascii-art">Enterprise ──┐
+  ~/.claude ─┼──▶ Merge ──▶ Agent Context
+   project/ ─┤
+    .local ──┘
+
+Priority: local > project > user > enterprise</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -608,11 +608,11 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-bash"># Auto-discovered hierarchy
-      /enterprise/CLAUDE.md    # Org policies
-      ~/.claude/CLAUDE.md      # User prefs
-      ./CLAUDE.md              # Project rules
-      ./CLAUDE.local.md        # Personal overrides</code></pre>
+        <pre><code class="language-bash"># Auto-discovered hierarchy
+/enterprise/CLAUDE.md    # Org policies
+~/.claude/CLAUDE.md      # User prefs
+./CLAUDE.md              # Project rules
+./CLAUDE.local.md        # Personal overrides</code></pre>
             </div>
           </div>
       
@@ -678,16 +678,16 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">MainAgent: "Find UserModel definitions"
-           │
-           ▼
-      SearchSubagent ──▶ [Index] ──▶ Top 3 snippets
-           │
-           ▼
-      Context: [user_service.py] [models/user.py] [auth.py]
-           │
-           ▼
-      MainAgent: edit_file(UserService) ✓</pre>
+          <pre class="ascii-art">MainAgent: "Find UserModel definitions"
+     │
+     ▼
+SearchSubagent ──▶ [Index] ──▶ Top 3 snippets
+     │
+     ▼
+Context: [user_service.py] [models/user.py] [auth.py]
+     │
+     ▼
+MainAgent: edit_file(UserService) ✓</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -704,11 +704,11 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">search = SearchSubagent(index="code_index")
-      snippets = search.find("UserModel", top_k=3)
-      
-      context.inject(snippets)  # Only 3 files
-      agent.edit("UserService")  # Focused work</code></pre>
+        <pre><code class="language-python">search = SearchSubagent(index="code_index")
+snippets = search.find("UserModel", top_k=3)
+
+context.inject(snippets)  # Only 3 files
+agent.edit("UserService")  # Focused work</code></pre>
             </div>
           </div>
       
@@ -776,15 +776,15 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Episode Done ──▶ Write Memory Blob ──▶ [Vector DB]
-                                                 │
-      New Task ──▶ Embed Prompt ──▶ Query ───────┘
-                                     │
-                                     ▼
-                               top-k Memories
-                                     │
-                                     ▼
-                     Agent [Context + Hints] ──▶ Execute</pre>
+          <pre class="ascii-art">Episode Done ──▶ Write Memory Blob ──▶ [Vector DB]
+                                           │
+New Task ──▶ Embed Prompt ──▶ Query ───────┘
+                               │
+                               ▼
+                         top-k Memories
+                               │
+                               ▼
+               Agent [Context + Hints] ──▶ Execute</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -805,16 +805,16 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># After episode completion
-      memory_db.write({
-          "event": "refactored auth module",
-          "outcome": "broke session handling",
-          "rationale": "missed dependency"
-      })
-      
-      # On new task
-      hints = memory_db.retrieve(task, top_k=3)
-      agent.execute(task, context_hints=hints)</code></pre>
+        <pre><code class="language-python"># After episode completion
+memory_db.write({
+    "event": "refactored auth module",
+    "outcome": "broke session handling",
+    "rationale": "missed dependency"
+})
+
+# On new task
+hints = memory_db.retrieve(task, top_k=3)
+agent.execute(task, context_hints=hints)</code></pre>
             </div>
           </div>
       
@@ -882,12 +882,12 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Task Diaries              Synthesis
-      ────────────              ─────────
-      [Diary 1] ──┐
-      [Diary 2] ──┼──▶ Synthesis Agent ──▶ Patterns
-      [Diary 3] ──┘              ↓
-                          CLAUDE.md / Commands</pre>
+          <pre class="ascii-art">Task Diaries              Synthesis
+────────────              ─────────
+[Diary 1] ──┐
+[Diary 2] ──┼──▶ Synthesis Agent ──▶ Patterns
+[Diary 3] ──┘              ↓
+                    CLAUDE.md / Commands</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -905,12 +905,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Synthesis prompt
-      synthesis_agent("""
-      Review 50 task diaries.
-      Find patterns appearing 3+ times.
-      Output: rules, commands, tests
-      """)</code></pre>
+        <pre><code class="language-python"># Synthesis prompt
+synthesis_agent("""
+Review 50 task diaries.
+Find patterns appearing 3+ times.
+Output: rules, commands, tests
+""")</code></pre>
             </div>
           </div>
       
@@ -976,18 +976,18 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Agent ──▶ [Work] ──▶ Write Notes ──▶ [state.md]
-                                │
-                                ▼
-                     ┌─────────────────────┐
-                     │  Template Schema    │
-                     │  • Objective        │
-                     │  • Progress         │
-                     │  • Knowledge Gaps   │
-                     └─────────────────────┘
-                                │
-                                ▼
-                      Validate ──▶ External Memory</pre>
+          <pre class="ascii-art">Agent ──▶ [Work] ──▶ Write Notes ──▶ [state.md]
+                          │
+                          ▼
+               ┌─────────────────────┐
+               │  Template Schema    │
+               │  • Objective        │
+               │  • Progress         │
+               │  • Knowledge Gaps   │
+               └─────────────────────┘
+                          │
+                          ▼
+                Validate ──▶ External Memory</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -1006,13 +1006,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">class StateManager:
-          def capture_state(self, agent_notes):
-              structured = self.parse_notes(agent_notes)
-              missing = self.validate(structured)
-              if missing:
-                  return self.prompt_clarification(missing)
-              return self.merge_with_memory(structured)</code></pre>
+        <pre><code class="language-python">class StateManager:
+    def capture_state(self, agent_notes):
+        structured = self.parse_notes(agent_notes)
+        missing = self.validate(structured)
+        if missing:
+            return self.prompt_clarification(missing)
+        return self.merge_with_memory(structured)</code></pre>
             </div>
           </div>
       
@@ -1080,19 +1080,19 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Task: "Add validation to signup()"
-                 │
-                 ▼
-        ┌─────────────────────────────────────┐
-        │ PRIMARY: UserController.java (full) │
-        ├─────────────────────────────────────┤
-        │ CONTEXT SNIPPETS:                   │
-        │  - UserService.validateUser()       │
-        │  - SignupDTO: fields + annotations  │
-        └─────────────────────────────────────┘
-                 │
-                 ▼
-            Agent: Focused edit ✓</pre>
+          <pre class="ascii-art">Task: "Add validation to signup()"
+           │
+           ▼
+  ┌─────────────────────────────────────┐
+  │ PRIMARY: UserController.java (full) │
+  ├─────────────────────────────────────┤
+  │ CONTEXT SNIPPETS:                   │
+  │  - UserService.validateUser()       │
+  │  - SignupDTO: fields + annotations  │
+  └─────────────────────────────────────┘
+           │
+           ▼
+      Agent: Focused edit ✓</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -1110,14 +1110,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">primary = load_full("UserController.java")
-      secondary = search.find("signup", top_n=5)
-      snippets = [extract_methods(f) for f in secondary]
-      
-      context = f"""
-      ### PRIMARY: {primary}
-      ### SNIPPETS: {snippets}
-      """</code></pre>
+        <pre><code class="language-python">primary = load_full("UserController.java")
+secondary = search.find("signup", top_n=5)
+snippets = [extract_methods(f) for f in secondary]
+
+context = f"""
+### PRIMARY: {primary}
+### SNIPPETS: {snippets}
+"""</code></pre>
             </div>
           </div>
       
@@ -1185,20 +1185,20 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Dev ──▶ Agent: "Upgrade to React 19"
-                    │
-                    ▼
-              [Push Branch] ──▶ CI Tests
-                    │               │
-                    │◀──── 12 fails ┘
-                    ▼
-              [Patch imports]
-                    │
-                    ▼
-              [Re-run CI] ──▶ All Green
-                    │
-                    ▼
-              Agent ──▶ Dev: "PR ready!"</pre>
+          <pre class="ascii-art">Dev ──▶ Agent: "Upgrade to React 19"
+              │
+              ▼
+        [Push Branch] ──▶ CI Tests
+              │               │
+              │◀──── 12 fails ┘
+              ▼
+        [Patch imports]
+              │
+              ▼
+        [Re-run CI] ──▶ All Green
+              │
+              ▼
+        Agent ──▶ Dev: "PR ready!"</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -1219,15 +1219,15 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-bash"># Agent runs in background
-      git checkout -b react19-upgrade
-      # Make changes...
-      git push origin react19-upgrade
-      
-      # CI runs automatically
-      # Agent polls for results
-      # On failure: patch and retry
-      # On success: notify developer</code></pre>
+        <pre><code class="language-bash"># Agent runs in background
+git checkout -b react19-upgrade
+# Make changes...
+git push origin react19-upgrade
+
+# CI runs automatically
+# Agent polls for results
+# On failure: patch and retry
+# On success: notify developer</code></pre>
             </div>
           </div>
       
@@ -1294,15 +1294,15 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">┌─────────────────────────────────────────────┐
-      │              DOGFOODING LOOP                │
-      └─────────────────────────────────────────────┘
-      
-      Build ──▶ Use Daily ──▶ Find Issues ──▶ Fix Fast
-        ▲                                        │
-        └────────────────────────────────────────┘
-      
-      Team(70-80%) ──▶ Feedback(5min) ──▶ Iterate</pre>
+          <pre class="ascii-art">┌─────────────────────────────────────────────┐
+│              DOGFOODING LOOP                │
+└─────────────────────────────────────────────┘
+
+Build ──▶ Use Daily ──▶ Find Issues ──▶ Fix Fast
+  ▲                                        │
+  └────────────────────────────────────────┘
+
+Team(70-80%) ──▶ Feedback(5min) ──▶ Iterate</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -1324,15 +1324,15 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Anthropic "ant-fooding" approach
-      team_adoption = 0.80  # 80% daily usage
-      feedback_interval = "5min"
-      
-      # Feature validation flow
-      feature = push_to_internal()
-      feedback = collect_team_feedback(feature)
-      if not feedback.positive:
-          unship(feature)  # Fast pivot</code></pre>
+        <pre><code class="language-python"># Anthropic "ant-fooding" approach
+team_adoption = 0.80  # 80% daily usage
+feedback_interval = "5min"
+
+# Feature validation flow
+feature = push_to_internal()
+feedback = collect_team_feedback(feature)
+if not feedback.positive:
+    unship(feature)  # Fast pivot</code></pre>
             </div>
           </div>
       
@@ -1400,15 +1400,15 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">        ┌── T1 ──┐
-              │        ▼
-      Problem ┼── T2 ──┼──▶ Aggregate ──▶ Refine ──▶ Solution
-              │        ▲         ▲
-              └── T3 ──┘         │
-                   │             │
-                   └── Loop ─────┘
-      
-      Branch → Aggregate → Refine → Loop back if needed</pre>
+          <pre class="ascii-art">        ┌── T1 ──┐
+        │        ▼
+Problem ┼── T2 ──┼──▶ Aggregate ──▶ Refine ──▶ Solution
+        │        ▲         ▲
+        └── T3 ──┘         │
+             │             │
+             └── Loop ─────┘
+
+Branch → Aggregate → Refine → Loop back if needed</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -1428,13 +1428,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">got = GraphOfThoughts(llm, max_thoughts=50)
-      got.add_thought(root)
-      for thought in thoughts_to_expand:
-          got.branch_thought(thought)   # Generate alternatives
-          got.aggregate_related()       # Combine insights
-          got.refine_thought(thought)   # Improve based on context
-      return got.extract_best_solution()</code></pre>
+        <pre><code class="language-python">got = GraphOfThoughts(llm, max_thoughts=50)
+got.add_thought(root)
+for thought in thoughts_to_expand:
+    got.branch_thought(thought)   # Generate alternatives
+    got.aggregate_related()       # Combine insights
+    got.refine_thought(thought)   # Improve based on context
+return got.extract_best_solution()</code></pre>
             </div>
           </div>
       
@@ -1500,16 +1500,16 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">                    ┌──────────────────┐
-                          │                  │
-                          ▼                  │ No
-      Input ──▶ Generate ──▶ Evaluate ──▶ [score ≥ θ?] ──▶ Done
-                                             │ Yes
-                          ▲                  │
-                          │    Feedback      │
-                          └──────────────────┘
-      
-      Quality:  ░░░░ → ▒▒▒▒ → ▓▓▓▓ → ████</pre>
+          <pre class="ascii-art">                    ┌──────────────────┐
+                    │                  │
+                    ▼                  │ No
+Input ──▶ Generate ──▶ Evaluate ──▶ [score ≥ θ?] ──▶ Done
+                                       │ Yes
+                    ▲                  │
+                    │    Feedback      │
+                    └──────────────────┘
+
+Quality:  ░░░░ → ▒▒▒▒ → ▓▓▓▓ → ████</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -1528,16 +1528,16 @@
               <div class="box-header">
                 <span class="box-label">Pseudo</span>
               </div>
-              <pre><code class="language-python">for attempt in range(max_iters):
-          draft = generate(prompt)
-          score, critique = evaluate(draft, metric)
-      
-          if score >= threshold:
-              return draft
-      
-          prompt = incorporate(critique, prompt)
-      
-      return draft  # best effort</code></pre>
+        <pre><code class="language-python">for attempt in range(max_iters):
+    draft = generate(prompt)
+    score, critique = evaluate(draft, metric)
+
+    if score >= threshold:
+        return draft
+
+    prompt = incorporate(critique, prompt)
+
+return draft  # best effort</code></pre>
             </div>
           </div>
       
@@ -1603,12 +1603,12 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Spec Change ──▶ Generate Tests ──▶ Run Tests ──┐
-                                                      │
-          ┌───────────────────────────────────────────┘
-          │  Fail?
-          ▼
-      Agent PR: Fix Code or Flag Spec ──▶ Review</pre>
+          <pre class="ascii-art">Spec Change ──▶ Generate Tests ──▶ Run Tests ──┐
+                                                │
+    ┌───────────────────────────────────────────┘
+    │  Fail?
+    ▼
+Agent PR: Fix Code or Flag Spec ──▶ Review</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -1626,11 +1626,11 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">on_commit(spec_or_code):
-          tests = generate_tests(spec.latest)
-          result = run_tests(tests)
-          if result.failed:
-              create_pr(fix_or_flag(result))</code></pre>
+        <pre><code class="language-python">on_commit(spec_or_code):
+    tests = generate_tests(spec.latest)
+    result = run_tests(tests)
+    if result.failed:
+        create_pr(fix_or_flag(result))</code></pre>
             </div>
           </div>
       
@@ -1696,11 +1696,11 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Agent ──▶ compile() ──▶ [+1.0] ──▶ lint() ──▶ [+0.5]
-                      │                       │
-                      └───────────────────────┴──▶ test() ──▶ [+2.0]
-                                                               │
-                                                    ∑ rewards ──▶ Policy Update</pre>
+          <pre class="ascii-art">Agent ──▶ compile() ──▶ [+1.0] ──▶ lint() ──▶ [+0.5]
+                │                       │
+                └───────────────────────┴──▶ test() ──▶ [+2.0]
+                                                         │
+                                              ∑ rewards ──▶ Policy Update</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -1718,12 +1718,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># RL step: shaped rewards for tool calls
-      if action == "compile":
-          local_reward = 1 if compile_success else -0.5
-      elif action == "run_tests":
-          local_reward = 2 if new_tests_passed else 0
-      trajectory.append((state, action, local_reward))</code></pre>
+        <pre><code class="language-python"># RL step: shaped rewards for tool calls
+if action == "compile":
+    local_reward = 1 if compile_success else -0.5
+elif action == "run_tests":
+    local_reward = 2 if new_tests_passed else 0
+trajectory.append((state, action, local_reward))</code></pre>
             </div>
           </div>
       
@@ -1789,20 +1789,20 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Agent ──▶ [Create Branch] ──▶ CI
-                    │                  │
-                    │◀── Partial Fails ┘
-                    ▼
-              [Patch Specific Files]
-                    │
-                    ▼
-              [Re-run Failed Tests] ──▶ CI
-                    │                    │
-                    │◀──── Still Fails? ─┘
-                    │        │
-                    │        └──▶ Patch Again
-                    ▼
-              All Green ──▶ User: "PR Ready"</pre>
+          <pre class="ascii-art">Agent ──▶ [Create Branch] ──▶ CI
+              │                  │
+              │◀── Partial Fails ┘
+              ▼
+        [Patch Specific Files]
+              │
+              ▼
+        [Re-run Failed Tests] ──▶ CI
+              │                    │
+              │◀──── Still Fails? ─┘
+              │        │
+              │        └──▶ Patch Again
+              ▼
+        All Green ──▶ User: "PR Ready"</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -1824,17 +1824,17 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Error parsing from CI logs
-      def parse_ci_failures(logs):
-          return [
-              {"file": "auth.py", "line": 42,
-               "error": "Expected status 200"}
-          ]
-      
-      # Prioritized re-run
-      agent.run_tests(only_files=patched_files)
-      # Notify on completion
-      if all_green: notify_user("PR ready")</code></pre>
+        <pre><code class="language-python"># Error parsing from CI logs
+def parse_ci_failures(logs):
+    return [
+        {"file": "auth.py", "line": 42,
+         "error": "Expected status 200"}
+    ]
+
+# Prioritized re-run
+agent.run_tests(only_files=patched_files)
+# Notify on completion
+if all_green: notify_user("PR ready")</code></pre>
             </div>
           </div>
       
@@ -1901,15 +1901,15 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">             ┌── Correctness ──▶ 1.0 ──┐
-                   │                         │
-      Patch ──▶ Critic ─── Style ──────▶ 0.8 ──┼──▶ Weighted ──▶ 0.7
-                   │                         │      Sum
-                   ├── Performance ──▶ 0.4 ──┤
-                   │                         │
-                   └── Security ────▶ 0.6 ──┘
-      
-      + CoT: "O(n^2) loop caused perf regression"</pre>
+          <pre class="ascii-art">             ┌── Correctness ──▶ 1.0 ──┐
+             │                         │
+Patch ──▶ Critic ─── Style ──────▶ 0.8 ──┼──▶ Weighted ──▶ 0.7
+             │                         │      Sum
+             ├── Performance ──▶ 0.4 ──┤
+             │                         │
+             └── Security ────▶ 0.6 ──┘
+
++ CoT: "O(n^2) loop caused perf regression"</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -1929,14 +1929,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">subscores = {
-          "correctness": test_critic.score(patch),
-          "style": linter_critic.score(patch),
-          "performance": perf_critic.score(patch),
-          "security": security_critic.score(patch),
-      }
-      final = sum(w[k]*subscores[k] for k in subscores)
-      return final, subscores, "O(n^2) loop detected"</code></pre>
+        <pre><code class="language-python">subscores = {
+    "correctness": test_critic.score(patch),
+    "style": linter_critic.score(patch),
+    "performance": perf_critic.score(patch),
+    "security": security_critic.score(patch),
+}
+final = sum(w[k]*subscores[k] for k in subscores)
+return final, subscores, "O(n^2) loop detected"</code></pre>
             </div>
           </div>
       
@@ -2002,13 +2002,13 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Agent ──▶ [Action] ──▶ [Tool] ──▶ Feedback ──┐
-        ▲                                          │
-        │       ┌──────────────────────────────────┘
-        │       ▼
-        └─── [Parse] ◀── errors, test fails, lint, screenshots
-      
-      Loop: action → feedback → fix → action → ...</pre>
+          <pre class="ascii-art">Agent ──▶ [Action] ──▶ [Tool] ──▶ Feedback ──┐
+  ▲                                          │
+  │       ┌──────────────────────────────────┘
+  │       ▼
+  └─── [Parse] ◀── errors, test fails, lint, screenshots
+
+Loop: action → feedback → fix → action → ...</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -2026,11 +2026,11 @@
               <div class="box-header">
                 <span class="box-label">Concept</span>
               </div>
-              <pre><code class="language-python"># Rich feedback > perfect prompts
-      result = agent.run(task)
-      feedback = get_diagnostics(result)  # errors, lint
-      if feedback.has_issues:
-          agent.fix(feedback)  # self-debugging loop</code></pre>
+        <pre><code class="language-python"># Rich feedback > perfect prompts
+result = agent.run(task)
+feedback = get_diagnostics(result)  # errors, lint
+if feedback.has_issues:
+    agent.fix(feedback)  # self-debugging loop</code></pre>
             </div>
           </div>
       
@@ -2096,18 +2096,18 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Instruction ──▶ Generate Candidates ──▶ [A, B, C]
-                                                  │
-                                                  ▼
-                                         Judge: "B > A > C"
-                                         (with reasoning)
-                                                  │
-                                                  ▼
-                                        Fine-tune on Judgments
-                                                  │
-                           ┌──────────────────────┴──────────────────────┐
-                           ▼                                             ▼
-                    Improved Evaluator                          Use as Reward Model</pre>
+          <pre class="ascii-art">Instruction ──▶ Generate Candidates ──▶ [A, B, C]
+                                            │
+                                            ▼
+                                   Judge: "B > A > C"
+                                   (with reasoning)
+                                            │
+                                            ▼
+                                  Fine-tune on Judgments
+                                            │
+                     ┌──────────────────────┴──────────────────────┐
+                     ▼                                             ▼
+              Improved Evaluator                          Use as Reward Model</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -2125,11 +2125,11 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">def self_taught_evaluator_loop(model, instructions):
-          candidates = [model.generate(i) for i in instructions]
-          judgments = model.judge_and_explain(candidates)
-          model.finetune(judgments)  # Train on own traces
-          return model  # Now better at evaluation</code></pre>
+        <pre><code class="language-python">def self_taught_evaluator_loop(model, instructions):
+    candidates = [model.generate(i) for i in instructions]
+    judgments = model.judge_and_explain(candidates)
+    model.finetune(judgments)  # Train on own traces
+    return model  # Now better at evaluation</code></pre>
             </div>
           </div>
       
@@ -2197,20 +2197,20 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Task ──▶ Analyze ──▶ Select Modules ──▶ Adapt ──▶ Compose
-                               │
-               ┌───────────────┴───────────────┐
-               │  Module Library               │
-               │  • Break into steps           │
-               │  • Work backwards             │
-               │  • Find patterns              │
-               └───────────────────────────────┘
-                                                    │
-                                                    ▼
-                                    Task-Specific Reasoning Structure
-                                                    │
-                                                    ▼
-                                               Execute ──▶ Solution</pre>
+          <pre class="ascii-art">Task ──▶ Analyze ──▶ Select Modules ──▶ Adapt ──▶ Compose
+                         │
+         ┌───────────────┴───────────────┐
+         │  Module Library               │
+         │  • Break into steps           │
+         │  • Work backwards             │
+         │  • Find patterns              │
+         └───────────────────────────────┘
+                                              │
+                                              ▼
+                              Task-Specific Reasoning Structure
+                                              │
+                                              ▼
+                                         Execute ──▶ Solution</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -2230,14 +2230,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">def self_discover_solve(task, modules):
-          # Select relevant modules for this task
-          selected = llm.select(task, modules)
-          # Adapt to specific problem
-          adapted = llm.adapt(task, selected)
-          # Compose reasoning structure
-          structure = llm.compose(adapted)
-          return llm.solve_with(task, structure)</code></pre>
+        <pre><code class="language-python">def self_discover_solve(task, modules):
+    # Select relevant modules for this task
+    selected = llm.select(task, modules)
+    # Adapt to specific problem
+    adapted = llm.adapt(task, selected)
+    # Compose reasoning structure
+    structure = llm.compose(adapted)
+    return llm.solve_with(task, structure)</code></pre>
             </div>
           </div>
       
@@ -2305,17 +2305,17 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Sample ──▶ Model ──▶ Tool Call? ──▶ Your Endpoint
-                    ▲          │              │
-                    │          ▼              ▼
-                    │     Final Answer   Add to Context
-                    │          │              │
-                    │          ▼              │
-                    │      Grader ◀───────────┘
-                    │          │
-                    └── Reward ┘
-      
-      [End-to-end training with real tools]</pre>
+          <pre class="ascii-art">Sample ──▶ Model ──▶ Tool Call? ──▶ Your Endpoint
+              ▲          │              │
+              │          ▼              ▼
+              │     Final Answer   Add to Context
+              │          │              │
+              │          ▼              │
+              │      Grader ◀───────────┘
+              │          │
+              └── Reward ┘
+
+[End-to-end training with real tools]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -2337,15 +2337,15 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">client.fine_tuning.jobs.create(
-          model="gpt-4o",
-          method="rft",
-          rft={
-              "tools": [{"url": "https://api/search"}],
-              "grader": {"type": "model", "model": "gpt-4o"},
-              "hyperparameters": {"compute_multiplier": 1}
-          }
-      )</code></pre>
+        <pre><code class="language-python">client.fine_tuning.jobs.create(
+    model="gpt-4o",
+    method="rft",
+    rft={
+        "tools": [{"url": "https://api/search"}],
+        "grader": {"type": "model", "model": "gpt-4o"},
+        "hyperparameters": {"compute_multiplier": 1}
+    }
+)</code></pre>
             </div>
           </div>
       
@@ -2411,15 +2411,15 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">┌─────────────────────────────────────────────────────┐
-      │               COMPOUNDING LOOP                      │
-      │                                                     │
-      │  Build ──▶ Learn ──▶ Codify ──▶ Easier Build       │
-      │    ▲                               │                │
-      │    └───────────────────────────────┘                │
-      │                                                     │
-      │  Outputs: CLAUDE.md, /commands, hooks, subagents   │
-      └─────────────────────────────────────────────────────┘</pre>
+          <pre class="ascii-art">┌─────────────────────────────────────────────────────┐
+│               COMPOUNDING LOOP                      │
+│                                                     │
+│  Build ──▶ Learn ──▶ Codify ──▶ Easier Build       │
+│    ▲                               │                │
+│    └───────────────────────────────┘                │
+│                                                     │
+│  Outputs: CLAUDE.md, /commands, hooks, subagents   │
+└─────────────────────────────────────────────────────┘</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -2437,11 +2437,11 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-markdown"># After completing feature:
-      1. Update CLAUDE.md with patterns
-      2. Create /test-with-validation command
-      3. Add pre-commit hook for edge cases
-      4. Build security-review subagent</code></pre>
+        <pre><code class="language-markdown"># After completing feature:
+1. Update CLAUDE.md with patterns
+2. Create /test-with-validation command
+3. Add pre-commit hook for edge cases
+4. Build security-review subagent</code></pre>
             </div>
           </div>
       
@@ -2509,13 +2509,13 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Ad-hoc ──▶ Save ──▶ Reusable ──▶ Documented ──▶ Capability
-        │         │          │            │              │
-        └─────────┴──────────┴────────────┴──────────────┘
-                          skills/
-                    ├── sentiment.py
-                    ├── pdf_convert.py
-                    └── api_summary.py</pre>
+          <pre class="ascii-art">Ad-hoc ──▶ Save ──▶ Reusable ──▶ Documented ──▶ Capability
+  │         │          │            │              │
+  └─────────┴──────────┴────────────┴──────────────┘
+                    skills/
+              ├── sentiment.py
+              ├── pdf_convert.py
+              └── api_summary.py</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -2532,13 +2532,13 @@
               <div class="box-header">
                 <span class="box-label">Concept</span>
               </div>
-              <pre><code class="language-python"># Session 1: Save working solution
-      with open("skills/sentiment.py", "w") as f:
-          f.write(working_code)
-      
-      # Session N: Reuse existing skill
-      from skills.sentiment import analyze
-      result = analyze(text)  # no rediscovery</code></pre>
+        <pre><code class="language-python"># Session 1: Save working solution
+with open("skills/sentiment.py", "w") as f:
+    f.write(working_code)
+
+# Session N: Reuse existing skill
+from skills.sentiment import analyze
+result = analyze(text)  # no rediscovery</code></pre>
             </div>
           </div>
       
@@ -2604,16 +2604,16 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Score
-      1.0 ●━━━━●━━━━●━━━━●     ← Always correct (no learning)
-          ┃
-      0.5 ┃  ●━━●━━●           ← HIGH VARIANCE (train here!)
-          ┃  ┃  ▼
-      0.0 ●━━●━━━━●━━━━●━━━●   ← Always wrong (no learning)
-          └──┴──┴──┴──┴──┴──▶
-             Sample Index
-      
-      Legend: ● best │ ━ mean │ ▼ variance range</pre>
+          <pre class="ascii-art">Score
+1.0 ●━━━━●━━━━●━━━━●     ← Always correct (no learning)
+    ┃
+0.5 ┃  ●━━●━━●           ← HIGH VARIANCE (train here!)
+    ┃  ┃  ▼
+0.0 ●━━●━━━━●━━━━●━━━●   ← Always wrong (no learning)
+    └──┴──┴──┴──┴──┴──▶
+       Sample Index
+
+Legend: ● best │ ━ mean │ ▼ variance range</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -2631,12 +2631,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Run multiple evals per sample
-      for sample in dataset:
-          scores = [agent.eval(sample) for _ in range(3)]
-          variance = np.var(scores)
-          if variance > 0.01 and 0 < np.mean(scores) < 1:
-              high_variance_samples.append(sample)</code></pre>
+        <pre><code class="language-python"># Run multiple evals per sample
+for sample in dataset:
+    scores = [agent.eval(sample) for _ in range(3)]
+    variance = np.var(scores)
+    if variance > 0.01 and 0 < np.mean(scores) < 1:
+        high_variance_samples.append(sample)</code></pre>
             </div>
           </div>
       
@@ -2702,13 +2702,13 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">                       ┌─── Sub1 ──▶ [████] ───┐
-                             │                       │
-      Main ──▶ Split(n) ────┼─── Sub2 ──▶ [████] ───┼──▶ Merge ──▶ Done
-                             │                       │
-                             └─── Sub3 ──▶ [████] ───┘
-      
-      Context:  Main[████████████]  →  Sub[██] Sub[██] Sub[██]</pre>
+          <pre class="ascii-art">                       ┌─── Sub1 ──▶ [████] ───┐
+                       │                       │
+Main ──▶ Split(n) ────┼─── Sub2 ──▶ [████] ───┼──▶ Merge ──▶ Done
+                       │                       │
+                       └─── Sub3 ──▶ [████] ───┘
+
+Context:  Main[████████████]  →  Sub[██] Sub[██] Sub[██]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -2735,14 +2735,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">main_agent.spawn_subagents(
-          task="Refactor YAML front-matter",
-          files=glob("*.md"),  # 36 files
-          agents=3,
-          per_agent=12
-      )
-      # Each subagent gets fresh context
-      # Main agent merges results</code></pre>
+        <pre><code class="language-python">main_agent.spawn_subagents(
+    task="Refactor YAML front-matter",
+    files=glob("*.md"),  # 36 files
+    agents=3,
+    per_agent=12
+)
+# Each subagent gets fresh context
+# Main agent merges results</code></pre>
             </div>
           </div>
       
@@ -2808,15 +2808,15 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">User Prompt ──▶ LLM ──▶ Action ID ──▶ Execute
-                       │                        │
-                       │    ┌───────────────────┘
-                       │    │
-                       ▼    ▼
-                  Allowlist Check    Tool Output
-                                    (NOT fed back!)
-      
-      [LLM as decoder only - no feedback loop]</pre>
+          <pre class="ascii-art">User Prompt ──▶ LLM ──▶ Action ID ──▶ Execute
+                 │                        │
+                 │    ┌───────────────────┘
+                 │    │
+                 ▼    ▼
+            Allowlist Check    Tool Output
+                              (NOT fed back!)
+
+[LLM as decoder only - no feedback loop]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -2835,11 +2835,11 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">allowlist = ["check_balance", "transfer", "history"]
-      action = llm.translate(user_prompt, allowlist)
-      result = execute(action)
-      # CRITICAL: result NOT returned to LLM
-      return result  # Direct to user</code></pre>
+        <pre><code class="language-python">allowlist = ["check_balance", "transfer", "history"]
+action = llm.translate(user_prompt, allowlist)
+result = execute(action)
+# CRITICAL: result NOT returned to LLM
+return result  # Direct to user</code></pre>
             </div>
           </div>
       
@@ -2905,20 +2905,20 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Workflow ──▶ Container ──▶ tmux Sessions
-                                    │
-                  ┌─────────────────┼─────────────────┐
-                  ▼                 ▼                 ▼
-             [Session 1]      [Session 2]      [Session 3]
-                  │                 │                 │
-                  └─────────┬───────┘                 │
-                            ▼                         │
-                     Monitor & Wait ◀─────────────────┘
-                            │
-                    Error? ─┼─▶ Retry/Recover
-                            │
-                            ▼
-                     Checkpoint ──▶ Next Step</pre>
+          <pre class="ascii-art">Workflow ──▶ Container ──▶ tmux Sessions
+                              │
+            ┌─────────────────┼─────────────────┐
+            ▼                 ▼                 ▼
+       [Session 1]      [Session 2]      [Session 3]
+            │                 │                 │
+            └─────────┬───────┘                 │
+                      ▼                         │
+               Monitor & Wait ◀─────────────────┘
+                      │
+              Error? ─┼─▶ Retry/Recover
+                      │
+                      ▼
+               Checkpoint ──▶ Next Step</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -2942,18 +2942,18 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">class WorkflowAgent:
-          def execute_workflow(self, steps):
-              for step in steps:
-                  session = self.create_session(step.name)
-                  try:
-                      result = self.execute_step(step, session)
-                      self.create_checkpoint(step, result)
-                  except Exception as e:
-                      if self.can_retry(e):
-                          self.retry_with_backoff(step)
-                      else:
-                          self.escalate_to_human(step, e)</code></pre>
+        <pre><code class="language-python">class WorkflowAgent:
+    def execute_workflow(self, steps):
+        for step in steps:
+            session = self.create_session(step.name)
+            try:
+                result = self.execute_step(step, session)
+                self.create_checkpoint(step, result)
+            except Exception as e:
+                if self.can_retry(e):
+                    self.retry_with_backoff(step)
+                else:
+                    self.escalate_to_human(step, e)</code></pre>
             </div>
           </div>
       
@@ -3021,15 +3021,15 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">┌──────────────────────────────────────────────┐
-      │              AUTONOMOUS LOOP                 │
-      │                                              │
-      │  Pick Task ──▶ Execute ──▶ Commit ──▶ Next  │
-      │      ▲                           │           │
-      │      └───────────────────────────┘           │
-      │                                              │
-      │  Rate Limit? ──▶ Exponential Backoff ──▶ ↺  │
-      └──────────────────────────────────────────────┘</pre>
+          <pre class="ascii-art">┌──────────────────────────────────────────────┐
+│              AUTONOMOUS LOOP                 │
+│                                              │
+│  Pick Task ──▶ Execute ──▶ Commit ──▶ Next  │
+│      ▲                           │           │
+│      └───────────────────────────┘           │
+│                                              │
+│  Rate Limit? ──▶ Exponential Backoff ──▶ ↺  │
+└──────────────────────────────────────────────┘</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -3050,14 +3050,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-bash">MAX_ITERATIONS=50
-      BACKOFF=300  # seconds
-      
-      while [ $i -lt $MAX_ITERATIONS ]; do
-        task=$(claude "Pick next from TODO.md")
-        claude --auto-accept "$task"
-        git add -A && git commit -m "$task"
-      done</code></pre>
+        <pre><code class="language-bash">MAX_ITERATIONS=50
+BACKOFF=300  # seconds
+
+while [ $i -lt $MAX_ITERATIONS ]; do
+  task=$(claude "Pick next from TODO.md")
+  claude --auto-accept "$task"
+  git add -A && git commit -m "$task"
+done</code></pre>
             </div>
           </div>
       
@@ -3125,13 +3125,13 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">                    ┌──▶ Worker1 [Worktree-A] ──┐
-                          │                           │
-      Coordinator ──▶ ────┼──▶ Worker2 [Worktree-B] ──┼──▶ Merge ──▶ main
-                          │                           │
-                          └──▶ Worker3 [Worktree-C] ──┘
-      
-      Tasks:  [████████] → [██] [██] [██] → [████████]</pre>
+          <pre class="ascii-art">                    ┌──▶ Worker1 [Worktree-A] ──┐
+                    │                           │
+Coordinator ──▶ ────┼──▶ Worker2 [Worktree-B] ──┼──▶ Merge ──▶ main
+                    │                           │
+                    └──▶ Worker3 [Worktree-C] ──┘
+
+Tasks:  [████████] → [██] [██] [██] → [████████]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -3158,13 +3158,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">coordinator.deploy_workers(
-          tasks=["refactor auth", "update API", "fix tests"],
-          workers=3,
-          git_worktrees=True
-      )
-      # Each worker: isolated worktree + Claude session
-      # Coordinator: monitors, merges PRs</code></pre>
+        <pre><code class="language-python">coordinator.deploy_workers(
+    tasks=["refactor auth", "update API", "fix tests"],
+    workers=3,
+    git_worktrees=True
+)
+# Each worker: isolated worktree + Claude session
+# Coordinator: monitors, merges PRs</code></pre>
             </div>
           </div>
       
@@ -3232,16 +3232,16 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">feature-list.json (IMMUTABLE)
-      ┌─────────────────────────────────┐
-      │ auth-001: [░] New chat button   │
-      │ auth-002: [░] Logout function   │◄── Agent can ONLY
-      │ ui-001:   [█] Dark mode         │    set passes=true
-      │ ui-002:   [░] Responsive nav    │
-      │ api-001:  [░] Rate limiting     │◄── Cannot DELETE
-      └─────────────────────────────────┘    or MODIFY
-      
-      Agent ──▶ Implement ──▶ Test ──▶ [█] Mark Done</pre>
+          <pre class="ascii-art">feature-list.json (IMMUTABLE)
+┌─────────────────────────────────┐
+│ auth-001: [░] New chat button   │
+│ auth-002: [░] Logout function   │◄── Agent can ONLY
+│ ui-001:   [█] Dark mode         │    set passes=true
+│ ui-002:   [░] Responsive nav    │
+│ api-001:  [░] Rate limiting     │◄── Cannot DELETE
+└─────────────────────────────────┘    or MODIFY
+
+Agent ──▶ Implement ──▶ Test ──▶ [█] Mark Done</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -3264,14 +3264,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-json">{
-        "features": [{
-          "id": "auth-001",
-          "description": "New chat creates conversation",
-          "steps": ["Click button", "Verify URL"],
-          "passes": false  // Agent can ONLY flip to true
-        }]
-      }</code></pre>
+        <pre><code class="language-json">{
+  "features": [{
+    "id": "auth-001",
+    "description": "New chat creates conversation",
+    "steps": ["Click button", "Verify URL"],
+    "passes": false  // Agent can ONLY flip to true
+  }]
+}</code></pre>
             </div>
           </div>
       
@@ -3337,13 +3337,13 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">              ┌─── Agent A ──▶ Ideas 1 ───┐
-                    │                           │
-      Problem ──▶   ├─── Agent B ──▶ Ideas 2 ───┼──▶ Synthesize
-                    │                           │
-                    └─── Agent C ──▶ Ideas 3 ───┘
-      
-      Perspectives: [Performance] [Security] [UX]</pre>
+          <pre class="ascii-art">              ┌─── Agent A ──▶ Ideas 1 ───┐
+              │                           │
+Problem ──▶   ├─── Agent B ──▶ Ideas 2 ───┼──▶ Synthesize
+              │                           │
+              └─── Agent C ──▶ Ideas 3 ───┘
+
+Perspectives: [Performance] [Security] [UX]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -3363,13 +3363,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Parallel brainstorming agents
-      ideas = await asyncio.gather(
-          agent("Refactor for performance"),
-          agent("Refactor for readability"),
-          agent("Refactor for testability")
-      )
-      best = synthesize(ideas)</code></pre>
+        <pre><code class="language-python"># Parallel brainstorming agents
+ideas = await asyncio.gather(
+    agent("Refactor for performance"),
+    agent("Refactor for readability"),
+    agent("Refactor for testability")
+)
+best = synthesize(ideas)</code></pre>
             </div>
           </div>
       
@@ -3435,9 +3435,9 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">User Request ──▶ Retrieval Model ──▶ Generation Model ──▶ Apply Model ──▶ Done
-                           │                    │                   │
-                       (context)            (edits)            (patches)</pre>
+          <pre class="ascii-art">User Request ──▶ Retrieval Model ──▶ Generation Model ──▶ Apply Model ──▶ Done
+                     │                    │                   │
+                 (context)            (edits)            (patches)</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -3454,12 +3454,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Multi-model pipeline
-      context = retrieval_model.gather(codebase)
-      edits = generation_model.generate(
-          context, user_request
-      )  # Claude Sonnet
-      apply_model.patch(edits)  # Custom</code></pre>
+        <pre><code class="language-python"># Multi-model pipeline
+context = retrieval_model.gather(codebase)
+edits = generation_model.generate(
+    context, user_request
+)  # Claude Sonnet
+apply_model.patch(edits)  # Custom</code></pre>
             </div>
           </div>
       
@@ -3525,17 +3525,17 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">         PLAN PHASE              EXECUTE PHASE
-                   │                        │
-      Prompt ──▶ [LLM] ──▶ Plan ──▶ [Controller] ──▶ Results
-                   │        │              │
-                   │    ┌───┴───┐     ┌────┴────┐
-                   │    │ call1 │     │ run(1)  │
-                   │    │ call2 │────▶│ run(2)  │
-                   │    │ call3 │     │ run(3)  │
-                   │    └───────┘     └─────────┘
-                   │                       │
-                frozen               no plan changes</pre>
+          <pre class="ascii-art">         PLAN PHASE              EXECUTE PHASE
+             │                        │
+Prompt ──▶ [LLM] ──▶ Plan ──▶ [Controller] ──▶ Results
+             │        │              │
+             │    ┌───┴───┐     ┌────┴────┐
+             │    │ call1 │     │ run(1)  │
+             │    │ call2 │────▶│ run(2)  │
+             │    │ call3 │     │ run(3)  │
+             │    └───────┘     └─────────┘
+             │                       │
+          frozen               no plan changes</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -3554,11 +3554,11 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">plan = LLM.make_plan(prompt)  # frozen
-      for call in plan:
-          result = tools.run(call)
-          stash(result)  # outputs isolated
-      # Tool outputs can't change which tools run</code></pre>
+        <pre><code class="language-python">plan = LLM.make_plan(prompt)  # frozen
+for call in plan:
+    result = tools.run(call)
+    stash(result)  # outputs isolated
+# Tool outputs can't change which tools run</code></pre>
             </div>
           </div>
       
@@ -3624,11 +3624,11 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Episode ──▶ Reflect ──▶ Draft Delta ──▶ Validate ──┐
-                                                          │
-                    ┌────────────────────────────────────-┘
-                    ▼
-              [System Prompt v1] ──▶ [System Prompt v2] ──▶ Next Episode</pre>
+          <pre class="ascii-art">Episode ──▶ Reflect ──▶ Draft Delta ──▶ Validate ──┐
+                                                    │
+              ┌────────────────────────────────────-┘
+              ▼
+        [System Prompt v1] ──▶ [System Prompt v2] ──▶ Next Episode</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -3647,11 +3647,11 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">dialogue = run_episode()
-      delta = LLM("Propose prompt edits", dialogue)
-      if passes_guardrails(delta):
-          system_prompt += delta
-          save(system_prompt)</code></pre>
+        <pre><code class="language-python">dialogue = run_episode()
+delta = LLM("Propose prompt edits", dialogue)
+if passes_guardrails(delta):
+    system_prompt += delta
+    save(system_prompt)</code></pre>
             </div>
           </div>
       
@@ -3717,16 +3717,16 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-      │  PERCEPTION   │   │  PROCESSING   │   │    ACTION     │
-      │───────────────│   │───────────────│   │───────────────│
-      │ Text/Image/   │   │  Reasoning    │   │ API Calls     │
-      │ Audio Input   │──▶│  Decision     │──▶│ File Ops      │
-      │ Normalization │   │  Validation   │   │ Notifications │
-      └───────────────┘   └───────────────┘   └───────────────┘
-                                  │
-                                  ▼
-                          [ Feedback Loop ]</pre>
+          <pre class="ascii-art">┌───────────────┐   ┌───────────────┐   ┌───────────────┐
+│  PERCEPTION   │   │  PROCESSING   │   │    ACTION     │
+│───────────────│   │───────────────│   │───────────────│
+│ Text/Image/   │   │  Reasoning    │   │ API Calls     │
+│ Audio Input   │──▶│  Decision     │──▶│ File Ops      │
+│ Normalization │   │  Validation   │   │ Notifications │
+└───────────────┘   └───────────────┘   └───────────────┘
+                            │
+                            ▼
+                    [ Feedback Loop ]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -3750,14 +3750,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">class ThreeStageAgent:
-          async def run(self, raw_input):
-              # Stage 1: Perception
-              data = await self.perception.process(raw_input)
-              # Stage 2: Processing
-              decisions = await self.processor.analyze(data)
-              # Stage 3: Action
-              return await self.action.execute(decisions)</code></pre>
+        <pre><code class="language-python">class ThreeStageAgent:
+    async def run(self, raw_input):
+        # Stage 1: Perception
+        data = await self.perception.process(raw_input)
+        # Stage 2: Processing
+        decisions = await self.processor.analyze(data)
+        # Stage 3: Action
+        return await self.action.execute(decisions)</code></pre>
             </div>
           </div>
       
@@ -3823,14 +3823,14 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Question ──▶ Formulate Query ──▶ Search ──▶ Analyze
-                          ▲                          │
-                          │    Sufficient? ◀─────────┘
-                          │         │
-                          │    No   │ Yes
-                          └─────────┘   │
-                                        ▼
-                                  Synthesize & Present</pre>
+          <pre class="ascii-art">Question ──▶ Formulate Query ──▶ Search ──▶ Analyze
+                    ▲                          │
+                    │    Sufficient? ◀─────────┘
+                    │         │
+                    │    No   │ Yes
+                    └─────────┘   │
+                                  ▼
+                            Synthesize & Present</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -3850,12 +3850,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">while not agent.satisfied():
-          query = agent.formulate_query(question)
-          results = search_tool.execute(query)
-          agent.analyze(results)
-          agent.refine_strategy()
-      return agent.synthesize_findings()</code></pre>
+        <pre><code class="language-python">while not agent.satisfied():
+    query = agent.formulate_query(question)
+    results = search_tool.execute(query)
+    agent.analyze(results)
+    agent.refine_strategy()
+return agent.synthesize_findings()</code></pre>
             </div>
           </div>
       
@@ -3921,14 +3921,14 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">┌──────────┐    Findings    ┌──────────┐    Plan    ┌──────────┐
-      │ Research │ ────────────▶  │ Planning │ ────────▶  │ Execute  │
-      │  (Opus)  │                │  (Opus)  │            │ (Sonnet) │
-      └──────────┘                └──────────┘            └──────────┘
-           ↓                           ↓                       ↓
-      [Fresh ctx]               [Fresh ctx]              [Fresh ctx]
-      
-      Key: Pass distilled conclusions, NOT full history</pre>
+          <pre class="ascii-art">┌──────────┐    Findings    ┌──────────┐    Plan    ┌──────────┐
+│ Research │ ────────────▶  │ Planning │ ────────▶  │ Execute  │
+│  (Opus)  │                │  (Opus)  │            │ (Sonnet) │
+└──────────┘                └──────────┘            └──────────┘
+     ↓                           ↓                       ↓
+[Fresh ctx]               [Fresh ctx]              [Fresh ctx]
+
+Key: Pass distilled conclusions, NOT full history</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -3943,14 +3943,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Phase 1: Research (new conversation)
-      findings = opus.research("OAuth flows in codebase")
-      
-      # Phase 2: Plan (new conversation)
-      plan = opus.plan(findings, "Add Google OAuth")
-      
-      # Phase 3: Execute (new conversation)
-      sonnet.implement(plan, step=1)</code></pre>
+        <pre><code class="language-python"># Phase 1: Research (new conversation)
+findings = opus.research("OAuth flows in codebase")
+
+# Phase 2: Plan (new conversation)
+plan = opus.plan(findings, "Add Google OAuth")
+
+# Phase 3: Execute (new conversation)
+sonnet.implement(plan, step=1)</code></pre>
             </div>
           </div>
       
@@ -4018,17 +4018,17 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">┌─────────────────┐      ┌─────────────────┐
-      │  Quarantined    │      │   Privileged    │
-      │     LLM         │      │      LLM        │
-      │                 │      │                 │
-      │ [Reads Data]    │ $VAR │ [Plans + Tools] │
-      │ [No Tools]      │ ───▶ │ [No Raw Data]   │
-      └─────────────────┘      └────────┬────────┘
-              ▲                         │
-              │                         ▼
-         Untrusted              execute(plan, $VAR)
-           Input</pre>
+          <pre class="ascii-art">┌─────────────────┐      ┌─────────────────┐
+│  Quarantined    │      │   Privileged    │
+│     LLM         │      │      LLM        │
+│                 │      │                 │
+│ [Reads Data]    │ $VAR │ [Plans + Tools] │
+│ [No Tools]      │ ───▶ │ [No Raw Data]   │
+└─────────────────┘      └────────┬────────┘
+        ▲                         │
+        │                         ▼
+   Untrusted              execute(plan, $VAR)
+     Input</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -4047,13 +4047,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">var1 = QuarantineLLM("extract email", text)
-      # Returns symbolic: $VAR1
-      
-      plan = PrivLLM.plan("send $VAR1 to boss")
-      # No raw text exposure
-      
-      execute(plan, subst={"$VAR1": var1})</code></pre>
+        <pre><code class="language-python">var1 = QuarantineLLM("extract email", text)
+# Returns symbolic: $VAR1
+
+plan = PrivLLM.plan("send $VAR1 to boss")
+# No raw text exposure
+
+execute(plan, subst={"$VAR1": var1})</code></pre>
             </div>
           </div>
       
@@ -4121,17 +4121,17 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Problem ──▶ Assess Difficulty
-                          │
-            ┌─────────────┼─────────────┐
-            ▼             ▼             ▼
-          [Low]       [Medium]       [High]
-            │             │             │
-        Standard    N Attempts    Deep Search
-            │             │             │
-            └─────────────┴─────────────┘
-                          │
-                     Select Best ──▶ Answer</pre>
+          <pre class="ascii-art">Problem ──▶ Assess Difficulty
+                    │
+      ┌─────────────┼─────────────┐
+      ▼             ▼             ▼
+    [Low]       [Medium]       [High]
+      │             │             │
+  Standard    N Attempts    Deep Search
+      │             │             │
+      └─────────────┴─────────────┘
+                    │
+               Select Best ──▶ Answer</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -4150,14 +4150,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">def solve_with_scaling(problem, budget=100):
-          difficulty = estimate_difficulty(problem)
-          if difficulty < 0.3:
-              return standard_inference(problem)
-          elif difficulty < 0.7:
-              return best_of_n(problem, n=5)
-          else:
-              return deep_reasoning_with_search(problem)</code></pre>
+        <pre><code class="language-python">def solve_with_scaling(problem, budget=100):
+    difficulty = estimate_difficulty(problem)
+    if difficulty < 0.3:
+        return standard_inference(problem)
+    elif difficulty < 0.7:
+        return best_of_n(problem, n=5)
+    else:
+        return deep_reasoning_with_search(problem)</code></pre>
             </div>
           </div>
       
@@ -4223,15 +4223,15 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">        [Root]
-             /   |   \
-           [A]  [B]  [C]    ← Expand candidates
-            |    |
-          [A1] [B1]         ← UCB select best
-            |
-          [A1a]             ← Evaluate & backprop
-      
-      Select ──▶ Expand ──▶ Evaluate ──▶ Backprop</pre>
+          <pre class="ascii-art">        [Root]
+       /   |   \
+     [A]  [B]  [C]    ← Expand candidates
+      |    |
+    [A1] [B1]         ← UCB select best
+      |
+    [A1a]             ← Evaluate & backprop
+
+Select ──▶ Expand ──▶ Evaluate ──▶ Backprop</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -4250,13 +4250,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">def search(root, iterations=50):
-          for _ in range(iterations):
-              node = select(root)  # UCB
-              children = expand(node)  # LLM
-              value = evaluate(node)  # LLM
-              backpropagate(node, value)
-          return best_path(root)</code></pre>
+        <pre><code class="language-python">def search(root, iterations=50):
+    for _ in range(iterations):
+        node = select(root)  # UCB
+        children = expand(node)  # LLM
+        value = evaluate(node)  # LLM
+        backpropagate(node, value)
+    return best_path(root)</code></pre>
             </div>
           </div>
       
@@ -4322,11 +4322,11 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Task ──┬──▶ [Advocate] ──▶ Propose ──┐
-             │                             │
-             └──▶ [Critic]   ──▶ Challenge ┼──▶ Debate ──▶ Synthesis
-                                           │
-                                    (Iterate)</pre>
+          <pre class="ascii-art">Task ──┬──▶ [Advocate] ──▶ Propose ──┐
+       │                             │
+       └──▶ [Critic]   ──▶ Challenge ┼──▶ Debate ──▶ Synthesis
+                                     │
+                              (Iterate)</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -4344,13 +4344,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Debate pattern for expenses
-      advocate = Agent(role="user_advocate")
-      auditor = Agent(role="company_auditor")
-      
-      proposal = advocate.classify(expense)
-      challenge = auditor.review(proposal)
-      final = synthesize(proposal, challenge)</code></pre>
+        <pre><code class="language-python"># Debate pattern for expenses
+advocate = Agent(role="user_advocate")
+auditor = Agent(role="company_auditor")
+
+proposal = advocate.classify(expense)
+challenge = auditor.review(proposal)
+final = synthesize(proposal, challenge)</code></pre>
             </div>
           </div>
       
@@ -4416,13 +4416,13 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Model v1 ──▶ Heavy Scaffolding ──▶ [2000 tokens prompt]
-          │
-          ▼ (model upgrade)
-      Model v2 ──▶ Audit & Remove ──▶ [500 tokens prompt]
-          │
-          ▼ (model upgrade)
-      Model v3 ──▶ Minimal Prompt ──▶ [100 tokens prompt]</pre>
+          <pre class="ascii-art">Model v1 ──▶ Heavy Scaffolding ──▶ [2000 tokens prompt]
+    │
+    ▼ (model upgrade)
+Model v2 ──▶ Audit & Remove ──▶ [500 tokens prompt]
+    │
+    ▼ (model upgrade)
+Model v3 ──▶ Minimal Prompt ──▶ [100 tokens prompt]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -4440,12 +4440,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Before: 2000 tokens of instructions
-      system_prompt_v1 = """Check file exists, read contents,
-      plan changes, make minimal edits, verify syntax..."""
-      
-      # After: Model internalized the steps
-      system_prompt_v2 = "Write clean, tested code."</code></pre>
+        <pre><code class="language-python"># Before: 2000 tokens of instructions
+system_prompt_v1 = """Check file exists, read contents,
+plan changes, make minimal edits, verify syntax..."""
+
+# After: Model internalized the steps
+system_prompt_v2 = "Write clean, tested code."</code></pre>
             </div>
           </div>
       
@@ -4513,10 +4513,10 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Spec File ──▶ Parse ──▶ Task Graph ──▶ Scaffold
-         (MD/JSON)                            │
-                                              ▼
-                              Generated Code ◀── [links to spec clause]</pre>
+          <pre class="ascii-art">Spec File ──▶ Parse ──▶ Task Graph ──▶ Scaffold
+   (MD/JSON)                            │
+                                        ▼
+                        Generated Code ◀── [links to spec clause]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -4534,10 +4534,10 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">if new_feature_requested:
-          write_spec(update)
-          agent.sync_with(spec)
-      # All artifacts link back to spec clauses</code></pre>
+        <pre><code class="language-python">if new_feature_requested:
+    write_spec(update)
+    agent.sync_with(spec)
+# All artifacts link back to spec clauses</code></pre>
             </div>
           </div>
       
@@ -4603,18 +4603,18 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">        Monolithic Tool (RISKY)          Compartmentalized (SAFE)
-              ┌─────────────────────┐           ┌─────────┐
-              │  read + fetch +     │           │ READER  │ fs:read-only
-              │  write ALL-IN-ONE   │    ──▶    └────┬────┘
-              │  🔓 max surface     │                │  consent
-              └─────────────────────┘           ┌────▼────┐
-                                                │PROCESSOR│ net:allowlist
-                                                └────┬────┘
-                                                     │  consent
-                                                ┌────▼────┐
-                                                │ WRITER  │ scoped perms
-                                                └─────────┘</pre>
+          <pre class="ascii-art">        Monolithic Tool (RISKY)          Compartmentalized (SAFE)
+        ┌─────────────────────┐           ┌─────────┐
+        │  read + fetch +     │           │ READER  │ fs:read-only
+        │  write ALL-IN-ONE   │    ──▶    └────┬────┘
+        │  🔓 max surface     │                │  consent
+        └─────────────────────┘           ┌────▼────┐
+                                          │PROCESSOR│ net:allowlist
+                                          └────┬────┘
+                                               │  consent
+                                          ┌────▼────┐
+                                          │ WRITER  │ scoped perms
+                                          └─────────┘</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -4635,16 +4635,16 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-yaml"># tool-manifest.yml
-      email_reader:
-        capabilities: [private_data, untrusted_input]
-        permissions:
-          fs: read-only:/mail
-          net: none
-      issue_creator:
-        capabilities: [external_comm]
-        permissions:
-          net: allowlist:github.com</code></pre>
+        <pre><code class="language-yaml"># tool-manifest.yml
+email_reader:
+  capabilities: [private_data, untrusted_input]
+  permissions:
+    fs: read-only:/mail
+    net: none
+issue_creator:
+  capabilities: [external_comm]
+  permissions:
+    net: allowlist:github.com</code></pre>
             </div>
           </div>
       
@@ -4710,18 +4710,18 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">┌─────────────────────────────────────────────────┐
-      │           THE BITTER LESSON CYCLE               │
-      │                                                 │
-      │  New Model ──▶ Eval Scaffolding ──▶ Obsolete?  │
-      │       ▲               │                │        │
-      │       │          Still needed?     Discard      │
-      │       │               │                │        │
-      │       │          ──▶ Keep minimal ◀────┘        │
-      │       └─────────────────────────────────────────│
-      │                                                 │
-      │  Mindset: Build simple, throw away, repeat     │
-      └─────────────────────────────────────────────────┘</pre>
+          <pre class="ascii-art">┌─────────────────────────────────────────────────┐
+│           THE BITTER LESSON CYCLE               │
+│                                                 │
+│  New Model ──▶ Eval Scaffolding ──▶ Obsolete?  │
+│       ▲               │                │        │
+│       │          Still needed?     Discard      │
+│       │               │                │        │
+│       │          ──▶ Keep minimal ◀────┘        │
+│       └─────────────────────────────────────────│
+│                                                 │
+│  Mindset: Build simple, throw away, repeat     │
+└─────────────────────────────────────────────────┘</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -4741,13 +4741,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Instead of 3-month robust solution:
-      def quick_context_compressor(text):
-          """Expect this to be obsolete by Q2"""
-          return simple_summarize(text)
-      
-      # Focus engineering on unique value
-      # that won't "fall into the model"</code></pre>
+        <pre><code class="language-python"># Instead of 3-month robust solution:
+def quick_context_compressor(text):
+    """Expect this to be obsolete by Q2"""
+    return simple_summarize(text)
+
+# Focus engineering on unique value
+# that won't "fall into the model"</code></pre>
             </div>
           </div>
       
@@ -4815,16 +4815,16 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">┌─────────────────────────────────────┐
-      │         PSRL Loop                   │
-      └─────────────────────────────────────┘
-      
-      Posterior ──▶ Sample Model ──▶ Compute Plan
-          ▲                              │
-          │                              ▼
-          └──── Update ◀── Observe ◀── Execute
-      
-      P(model|data) → sample → plan → act → reward</pre>
+          <pre class="ascii-art">┌─────────────────────────────────────┐
+│         PSRL Loop                   │
+└─────────────────────────────────────┘
+
+Posterior ──▶ Sample Model ──▶ Compute Plan
+    ▲                              │
+    │                              ▼
+    └──── Update ◀── Observe ◀── Execute
+
+P(model|data) → sample → plan → act → reward</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -4843,15 +4843,15 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># PSRL-based agent loop
-      posterior = init_prior(task_models)
-      
-      while not done:
-          model = posterior.sample()
-          plan = compute_optimal_plan(model)
-          reward = execute(plan)
-          posterior.update(observation, reward)
-          # Natural language: LLM fills each step</code></pre>
+        <pre><code class="language-python"># PSRL-based agent loop
+posterior = init_prior(task_models)
+
+while not done:
+    model = posterior.sample()
+    plan = compute_optimal_plan(model)
+    reward = execute(plan)
+    posterior.update(observation, reward)
+    # Natural language: LLM fills each step</code></pre>
             </div>
           </div>
       
@@ -4919,19 +4919,19 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">┌─── ONCE ─────────────────────────────────┐
-      │ Initializer ──▶ features.json            │
-      │              ──▶ init.sh                 │
-      │              ──▶ progress.txt            │
-      │              ──▶ First Commit            │
-      └──────────────────────────────────────────┘
-                          ▼
-      ┌─── EACH SESSION ─────────────────────────┐
-      │ Maintainer ──▶ Read git/progress         │
-      │            ──▶ Select next feature       │
-      │            ──▶ Implement + Test          │
-      │            ──▶ Commit + Update progress  │
-      └──────────────────────────────────────────┘</pre>
+          <pre class="ascii-art">┌─── ONCE ─────────────────────────────────┐
+│ Initializer ──▶ features.json            │
+│              ──▶ init.sh                 │
+│              ──▶ progress.txt            │
+│              ──▶ First Commit            │
+└──────────────────────────────────────────┘
+                    ▼
+┌─── EACH SESSION ─────────────────────────┐
+│ Maintainer ──▶ Read git/progress         │
+│            ──▶ Select next feature       │
+│            ──▶ Implement + Test          │
+│            ──▶ Commit + Update progress  │
+└──────────────────────────────────────────┘</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -4956,14 +4956,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-bash"># Initializer creates foundation
-      project/
-        feature-list.json  # All features, passes=false
-        progress.txt       # Running log
-        init.sh            # One-command bootstrap
-      
-      # Maintainer session ritual
-      $ ./init.sh && read_progress && implement_next</code></pre>
+        <pre><code class="language-bash"># Initializer creates foundation
+project/
+  feature-list.json  # All features, passes=false
+  progress.txt       # Running log
+  init.sh            # One-command bootstrap
+
+# Maintainer session ritual
+$ ./init.sh && read_progress && implement_next</code></pre>
             </div>
           </div>
       
@@ -5029,11 +5029,11 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">        MAP                    REDUCE
-      [Doc1] ──▶ Sandbox LLM ──┐
-      [Doc2] ──▶ Sandbox LLM ──┼──▶ Aggregate ──▶ Result
-      [Doc3] ──▶ Sandbox LLM ──┘
-                 (isolated)    (safe summaries only)</pre>
+          <pre class="ascii-art">        MAP                    REDUCE
+[Doc1] ──▶ Sandbox LLM ──┐
+[Doc2] ──▶ Sandbox LLM ──┼──▶ Aggregate ──▶ Result
+[Doc3] ──▶ Sandbox LLM ──┘
+           (isolated)    (safe summaries only)</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -5053,13 +5053,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">results = []
-      for doc in untrusted_docs:
-          # Sandboxed: constrained output
-          ok = sandbox_llm("Invoice? yes/no", doc)
-          results.append(ok)
-      # Reduce: no raw docs here
-      final = reduce(results)</code></pre>
+        <pre><code class="language-python">results = []
+for doc in untrusted_docs:
+    # Sandboxed: constrained output
+    ok = sandbox_llm("Invoice? yes/no", doc)
+    results.append(ok)
+# Reduce: no raw docs here
+final = reduce(results)</code></pre>
             </div>
           </div>
       
@@ -5125,11 +5125,11 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Request ──▶ Worker(Sonnet) ──┬──▶ Execute ──▶ Done
-                                   │
-                              [Stuck?]
-                                   │
-                                   └──▶ Oracle(o3) ──▶ Strategy ──▶ Worker</pre>
+          <pre class="ascii-art">Request ──▶ Worker(Sonnet) ──┬──▶ Execute ──▶ Done
+                             │
+                        [Stuck?]
+                             │
+                             └──▶ Oracle(o3) ──▶ Strategy ──▶ Worker</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -5149,13 +5149,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">worker = Agent(model="sonnet-4")
-      oracle = Agent(model="o3")
-      
-      result = worker.execute(task)
-      if worker.is_stuck():
-          strategy = oracle.consult(context)
-          result = worker.execute(strategy)</code></pre>
+        <pre><code class="language-python">worker = Agent(model="sonnet-4")
+oracle = Agent(model="o3")
+
+result = worker.execute(task)
+if worker.is_stuck():
+    strategy = oracle.consult(context)
+    result = worker.execute(strategy)</code></pre>
             </div>
           </div>
       
@@ -5221,13 +5221,13 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Tier 1: Research ──▶ Present to Human
-                 │ (proven reliable)
-                 ▼
-      Tier 2: Research ──▶ Draft ──▶ Human Approves
-                 │ (proven reliable)
-                 ▼
-      Tier 3: Research ──▶ Draft ──▶ Auto-Send (if conf > 0.8)</pre>
+          <pre class="ascii-art">Tier 1: Research ──▶ Present to Human
+           │ (proven reliable)
+           ▼
+Tier 2: Research ──▶ Draft ──▶ Human Approves
+           │ (proven reliable)
+           ▼
+Tier 3: Research ──▶ Draft ──▶ Auto-Send (if conf > 0.8)</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -5244,15 +5244,15 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">class AgentCapabilities:
-          def process(self, data):
-              research = self.research(data)  # Tier 1
-              if self.tier >= 2:
-                  draft = self.generate(research)
-                  if self.tier >= 3 and self.confidence > 0.8:
-                      return self.auto_execute(draft)
-                  return self.request_approval(draft)
-              return self.present_findings(research)</code></pre>
+        <pre><code class="language-python">class AgentCapabilities:
+    def process(self, data):
+        research = self.research(data)  # Tier 1
+        if self.tier >= 2:
+            draft = self.generate(research)
+            if self.tier >= 3 and self.confidence > 0.8:
+                return self.auto_execute(draft)
+            return self.request_approval(draft)
+        return self.present_findings(research)</code></pre>
             </div>
           </div>
       
@@ -5320,12 +5320,12 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Agent Turn ──▶ Stop Hook ──▶ Run Tests ──┐
-                                               │
-                ┌──────────────────────────────┘
-                │ Fail?
-                ▼
-         Auto-Continue ──▶ Agent Fixes ──▶ [loop until pass]</pre>
+          <pre class="ascii-art">Agent Turn ──▶ Stop Hook ──▶ Run Tests ──┐
+                                         │
+          ┌──────────────────────────────┘
+          │ Fail?
+          ▼
+   Auto-Continue ──▶ Agent Fixes ──▶ [loop until pass]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -5343,13 +5343,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-javascript">// hooks config
-      {
-        "on_stop": {
-          "command": "./check_tests.sh",
-          "auto_continue_on_failure": true
-        }
-      }</code></pre>
+        <pre><code class="language-javascript">// hooks config
+{
+  "on_stop": {
+    "command": "./check_tests.sh",
+    "auto_continue_on_failure": true
+  }
+}</code></pre>
             </div>
           </div>
       
@@ -5415,18 +5415,18 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">                    [Problem]
-                              │
-                  ┌───────────┼───────────┐
-                  ▼           ▼           ▼
-              [Step A]    [Step B]    [Step C]
-                 │           │           │
-             ┌───┴───┐   ┌───┴───┐       ✗
-             ▼       ▼   ▼       ▼
-          [A1]    [A2] [B1]    [B2]  ← evaluate
-             │       ✗   ✓       ✗
-             ▼           │
-          [A1.1]    [best path]</pre>
+          <pre class="ascii-art">                    [Problem]
+                        │
+            ┌───────────┼───────────┐
+            ▼           ▼           ▼
+        [Step A]    [Step B]    [Step C]
+           │           │           │
+       ┌───┴───┐   ┌───┴───┐       ✗
+       ▼       ▼   ▼       ▼
+    [A1]    [A2] [B1]    [B2]  ← evaluate
+       │       ✗   ✓       ✗
+       ▼           │
+    [A1.1]    [best path]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -5447,13 +5447,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">queue = [root_problem]
-      while queue:
-          thought = queue.pop()
-          for step in expand(thought):
-              score = evaluate(step)
-              queue.push((score, step))
-      return select_best(queue)</code></pre>
+        <pre><code class="language-python">queue = [root_problem]
+while queue:
+    thought = queue.pop()
+    for step in expand(thought):
+        score = evaluate(step)
+        queue.push((score, step))
+return select_best(queue)</code></pre>
             </div>
           </div>
       
@@ -5519,19 +5519,19 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Human: "Refactor UploadService to async"
-             │
-             ▼
-      ┌─────────────────────────────────────────┐
-      │          Agent Decides HOW              │
-      │  ┌─────┐   ┌─────┐   ┌─────┐           │
-      │  │grep │──▶│edit │──▶│test │──▶ ...    │
-      │  └─────┘   └─────┘   └─────┘           │
-      │      (Agent orchestrates 87%)           │
-      └─────────────────────────────────────────┘
-             │
-             ▼
-      Human: Review PR (3%)</pre>
+          <pre class="ascii-art">Human: "Refactor UploadService to async"
+       │
+       ▼
+┌─────────────────────────────────────────┐
+│          Agent Decides HOW              │
+│  ┌─────┐   ┌─────┐   ┌─────┐           │
+│  │grep │──▶│edit │──▶│test │──▶ ...    │
+│  └─────┘   └─────┘   └─────┘           │
+│      (Agent orchestrates 87%)           │
+└─────────────────────────────────────────┘
+       │
+       ▼
+Human: Review PR (3%)</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -5549,13 +5549,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Human provides goal, not steps
-      agent.run(
-          goal="Refactor UploadService to async",
-          tools=[grep, edit_file, run_tests, git],
-          guardrails=["no prod DB access", "tests must pass"]
-      )
-      # Agent decides: grep -> analyze -> edit -> test -> PR</code></pre>
+        <pre><code class="language-python"># Human provides goal, not steps
+agent.run(
+    goal="Refactor UploadService to async",
+    tools=[grep, edit_file, run_tests, git],
+    guardrails=["no prod DB access", "tests must pass"]
+)
+# Agent decides: grep -> analyze -> edit -> test -> PR</code></pre>
             </div>
           </div>
       
@@ -5621,12 +5621,12 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">BEFORE (Sequential):  T1 ──▶ T2 ──▶ T3 ──▶ T4  (7s)
-      
-      AFTER (RL-Learned Parallel):
-          ┌── T1 ──┐
-          ├── T2 ──┼──▶ Results ──▶ T4 ──▶ Done  (3.5s)
-          └── T3 ──┘</pre>
+          <pre class="ascii-art">BEFORE (Sequential):  T1 ──▶ T2 ──▶ T3 ──▶ T4  (7s)
+
+AFTER (RL-Learned Parallel):
+    ┌── T1 ──┐
+    ├── T2 ──┼──▶ Results ──▶ T4 ──▶ Done  (3.5s)
+    └── T3 ──┘</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -5646,14 +5646,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># RL learns parallel patterns naturally
-      # No explicit parallelization code needed
-      job = client.fine_tuning.jobs.create(
-          model="gpt-4o",
-          method="rft",
-          rft={"tools": tools, "grader": grader}
-      )
-      # Model discovers: batch independent calls</code></pre>
+        <pre><code class="language-python"># RL learns parallel patterns naturally
+# No explicit parallelization code needed
+job = client.fine_tuning.jobs.create(
+    model="gpt-4o",
+    method="rft",
+    rft={"tools": tools, "grader": grader}
+)
+# Model discovers: batch independent calls</code></pre>
             </div>
           </div>
       
@@ -5719,12 +5719,12 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Main ──▶ Scan (100 files) ──▶ Todo List ──▶ Spawn 10 Agents
-                                                    │
-           ┌─────────────────────────────────────-──┘
-           │  [10 files each, parallel]
-           ▼
-       Verify All ──▶ Consolidated PR</pre>
+          <pre class="ascii-art">Main ──▶ Scan (100 files) ──▶ Todo List ──▶ Spawn 10 Agents
+                                              │
+     ┌─────────────────────────────────────-──┘
+     │  [10 files each, parallel]
+     ▼
+ Verify All ──▶ Consolidated PR</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -5746,12 +5746,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">files = find("*.test.js", old_framework)
-      for batch in chunk(files, 10):
-          spawn_agent(
-              task=f"Migrate {batch} to new framework",
-              auto_commit=True
-          )</code></pre>
+        <pre><code class="language-python">files = find("*.test.js", old_framework)
+for batch in chunk(files, 10):
+    spawn_agent(
+        task=f"Migrate {batch} to new framework",
+        auto_commit=True
+    )</code></pre>
             </div>
           </div>
       
@@ -5817,9 +5817,9 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Tools ──▶ Classify ──┬── Read-Only? ── Parallel ──┐
-                           │                            │
-                           └── Has-Write? ── Sequential ┴──▶ Results</pre>
+          <pre class="ascii-art">Tools ──▶ Classify ──┬── Read-Only? ── Parallel ──┐
+                     │                            │
+                     └── Has-Write? ── Sequential ┴──▶ Results</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -5837,14 +5837,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">def execute_batch(tools):
-          if all(t.is_read_only for t in tools):
-              return parallel_execute(tools)
-          else:
-              return sequential_execute(tools)
-      
-      # FileRead, Grep: parallel
-      # FileWrite: sequential</code></pre>
+        <pre><code class="language-python">def execute_batch(tools):
+    if all(t.is_read_only for t in tools):
+        return parallel_execute(tools)
+    else:
+        return sequential_execute(tools)
+
+# FileRead, Grep: parallel
+# FileWrite: sequential</code></pre>
             </div>
           </div>
       
@@ -5910,19 +5910,19 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Answer ──▶ ┌──────────────────┐
-                 │  Multi-Criteria  │
-                 │     Grader       │
-                 └────────┬─────────┘
-                          │
-           ┌──────────────┼──────────────┐
-           ▼              ▼              ▼
-      Correctness    Reasoning     Citations
-        (0.50)        (0.20)        (0.10)
-           │              │              │
-           └──────────────┴──────────────┘
-                          │
-                    Weighted Sum ──▶ Final Score</pre>
+          <pre class="ascii-art">Answer ──▶ ┌──────────────────┐
+           │  Multi-Criteria  │
+           │     Grader       │
+           └────────┬─────────┘
+                    │
+     ┌──────────────┼──────────────┐
+     ▼              ▼              ▼
+Correctness    Reasoning     Citations
+  (0.50)        (0.20)        (0.10)
+     │              │              │
+     └──────────────┴──────────────┘
+                    │
+              Weighted Sum ──▶ Final Score</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -5943,18 +5943,18 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">scores = {
-          'correctness': 0.50,
-          'reasoning': 0.20,
-          'completeness': 0.15,
-          'citations': 0.10,
-          'formatting': 0.05
-      }
-      # Check gaming patterns first
-      if gaming_pattern_detected(trace):
-          return {"score": 0.0, "violation": True}
-      # Multi-criteria weighted score
-      final = sum(w * scores[k] for k, w in weights)</code></pre>
+        <pre><code class="language-python">scores = {
+    'correctness': 0.50,
+    'reasoning': 0.20,
+    'completeness': 0.15,
+    'citations': 0.10,
+    'formatting': 0.05
+}
+# Check gaming patterns first
+if gaming_pattern_detected(trace):
+    return {"score": 0.0, "violation": True}
+# Multi-criteria weighted score
+final = sum(w * scores[k] for k, w in weights)</code></pre>
             </div>
           </div>
       
@@ -6022,13 +6022,13 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Generator ──▶ Code ──▶ CriticGPT ──▶ Issues?
-                                    │
-                          ┌─────────┴─────────┐
-                          │                   │
-                         Yes                  No
-                          │                   │
-                    ◀── Refine           ──▶ Human Review</pre>
+          <pre class="ascii-art">Generator ──▶ Code ──▶ CriticGPT ──▶ Issues?
+                              │
+                    ┌─────────┴─────────┐
+                    │                   │
+                   Yes                  No
+                    │                   │
+              ◀── Refine           ──▶ Human Review</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -6048,13 +6048,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">critic = CriticGPT(severity_threshold=0.7)
-      review = critic.review_code(code)
-      
-      if review['issues']:
-          code = generator.refine(code, review)
-      else:
-          submit_to_human(code, review)</code></pre>
+        <pre><code class="language-python">critic = CriticGPT(severity_threshold=0.7)
+review = critic.review_code(code)
+
+if review['issues']:
+    code = generator.refine(code, review)
+else:
+    submit_to_human(code, review)</code></pre>
             </div>
           </div>
       
@@ -6122,16 +6122,16 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Coherence Window Evolution:
-      
-      Early:  [██░░░░░░░░░░░░░░░░░░]  ~5 min
-              └─ loses track quickly
-      
-      Current: [██████████████░░░░░░]  ~hours
-               └─ sustained focus
-      
-      Future:  [████████████████████]  all-day
-               └─ human-equivalent</pre>
+          <pre class="ascii-art">Coherence Window Evolution:
+
+Early:  [██░░░░░░░░░░░░░░░░░░]  ~5 min
+        └─ loses track quickly
+
+Current: [██████████████░░░░░░]  ~hours
+         └─ sustained focus
+
+Future:  [████████████████████]  all-day
+         └─ human-equivalent</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -6153,13 +6153,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Coherence doubles every 7 months
-      agent = ExtendedCoherenceAgent(
-          context_window="200K tokens",
-          state_management="persistent",
-          session_length="hours"
-      )
-      # Can now handle multi-hour projects</code></pre>
+        <pre><code class="language-python"># Coherence doubles every 7 months
+agent = ExtendedCoherenceAgent(
+    context_window="200K tokens",
+    state_management="persistent",
+    session_length="hours"
+)
+# Can now handle multi-hour projects</code></pre>
             </div>
           </div>
       
@@ -6225,12 +6225,12 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">    [Private Data]
-               /    \
-              /      \
-      [Untrusted] ─── [External Comm]
-      
-      All 3 = DANGER! Block at least one circle.</pre>
+          <pre class="ascii-art">    [Private Data]
+         /    \
+        /      \
+[Untrusted] ─── [External Comm]
+
+All 3 = DANGER! Block at least one circle.</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -6249,11 +6249,11 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Pre-execution policy check
-      if (tool.can_externally_communicate and
-          tool.accesses_private_data and
-          input_source == "untrusted"):
-          raise SecurityError("Lethal trifecta!")</code></pre>
+        <pre><code class="language-python"># Pre-execution policy check
+if (tool.can_externally_communicate and
+    tool.accesses_private_data and
+    input_source == "untrusted"):
+    raise SecurityError("Lethal trifecta!")</code></pre>
             </div>
           </div>
       
@@ -6319,11 +6319,11 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Base LLM ──┬──▶ Lang Specialist ──┐
-                 │                       │
-                 └──▶ Code Specialist ──┼──▶ Weight Merge ──▶ Unified Model
-                                         │
-                    (Fisher Avg / α=0.5)</pre>
+          <pre class="ascii-art">Base LLM ──┬──▶ Lang Specialist ──┐
+           │                       │
+           └──▶ Code Specialist ──┼──▶ Weight Merge ──▶ Unified Model
+                                   │
+              (Fisher Avg / α=0.5)</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -6341,12 +6341,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-bash"># Merge two specialist checkpoints
-      python merge_models.py \
-        --model_a lang-specialist.pt \
-        --model_b code-specialist.pt \
-        --output merged-agent.pt \
-        --alpha 0.5</code></pre>
+        <pre><code class="language-bash"># Merge two specialist checkpoints
+python merge_models.py \
+  --model_a lang-specialist.pt \
+  --model_b code-specialist.pt \
+  --output merged-agent.pt \
+  --alpha 0.5</code></pre>
             </div>
           </div>
       
@@ -6412,18 +6412,18 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">                    ┌──────────────────┐
-      Prompt ──▶ Model ──▶│ Response A       │
-                          │ Response B       │
-                          └────────┬─────────┘
-                                   ▼
-                          ┌──────────────────┐
-                          │  AI Critic       │
-                          │  + Constitution  │──▶ Preference (A > B)
-                          └──────────────────┘
-                                   │
-                                   ▼
-                          Train Reward Model</pre>
+          <pre class="ascii-art">                    ┌──────────────────┐
+Prompt ──▶ Model ──▶│ Response A       │
+                    │ Response B       │
+                    └────────┬─────────┘
+                             ▼
+                    ┌──────────────────┐
+                    │  AI Critic       │
+                    │  + Constitution  │──▶ Preference (A > B)
+                    └──────────────────┘
+                             │
+                             ▼
+                    Train Reward Model</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -6441,13 +6441,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">class RLAIF:
-          def generate_preference(self, prompt, a, b):
-              critique = f"""Given principles: {self.constitution}
-      Which response is better for "{prompt}"?
-      A: {a}  B: {b}
-      Choose and explain why."""
-              return self.critic.generate(critique)</code></pre>
+        <pre><code class="language-python">class RLAIF:
+    def generate_preference(self, prompt, a, b):
+        critique = f"""Given principles: {self.constitution}
+Which response is better for "{prompt}"?
+A: {a}  B: {b}
+Choose and explain why."""
+        return self.critic.generate(critique)</code></pre>
             </div>
           </div>
       
@@ -6515,9 +6515,9 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Input ──▶ LLM + Schema ──▶ Validated Output ──┬──▶ DB
-                                                    ├──▶ API
-                                                    └──▶ Next Agent</pre>
+          <pre class="ascii-art">Input ──▶ LLM + Schema ──▶ Validated Output ──┬──▶ DB
+                                              ├──▶ API
+                                              └──▶ Next Agent</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -6535,13 +6535,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-typescript">const schema = z.object({
-        category: z.enum(['spam', 'legit']),
-        confidence: z.number().min(0).max(1)
-      });
-      const result = await generateObject({
-        model, schema, prompt
-      });</code></pre>
+        <pre><code class="language-typescript">const schema = z.object({
+  category: z.enum(['spam', 'legit']),
+  confidence: z.number().min(0).max(1)
+});
+const result = await generateObject({
+  model, schema, prompt
+});</code></pre>
             </div>
           </div>
       
@@ -6607,20 +6607,20 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Agent ──▶ Propose Change ──▶ Git PR
-                                        │
-                                 ┌──────▼──────┐
-                                 │   CI Check  │
-                                 │ - Signed?   │
-                                 │ - Policy OK?│
-                                 └──────┬──────┘
-                                        │
-                           ┌────────────┼────────────┐
-                           ▼            ▼            ▼
-                        [PASS]      [REVIEW]      [REJECT]
-                           │            │
-                           ▼            ▼
-                     Gatekeeper ──▶ Merge</pre>
+          <pre class="ascii-art">Agent ──▶ Propose Change ──▶ Git PR
+                                  │
+                           ┌──────▼──────┐
+                           │   CI Check  │
+                           │ - Signed?   │
+                           │ - Policy OK?│
+                           └──────┬──────┘
+                                  │
+                     ┌────────────┼────────────┐
+                     ▼            ▼            ▼
+                  [PASS]      [REVIEW]      [REJECT]
+                     │            │
+                     ▼            ▼
+               Gatekeeper ──▶ Merge</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -6639,15 +6639,15 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-yaml"># constitution.yaml (in signed git repo)
-      rules:
-        - name: "no_secret_exfil"
-          level: critical
-          immutable: true
-        - name: "confirm_destructive"
-          level: high
-      
-      # CI: flag deletion of critical rules</code></pre>
+        <pre><code class="language-yaml"># constitution.yaml (in signed git repo)
+rules:
+  - name: "no_secret_exfil"
+    level: critical
+    immutable: true
+  - name: "confirm_destructive"
+    level: high
+
+# CI: flag deletion of critical rules</code></pre>
             </div>
           </div>
       
@@ -6713,19 +6713,19 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-      │  Inference  │───▶│ Tool Queue  │───▶│   Tool      │
-      │  Workers    │    │ (Redis/MQ)  │    │  Executors  │
-      │   (GPU)     │◀───│             │◀───│   (CPU)     │
-      └──────┬──────┘    └─────────────┘    └─────────────┘
-             │
-             ▼ trajectories
-      ┌─────────────┐    ┌─────────────┐
-      │   Replay    │───▶│   Learner   │
-      │   Buffer    │    │(Policy Upd) │
-      └─────────────┘    └──────┬──────┘
-                                │ new checkpoint
-                                ▼</pre>
+          <pre class="ascii-art">┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  Inference  │───▶│ Tool Queue  │───▶│   Tool      │
+│  Workers    │    │ (Redis/MQ)  │    │  Executors  │
+│   (GPU)     │◀───│             │◀───│   (CPU)     │
+└──────┬──────┘    └─────────────┘    └─────────────┘
+       │
+       ▼ trajectories
+┌─────────────┐    ┌─────────────┐
+│   Replay    │───▶│   Learner   │
+│   Buffer    │    │(Policy Upd) │
+└─────────────┘    └──────┬──────┘
+                          │ new checkpoint
+                          ▼</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -6744,17 +6744,17 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Async pipeline components
-      inference_worker.submit_action("compile", file)
-      # No blocking - continue inference
-      
-      # Tool executor (separate process)
-      tool_queue.subscribe("compile_requests")
-      result = run_compile(request)
-      result_queue.publish(result)
-      
-      # Learner updates policy periodically
-      learner.update_from_buffer(replay_buffer)</code></pre>
+        <pre><code class="language-python"># Async pipeline components
+inference_worker.submit_action("compile", file)
+# No blocking - continue inference
+
+# Tool executor (separate process)
+tool_queue.subscribe("compile_requests")
+result = run_compile(request)
+result_queue.publish(result)
+
+# Learner updates policy periodically
+learner.update_from_buffer(replay_buffer)</code></pre>
             </div>
           </div>
       
@@ -6820,12 +6820,12 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">PROTOTYPE PHASE                    PRODUCTION PHASE
-          │                                    │
-          ▼                                    ▼
-      [No Limits] ──▶ [Rich Output] ──▶ [Pattern Discovery] ──▶ [Optimized]
-          │               │                    │                    │
-       $$$$$           Quality             Insights              $</pre>
+          <pre class="ascii-art">PROTOTYPE PHASE                    PRODUCTION PHASE
+    │                                    │
+    ▼                                    ▼
+[No Limits] ──▶ [Rich Output] ──▶ [Pattern Discovery] ──▶ [Optimized]
+    │               │                    │                    │
+ $$$$$           Quality             Insights              $</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -6841,13 +6841,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Prototype: no limits
-      config = {
-          "max_tokens": None,  # Unlimited
-          "reasoning_passes": 5,
-          "self_correction": True
-      }
-      # Find patterns, then optimize later</code></pre>
+        <pre><code class="language-python"># Prototype: no limits
+config = {
+    "max_tokens": None,  # Unlimited
+    "reasoning_passes": 5,
+    "self_correction": True
+}
+# Find patterns, then optimize later</code></pre>
             </div>
           </div>
       
@@ -6913,15 +6913,15 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Agent ──▶ Generate ──▶ make all ──▶ Scan Pass?
-                                              │
-                                ┌─────────────┴─────────────┐
-                                │                           │
-                               No                          Yes
-                                │                           │
-                          See errors              ──▶ Complete ✓
-                                │
-                          ◀── Regenerate</pre>
+          <pre class="ascii-art">Agent ──▶ Generate ──▶ make all ──▶ Scan Pass?
+                                        │
+                          ┌─────────────┴─────────────┐
+                          │                           │
+                         No                          Yes
+                          │                           │
+                    See errors              ──▶ Complete ✓
+                          │
+                    ◀── Regenerate</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -6940,12 +6940,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-makefile">all: build test security-scan
-      
-      security-scan:
-          semgrep --config=auto src/
-          bandit -r src/
-          @exit $?</code></pre>
+        <pre><code class="language-makefile">all: build test security-scan
+
+security-scan:
+    semgrep --config=auto src/
+    bandit -r src/
+    @exit $?</code></pre>
             </div>
           </div>
       
@@ -7013,17 +7013,17 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">┌─────────────────────────────────────────┐
-      │            SANDBOXED AGENT              │
-      │  [Private Data] ──▶ [Agent] ──▶ ???     │
-      └─────────────────────────────────────────┘
-                            │
-                ┌───────────┼───────────┐
-                ▼           ▼           ▼
-          api.internal   attacker.com  ANY
-               ✓             ✗          ✗
-      
-         OUTPUT DROP (default) | ACCEPT (whitelist)</pre>
+          <pre class="ascii-art">┌─────────────────────────────────────────┐
+│            SANDBOXED AGENT              │
+│  [Private Data] ──▶ [Agent] ──▶ ???     │
+└─────────────────────────────────────────┘
+                      │
+          ┌───────────┼───────────┐
+          ▼           ▼           ▼
+    api.internal   attacker.com  ANY
+         ✓             ✗          ✗
+
+   OUTPUT DROP (default) | ACCEPT (whitelist)</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -7040,14 +7040,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-bash"># Docker egress rules
-      iptables -P OUTPUT DROP  # default-deny
-      iptables -A OUTPUT \
-        -d api.mycompany.internal \
-        -j ACCEPT
-      
-      # Log blocked attempts
-      iptables -A OUTPUT -j LOG</code></pre>
+        <pre><code class="language-bash"># Docker egress rules
+iptables -P OUTPUT DROP  # default-deny
+iptables -A OUTPUT \
+  -d api.mycompany.internal \
+  -j ACCEPT
+
+# Log blocked attempts
+iptables -A OUTPUT -j LOG</code></pre>
             </div>
           </div>
       
@@ -7115,13 +7115,13 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">               ┌─── VM1 [Rollout 1] ───┐
-                     │   shell("grep TODO")  │
-      Training ──▶   ├─── VM2 [Rollout 2] ───┼──▶ Rewards
-                     │   shell("rm temp")    │
-                     └─── VM3 [Rollout 3] ───┘
-      
-      Each VM: [Fresh FS] → [Execute] → [Destroy]</pre>
+          <pre class="ascii-art">               ┌─── VM1 [Rollout 1] ───┐
+               │   shell("grep TODO")  │
+Training ──▶   ├─── VM2 [Rollout 2] ───┼──▶ Rewards
+               │   shell("rm temp")    │
+               └─── VM3 [Rollout 3] ───┘
+
+Each VM: [Fresh FS] → [Execute] → [Destroy]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -7142,12 +7142,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">@app.cls(image=base_image, timeout=600)
-      class IsolatedToolExecutor:
-          def execute_shell(self, rollout_id, cmd):
-              # Safe: isolated VM per rollout
-              return subprocess.run(cmd, shell=True)
-          # VM auto-destroyed after rollout</code></pre>
+        <pre><code class="language-python">@app.cls(image=base_image, timeout=600)
+class IsolatedToolExecutor:
+    def execute_shell(self, rollout_id, cmd):
+        # Safe: isolated VM per rollout
+        return subprocess.run(cmd, shell=True)
+    # VM auto-destroyed after rollout</code></pre>
             </div>
           </div>
       
@@ -7213,13 +7213,13 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Tool ──▶ [john@x.com] ──▶ MCP Client ──▶ [EMAIL_1] ──▶ Model
+          <pre class="ascii-art">Tool ──▶ [john@x.com] ──▶ MCP Client ──▶ [EMAIL_1] ──▶ Model
+                              │
+                         Tokenize
+                              │
+Model ──▶ "Send to [EMAIL_1]" ──▶ MCP ──▶ [john@x.com] ──▶ Tool
                                     │
-                               Tokenize
-                                    │
-      Model ──▶ "Send to [EMAIL_1]" ──▶ MCP ──▶ [john@x.com] ──▶ Tool
-                                          │
-                                     Untokenize</pre>
+                               Untokenize</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -7238,12 +7238,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># MCP client intercepts
-      data = {"email": "john@example.com"}
-      # Tokenized for model
-      ctx = {"email": "[EMAIL_1]"}
-      # Agent reasons with tokens
-      # Real value restored for tools</code></pre>
+        <pre><code class="language-python"># MCP client intercepts
+data = {"email": "john@example.com"}
+# Tokenized for model
+ctx = {"email": "[EMAIL_1]"}
+# Agent reasons with tokens
+# Real value restored for tools</code></pre>
             </div>
           </div>
       
@@ -7309,17 +7309,17 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Agent ──▶ CLI --for-agent --json ──▶ System
-                                              │
-                    ┌─────────────────────────┘
-                    ▼
-               Unified Logger (JSON Lines)
-                    │
-                    ▼
-               Agent Parses Structured Data
-                    │
-                    ▼
-               Next Action Based on Analysis</pre>
+          <pre class="ascii-art">Agent ──▶ CLI --for-agent --json ──▶ System
+                                        │
+              ┌─────────────────────────┘
+              ▼
+         Unified Logger (JSON Lines)
+              │
+              ▼
+         Agent Parses Structured Data
+              │
+              ▼
+         Next Action Based on Analysis</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -7339,13 +7339,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-bash"># Human-friendly (hard to parse)
-      $ npm test
-      PASS src/test.js
-      
-      # Agent-friendly (easy to parse)
-      $ npm test --json --for-agent
-      {"status":"pass","file":"src/test.js"}</code></pre>
+        <pre><code class="language-bash"># Human-friendly (hard to parse)
+$ npm test
+PASS src/test.js
+
+# Agent-friendly (easy to parse)
+$ npm test --json --for-agent
+{"status":"pass","file":"src/test.js"}</code></pre>
             </div>
           </div>
       
@@ -7411,20 +7411,20 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">┌─────────────────────────────────────┐
-      │          Integration Points         │
-      └─────────────────────────────────────┘
-              │         │         │
-              ▼         ▼         ▼
-         Makefile   Git Hook   Cron Job
-              │         │         │
-              └────┬────┴────┬────┘
-                   │         │
-                   ▼         ▼
-            claude spec   claude repl
-                   │
-                   ▼
-            Local Context ──▶ Agent ──▶ Output</pre>
+          <pre class="ascii-art">┌─────────────────────────────────────┐
+│          Integration Points         │
+└─────────────────────────────────────┘
+        │         │         │
+        ▼         ▼         ▼
+   Makefile   Git Hook   Cron Job
+        │         │         │
+        └────┬────┴────┬────┘
+             │         │
+             ▼         ▼
+      claude spec   claude repl
+             │
+             ▼
+      Local Context ──▶ Agent ──▶ Output</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -7443,15 +7443,15 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-bash"># In your Makefile
-      generate-from-spec:
-          claude spec run --input api.yaml --output src/
-      
-      test-spec-compliance:
-          claude spec test --spec api.yaml --codebase src/
-      
-      # Git pre-commit hook
-      claude spec test || exit 1</code></pre>
+        <pre><code class="language-bash"># In your Makefile
+generate-from-spec:
+    claude spec run --input api.yaml --output src/
+
+test-spec-compliance:
+    claude spec test --spec api.yaml --codebase src/
+
+# Git pre-commit hook
+claude spec test || exit 1</code></pre>
             </div>
           </div>
       
@@ -7518,13 +7518,13 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">LLM ──▶ [Write DSL] ──▶ Static Check ──▶ Sandbox Run
-                   │              │                │
-              ┌────┴────┐    ┌────┴────┐      ┌────┴────┐
-              │ x=read  │    │ taint   │      │ locked  │
-              │ y=proc  │───▶│ verify  │─────▶│ execute │
-              │ z=write │    │ flows   │      │         │
-              └─────────┘    └─────────┘      └─────────┘</pre>
+          <pre class="ascii-art">LLM ──▶ [Write DSL] ──▶ Static Check ──▶ Sandbox Run
+             │              │                │
+        ┌────┴────┐    ┌────┴────┐      ┌────┴────┐
+        │ x=read  │    │ taint   │      │ locked  │
+        │ y=proc  │───▶│ verify  │─────▶│ execute │
+        │ z=write │    │ flows   │      │         │
+        └─────────┘    └─────────┘      └─────────┘</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -7542,10 +7542,10 @@
               <div class="box-header">
                 <span class="box-label">DSL Example</span>
               </div>
-              <pre><code class="language-python">x = calendar.read(today)
-      y = QuarantineLLM.format(x)
-      email.write(to="john@acme.com", body=y)
-      # Static check: tainted var can't reach recipient</code></pre>
+        <pre><code class="language-python">x = calendar.read(today)
+y = QuarantineLLM.format(x)
+email.write(to="john@acme.com", body=y)
+# Static check: tainted var can't reach recipient</code></pre>
             </div>
           </div>
       
@@ -7611,13 +7611,13 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Human ──▶ /commit ──┐
-                          │     ┌────────────────┐
-                          ├───▶ │  Shared Tool   │ ──▶ Result
-                          │     │  (same logic)  │
-      Agent ──▶ /commit ──┘     └────────────────┘
-      
-      "Everything you can do, Claude can do"</pre>
+          <pre class="ascii-art">Human ──▶ /commit ──┐
+                    │     ┌────────────────┐
+                    ├───▶ │  Shared Tool   │ ──▶ Result
+                    │     │  (same logic)  │
+Agent ──▶ /commit ──┘     └────────────────┘
+
+"Everything you can do, Claude can do"</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -7634,13 +7634,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">define_slash_command("/commit", {
-          "steps": ["lint", "gen message", "commit"],
-          "callable_by": ["human", "agent"],
-          "pre_allowed": ["git add", "git commit"]
-      })
-      # Human: $ /commit
-      # Agent: agent.call("/commit")</code></pre>
+        <pre><code class="language-python">define_slash_command("/commit", {
+    "steps": ["lint", "gen message", "commit"],
+    "callable_by": ["human", "agent"],
+    "pre_allowed": ["git add", "git commit"]
+})
+# Human: $ /commit
+# Agent: agent.call("/commit")</code></pre>
             </div>
           </div>
       
@@ -7708,12 +7708,12 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Human API          LLM-Friendly API
-      ─────────          ────────────────
-      Complex nesting    Flat structure
-      Implicit version   Explicit v2.0
-      Cryptic errors     Actionable errors
-      Many indirects     2 levels max</pre>
+          <pre class="ascii-art">Human API          LLM-Friendly API
+─────────          ────────────────
+Complex nesting    Flat structure
+Implicit version   Explicit v2.0
+Cryptic errors     Actionable errors
+Many indirects     2 levels max</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -7729,13 +7729,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># LLM-friendly function
-      def create_user_v2(
-          name: str,      # Descriptive param names
-          email: str
-      ) -> UserResult:   # Typed return
-          """Creates a new user account."""
-          # Clear errors, not cryptic codes</code></pre>
+        <pre><code class="language-python"># LLM-friendly function
+def create_user_v2(
+    name: str,      # Descriptive param names
+    email: str
+) -> UserResult:   # Typed return
+    """Creates a new user account."""
+    # Clear errors, not cryptic codes</code></pre>
             </div>
           </div>
       
@@ -7801,12 +7801,12 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">User: "Refactor X" ──▶ [+Prompt: "Use ASTRefactor"] ──▶ Agent
-                                                                │
-                                                          Selects: ASTRefactor
-                                                                │
-                                                                ▼
-                                                          Safe AST Patch</pre>
+          <pre class="ascii-art">User: "Refactor X" ──▶ [+Prompt: "Use ASTRefactor"] ──▶ Agent
+                                                          │
+                                                    Selects: ASTRefactor
+                                                          │
+                                                          ▼
+                                                    Safe AST Patch</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -7822,13 +7822,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Prompt template with tool steering
-      prompt = f"""
-      Task: {task_description}
-      Preferred tool: ASTRefactor
-      Usage: {{"file": str, "pattern": str}}
-      Fallback: apply_patch if AST fails
-      """</code></pre>
+        <pre><code class="language-python"># Prompt template with tool steering
+prompt = f"""
+Task: {task_description}
+Preferred tool: ASTRefactor
+Usage: {{"file": str, "pattern": str}}
+Fallback: apply_patch if AST fails
+"""</code></pre>
             </div>
           </div>
       
@@ -7894,10 +7894,10 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">User ──▶ "!ls -la" ──▶ Interface ──▶ Shell ──▶ Output
-                                              │
-                Agent Context ◀───────────────┘
-                    [cmd + output injected]</pre>
+          <pre class="ascii-art">User ──▶ "!ls -la" ──▶ Interface ──▶ Shell ──▶ Output
+                                        │
+          Agent Context ◀───────────────┘
+              [cmd + output injected]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -7915,12 +7915,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-bash"># User types in Claude Code:
-      !git status
-      
-      # Agent receives in context:
-      # Command: git status
-      # Output: On branch main, 2 files changed...</code></pre>
+        <pre><code class="language-bash"># User types in Claude Code:
+!git status
+
+# Agent receives in context:
+# Command: git status
+# Output: On branch main, 2 files changed...</code></pre>
             </div>
           </div>
       
@@ -7986,16 +7986,16 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">User Task ──┬──▶ [Direct: "Use file search tool"]
-                  │
-                  ├──▶ [Teach: "Use barley CLI, -h for help"]
-                  │
-                  ├──▶ [Implicit: "commit, push, pr"]
-                  │
-                  └──▶ [Think: "*think hard*"]
-                             │
-                             ▼
-                     Agent Tool Selection ──▶ Execute</pre>
+          <pre class="ascii-art">User Task ──┬──▶ [Direct: "Use file search tool"]
+            │
+            ├──▶ [Teach: "Use barley CLI, -h for help"]
+            │
+            ├──▶ [Implicit: "commit, push, pr"]
+            │
+            └──▶ [Think: "*think hard*"]
+                       │
+                       ▼
+               Agent Tool Selection ──▶ Execute</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -8015,14 +8015,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-text"># Direct invocation
-      "Use the file search tool to find config files"
-      
-      # Teaching tool usage
-      "Use our barley CLI to check logs. -h for help"
-      
-      # Implicit shortcut (learned association)
-      "commit, push, pr"  # agent knows git workflow</code></pre>
+        <pre><code class="language-text"># Direct invocation
+"Use the file search tool to find config files"
+
+# Teaching tool usage
+"Use our barley CLI to check logs. -h for help"
+
+# Implicit shortcut (learned association)
+"commit, push, pr"  # agent knows git workflow</code></pre>
             </div>
           </div>
       
@@ -8088,17 +8088,17 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Application/Script ──▶ Agent SDK
-                                  │
-                ┌─────────────────┼─────────────────┐
-                │                 │                 │
-                ▼                 ▼                 ▼
-           CLI Interface    Python Lib      TS Library
-                │                 │                 │
-                └─────────────────┼─────────────────┘
-                                  ▼
-                             Agent Core
-                           (Tools, Memory)</pre>
+          <pre class="ascii-art">Application/Script ──▶ Agent SDK
+                            │
+          ┌─────────────────┼─────────────────┐
+          │                 │                 │
+          ▼                 ▼                 ▼
+     CLI Interface    Python Lib      TS Library
+          │                 │                 │
+          └─────────────────┼─────────────────┘
+                            ▼
+                       Agent Core
+                     (Tools, Memory)</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -8118,13 +8118,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-bash"># CLI usage for CI/CD
-      $ claude -p "what changed this week?" \
-        --allowedTools "Bash(git log:*)" \
-        --output-format json
-      
-      # Python SDK
-      agent.run("Review PR", tools=["git"])</code></pre>
+        <pre><code class="language-bash"># CLI usage for CI/CD
+$ claude -p "what changed this week?" \
+  --allowedTools "Bash(git log:*)" \
+  --output-format json
+
+# Python SDK
+agent.run("Review PR", tools=["git"])</code></pre>
             </div>
           </div>
       
@@ -8190,17 +8190,17 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Traditional:
-        LLM ──▶ Tool1 ──▶ [JSON 1000t] ──▶ LLM
-        LLM ──▶ Tool2 ──▶ [JSON 1000t] ──▶ LLM
-        LLM ──▶ Tool3 ──▶ [JSON 1000t] ──▶ LLM
-      
-      Code Mode:
-        LLM ──▶ V8 Isolate ┬──▶ Tool1
-                           ├──▶ Tool2
-                           └──▶ Tool3
-                                │
-                           [Condensed] ──▶ LLM</pre>
+          <pre class="ascii-art">Traditional:
+  LLM ──▶ Tool1 ──▶ [JSON 1000t] ──▶ LLM
+  LLM ──▶ Tool2 ──▶ [JSON 1000t] ──▶ LLM
+  LLM ──▶ Tool3 ──▶ [JSON 1000t] ──▶ LLM
+
+Code Mode:
+  LLM ──▶ V8 Isolate ┬──▶ Tool1
+                     ├──▶ Tool2
+                     └──▶ Tool3
+                          │
+                     [Condensed] ──▶ LLM</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -8219,13 +8219,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-typescript">// LLM generates orchestration code
-      const vpc = await createVPC({name: "demo"})
-      const igw = await createInternetGateway(vpc.id)
-      const sg = await createSecurityGroup(vpc.id, rules)
-      const ec2 = await launchEC2({vpcId: vpc.id})
-      // All calls in isolate - only result to LLM
-      return {vpcId: vpc.id, publicIP: ec2.ip}</code></pre>
+        <pre><code class="language-typescript">// LLM generates orchestration code
+const vpc = await createVPC({name: "demo"})
+const igw = await createInternetGateway(vpc.id)
+const sg = await createSecurityGroup(vpc.id, rules)
+const ec2 = await launchEC2({vpcId: vpc.id})
+// All calls in isolate - only result to LLM
+return {vpcId: vpc.id, publicIP: ec2.ip}</code></pre>
             </div>
           </div>
       
@@ -8293,18 +8293,18 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">User: "@src/Button.js"
-               │
-               ▼
-      ┌─────────────────────────────┐
-      │  Preprocessor               │
-      │  1. Parse @mention          │
-      │  2. Read file (lines 1-50)  │
-      │  3. Inject into context     │
-      └─────────────────────────────┘
-               │
-               ▼
-      Agent: [Context + Button.js] ──▶ Continue</pre>
+          <pre class="ascii-art">User: "@src/Button.js"
+         │
+         ▼
+┌─────────────────────────────┐
+│  Preprocessor               │
+│  1. Parse @mention          │
+│  2. Read file (lines 1-50)  │
+│  3. Inject into context     │
+└─────────────────────────────┘
+         │
+         ▼
+Agent: [Context + Button.js] ──▶ Continue</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -8326,15 +8326,15 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Syntax examples
-      "@path/to/file.ext"        # Full file
-      "/load file.ext:10-50"     # Line range
-      "/summarize test_spec.py"  # Extract summary
-      
-      # Injected as:
-      # /// BEGIN Button.js
-      # ...content...
-      # /// END Button.js</code></pre>
+        <pre><code class="language-python"># Syntax examples
+"@path/to/file.ext"        # Full file
+"/load file.ext:10-50"     # Line range
+"/summarize test_spec.py"  # Extract summary
+
+# Injected as:
+# /// BEGIN Button.js
+# ...content...
+# /// END Button.js</code></pre>
             </div>
           </div>
       
@@ -8402,16 +8402,16 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">servers/
-      ├── google-drive/   ──▶ list (names only)
-      │   ├── getDocument     ──▶ search (+ description)
-      │   └── listFiles           ──▶ get (full schema)
-      ├── slack/
-      └── github/
-      
-      Agent: list_dir("./servers/") → ["google-drive/", ...]
-             search_tools("google-drive/*", "name+desc")
-             get_tool_definition("getDocument") → {schema}</pre>
+          <pre class="ascii-art">servers/
+├── google-drive/   ──▶ list (names only)
+│   ├── getDocument     ──▶ search (+ description)
+│   └── listFiles           ──▶ get (full schema)
+├── slack/
+└── github/
+
+Agent: list_dir("./servers/") → ["google-drive/", ...]
+       search_tools("google-drive/*", "name+desc")
+       get_tool_definition("getDocument") → {schema}</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -8428,13 +8428,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Progressive discovery workflow
-      servers = list_directory("./servers/")  # names only
-      tools = search_tools("google-drive/*",
-                           detail="name+description")
-      schema = get_tool_definition(
-          "servers/google-drive/getDocument"
-      )  # full JSON schema when needed</code></pre>
+        <pre><code class="language-python"># Progressive discovery workflow
+servers = list_directory("./servers/")  # names only
+tools = search_tools("google-drive/*",
+                     detail="name+description")
+schema = get_tool_definition(
+    "servers/google-drive/getDocument"
+)  # full JSON schema when needed</code></pre>
             </div>
           </div>
       
@@ -8502,10 +8502,10 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Main ──▶ "Compile svc-A" ──▶ CompileSubagent ──▶ Build
-                                                        │
-               Main Context ◀───────────────────────────┘
-                 [{file:"x.go", line:10, err:"..."}]</pre>
+          <pre class="ascii-art">Main ──▶ "Compile svc-A" ──▶ CompileSubagent ──▶ Build
+                                                  │
+         Main Context ◀───────────────────────────┘
+           [{file:"x.go", line:10, err:"..."}]</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -8525,10 +8525,10 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">result = spawn_compile_agent("auth-service")
-      # Returns concise error summary:
-      # [{file:"auth.go", line:85, error:"undefined"}]
-      main_context.inject(result.errors)</code></pre>
+        <pre><code class="language-python">result = spawn_compile_agent("auth-service")
+# Returns concise error summary:
+# [{file:"auth.go", line:85, error:"undefined"}]
+main_context.inject(result.errors)</code></pre>
             </div>
           </div>
       
@@ -8594,17 +8594,17 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">User ──▶ Agent ──▶ ┌──────────────────────┐
-                         │    VIRTUAL MACHINE   │
-                         │ ┌──────────────────┐ │
-                         │ │ Execute Code     │ │
-                         │ │ Install Packages │ │
-                         │ │ File Operations  │ │
-                         │ │ Run Applications │ │
-                         │ └──────────────────┘ │
-                         └──────────┬───────────┘
-                                    │
-                         Agent ◀────┘ Results</pre>
+          <pre class="ascii-art">User ──▶ Agent ──▶ ┌──────────────────────┐
+                   │    VIRTUAL MACHINE   │
+                   │ ┌──────────────────┐ │
+                   │ │ Execute Code     │ │
+                   │ │ Install Packages │ │
+                   │ │ File Operations  │ │
+                   │ │ Run Applications │ │
+                   │ └──────────────────┘ │
+                   └──────────┬───────────┘
+                              │
+                   Agent ◀────┘ Results</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -8623,12 +8623,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Agent operating in VM environment
-      vm.execute("pip install pandas matplotlib")
-      vm.execute("python analyze_data.py")
-      vm.read_file("/output/report.pdf")
-      vm.execute("git add . && git commit -m 'Add report'")
-      # Agent has full computer operator capability</code></pre>
+        <pre><code class="language-python"># Agent operating in VM environment
+vm.execute("pip install pandas matplotlib")
+vm.execute("python analyze_data.py")
+vm.read_file("/output/report.pdf")
+vm.execute("git add . && git commit -m 'Add report'")
+# Agent has full computer operator capability</code></pre>
             </div>
           </div>
       
@@ -8694,15 +8694,15 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Traditional RAG:
-        Code ──▶ Index ──▶ Vector DB ──▶ Query
-                 (stale)     (infra)
-      
-      Agentic Search:
-        Query ──▶ grep/find ──▶ Refine ──▶ Results
-                    │              │
-                    └──────────────┘
-                 (current state, no infra)</pre>
+          <pre class="ascii-art">Traditional RAG:
+  Code ──▶ Index ──▶ Vector DB ──▶ Query
+           (stale)     (infra)
+
+Agentic Search:
+  Query ──▶ grep/find ──▶ Refine ──▶ Results
+              │              │
+              └──────────────┘
+           (current state, no infra)</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -8721,14 +8721,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Instead of vector search:
-      # vector_db.index(codebase)  # stale!
-      # results = vector_db.query(embed(q))
-      
-      # Use agentic search:
-      agent.call_tool("grep", "function.*auth")
-      agent.call_tool("find", "**/auth/*.ts")
-      agent.refine_search_based_on_results()</code></pre>
+        <pre><code class="language-python"># Instead of vector search:
+# vector_db.index(codebase)  # stale!
+# results = vector_db.query(embed(q))
+
+# Use agentic search:
+agent.call_tool("grep", "function.*auth")
+agent.call_tool("find", "**/auth/*.ts")
+agent.refine_search_based_on_results()</code></pre>
             </div>
           </div>
       
@@ -8794,17 +8794,17 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Direct API (High Cost):
-        Agent ──▶ API ──▶ [10K rows: 150K tokens] ──▶ Context
-      
-      Code-Over-API (Low Cost):
-        Agent ──▶ Write Code ──▶ Sandbox
-                                    │
-                               [Process 10K]
-                                    │
-                               [Filter/Agg]
-                                    │
-                               [Summary: 2K] ──▶ Context</pre>
+          <pre class="ascii-art">Direct API (High Cost):
+  Agent ──▶ API ──▶ [10K rows: 150K tokens] ──▶ Context
+
+Code-Over-API (Low Cost):
+  Agent ──▶ Write Code ──▶ Sandbox
+                              │
+                         [Process 10K]
+                              │
+                         [Filter/Agg]
+                              │
+                         [Summary: 2K] ──▶ Context</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -8822,14 +8822,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">def process_spreadsheet():
-          # Fetch in execution env (not context)
-          rows = spreadsheet.getRows(sheet_id="abc")
-          # Filter in code
-          active = [r for r in rows if r.status == "active"]
-          # Only summary to context
-          print(f"Found {len(active)} of {len(rows)}")
-          return active[:5]  # Sample only</code></pre>
+        <pre><code class="language-python">def process_spreadsheet():
+    # Fetch in execution env (not context)
+    rows = spreadsheet.getRows(sheet_id="abc")
+    # Filter in code
+    active = [r for r in rows if r.status == "active"]
+    # Only summary to context
+    print(f"Found {len(active)} of {len(rows)}")
+    return active[:5]  # Sample only</code></pre>
             </div>
           </div>
       
@@ -8897,15 +8897,15 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">         ┌─────────┐
-      Text ────┤         │
-               │ Multi   ├──▶ Cross-Modal ──▶ Solution
-      Image ───┤ Modal   │    Reasoning
-               │ Model   │
-      Video ───┤         │
-               └─────────┘
-      
-      Image ──▶ [OCR] + [Objects] + [Spatial] ──▶ Understanding</pre>
+          <pre class="ascii-art">         ┌─────────┐
+Text ────┤         │
+         │ Multi   ├──▶ Cross-Modal ──▶ Solution
+Image ───┤ Modal   │    Reasoning
+         │ Model   │
+Video ───┤         │
+         └─────────┘
+
+Image ──▶ [OCR] + [Objects] + [Spatial] ──▶ Understanding</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -8925,14 +8925,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">class VisualAIAgent:
-          async def process(self, task, image):
-              analysis = await self.mm_llm.analyze(
-                  prompt=f"Task: {task}",
-                  image=image
-              )
-              # Extract: objects, OCR text, spatial info
-              return await self.solve_with_visual(analysis)</code></pre>
+        <pre><code class="language-python">class VisualAIAgent:
+    async def process(self, task, image):
+        analysis = await self.mm_llm.analyze(
+            prompt=f"Task: {task}",
+            image=image
+        )
+        # Extract: objects, OCR text, spatial info
+        return await self.solve_with_visual(analysis)</code></pre>
             </div>
           </div>
       
@@ -8998,15 +8998,15 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">AI Code ──▶ Abstractor ──▶ Pseudocode/Summary
-         │                              │
-         │         ┌────────────────────┘
-         │         ▼
-         │    Human Review (Intent)
-         │         │
-         └─────────┼──▶ Verified Code
-                   ▼
-          "Sort changed: O(n²) → O(n log n)"</pre>
+          <pre class="ascii-art">AI Code ──▶ Abstractor ──▶ Pseudocode/Summary
+   │                              │
+   │         ┌────────────────────┘
+   │         ▼
+   │    Human Review (Intent)
+   │         │
+   └─────────┼──▶ Verified Code
+             ▼
+    "Sort changed: O(n²) → O(n log n)"</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -9025,12 +9025,12 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Instead of reviewing 50 lines of code:
-      review = abstractor.summarize(diff)
-      # Output: "Changed user_list sorting from
-      #          bubble sort to quicksort.
-      #          Tests maintained."
-      human.verify_intent(review)  # Much faster!</code></pre>
+        <pre><code class="language-python"># Instead of reviewing 50 lines of code:
+review = abstractor.summarize(diff)
+# Output: "Changed user_list sorting from
+#          bubble sort to quicksort.
+#          Tests maintained."
+human.verify_intent(review)  # Much faster!</code></pre>
             </div>
           </div>
       
@@ -9096,21 +9096,21 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Agent: "I'll modify auth.ts..."
-         │
-         ▼
-      [Start file read] ──▶ Dev watching
-                               │
-                          INTERRUPT!
-                               │
-                               ▼
-      Dev: "Use oauth.ts instead"
-         │
-         ▼
-      Agent: [Read oauth.ts] ──▶ Continue
-         │
-         ▼
-      Correction within first tool call</pre>
+          <pre class="ascii-art">Agent: "I'll modify auth.ts..."
+   │
+   ▼
+[Start file read] ──▶ Dev watching
+                         │
+                    INTERRUPT!
+                         │
+                         ▼
+Dev: "Use oauth.ts instead"
+   │
+   ▼
+Agent: [Read oauth.ts] ──▶ Continue
+   │
+   ▼
+Correction within first tool call</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -9132,16 +9132,16 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Real-time reasoning visibility
-      stream_reasoning_to_ui(agent.thoughts)
-      
-      # Low-friction interruption
-      if user_pressed_escape():
-          agent.pause()
-          context = user.get_correction()
-          agent.inject_context(context)
-          agent.resume()
-      # Partial work preserved on interrupt</code></pre>
+        <pre><code class="language-python"># Real-time reasoning visibility
+stream_reasoning_to_ui(agent.thoughts)
+
+# Low-friction interruption
+if user_pressed_escape():
+    agent.pause()
+    context = user.get_correction()
+    agent.inject_context(context)
+    agent.resume()
+# Partial work preserved on interrupt</code></pre>
             </div>
           </div>
       
@@ -9209,18 +9209,18 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">                Low Risk
-                    ┌────────────────────────────────▶ Execute
-                    │
-      Agent ──▶ [Risk?]
-                    │
-                    │ High Risk        ┌─────┐
-                    └───────▶ Human ──▶│ Y/N │──┬──▶ Execute
-                             <span class="emoji">⌛</span>       └─────┘  │
-                                                └──▶ Abort / Adapt
-      
-      Gate:  [auto]────────────●────────────[manual]
-                           threshold</pre>
+          <pre class="ascii-art">                Low Risk
+              ┌────────────────────────────────▶ Execute
+              │
+Agent ──▶ [Risk?]
+              │
+              │ High Risk        ┌─────┐
+              └───────▶ Human ──▶│ Y/N │──┬──▶ Execute
+                       <span class="emoji">⌛</span>       └─────┘  │
+                                          └──▶ Abort / Adapt
+
+Gate:  [auto]────────────●────────────[manual]
+                     threshold</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -9250,15 +9250,15 @@
               <div class="box-header">
                 <span class="box-label">Implementation</span>
               </div>
-              <pre><code class="language-python">from humanlayer import HumanLayer
-      hl = HumanLayer()
-      
-      @hl.require_approval(channel="slack")
-      def delete_user_data(user_id: str):
-          return db.users.delete(user_id)
-      
-      # Execution pauses until human approves
-      delete_user_data("user_123")</code></pre>
+        <pre><code class="language-python">from humanlayer import HumanLayer
+hl = HumanLayer()
+
+@hl.require_approval(channel="slack")
+def delete_user_data(user_id: str):
+    return db.users.delete(user_id)
+
+# Execution pauses until human approves
+delete_user_data("user_123")</code></pre>
             </div>
           </div>
       
@@ -9325,19 +9325,19 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Agent ──▶ "DROP TABLE" ──▶ Framework
-                                    │
-                          [HIGH RISK DETECTED]
-                                    │
-                                    ▼
-                               Slack #ops
-                          ┌─────────────────┐
-                          │ [Approve] [Deny]│
-                          └─────────────────┘
-                                    │
-                    ┌───────────────┴───────────────┐
-                    ▼                               ▼
-               Execute + Log                   Agent Adapts</pre>
+          <pre class="ascii-art">Agent ──▶ "DROP TABLE" ──▶ Framework
+                              │
+                    [HIGH RISK DETECTED]
+                              │
+                              ▼
+                         Slack #ops
+                    ┌─────────────────┐
+                    │ [Approve] [Deny]│
+                    └─────────────────┘
+                              │
+              ┌───────────────┴───────────────┐
+              ▼                               ▼
+         Execute + Log                   Agent Adapts</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -9357,14 +9357,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">from humanlayer import HumanLayer
-      hl = HumanLayer()
-      
-      @hl.require_approval(channel="slack")
-      def delete_user_data(user_id: str):
-          """Requires human approval before execution"""
-          return db.users.delete(user_id)
-      # Pauses for Slack approval button click</code></pre>
+        <pre><code class="language-python">from humanlayer import HumanLayer
+hl = HumanLayer()
+
+@hl.require_approval(channel="slack")
+def delete_user_data(user_id: str):
+    """Requires human approval before execution"""
+    return db.users.delete(user_id)
+# Pauses for Slack approval button click</code></pre>
             </div>
           </div>
       
@@ -9430,11 +9430,11 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Hackable     Power Users      Analytics
-      Product  ──▶  "Abuse"    ──▶   Pattern   ──▶ Productize
-                   Features         Detection
-      
-      Example: Groups → 40% buy/sell → Marketplace</pre>
+          <pre class="ascii-art">Hackable     Power Users      Analytics
+Product  ──▶  "Abuse"    ──▶   Pattern   ──▶ Productize
+             Features         Detection
+
+Example: Groups → 40% buy/sell → Marketplace</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -9451,11 +9451,11 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Monitor creative usage patterns
-      if (slash_commands.custom_count > 100 and
-          usage.pattern == "notification"):
-          # Many users built this - productize it
-          roadmap.add("Built-in notifications")</code></pre>
+        <pre><code class="language-python"># Monitor creative usage patterns
+if (slash_commands.custom_count > 100 and
+    usage.pattern == "notification"):
+    # Many users built this - productize it
+    roadmap.add("Built-in notifications")</code></pre>
             </div>
           </div>
       
@@ -9521,11 +9521,11 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Low Autonomy          Medium              High              Async
-          │                    │                   │                  │
-          ▼                    ▼                   ▼                  ▼
-      [Tab Complete] ──▶ [Cmd-K Edit] ──▶ [Agent Mode] ──▶ [Background Agent]
-        (inline)        (region/file)    (multi-file)       (full PR)</pre>
+          <pre class="ascii-art">Low Autonomy          Medium              High              Async
+    │                    │                   │                  │
+    ▼                    ▼                   ▼                  ▼
+[Tab Complete] ──▶ [Cmd-K Edit] ──▶ [Agent Mode] ──▶ [Background Agent]
+  (inline)        (region/file)    (multi-file)       (full PR)</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -9543,11 +9543,11 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># User chooses autonomy level:
-      cursor.tab()       # inline assist
-      cursor.cmd_k()     # edit region
-      cursor.agent()     # multi-file task
-      cursor.background()# async full PR</code></pre>
+        <pre><code class="language-python"># User chooses autonomy level:
+cursor.tab()       # inline assist
+cursor.cmd_k()     # edit region
+cursor.agent()     # multi-file task
+cursor.background()# async full PR</code></pre>
             </div>
           </div>
       
@@ -9613,18 +9613,18 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">                    ┌─────────────────────────┐
-                          │   .claude/settings.json │
-                          │   (version controlled)  │
-                          └───────────┬─────────────┘
-                                      │
-               ┌──────────────────────┼──────────────────────┐
-               │                      │                      │
-               ▼                      ▼                      ▼
-          [Dev A] ──▶ git pull ──▶ [Dev B] ──▶ git pull ──▶ [Dev C]
-               │                      │                      │
-               └──────────────────────┴──────────────────────┘
-                          Same Config Everywhere</pre>
+          <pre class="ascii-art">                    ┌─────────────────────────┐
+                    │   .claude/settings.json │
+                    │   (version controlled)  │
+                    └───────────┬─────────────┘
+                                │
+         ┌──────────────────────┼──────────────────────┐
+         │                      │                      │
+         ▼                      ▼                      ▼
+    [Dev A] ──▶ git pull ──▶ [Dev B] ──▶ git pull ──▶ [Dev C]
+         │                      │                      │
+         └──────────────────────┴──────────────────────┘
+                    Same Config Everywhere</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -9643,14 +9643,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-json">// .claude/settings.json
-      {
-        "permissions": {
-          "pre_allowed": ["git add", "npm test"],
-          "blocked_paths": [".env", "secrets/"]
-        },
-        "hooks": { "pre_commit": "./run_tests.sh" }
-      }</code></pre>
+        <pre><code class="language-json">// .claude/settings.json
+{
+  "permissions": {
+    "pre_allowed": ["git add", "npm test"],
+    "blocked_paths": [".env", "secrets/"]
+  },
+  "hooks": { "pre_commit": "./run_tests.sh" }
+}</code></pre>
             </div>
           </div>
       
@@ -9716,18 +9716,18 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Developer ──▶ "Create user API" ──▶ Agent
-                                              │
-                    ┌─────────────────────────┘
-                    ▼
-               Generated Files:
-               ├── routes/user.ts
-               ├── controllers/user.ts
-               ├── models/user.ts
-               └── tests/user.test.ts
-                    │
-                    ▼
-               Developer: Implement Core Logic</pre>
+          <pre class="ascii-art">Developer ──▶ "Create user API" ──▶ Agent
+                                        │
+              ┌─────────────────────────┘
+              ▼
+         Generated Files:
+         ├── routes/user.ts
+         ├── controllers/user.ts
+         ├── models/user.ts
+         └── tests/user.test.ts
+              │
+              ▼
+         Developer: Implement Core Logic</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -9746,13 +9746,13 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python">agent.scaffold(
-          description="User profile API endpoint",
-          framework="fastapi",
-          include=["routes", "models", "tests"]
-      )
-      # Agent generates structure
-      # Developer fills in business logic</code></pre>
+        <pre><code class="language-python">agent.scaffold(
+    description="User profile API endpoint",
+    framework="fastapi",
+    include=["routes", "models", "tests"]
+)
+# Agent generates structure
+# Developer fills in business logic</code></pre>
             </div>
           </div>
       
@@ -9818,20 +9818,20 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">User: "Refactor X" ──▶ [Background Agent]
-                                    │
-                                    ▼
-                             Proposes PR (90%)
-                                    │
-                 ┌──────────────────┴──────────────────┐
-                 ▼                                     ▼
-           100% Correct ──▶ Done           90% Correct ──▶ Take Over
-                                                             │
-                                                             ▼
-                                                User + Foreground Tools
-                                                             │
-                                                             ▼
-                                                        Finalized PR</pre>
+          <pre class="ascii-art">User: "Refactor X" ──▶ [Background Agent]
+                              │
+                              ▼
+                       Proposes PR (90%)
+                              │
+           ┌──────────────────┴──────────────────┐
+           ▼                                     ▼
+     100% Correct ──▶ Done           90% Correct ──▶ Take Over
+                                                       │
+                                                       ▼
+                                          User + Foreground Tools
+                                                       │
+                                                       ▼
+                                                  Finalized PR</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -9851,15 +9851,15 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Background agent completes task
-      pr = background_agent.work("Refactor module X")
-      
-      # User reviews and takes control if needed
-      if user.review(pr) != "approved":
-          # Seamless handoff with context
-          foreground = pr.take_control()
-          foreground.edit_with_ai_assist()
-          foreground.finalize()</code></pre>
+        <pre><code class="language-python"># Background agent completes task
+pr = background_agent.work("Refactor module X")
+
+# User reviews and takes control if needed
+if user.review(pr) != "approved":
+    # Seamless handoff with context
+    foreground = pr.take_control()
+    foreground.edit_with_ai_assist()
+    foreground.finalize()</code></pre>
             </div>
           </div>
       
@@ -9927,18 +9927,18 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">User ──▶ Complex Task ──▶ Agent ──▶ [Standard Output]
-                                               │
-                                     ┌─────────┘
-                                     │  Ctrl+R
-                                     ▼
-                          ┌──────────────────────┐
-                          │  VERBOSE VIEW        │
-                          │  - Reasoning steps   │
-                          │  - Tool selection    │
-                          │  - Confidence scores │
-                          │  - Raw tool outputs  │
-                          └──────────────────────┘</pre>
+          <pre class="ascii-art">User ──▶ Complex Task ──▶ Agent ──▶ [Standard Output]
+                                         │
+                               ┌─────────┘
+                               │  Ctrl+R
+                               ▼
+                    ┌──────────────────────┐
+                    │  VERBOSE VIEW        │
+                    │  - Reasoning steps   │
+                    │  - Tool selection    │
+                    │  - Confidence scores │
+                    │  - Raw tool outputs  │
+                    └──────────────────────┘</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -9957,14 +9957,14 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Verbose mode output example
-      {
-          "interpretation": "User wants to refactor...",
-          "tools_considered": ["grep", "ast-parse", "sed"],
-          "tool_selected": "ast-parse",
-          "reason": "Need semantic understanding",
-          "confidence": 0.87
-      }</code></pre>
+        <pre><code class="language-python"># Verbose mode output example
+{
+    "interpretation": "User wants to refactor...",
+    "tools_considered": ["grep", "ast-parse", "sed"],
+    "tool_selected": "ast-parse",
+    "reason": "Need semantic understanding",
+    "confidence": 0.87
+}</code></pre>
             </div>
           </div>
       
@@ -10030,20 +10030,20 @@
                 </div>
               </div>
               <div class="tab-content active" data-content="ascii">
-                <pre class="ascii-art">Traditional ──▶ Agent-Friendly?
-           │               │
-           │     ┌─────────┴─────────┐
-           │     │                   │
-           ▼     ▼                   ▼
-        Redesign:              Already OK
-        ├── Clear Goals           │
-        ├── Autonomy              │
-        ├── Structured I/O        │
-        └── Feedback Loops        │
-                │                 │
-                └────────┬────────┘
-                         ▼
-                  Enhanced Performance</pre>
+          <pre class="ascii-art">Traditional ──▶ Agent-Friendly?
+     │               │
+     │     ┌─────────┴─────────┐
+     │     │                   │
+     ▼     ▼                   ▼
+  Redesign:              Already OK
+  ├── Clear Goals           │
+  ├── Autonomy              │
+  ├── Structured I/O        │
+  └── Feedback Loops        │
+          │                 │
+          └────────┬────────┘
+                   ▼
+            Enhanced Performance</pre>
               </div>
               <div class="tab-content" data-content="mermaid">
                 <div class="mermaid">
@@ -10064,15 +10064,15 @@
               <div class="box-header">
                 <span class="box-label">Example</span>
               </div>
-              <pre><code class="language-python"># Bad: Micromanaging
-      agent.do("Use React, then add useState...")
-      
-      # Good: Goal-oriented with autonomy
-      agent.do(
-          goal="Build login form",
-          constraints=["use existing auth"],
-          freedom="choose implementation"
-      )</code></pre>
+        <pre><code class="language-python"># Bad: Micromanaging
+agent.do("Use React, then add useState...")
+
+# Good: Goal-oriented with autonomy
+agent.do(
+    goal="Build login form",
+    constraints=["use existing auth"],
+    freedom="choose implementation"
+)</code></pre>
             </div>
           </div>
       
