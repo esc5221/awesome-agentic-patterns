@@ -1,0 +1,19 @@
+{
+  "category": "Feedback Loops",
+  "problem": "Generative models may produce subpar output if they never review or critique their own work",
+  "solution": "After generating a draft, have the model grade it against a metric and refine using that feedback iteratively",
+  "when": [
+    "Quality or adherence to criteria matters",
+    "Writing, reasoning, or code tasks",
+    "Automatic improvement is needed",
+    "Can iterate until threshold is met"
+  ],
+  "pros": [
+    "Improves outputs with little supervision",
+    "Self-evaluation against explicit criteria"
+  ],
+  "cons": [
+    "Extra compute cost",
+    "May stall if metric poorly defined"
+  ]
+}

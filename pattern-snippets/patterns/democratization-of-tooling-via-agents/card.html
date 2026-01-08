@@ -1,0 +1,90 @@
+<article class="pattern-card" data-pattern="democratization-of-tooling-via-agents">
+  <div class="pattern-header">
+    <h2>Democratization of Tooling via Agents</h2>
+    <span class="tag" data-i18n="category">UX & Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Non-Dev ──▶ "Make me a dashboard" ──▶ AI Agent ──▶ Code
+   │                                       │
+   ▼                                       ▼
+Iterate ◀── "Add filter for date" ◀─── Working Tool</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    U[Non-Dev User] -->|Natural Language| A[AI Agent]
+    A -->|Generate| C[Code/Tool]
+    C -->|Review| U
+    U -->|Refine| A
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Sales team member prompt:
+"Create a dashboard that shows my
+ weekly pipeline from Salesforce,
+ with filters by deal stage"
+
+# Agent generates: dashboard.py
+# User iterates: "Add export to CSV"</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Non-engineering roles (sales, marketing, ops) need custom tools but lack programming skills to build them</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">AI agent translates natural language requests into code, enabling domain experts to create their own tools</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>Non-developers need custom tools</li>
+          <li>Simple dashboard/script creation</li>
+          <li>Quick bug fixes to existing code</li>
+          <li>Domain experts want self-automation</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Democratizes software access</li>
+              <li>Domain expertise directly applied</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Limited for complex systems</li>
+              <li>Requires quality/security review</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

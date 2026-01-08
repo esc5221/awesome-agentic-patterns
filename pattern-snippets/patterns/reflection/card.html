@@ -1,0 +1,99 @@
+<article class="pattern-card" data-pattern="reflection">
+  <div class="pattern-header">
+    <h2>Reflection Loop</h2>
+    <span class="tag" data-i18n="category">Feedback Loops</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">         ┌─────────────────────────┐
+         │                         │
+         ▼                         │
+Prompt ──▶ Generate ──▶ Evaluate ──┤
+              │           │        │
+              ▼           ▼        │
+           Draft    score < threshold?
+                          │ yes    │
+                          └────────┘
+                          │ no
+                          ▼
+                       Return</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart TD
+    A[Prompt] --> B[Generate Draft]
+    B --> C[Evaluate]
+    C --> D{score >= threshold?}
+    D -->|No| E[Incorporate Feedback]
+    E --> B
+    D -->|Yes| F[Return Draft]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python">for attempt in range(max_iters):
+    draft = generate(prompt)
+    score, critique = evaluate(draft)
+    if score >= threshold:
+        return draft
+    prompt = incorporate(critique, prompt)</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">생성 모델이 자신의 출력을 검토하거나 비평하지 않으면 품질이 낮은 결과물을 생성할 수 있음</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">초안 생성 후 모델이 스스로 평가하고 피드백을 반영하여 반복적으로 개선</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>품질이나 명시적 기준 준수가 중요할 때</li>
+          <li>글쓰기, 추론, 코드 작성 작업</li>
+          <li>자동 개선이 필요한 경우</li>
+          <li>임계값 도달까지 반복 가능할 때</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>적은 감독으로 출력 품질 향상</li>
+              <li>명시적 기준 대비 자가 평가 가능</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>추가 연산 비용 발생</li>
+              <li>평가 지표가 잘못 정의되면 개선 정체</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

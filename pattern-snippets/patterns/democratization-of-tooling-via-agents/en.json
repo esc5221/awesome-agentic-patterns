@@ -1,0 +1,19 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Non-engineering roles (sales, marketing, ops) need custom tools but lack programming skills to build them",
+  "solution": "AI agent translates natural language requests into code, enabling domain experts to create their own tools",
+  "when": [
+    "Non-developers need custom tools",
+    "Simple dashboard/script creation",
+    "Quick bug fixes to existing code",
+    "Domain experts want self-automation"
+  ],
+  "pros": [
+    "Democratizes software access",
+    "Domain expertise directly applied"
+  ],
+  "cons": [
+    "Limited for complex systems",
+    "Requires quality/security review"
+  ]
+}

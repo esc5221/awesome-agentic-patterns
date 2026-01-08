@@ -1,0 +1,20 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Developing code 'taste' and skills requires extensive experience and mentorship, a slow process especially for juniors",
+  "solution": "Use AI agents as interactive learning tools enabling fast iteration, mistake learning, and best practice observation",
+  "when": [
+    "Learning new languages/frameworks",
+    "Quickly developing code quality sense",
+    "Self-learning without mentors",
+    "Experimenting with different approaches"
+  ],
+  "pros": [
+    "Fast feedback loops accelerate learning",
+    "Always-available tutor",
+    "Reduces fear of experimentation"
+  ],
+  "cons": [
+    "Learning quality depends on AI output",
+    "Risk of shallow learning"
+  ]
+}

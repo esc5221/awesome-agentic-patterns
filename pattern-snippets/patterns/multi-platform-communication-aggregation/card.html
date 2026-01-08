@@ -1,0 +1,100 @@
+<article class="pattern-card" data-pattern="multi-platform-communication-aggregation">
+  <div class="pattern-header">
+    <h2>Multi-Platform Communication Aggregation</h2>
+    <span class="tag" data-i18n="category">Tool Use</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">                    ┌─── iMessage ───┐
+                    │                │
+Query ──▶ Agent ───┼─── Slack ──────┼──▶ Aggregate ──▶ Results
+                    │                │
+                    └─── Email ──────┘
+
+Output: [{platform, sender, time, content, url}, ...]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    Q[User Query] --> A[Aggregator]
+    A --> M[iMessage]
+    A --> S[Slack]
+    A --> E[Email]
+    M --> R[Results]
+    S --> R
+    E --> R
+    R --> T[Unified Table]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash">search_all() {
+  query="$1"
+  messages search "$query" > /tmp/msg.json &
+  slack search "$query" > /tmp/slack.json &
+  email search "$query" > /tmp/email.json &
+  wait
+  aggregate_results /tmp/*.json
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">Searching for info across multiple platforms (email, Slack, iMessage) requires slow manual checks on each</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">Create unified search interface that queries all platforms in parallel and aggregates results into single format</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>"Where did X mention Y?" searches</li>
+          <li>Finding conversations without knowing platform</li>
+          <li>Cross-platform audit/compliance</li>
+          <li>Building unified inbox features</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>Single query searches all platforms</li>
+              <li>Parallel execution minimizes latency</li>
+              <li>Extensible to new platforms</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>Must maintain per-platform adapters</li>
+              <li>Cross-platform ranking is subjective</li>
+              <li>Aggregation increases privacy exposure</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

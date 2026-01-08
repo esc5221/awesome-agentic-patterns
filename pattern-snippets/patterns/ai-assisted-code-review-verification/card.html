@@ -1,0 +1,99 @@
+<article class="pattern-card" data-pattern="ai-assisted-code-review-verification">
+  <div class="pattern-header">
+    <h2>AI-Assisted Code Review</h2>
+    <span class="tag" data-i18n="category">Feedback Loops</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Code ──▶ AI Analyzer ──▶ Issues/Summary ──▶ Human Review
+  │                            │                   │
+  │   "Explain this change?"   │                   │
+  └────────────────────────────┴───── Q&A ◀───────┘
+
+Intent Alignment: [Mind's Eye] ◀─── Verify ─── [Generated Code]</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Code Changes] --> B[AI Analyzer]
+    B --> C[Issues & Summary]
+    C --> D[Human Reviewer]
+    D --> E{Aligned?}
+    E -- Yes --> F[Approve]
+    E -- No --> G[Request Changes]
+    D --> H[Ask AI to Explain]
+    H --> D
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># PR Review workflow
+ai_review = agent.analyze_pr(diff)
+print(ai_review.summary)
+print(ai_review.issues)
+
+# Interactive Q&A
+answer = agent.explain("Why was this refactored?")
+if aligned_with_intent(answer):
+    pr.approve()</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">AI가 생성하는 코드량이 증가하면서 검증이 병목이 됨. 문법적 정확성뿐 아니라 의도 부합 여부 확인이 중요해짐</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">AI로 코드 변경사항을 분석하고, 이슈/요약을 제공하며, 인터랙티브 Q&A로 의도 정렬을 검증</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>AI 생성 코드의 PR 리뷰 시</li>
+          <li>대규모 코드베이스 변경 검토</li>
+          <li>명세가 모호한 작업의 결과 검증</li>
+          <li>팀 전체 리뷰 효율성 향상 필요 시</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>리뷰 속도 및 효율성 향상</li>
+              <li>AI 설명으로 이해도 증가</li>
+              <li>의도 정렬 검증 가능</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>AI 분석의 정확도 의존</li>
+              <li>과도한 신뢰로 인한 오류 간과 위험</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

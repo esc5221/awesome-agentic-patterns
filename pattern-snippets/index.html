@@ -74,6 +74,7 @@
       <a href="#memory-synthesis-from-execution-logs" class="toc-item">Memory Synthesis from Execution Logs</a>
       <a href="#proactive-agent-state-externalization" class="toc-item">Proactive Agent State Externalization</a>
       <a href="#curated-file-context-window" class="toc-item">Curated File Context Window</a>
+      <a href="#agent-powered-codebase-qa-onboarding" class="toc-item">Agent-Powered Codebase Q&A / Onboarding</a>
     </div>
     <div class="toc-group">
       <div class="toc-category">Feedback Loops</div>
@@ -88,6 +89,8 @@
       <a href="#rich-feedback-loops" class="toc-item">Rich Feedback Loops</a>
       <a href="#self-critique-evaluator-loop" class="toc-item">Self-Critique Evaluator Loop</a>
       <a href="#self-discover-reasoning-structures" class="toc-item">Self-Discover Reasoning Structures</a>
+      <a href="#ai-assisted-code-review-verification" class="toc-item">AI-Assisted Code Review / Verification</a>
+      <a href="#reflection" class="toc-item">Reflection Loop</a>
     </div>
     <div class="toc-group">
       <div class="toc-category">Learning & Adaptation</div>
@@ -153,11 +156,13 @@
     </div>
     <div class="toc-group">
       <div class="toc-category">Tool Use & Environment</div>
+      <a href="#cli-first-skill-design" class="toc-item">CLI-First Skill Design</a>
       <a href="#agent-first-tooling-and-logging" class="toc-item">Agent-First Tooling and Logging</a>
       <a href="#cli-native-agent-orchestration" class="toc-item">CLI-Native Agent Orchestration</a>
       <a href="#code-then-execute-pattern" class="toc-item">Code-Then-Execute Pattern</a>
       <a href="#dual-use-tool-design" class="toc-item">Dual-Use Tool Design</a>
       <a href="#llm-friendly-api-design" class="toc-item">LLM-Friendly API Design</a>
+      <a href="#multi-platform-communication-aggregation" class="toc-item">Multi-Platform Communication Aggregation</a>
       <a href="#patch-steering-via-prompted-tool-selection" class="toc-item">Patch Steering via Prompted Tool Selection</a>
       <a href="#shell-command-contextualization" class="toc-item">Shell Command Contextualization</a>
       <a href="#tool-use-steering-via-prompting" class="toc-item">Tool Use Steering via Prompting</a>
@@ -173,8 +178,11 @@
     </div>
     <div class="toc-group">
       <div class="toc-category">UX & Collaboration</div>
+      <a href="#proactive-trigger-vocabulary" class="toc-item">Proactive Trigger Vocabulary</a>
       <a href="#abstracted-code-representation-for-review" class="toc-item">Abstracted Code Representation for Review</a>
+      <a href="#ai-accelerated-learning-and-skill-development" class="toc-item">AI-Accelerated Learning and Skill Development</a>
       <a href="#chain-of-thought-monitoring-interruption" class="toc-item">Chain-of-Thought Monitoring & Interruption</a>
+      <a href="#democratization-of-tooling-via-agents" class="toc-item">Democratization of Tooling via Agents</a>
       <a href="#human-in-loop" class="toc-item">Human-in-the-Loop Approval</a>
       <a href="#human-in-loop-approval-framework" class="toc-item">Human-in-the-Loop Approval Framework</a>
       <a href="#latent-demand-product-discovery" class="toc-item">Latent Demand Product Discovery</a>
@@ -1182,6 +1190,102 @@ context = f"""
           </div>
         </div>
         <a href="https://agentic-patterns.com/patterns/curated-file-context-window/" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
+      </article>
+      
+
+      <article class="pattern-card" data-pattern="agent-powered-codebase-qa-onboarding" id="agent-powered-codebase-qa-onboarding">
+        <div class="pattern-header">
+          <h2>Agent-Powered Codebase Q&A / Onboarding</h2>
+          <span class="tag" data-i18n="agent-powered-codebase-qa-onboarding.category">Context & Memory</span>
+        </div>
+      
+        <div class="pattern-content">
+          <div class="visual-side">
+            <div class="diagram-box">
+              <div class="box-header">
+                <span class="box-label">Flow</span>
+                <div class="tab-switch">
+                  <button class="tab active" data-tab="ascii">ASCII</button>
+                  <button class="tab" data-tab="mermaid">Mermaid</button>
+                </div>
+              </div>
+              <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Developer                  Agent                  Codebase
+    │                        │                        │
+    │  "Where is DB config?" │                        │
+    ├───────────────────────▶│                        │
+    │                        │   Search/Index/Analyze │
+    │                        ├───────────────────────▶│
+    │                        │◀───────────────────────┤
+    │  "config/database.js"  │                        │
+    │◀───────────────────────┤                        │</pre>
+              </div>
+              <div class="tab-content" data-content="mermaid">
+                <div class="mermaid">
+      sequenceDiagram
+          Developer->>Agent: "Where is the database connection configured?"
+          Agent->>Codebase: Search/Analyze
+          Agent-->>Developer: "It's configured in config/database.js"
+                </div>
+              </div>
+            </div>
+      
+            <div class="code-box">
+              <div class="box-header">
+                <span class="box-label">Example</span>
+              </div>
+        <pre><code class="language-python"># Natural language codebase Q&A
+agent.ask("How does user auth work?")
+# Agent searches, analyzes, responds:
+# "Auth is in auth/service.py, uses JWT,
+#  called by UserController.login()"</code></pre>
+            </div>
+          </div>
+      
+          <div class="description-side">
+            <div class="section">
+              <div class="section-title">Problem</div>
+              <p data-i18n="agent-powered-codebase-qa-onboarding.problem">대규모 코드베이스 이해와 온보딩이 어렵고, 수동으로 코드 경로를 추적하는 데 시간이 많이 소요됨</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Solution</div>
+              <p data-i18n="agent-powered-codebase-qa-onboarding.solution">검색/인덱싱/Q&A 능력을 갖춘 AI 에이전트가 자연어 질문에 답하며 코드 구조를 설명</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">When to use</div>
+              <ul data-i18n="agent-powered-codebase-qa-onboarding.when">
+                <li>새 프로젝트에 온보딩할 때</li>
+                <li>복잡한 시스템 디버깅 시</li>
+                <li>코드 간 상호작용 파악이 필요할 때</li>
+                <li>특정 모듈/파일의 목적을 빠르게 이해해야 할 때</li>
+              </ul>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Trade-offs</div>
+              <div class="tradeoffs">
+                <div class="tradeoff-col pros">
+                  <h4>Pros</h4>
+                  <ul data-i18n="agent-powered-codebase-qa-onboarding.pros">
+                    <li>온보딩 시간 대폭 단축</li>
+                    <li>자연어로 코드베이스 탐색 가능</li>
+                    <li>컨텍스트 기반 정확한 답변</li>
+                  </ul>
+                </div>
+                <div class="tradeoff-col cons">
+                  <h4>Cons</h4>
+                  <ul data-i18n="agent-powered-codebase-qa-onboarding.cons">
+                    <li>인덱싱 품질에 답변 품질 의존</li>
+                    <li>대규모 코드베이스 인덱싱 비용</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="https://agentic-patterns.com/patterns/agent-powered-codebase-qa-onboarding/" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
       </article>
       
 
@@ -2411,6 +2515,108 @@ if feedback.has_issues:
       </article>
       
 
+      <article class="pattern-card" data-pattern="ai-assisted-code-review-verification" id="ai-assisted-code-review-verification">
+        <div class="pattern-header">
+          <h2>AI-Assisted Code Review</h2>
+          <span class="tag" data-i18n="ai-assisted-code-review-verification.category">Feedback Loops</span>
+        </div>
+      
+        <div class="pattern-content">
+          <div class="visual-side">
+            <div class="diagram-box">
+              <div class="box-header">
+                <span class="box-label">Flow</span>
+                <div class="tab-switch">
+                  <button class="tab active" data-tab="ascii">ASCII</button>
+                  <button class="tab" data-tab="mermaid">Mermaid</button>
+                </div>
+              </div>
+              <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Code ──▶ AI Analyzer ──▶ Issues/Summary ──▶ Human Review
+  │                            │                   │
+  │   "Explain this change?"   │                   │
+  └────────────────────────────┴───── Q&A ◀───────┘
+
+Intent Alignment: [Mind's Eye] ◀─── Verify ─── [Generated Code]</pre>
+              </div>
+              <div class="tab-content" data-content="mermaid">
+                <div class="mermaid">
+      flowchart LR
+          A[Code Changes] --> B[AI Analyzer]
+          B --> C[Issues & Summary]
+          C --> D[Human Reviewer]
+          D --> E{Aligned?}
+          E -- Yes --> F[Approve]
+          E -- No --> G[Request Changes]
+          D --> H[Ask AI to Explain]
+          H --> D
+                </div>
+              </div>
+            </div>
+      
+            <div class="code-box">
+              <div class="box-header">
+                <span class="box-label">Example</span>
+              </div>
+        <pre><code class="language-python"># PR Review workflow
+ai_review = agent.analyze_pr(diff)
+print(ai_review.summary)
+print(ai_review.issues)
+
+# Interactive Q&A
+answer = agent.explain("Why was this refactored?")
+if aligned_with_intent(answer):
+    pr.approve()</code></pre>
+            </div>
+          </div>
+      
+          <div class="description-side">
+            <div class="section">
+              <div class="section-title">Problem</div>
+              <p data-i18n="ai-assisted-code-review-verification.problem">AI가 생성하는 코드량이 증가하면서 검증이 병목이 됨. 문법적 정확성뿐 아니라 의도 부합 여부 확인이 중요해짐</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Solution</div>
+              <p data-i18n="ai-assisted-code-review-verification.solution">AI로 코드 변경사항을 분석하고, 이슈/요약을 제공하며, 인터랙티브 Q&A로 의도 정렬을 검증</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">When to use</div>
+              <ul data-i18n="ai-assisted-code-review-verification.when">
+                <li>AI 생성 코드의 PR 리뷰 시</li>
+                <li>대규모 코드베이스 변경 검토</li>
+                <li>명세가 모호한 작업의 결과 검증</li>
+                <li>팀 전체 리뷰 효율성 향상 필요 시</li>
+              </ul>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Trade-offs</div>
+              <div class="tradeoffs">
+                <div class="tradeoff-col pros">
+                  <h4>Pros</h4>
+                  <ul data-i18n="ai-assisted-code-review-verification.pros">
+                    <li>리뷰 속도 및 효율성 향상</li>
+                    <li>AI 설명으로 이해도 증가</li>
+                    <li>의도 정렬 검증 가능</li>
+                  </ul>
+                </div>
+                <div class="tradeoff-col cons">
+                  <h4>Cons</h4>
+                  <ul data-i18n="ai-assisted-code-review-verification.cons">
+                    <li>AI 분석의 정확도 의존</li>
+                    <li>과도한 신뢰로 인한 오류 간과 위험</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="https://agentic-patterns.com/patterns/ai-assisted-code-review-verification/" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
+      </article>
+      
+
       <article class="pattern-card" data-pattern="compounding-engineering-pattern" id="compounding-engineering-pattern">
         <div class="pattern-header">
           <h2>Compounding Engineering Pattern</h2>
@@ -2506,6 +2712,108 @@ if feedback.has_issues:
           </div>
         </div>
         <a href="https://agentic-patterns.com/patterns/compounding-engineering-pattern/" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
+      </article>
+      
+
+      <article class="pattern-card" data-pattern="reflection" id="reflection">
+        <div class="pattern-header">
+          <h2>Reflection Loop</h2>
+          <span class="tag" data-i18n="reflection.category">Feedback Loops</span>
+        </div>
+      
+        <div class="pattern-content">
+          <div class="visual-side">
+            <div class="diagram-box">
+              <div class="box-header">
+                <span class="box-label">Flow</span>
+                <div class="tab-switch">
+                  <button class="tab active" data-tab="ascii">ASCII</button>
+                  <button class="tab" data-tab="mermaid">Mermaid</button>
+                </div>
+              </div>
+              <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">         ┌─────────────────────────┐
+         │                         │
+         ▼                         │
+Prompt ──▶ Generate ──▶ Evaluate ──┤
+              │           │        │
+              ▼           ▼        │
+           Draft    score < threshold?
+                          │ yes    │
+                          └────────┘
+                          │ no
+                          ▼
+                       Return</pre>
+              </div>
+              <div class="tab-content" data-content="mermaid">
+                <div class="mermaid">
+      flowchart TD
+          A[Prompt] --> B[Generate Draft]
+          B --> C[Evaluate]
+          C --> D{score >= threshold?}
+          D -->|No| E[Incorporate Feedback]
+          E --> B
+          D -->|Yes| F[Return Draft]
+                </div>
+              </div>
+            </div>
+      
+            <div class="code-box">
+              <div class="box-header">
+                <span class="box-label">Example</span>
+              </div>
+        <pre><code class="language-python">for attempt in range(max_iters):
+    draft = generate(prompt)
+    score, critique = evaluate(draft)
+    if score >= threshold:
+        return draft
+    prompt = incorporate(critique, prompt)</code></pre>
+            </div>
+          </div>
+      
+          <div class="description-side">
+            <div class="section">
+              <div class="section-title">Problem</div>
+              <p data-i18n="reflection.problem">생성 모델이 자신의 출력을 검토하거나 비평하지 않으면 품질이 낮은 결과물을 생성할 수 있음</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Solution</div>
+              <p data-i18n="reflection.solution">초안 생성 후 모델이 스스로 평가하고 피드백을 반영하여 반복적으로 개선</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">When to use</div>
+              <ul data-i18n="reflection.when">
+                <li>품질이나 명시적 기준 준수가 중요할 때</li>
+                <li>글쓰기, 추론, 코드 작성 작업</li>
+                <li>자동 개선이 필요한 경우</li>
+                <li>임계값 도달까지 반복 가능할 때</li>
+              </ul>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Trade-offs</div>
+              <div class="tradeoffs">
+                <div class="tradeoff-col pros">
+                  <h4>Pros</h4>
+                  <ul data-i18n="reflection.pros">
+                    <li>적은 감독으로 출력 품질 향상</li>
+                    <li>명시적 기준 대비 자가 평가 가능</li>
+                  </ul>
+                </div>
+                <div class="tradeoff-col cons">
+                  <h4>Cons</h4>
+                  <ul data-i18n="reflection.cons">
+                    <li>추가 연산 비용 발생</li>
+                    <li>평가 지표가 잘못 정의되면 개선 정체</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="https://agentic-patterns.com/patterns/reflection/" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
       </article>
       
 
@@ -6022,6 +6330,108 @@ final = sum(w * scores[k] for k, w in weights)</code></pre>
       </article>
       
 
+      <article class="pattern-card" data-pattern="cli-first-skill-design" id="cli-first-skill-design">
+        <div class="pattern-header">
+          <h2>CLI-First Skill Design</h2>
+          <span class="tag" data-i18n="cli-first-skill-design.category">Tool Use</span>
+        </div>
+      
+        <div class="pattern-content">
+          <div class="visual-side">
+            <div class="diagram-box">
+              <div class="box-header">
+                <span class="box-label">Flow</span>
+                <div class="tab-switch">
+                  <button class="tab active" data-tab="ascii">ASCII</button>
+                  <button class="tab" data-tab="mermaid">Mermaid</button>
+                </div>
+              </div>
+              <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">               ┌── Human: $ skill.sh list
+               │
+Skill Logic ──▶ CLI ──┼── Agent: Bash("skill.sh list")
+               │
+               └── Cron: */5 * * * * skill.sh sync
+
+Unix Philosophy: One tool ──▶ One task ──▶ Compose with pipes</pre>
+              </div>
+              <div class="tab-content" data-content="mermaid">
+                <div class="mermaid">
+      flowchart LR
+          A[Skill Logic] --> B[CLI Interface]
+          B --> C[Human: Terminal]
+          B --> D[Agent: Bash Tool]
+          B --> E[Scripts: Automation]
+          B --> F[Cron: Scheduled]
+                </div>
+              </div>
+            </div>
+      
+            <div class="code-box">
+              <div class="box-header">
+                <span class="box-label">Example</span>
+              </div>
+        <pre><code class="language-bash">#!/bin/bash
+# trello.sh - CLI-first skill
+case "$1" in
+  boards) curl -s "$API/boards" ;;
+  cards)  curl -s "$API/boards/$2/cards" ;;
+  create) curl -X POST "$API/cards" -d "name=$3" ;;
+esac
+
+# Human: trello.sh boards | jq '.name'
+# Agent:  Bash("trello.sh cards abc123")</code></pre>
+            </div>
+          </div>
+      
+          <div class="description-side">
+            <div class="section">
+              <div class="section-title">Problem</div>
+              <p data-i18n="cli-first-skill-design.problem">API-first는 디버깅 어렵고, GUI-first는 에이전트가 사용 불가. 두 인터페이스를 따로 만들어야 하는 부담</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Solution</div>
+              <p data-i18n="cli-first-skill-design.solution">모든 스킬을 CLI 도구로 설계. 사람은 터미널에서, 에이전트는 Bash 도구로 동일하게 사용 가능</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">When to use</div>
+              <ul data-i18n="cli-first-skill-design.when">
+                <li>사람과 에이전트 모두 사용할 스킬 개발 시</li>
+                <li>디버깅/테스트가 용이해야 할 때</li>
+                <li>Unix 도구와 파이프 조합이 필요할 때</li>
+                <li>런타임 의존성 최소화 필요 시</li>
+              </ul>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Trade-offs</div>
+              <div class="tradeoffs">
+                <div class="tradeoff-col pros">
+                  <h4>Pros</h4>
+                  <ul data-i18n="cli-first-skill-design.pros">
+                    <li>사람/에이전트 동시 사용</li>
+                    <li>쉬운 디버깅 및 테스트</li>
+                    <li>Unix 도구와 조합 가능</li>
+                  </ul>
+                </div>
+                <div class="tradeoff-col cons">
+                  <h4>Cons</h4>
+                  <ul data-i18n="cli-first-skill-design.cons">
+                    <li>복잡한 데이터 구조 처리 어려움</li>
+                    <li>프로세스 생성 오버헤드</li>
+                    <li>Windows 호환성 제한</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="https://agentic-patterns.com/patterns/cli-first-skill-design/" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
+      </article>
+      
+
       <article class="pattern-card" data-pattern="criticgpt-style-evaluation" id="criticgpt-style-evaluation">
         <div class="pattern-header">
           <h2>CriticGPT-Style Evaluation</h2>
@@ -7801,6 +8211,109 @@ def create_user_v2(
       </article>
       
 
+      <article class="pattern-card" data-pattern="multi-platform-communication-aggregation" id="multi-platform-communication-aggregation">
+        <div class="pattern-header">
+          <h2>Multi-Platform Communication Aggregation</h2>
+          <span class="tag" data-i18n="multi-platform-communication-aggregation.category">Tool Use</span>
+        </div>
+      
+        <div class="pattern-content">
+          <div class="visual-side">
+            <div class="diagram-box">
+              <div class="box-header">
+                <span class="box-label">Flow</span>
+                <div class="tab-switch">
+                  <button class="tab active" data-tab="ascii">ASCII</button>
+                  <button class="tab" data-tab="mermaid">Mermaid</button>
+                </div>
+              </div>
+              <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">                    ┌─── iMessage ───┐
+                    │                │
+Query ──▶ Agent ───┼─── Slack ──────┼──▶ Aggregate ──▶ Results
+                    │                │
+                    └─── Email ──────┘
+
+Output: [{platform, sender, time, content, url}, ...]</pre>
+              </div>
+              <div class="tab-content" data-content="mermaid">
+                <div class="mermaid">
+      flowchart LR
+          Q[User Query] --> A[Aggregator]
+          A --> M[iMessage]
+          A --> S[Slack]
+          A --> E[Email]
+          M --> R[Results]
+          S --> R
+          E --> R
+          R --> T[Unified Table]
+                </div>
+              </div>
+            </div>
+      
+            <div class="code-box">
+              <div class="box-header">
+                <span class="box-label">Example</span>
+              </div>
+        <pre><code class="language-bash">search_all() {
+  query="$1"
+  messages search "$query" > /tmp/msg.json &
+  slack search "$query" > /tmp/slack.json &
+  email search "$query" > /tmp/email.json &
+  wait
+  aggregate_results /tmp/*.json
+}</code></pre>
+            </div>
+          </div>
+      
+          <div class="description-side">
+            <div class="section">
+              <div class="section-title">Problem</div>
+              <p data-i18n="multi-platform-communication-aggregation.problem">Searching for info across multiple platforms (email, Slack, iMessage) requires slow manual checks on each</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Solution</div>
+              <p data-i18n="multi-platform-communication-aggregation.solution">Create unified search interface that queries all platforms in parallel and aggregates results into single format</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">When to use</div>
+              <ul data-i18n="multi-platform-communication-aggregation.when">
+                <li>"Where did X mention Y?" searches</li>
+                <li>Finding conversations without knowing platform</li>
+                <li>Cross-platform audit/compliance</li>
+                <li>Building unified inbox features</li>
+              </ul>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Trade-offs</div>
+              <div class="tradeoffs">
+                <div class="tradeoff-col pros">
+                  <h4>Pros</h4>
+                  <ul data-i18n="multi-platform-communication-aggregation.pros">
+                    <li>Single query searches all platforms</li>
+                    <li>Parallel execution minimizes latency</li>
+                    <li>Extensible to new platforms</li>
+                  </ul>
+                </div>
+                <div class="tradeoff-col cons">
+                  <h4>Cons</h4>
+                  <ul data-i18n="multi-platform-communication-aggregation.cons">
+                    <li>Must maintain per-platform adapters</li>
+                    <li>Cross-platform ranking is subjective</li>
+                    <li>Aggregation increases privacy exposure</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="https://agentic-patterns.com/patterns/multi-platform-communication-aggregation/" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
+      </article>
+      
+
       <article class="pattern-card" data-pattern="patch-steering-via-prompted-tool-selection" id="patch-steering-via-prompted-tool-selection">
         <div class="pattern-header">
           <h2>Patch Steering via Prompted Tool Selection</h2>
@@ -7891,6 +8404,104 @@ Fallback: apply_patch if AST fails
           </div>
         </div>
         <a href="https://agentic-patterns.com/patterns/patch-steering-via-prompted-tool-selection/" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
+      </article>
+      
+
+      <article class="pattern-card" data-pattern="proactive-trigger-vocabulary" id="proactive-trigger-vocabulary">
+        <div class="pattern-header">
+          <h2>Proactive Trigger Vocabulary</h2>
+          <span class="tag" data-i18n="proactive-trigger-vocabulary.category">UX & Collaboration</span>
+        </div>
+      
+        <div class="pattern-content">
+          <div class="visual-side">
+            <div class="diagram-box">
+              <div class="box-header">
+                <span class="box-label">Flow</span>
+                <div class="tab-switch">
+                  <button class="tab active" data-tab="ascii">ASCII</button>
+                  <button class="tab" data-tab="mermaid">Mermaid</button>
+                </div>
+              </div>
+              <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User Input ──▶ Match Triggers?
+                    │
+     ┌──────────────┼──────────────┐
+     │              │              │
+     ▼              ▼              ▼
+"sup" ──▶      "search hn"    No match
+priority       ──▶ hn-search   ──▶ General
+-report        skill           response</pre>
+              </div>
+              <div class="tab-content" data-content="mermaid">
+                <div class="mermaid">
+      graph TD
+          A[User Input] --> B{Match Triggers?}
+          B -->|"sup"| C[priority-report skill]
+          B -->|"search hn"| D[hn-search skill]
+          B -->|No match| E[General response]
+                </div>
+              </div>
+            </div>
+      
+            <div class="code-box">
+              <div class="box-header">
+                <span class="box-label">Example</span>
+              </div>
+        <pre><code class="language-yaml">skill: priority-report
+triggers:
+  exact: ["sup", "standup prep"]
+  contains: ["what should I work on"]
+  patterns: ["what.*on my plate"]
+proactive: true</code></pre>
+            </div>
+          </div>
+      
+          <div class="description-side">
+            <div class="section">
+              <div class="section-title">Problem</div>
+              <p data-i18n="proactive-trigger-vocabulary.problem">다양한 스킬을 가진 에이전트가 사용자의 자연어 입력을 어떤 스킬로 라우팅할지 불투명하여 사용자가 어떤 문구로 기능을 활성화하는지 알기 어려움</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Solution</div>
+              <p data-i18n="proactive-trigger-vocabulary.solution">각 스킬에 명시적 트리거 어휘(키워드, 패턴)를 정의하고 문서화하여 투명하고 예측 가능한 스킬 라우팅 제공</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">When to use</div>
+              <ul data-i18n="proactive-trigger-vocabulary.when">
+                <li>에이전트가 여러 스킬/기능을 보유</li>
+                <li>사용자에게 명확한 활성화 방법 제공 필요</li>
+                <li>특정 주제 시 자동 활성화(proactive) 원할 때</li>
+                <li>빠르고 예측 가능한 라우팅이 중요할 때</li>
+              </ul>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Trade-offs</div>
+              <div class="tradeoffs">
+                <div class="tradeoff-col pros">
+                  <h4>Pros</h4>
+                  <ul data-i18n="proactive-trigger-vocabulary.pros">
+                    <li>투명하고 예측 가능한 라우팅</li>
+                    <li>문자열 매칭으로 빠른 속도</li>
+                    <li>디버깅 용이</li>
+                  </ul>
+                </div>
+                <div class="tradeoff-col cons">
+                  <h4>Cons</h4>
+                  <ul data-i18n="proactive-trigger-vocabulary.cons">
+                    <li>트리거 리스트에 없는 표현은 누락</li>
+                    <li>어휘 변화에 따른 유지보수 필요</li>
+                    <li>다국어/문화권 편향 가능</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="https://agentic-patterns.com/patterns/proactive-trigger-vocabulary/" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
       </article>
       
 
@@ -9096,6 +9707,115 @@ human.verify_intent(review)  # Much faster!</code></pre>
       </article>
       
 
+      <article class="pattern-card" data-pattern="ai-accelerated-learning-and-skill-development" id="ai-accelerated-learning-and-skill-development">
+        <div class="pattern-header">
+          <h2>AI-Accelerated Learning and Skill Development</h2>
+          <span class="tag" data-i18n="ai-accelerated-learning-and-skill-development.category">UX & Collaboration</span>
+        </div>
+      
+        <div class="pattern-content">
+          <div class="visual-side">
+            <div class="diagram-box">
+              <div class="box-header">
+                <span class="box-label">Flow</span>
+                <div class="tab-switch">
+                  <button class="tab active" data-tab="ascii">ASCII</button>
+                  <button class="tab" data-tab="mermaid">Mermaid</button>
+                </div>
+              </div>
+              <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">     ┌─────────────────────────────────────────────┐
+     │           Fast Learning Loop                │
+     └─────────────────────────────────────────────┘
+              ┌──────────┐
+              │  Try it  │
+              └────┬─────┘
+                   ▼
+     ┌─────────────────────────┐
+     │  AI Feedback / Explain  │◀──┐
+     └───────────┬─────────────┘   │
+                 ▼                 │
+          ┌────────────┐           │
+          │Learn & Fix │───────────┘
+          └────────────┘
+                 │
+                 ▼
+           [Skill++]</pre>
+              </div>
+              <div class="tab-content" data-content="mermaid">
+                <div class="mermaid">
+      flowchart TD
+          A[Try Code] --> B[AI Feedback]
+          B --> C[Learn from Mistakes]
+          C --> D[Improve & Iterate]
+          D --> A
+          D --> E[Skill Development]
+                </div>
+              </div>
+            </div>
+      
+            <div class="code-box">
+              <div class="box-header">
+                <span class="box-label">Example</span>
+              </div>
+        <pre><code class="language-python"># Ask AI to explain unfamiliar code
+ai.explain("What does this regex do?")
+# AI explains step-by-step
+
+# Learn from AI suggestions
+ai.review(my_code)
+# "Consider using list comprehension
+#  instead of this loop for clarity"</code></pre>
+            </div>
+          </div>
+      
+          <div class="description-side">
+            <div class="section">
+              <div class="section-title">Problem</div>
+              <p data-i18n="ai-accelerated-learning-and-skill-development.problem">코드 품질에 대한 '감각' 개발과 스킬 습득이 오랜 경험과 멘토링을 필요로 하며, 주니어 개발자에게 특히 느린 과정</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Solution</div>
+              <p data-i18n="ai-accelerated-learning-and-skill-development.solution">AI 에이전트를 대화형 학습 도구로 활용하여 빠른 반복, 실수 학습, 베스트 프랙티스 관찰로 스킬 습득 가속화</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">When to use</div>
+              <ul data-i18n="ai-accelerated-learning-and-skill-development.when">
+                <li>새로운 언어/프레임워크 학습 시</li>
+                <li>코드 품질 감각을 빠르게 키우고 싶을 때</li>
+                <li>멘토 없이 독학할 때</li>
+                <li>다양한 접근법을 실험하고 싶을 때</li>
+              </ul>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Trade-offs</div>
+              <div class="tradeoffs">
+                <div class="tradeoff-col pros">
+                  <h4>Pros</h4>
+                  <ul data-i18n="ai-accelerated-learning-and-skill-development.pros">
+                    <li>빠른 피드백 루프로 학습 가속</li>
+                    <li>항상 사용 가능한 튜터</li>
+                    <li>실험에 대한 두려움 감소</li>
+                  </ul>
+                </div>
+                <div class="tradeoff-col cons">
+                  <h4>Cons</h4>
+                  <ul data-i18n="ai-accelerated-learning-and-skill-development.cons">
+                    <li>AI 코드 품질에 학습 품질 의존</li>
+                    <li>깊은 이해 없이 표면적 학습 위험</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="https://agentic-patterns.com/patterns/ai-accelerated-learning-and-skill-development/" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
+      </article>
+      
+
       <article class="pattern-card" data-pattern="chain-of-thought-monitoring-interruption" id="chain-of-thought-monitoring-interruption">
         <div class="pattern-header">
           <h2>Chain-of-Thought Monitoring & Interruption</h2>
@@ -9206,6 +9926,99 @@ if user_pressed_escape():
           </div>
         </div>
         <a href="https://agentic-patterns.com/patterns/chain-of-thought-monitoring-interruption/" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
+      </article>
+      
+
+      <article class="pattern-card" data-pattern="democratization-of-tooling-via-agents" id="democratization-of-tooling-via-agents">
+        <div class="pattern-header">
+          <h2>Democratization of Tooling via Agents</h2>
+          <span class="tag" data-i18n="democratization-of-tooling-via-agents.category">UX & Collaboration</span>
+        </div>
+      
+        <div class="pattern-content">
+          <div class="visual-side">
+            <div class="diagram-box">
+              <div class="box-header">
+                <span class="box-label">Flow</span>
+                <div class="tab-switch">
+                  <button class="tab active" data-tab="ascii">ASCII</button>
+                  <button class="tab" data-tab="mermaid">Mermaid</button>
+                </div>
+              </div>
+              <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Non-Dev ──▶ "Make me a dashboard" ──▶ AI Agent ──▶ Code
+   │                                       │
+   ▼                                       ▼
+Iterate ◀── "Add filter for date" ◀─── Working Tool</pre>
+              </div>
+              <div class="tab-content" data-content="mermaid">
+                <div class="mermaid">
+      flowchart LR
+          U[Non-Dev User] -->|Natural Language| A[AI Agent]
+          A -->|Generate| C[Code/Tool]
+          C -->|Review| U
+          U -->|Refine| A
+                </div>
+              </div>
+            </div>
+      
+            <div class="code-box">
+              <div class="box-header">
+                <span class="box-label">Example</span>
+              </div>
+        <pre><code class="language-python"># Sales team member prompt:
+"Create a dashboard that shows my
+ weekly pipeline from Salesforce,
+ with filters by deal stage"
+
+# Agent generates: dashboard.py
+# User iterates: "Add export to CSV"</code></pre>
+            </div>
+          </div>
+      
+          <div class="description-side">
+            <div class="section">
+              <div class="section-title">Problem</div>
+              <p data-i18n="democratization-of-tooling-via-agents.problem">Non-engineering roles (sales, marketing, ops) need custom tools but lack programming skills to build them</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Solution</div>
+              <p data-i18n="democratization-of-tooling-via-agents.solution">AI agent translates natural language requests into code, enabling domain experts to create their own tools</p>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">When to use</div>
+              <ul data-i18n="democratization-of-tooling-via-agents.when">
+                <li>Non-developers need custom tools</li>
+                <li>Simple dashboard/script creation</li>
+                <li>Quick bug fixes to existing code</li>
+                <li>Domain experts want self-automation</li>
+              </ul>
+            </div>
+      
+            <div class="section">
+              <div class="section-title">Trade-offs</div>
+              <div class="tradeoffs">
+                <div class="tradeoff-col pros">
+                  <h4>Pros</h4>
+                  <ul data-i18n="democratization-of-tooling-via-agents.pros">
+                    <li>Democratizes software access</li>
+                    <li>Domain expertise directly applied</li>
+                  </ul>
+                </div>
+                <div class="tradeoff-col cons">
+                  <h4>Cons</h4>
+                  <ul data-i18n="democratization-of-tooling-via-agents.cons">
+                    <li>Limited for complex systems</li>
+                    <li>Requires quality/security review</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="https://agentic-patterns.com/patterns/democratization-of-tooling-via-agents/" target="_blank" rel="noopener" class="original-link" data-i18n="site.viewOriginal">View Original →</a>
       </article>
       
 

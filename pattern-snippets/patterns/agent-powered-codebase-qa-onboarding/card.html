@@ -1,0 +1,93 @@
+<article class="pattern-card" data-pattern="agent-powered-codebase-qa-onboarding">
+  <div class="pattern-header">
+    <h2>Agent-Powered Codebase Q&A / Onboarding</h2>
+    <span class="tag" data-i18n="category">Context & Memory</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">Developer                  Agent                  Codebase
+    │                        │                        │
+    │  "Where is DB config?" │                        │
+    ├───────────────────────▶│                        │
+    │                        │   Search/Index/Analyze │
+    │                        ├───────────────────────▶│
+    │                        │◀───────────────────────┤
+    │  "config/database.js"  │                        │
+    │◀───────────────────────┤                        │</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+sequenceDiagram
+    Developer->>Agent: "Where is the database connection configured?"
+    Agent->>Codebase: Search/Analyze
+    Agent-->>Developer: "It's configured in config/database.js"
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-python"># Natural language codebase Q&A
+agent.ask("How does user auth work?")
+# Agent searches, analyzes, responds:
+# "Auth is in auth/service.py, uses JWT,
+#  called by UserController.login()"</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">대규모 코드베이스 이해와 온보딩이 어렵고, 수동으로 코드 경로를 추적하는 데 시간이 많이 소요됨</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">검색/인덱싱/Q&A 능력을 갖춘 AI 에이전트가 자연어 질문에 답하며 코드 구조를 설명</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>새 프로젝트에 온보딩할 때</li>
+          <li>복잡한 시스템 디버깅 시</li>
+          <li>코드 간 상호작용 파악이 필요할 때</li>
+          <li>특정 모듈/파일의 목적을 빠르게 이해해야 할 때</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>온보딩 시간 대폭 단축</li>
+              <li>자연어로 코드베이스 탐색 가능</li>
+              <li>컨텍스트 기반 정확한 답변</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>인덱싱 품질에 답변 품질 의존</li>
+              <li>대규모 코드베이스 인덱싱 비용</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

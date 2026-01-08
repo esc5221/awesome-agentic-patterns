@@ -1,0 +1,95 @@
+<article class="pattern-card" data-pattern="proactive-trigger-vocabulary">
+  <div class="pattern-header">
+    <h2>Proactive Trigger Vocabulary</h2>
+    <span class="tag" data-i18n="category">UX & Collaboration</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">User Input ──▶ Match Triggers?
+                    │
+     ┌──────────────┼──────────────┐
+     │              │              │
+     ▼              ▼              ▼
+"sup" ──▶      "search hn"    No match
+priority       ──▶ hn-search   ──▶ General
+-report        skill           response</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+graph TD
+    A[User Input] --> B{Match Triggers?}
+    B -->|"sup"| C[priority-report skill]
+    B -->|"search hn"| D[hn-search skill]
+    B -->|No match| E[General response]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-yaml">skill: priority-report
+triggers:
+  exact: ["sup", "standup prep"]
+  contains: ["what should I work on"]
+  patterns: ["what.*on my plate"]
+proactive: true</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">다양한 스킬을 가진 에이전트가 사용자의 자연어 입력을 어떤 스킬로 라우팅할지 불투명하여 사용자가 어떤 문구로 기능을 활성화하는지 알기 어려움</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">각 스킬에 명시적 트리거 어휘(키워드, 패턴)를 정의하고 문서화하여 투명하고 예측 가능한 스킬 라우팅 제공</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>에이전트가 여러 스킬/기능을 보유</li>
+          <li>사용자에게 명확한 활성화 방법 제공 필요</li>
+          <li>특정 주제 시 자동 활성화(proactive) 원할 때</li>
+          <li>빠르고 예측 가능한 라우팅이 중요할 때</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>투명하고 예측 가능한 라우팅</li>
+              <li>문자열 매칭으로 빠른 속도</li>
+              <li>디버깅 용이</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>트리거 리스트에 없는 표현은 누락</li>
+              <li>어휘 변화에 따른 유지보수 필요</li>
+              <li>다국어/문화권 편향 가능</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

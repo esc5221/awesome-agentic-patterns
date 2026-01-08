@@ -199,6 +199,26 @@
       "Index needs to stay current"
     ]
   },
+  "agent-powered-codebase-qa-onboarding": {
+    "category": "Context & Memory",
+    "problem": "Understanding large codebases is challenging; manual code tracing is time-consuming, especially during onboarding",
+    "solution": "AI agent with retrieval/search/Q&A capabilities answers natural language queries about code structure and behavior",
+    "when": [
+      "Onboarding to a new project",
+      "Debugging complex systems",
+      "Understanding component interactions",
+      "Quickly grasping module/file purposes"
+    ],
+    "pros": [
+      "Drastically reduces onboarding time",
+      "Natural language codebase exploration",
+      "Context-aware accurate answers"
+    ],
+    "cons": [
+      "Answer quality depends on indexing",
+      "Large codebase indexing cost"
+    ]
+  },
   "background-agent-ci": {
     "category": "Feedback Loops",
     "problem": "Long-running tasks tie up the editor and require developers to babysit the agent throughout execution.",
@@ -427,6 +447,26 @@
       "Careful reward engineering needed"
     ]
   },
+  "ai-assisted-code-review-verification": {
+    "category": "Feedback Loops",
+    "problem": "As AI generates more code, verification becomes the bottleneck. Need to ensure semantic correctness and intent alignment, not just syntax",
+    "solution": "Use AI to analyze code changes, provide issues/summaries, and verify intent alignment through interactive Q&A",
+    "when": [
+      "Reviewing PRs with AI-generated code",
+      "Large codebase change reviews",
+      "Verifying results of underspecified tasks",
+      "Improving team-wide review efficiency"
+    ],
+    "pros": [
+      "Faster and more efficient reviews",
+      "Better understanding via AI explanations",
+      "Intent alignment verification"
+    ],
+    "cons": [
+      "Dependent on AI analysis accuracy",
+      "Risk of overlooking errors due to over-trust"
+    ]
+  },
   "compounding-engineering-pattern": {
     "category": "Learning & Adaptation",
     "problem": "Traditional engineering has diminishing returns; AI agents repeat mistakes because learnings aren't codified.",
@@ -445,6 +485,25 @@
       "Upfront documentation time",
       "Risk of prompt bloat",
       "Requires extensible agent system"
+    ]
+  },
+  "reflection": {
+    "category": "Feedback Loops",
+    "problem": "Generative models may produce subpar output if they never review or critique their own work",
+    "solution": "After generating a draft, have the model grade it against a metric and refine using that feedback iteratively",
+    "when": [
+      "Quality or adherence to criteria matters",
+      "Writing, reasoning, or code tasks",
+      "Automatic improvement is needed",
+      "Can iterate until threshold is met"
+    ],
+    "pros": [
+      "Improves outputs with little supervision",
+      "Self-evaluation against explicit criteria"
+    ],
+    "cons": [
+      "Extra compute cost",
+      "May stall if metric poorly defined"
     ]
   },
   "skill-library-evolution": {
@@ -1105,6 +1164,27 @@
       "Computational cost for multi-criteria evaluation"
     ]
   },
+  "cli-first-skill-design": {
+    "category": "Tool Use & Environment",
+    "problem": "API-first is hard to debug, GUI-first is unusable by agents. Teams end up building two interfaces",
+    "solution": "Design all skills as CLI tools first. Humans use terminal, agents use Bash tool - same interface",
+    "when": [
+      "Building skills for both humans and agents",
+      "Need easy debugging and testing",
+      "Want to compose with Unix pipes",
+      "Minimizing runtime dependencies"
+    ],
+    "pros": [
+      "Dual-use for humans and agents",
+      "Easy debugging and testing",
+      "Composable with Unix tools"
+    ],
+    "cons": [
+      "Complex data structures awkward",
+      "Process spawn overhead",
+      "Windows compatibility limited"
+    ]
+  },
   "criticgpt-style-evaluation": {
     "category": "Reliability & Eval",
     "problem": "Human reviewers struggle to catch subtle bugs in sophisticated AI-generated code at scale.",
@@ -1442,6 +1522,27 @@
       "May be verbose"
     ]
   },
+  "multi-platform-communication-aggregation": {
+    "category": "Tool Use & Environment",
+    "problem": "Searching for info across multiple platforms (email, Slack, iMessage) requires slow manual checks on each",
+    "solution": "Create unified search interface that queries all platforms in parallel and aggregates results into single format",
+    "when": [
+      "\"Where did X mention Y?\" searches",
+      "Finding conversations without knowing platform",
+      "Cross-platform audit/compliance",
+      "Building unified inbox features"
+    ],
+    "pros": [
+      "Single query searches all platforms",
+      "Parallel execution minimizes latency",
+      "Extensible to new platforms"
+    ],
+    "cons": [
+      "Must maintain per-platform adapters",
+      "Cross-platform ranking is subjective",
+      "Aggregation increases privacy exposure"
+    ]
+  },
   "patch-steering-via-prompted-tool-selection": {
     "category": "Tool Use & Environment",
     "problem": "Agents with multiple patching tools may choose suboptimal ones, causing inconsistent and lower quality results.",
@@ -1458,6 +1559,27 @@
     "cons": [
       "Prompt length increases",
       "Requires maintenance as tools evolve"
+    ]
+  },
+  "proactive-trigger-vocabulary": {
+    "category": "UX & Collaboration",
+    "problem": "Agents with many skills face opaque routing - users don't know which phrases activate which capabilities",
+    "solution": "Define explicit trigger vocabulary (keywords, patterns) per skill, documented visibly for transparent and predictable skill routing",
+    "when": [
+      "Agent has multiple skills/capabilities",
+      "Need clear activation paths for users",
+      "Want proactive activation on certain topics",
+      "Fast, predictable routing is important"
+    ],
+    "pros": [
+      "Transparent and predictable routing",
+      "Fast via string matching",
+      "Easy to debug"
+    ],
+    "cons": [
+      "Misses paraphrases not in trigger list",
+      "Maintenance as vocabulary evolves",
+      "Cultural/language bias possible"
     ]
   },
   "shell-command-contextualization": {
@@ -1684,6 +1806,26 @@
       "May miss low-level bugs"
     ]
   },
+  "ai-accelerated-learning-and-skill-development": {
+    "category": "UX & Collaboration",
+    "problem": "Developing code 'taste' and skills requires extensive experience and mentorship, a slow process especially for juniors",
+    "solution": "Use AI agents as interactive learning tools enabling fast iteration, mistake learning, and best practice observation",
+    "when": [
+      "Learning new languages/frameworks",
+      "Quickly developing code quality sense",
+      "Self-learning without mentors",
+      "Experimenting with different approaches"
+    ],
+    "pros": [
+      "Fast feedback loops accelerate learning",
+      "Always-available tutor",
+      "Reduces fear of experimentation"
+    ],
+    "cons": [
+      "Learning quality depends on AI output",
+      "Risk of shallow learning"
+    ]
+  },
   "chain-of-thought-monitoring-interruption": {
     "category": "UX & Collaboration",
     "problem": "Agents can pursue misguided reasoning paths for extended periods. By the time developers realize it's wrong, significant time and tokens are wasted.",
@@ -1702,6 +1844,25 @@
       "Requires active human attention (not autonomous)",
       "Can interrupt productive exploration if triggered prematurely",
       "Adds cognitive load to monitor reasoning"
+    ]
+  },
+  "democratization-of-tooling-via-agents": {
+    "category": "UX & Collaboration",
+    "problem": "Non-engineering roles (sales, marketing, ops) need custom tools but lack programming skills to build them",
+    "solution": "AI agent translates natural language requests into code, enabling domain experts to create their own tools",
+    "when": [
+      "Non-developers need custom tools",
+      "Simple dashboard/script creation",
+      "Quick bug fixes to existing code",
+      "Domain experts want self-automation"
+    ],
+    "pros": [
+      "Democratizes software access",
+      "Domain expertise directly applied"
+    ],
+    "cons": [
+      "Limited for complex systems",
+      "Requires quality/security review"
     ]
   },
   "human-in-loop": {

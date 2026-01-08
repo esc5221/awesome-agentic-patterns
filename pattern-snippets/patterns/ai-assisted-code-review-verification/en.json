@@ -1,0 +1,20 @@
+{
+  "category": "Feedback Loops",
+  "problem": "As AI generates more code, verification becomes the bottleneck. Need to ensure semantic correctness and intent alignment, not just syntax",
+  "solution": "Use AI to analyze code changes, provide issues/summaries, and verify intent alignment through interactive Q&A",
+  "when": [
+    "Reviewing PRs with AI-generated code",
+    "Large codebase change reviews",
+    "Verifying results of underspecified tasks",
+    "Improving team-wide review efficiency"
+  ],
+  "pros": [
+    "Faster and more efficient reviews",
+    "Better understanding via AI explanations",
+    "Intent alignment verification"
+  ],
+  "cons": [
+    "Dependent on AI analysis accuracy",
+    "Risk of overlooking errors due to over-trust"
+  ]
+}

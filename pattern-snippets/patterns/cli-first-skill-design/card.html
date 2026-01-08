@@ -1,0 +1,99 @@
+<article class="pattern-card" data-pattern="cli-first-skill-design">
+  <div class="pattern-header">
+    <h2>CLI-First Skill Design</h2>
+    <span class="tag" data-i18n="category">Tool Use</span>
+  </div>
+
+  <div class="pattern-content">
+    <div class="visual-side">
+      <div class="diagram-box">
+        <div class="box-header">
+          <span class="box-label">Flow</span>
+          <div class="tab-switch">
+            <button class="tab active" data-tab="ascii">ASCII</button>
+            <button class="tab" data-tab="mermaid">Mermaid</button>
+          </div>
+        </div>
+        <div class="tab-content active" data-content="ascii">
+          <pre class="ascii-art">               ┌── Human: $ skill.sh list
+               │
+Skill Logic ──▶ CLI ──┼── Agent: Bash("skill.sh list")
+               │
+               └── Cron: */5 * * * * skill.sh sync
+
+Unix Philosophy: One tool ──▶ One task ──▶ Compose with pipes</pre>
+        </div>
+        <div class="tab-content" data-content="mermaid">
+          <div class="mermaid">
+flowchart LR
+    A[Skill Logic] --> B[CLI Interface]
+    B --> C[Human: Terminal]
+    B --> D[Agent: Bash Tool]
+    B --> E[Scripts: Automation]
+    B --> F[Cron: Scheduled]
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="box-header">
+          <span class="box-label">Example</span>
+        </div>
+        <pre><code class="language-bash">#!/bin/bash
+# trello.sh - CLI-first skill
+case "$1" in
+  boards) curl -s "$API/boards" ;;
+  cards)  curl -s "$API/boards/$2/cards" ;;
+  create) curl -X POST "$API/cards" -d "name=$3" ;;
+esac
+
+# Human: trello.sh boards | jq '.name'
+# Agent:  Bash("trello.sh cards abc123")</code></pre>
+      </div>
+    </div>
+
+    <div class="description-side">
+      <div class="section">
+        <div class="section-title">Problem</div>
+        <p data-i18n="problem">API-first는 디버깅 어렵고, GUI-first는 에이전트가 사용 불가. 두 인터페이스를 따로 만들어야 하는 부담</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Solution</div>
+        <p data-i18n="solution">모든 스킬을 CLI 도구로 설계. 사람은 터미널에서, 에이전트는 Bash 도구로 동일하게 사용 가능</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">When to use</div>
+        <ul data-i18n="when">
+          <li>사람과 에이전트 모두 사용할 스킬 개발 시</li>
+          <li>디버깅/테스트가 용이해야 할 때</li>
+          <li>Unix 도구와 파이프 조합이 필요할 때</li>
+          <li>런타임 의존성 최소화 필요 시</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Trade-offs</div>
+        <div class="tradeoffs">
+          <div class="tradeoff-col pros">
+            <h4>Pros</h4>
+            <ul data-i18n="pros">
+              <li>사람/에이전트 동시 사용</li>
+              <li>쉬운 디버깅 및 테스트</li>
+              <li>Unix 도구와 조합 가능</li>
+            </ul>
+          </div>
+          <div class="tradeoff-col cons">
+            <h4>Cons</h4>
+            <ul data-i18n="cons">
+              <li>복잡한 데이터 구조 처리 어려움</li>
+              <li>프로세스 생성 오버헤드</li>
+              <li>Windows 호환성 제한</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

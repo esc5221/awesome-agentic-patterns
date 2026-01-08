@@ -1,0 +1,20 @@
+{
+  "category": "Context & Memory",
+  "problem": "Understanding large codebases is challenging; manual code tracing is time-consuming, especially during onboarding",
+  "solution": "AI agent with retrieval/search/Q&A capabilities answers natural language queries about code structure and behavior",
+  "when": [
+    "Onboarding to a new project",
+    "Debugging complex systems",
+    "Understanding component interactions",
+    "Quickly grasping module/file purposes"
+  ],
+  "pros": [
+    "Drastically reduces onboarding time",
+    "Natural language codebase exploration",
+    "Context-aware accurate answers"
+  ],
+  "cons": [
+    "Answer quality depends on indexing",
+    "Large codebase indexing cost"
+  ]
+}

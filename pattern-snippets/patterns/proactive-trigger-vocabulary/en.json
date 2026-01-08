@@ -1,0 +1,21 @@
+{
+  "category": "UX & Collaboration",
+  "problem": "Agents with many skills face opaque routing - users don't know which phrases activate which capabilities",
+  "solution": "Define explicit trigger vocabulary (keywords, patterns) per skill, documented visibly for transparent and predictable skill routing",
+  "when": [
+    "Agent has multiple skills/capabilities",
+    "Need clear activation paths for users",
+    "Want proactive activation on certain topics",
+    "Fast, predictable routing is important"
+  ],
+  "pros": [
+    "Transparent and predictable routing",
+    "Fast via string matching",
+    "Easy to debug"
+  ],
+  "cons": [
+    "Misses paraphrases not in trigger list",
+    "Maintenance as vocabulary evolves",
+    "Cultural/language bias possible"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "API-first is hard to debug, GUI-first is unusable by agents. Teams end up building two interfaces",
+  "solution": "Design all skills as CLI tools first. Humans use terminal, agents use Bash tool - same interface",
+  "when": [
+    "Building skills for both humans and agents",
+    "Need easy debugging and testing",
+    "Want to compose with Unix pipes",
+    "Minimizing runtime dependencies"
+  ],
+  "pros": [
+    "Dual-use for humans and agents",
+    "Easy debugging and testing",
+    "Composable with Unix tools"
+  ],
+  "cons": [
+    "Complex data structures awkward",
+    "Process spawn overhead",
+    "Windows compatibility limited"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "category": "Tool Use & Environment",
+  "problem": "Searching for info across multiple platforms (email, Slack, iMessage) requires slow manual checks on each",
+  "solution": "Create unified search interface that queries all platforms in parallel and aggregates results into single format",
+  "when": [
+    "\"Where did X mention Y?\" searches",
+    "Finding conversations without knowing platform",
+    "Cross-platform audit/compliance",
+    "Building unified inbox features"
+  ],
+  "pros": [
+    "Single query searches all platforms",
+    "Parallel execution minimizes latency",
+    "Extensible to new platforms"
+  ],
+  "cons": [
+    "Must maintain per-platform adapters",
+    "Cross-platform ranking is subjective",
+    "Aggregation increases privacy exposure"
+  ]
+}
