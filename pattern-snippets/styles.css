@@ -219,11 +219,11 @@ body {
 
 .original-link {
   display: block;
-  text-align: right;
+  width: fit-content;
+  margin: 0.5rem 1rem 0.5rem auto;
   font-size: 0.7rem;
   color: var(--text-muted);
   text-decoration: none;
-  padding: 0.5rem 1rem;
   opacity: 0.6;
   transition: opacity 0.15s;
 }
@@ -516,6 +516,12 @@ pre code {
 
 .copy-btn.copied .check-icon {
   display: inline-block;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 /* ========================================
