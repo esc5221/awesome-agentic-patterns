@@ -11035,15 +11035,11 @@ agent.do(
       document.querySelectorAll('.pattern-card').forEach(card => {
         const header = card.querySelector('.pattern-header');
         const h2 = header.querySelector('h2');
-        const tag = header.querySelector('.tag');
-
-        // Create header-right wrapper
-        const headerRight = document.createElement('div');
-        headerRight.className = 'header-right';
 
         // Create copy button
         const copyBtn = document.createElement('button');
         copyBtn.className = 'copy-btn';
+        copyBtn.title = 'Copy as Markdown';
         copyBtn.innerHTML = `
           <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -11052,17 +11048,12 @@ agent.do(
           <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
-          <span data-i18n="site.copy">Copy</span>
         `;
 
         copyBtn.addEventListener('click', () => copyPatternAsMarkdown(card, copyBtn));
 
-        // Move tag to header-right
-        if (tag) {
-          headerRight.appendChild(copyBtn);
-          headerRight.appendChild(tag);
-          header.appendChild(headerRight);
-        }
+        // Insert copy button right after h2
+        h2.after(copyBtn);
       });
     }
 
