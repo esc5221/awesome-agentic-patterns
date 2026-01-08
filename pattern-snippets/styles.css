@@ -476,6 +476,69 @@ pre code {
 .tradeoff-col.cons li::before { content: "−"; color: #dc2626; }
 
 /* ========================================
+   Copy Button
+   ======================================== */
+.copy-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.3rem 0.4rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.15s;
+  font-size: 0.6rem;
+  font-family: inherit;
+}
+
+.copy-btn:hover {
+  background: var(--bg-code);
+  color: var(--text);
+  border-color: #ccc;
+}
+
+.copy-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.copy-btn.copied {
+  background: #dcfce7;
+  border-color: #16a34a;
+  color: #16a34a;
+}
+
+.copy-btn .copy-icon,
+.copy-btn .check-icon {
+  display: none;
+}
+
+.copy-btn:not(.copied) .copy-icon {
+  display: block;
+}
+
+.copy-btn.copied .check-icon {
+  display: block;
+}
+
+.pattern-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+/* ========================================
    Footer
    ======================================== */
 .footer {

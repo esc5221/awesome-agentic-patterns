@@ -11027,6 +11027,123 @@ agent.do(
         }
       });
     });
+
+    // ========================================
+    // Copy Pattern as Markdown
+    // ========================================
+    function initCopyButtons() {
+      document.querySelectorAll('.pattern-card').forEach(card => {
+        const header = card.querySelector('.pattern-header');
+        const h2 = header.querySelector('h2');
+        const tag = header.querySelector('.tag');
+
+        // Create header-right wrapper
+        const headerRight = document.createElement('div');
+        headerRight.className = 'header-right';
+
+        // Create copy button
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'copy-btn';
+        copyBtn.innerHTML = `
+          <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span data-i18n="site.copy">Copy</span>
+        `;
+
+        copyBtn.addEventListener('click', () => copyPatternAsMarkdown(card, copyBtn));
+
+        // Move tag to header-right
+        if (tag) {
+          headerRight.appendChild(copyBtn);
+          headerRight.appendChild(tag);
+          header.appendChild(headerRight);
+        }
+      });
+    }
+
+    function copyPatternAsMarkdown(card, btn) {
+      const title = card.querySelector('.pattern-header h2').textContent;
+      const category = card.querySelector('.tag').textContent;
+
+      // Get description sections
+      const sections = card.querySelectorAll('.description-side .section');
+      let problem = '', solution = '', whenToUse = [], pros = [], cons = [];
+
+      sections.forEach(section => {
+        const sectionTitle = section.querySelector('.section-title')?.textContent?.toLowerCase() || '';
+
+        if (sectionTitle.includes('problem')) {
+          problem = section.querySelector('p')?.textContent || '';
+        } else if (sectionTitle.includes('solution')) {
+          solution = section.querySelector('p')?.textContent || '';
+        } else if (sectionTitle.includes('when')) {
+          section.querySelectorAll('li').forEach(li => whenToUse.push(li.textContent));
+        } else if (sectionTitle.includes('trade')) {
+          section.querySelectorAll('.pros li').forEach(li => pros.push(li.textContent));
+          section.querySelectorAll('.cons li').forEach(li => cons.push(li.textContent));
+        }
+      });
+
+      // Get ASCII diagram
+      const asciiArt = card.querySelector('.ascii-art')?.textContent || '';
+
+      // Get example code
+      const codeBlock = card.querySelector('.code-box code');
+      const code = codeBlock?.textContent || '';
+      const lang = codeBlock?.className?.match(/language-(\w+)/)?.[1] || '';
+
+      // Build Markdown
+      let md = `# ${title}\n\n`;
+      md += `**Category:** ${category}\n\n`;
+
+      if (problem) {
+        md += `## Problem\n${problem}\n\n`;
+      }
+
+      if (solution) {
+        md += `## Solution\n${solution}\n\n`;
+      }
+
+      if (whenToUse.length > 0) {
+        md += `## When to use\n`;
+        whenToUse.forEach(item => md += `- ${item}\n`);
+        md += '\n';
+      }
+
+      if (pros.length > 0) {
+        md += `## Pros\n`;
+        pros.forEach(item => md += `- ${item}\n`);
+        md += '\n';
+      }
+
+      if (cons.length > 0) {
+        md += `## Cons\n`;
+        cons.forEach(item => md += `- ${item}\n`);
+        md += '\n';
+      }
+
+      if (asciiArt.trim()) {
+        md += `## Flow (ASCII)\n\`\`\`\n${asciiArt.trim()}\n\`\`\`\n\n`;
+      }
+
+      if (code.trim()) {
+        md += `## Example\n\`\`\`${lang}\n${code.trim()}\n\`\`\`\n`;
+      }
+
+      // Copy to clipboard
+      navigator.clipboard.writeText(md).then(() => {
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 1500);
+      });
+    }
+
+    // Initialize copy buttons after DOM is ready
+    initCopyButtons();
   </script>
   <script src="i18n.js"></script>
 </body>
