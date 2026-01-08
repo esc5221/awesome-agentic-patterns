@@ -11034,11 +11034,11 @@ agent.do(
     function initCopyButtons() {
       document.querySelectorAll('.pattern-card').forEach(card => {
         const header = card.querySelector('.pattern-header');
-        const tag = header.querySelector('.tag');
+        const h2 = header.querySelector('h2');
 
-        // Create wrapper for right side items
-        const headerRight = document.createElement('div');
-        headerRight.className = 'header-right';
+        // Create wrapper for title + copy button
+        const headerLeft = document.createElement('div');
+        headerLeft.className = 'header-left';
 
         // Create copy button
         const copyBtn = document.createElement('button');
@@ -11056,12 +11056,10 @@ agent.do(
 
         copyBtn.addEventListener('click', () => copyPatternAsMarkdown(card, copyBtn));
 
-        // Wrap copy button and tag together on right side
-        if (tag) {
-          headerRight.appendChild(copyBtn);
-          headerRight.appendChild(tag);
-          header.appendChild(headerRight);
-        }
+        // Wrap h2 and copy button together on left
+        h2.before(headerLeft);
+        headerLeft.appendChild(h2);
+        headerLeft.appendChild(copyBtn);
       });
     }
 

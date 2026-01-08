@@ -497,8 +497,8 @@ pre code {
 }
 
 .copy-btn svg {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
 }
 
 .copy-btn.copied {
@@ -518,10 +518,15 @@ pre code {
   display: inline-block;
 }
 
-.header-right {
-  display: flex;
+.pattern-header .header-left {
+  display: inline-flex;
+  flex-direction: row;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
+}
+
+.pattern-header .header-left h2 {
+  margin: 0;
 }
 
 /* ========================================
